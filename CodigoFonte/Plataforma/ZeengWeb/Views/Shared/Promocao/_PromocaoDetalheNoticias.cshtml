@@ -1,0 +1,39 @@
+﻿
+<style>
+    .noticia-paginacao{
+        margin-right: 14px;
+    }
+    .titulo_noticia a{
+        color: #606060;
+    }
+</style>
+
+<div class="ibox-content m-b-sm border-bottom">
+    <div class="row">
+        <div class="col-md-12">
+            <label>Pesquisar</label>
+        </div>
+
+        <div class="col-md-9">
+            <input type="text" id="txtPesquisaNoticia" name="txtPesquisaNoticia" value="" placeholder="Palavra ou texto" class="form-control input-mini" />
+        </div>
+
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary" onclick="PesquisaNoticias()">Pesquisar</button>
+        </div>
+    </div>
+
+</div>
+
+<br />
+<div class="row">
+    <div class="noticia-paginacao"></div>
+</div>
+
+
+<div class="row" id="listaNoticias">
+</div>
+
+<div class="row">
+    <div class="noticia-paginacao"></div>
+</div>

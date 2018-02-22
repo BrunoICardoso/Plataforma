@@ -1,0 +1,21 @@
+﻿@using ZRN.Usuarios
+@{  
+    ViewBag.Title = "Perfil";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Perfil</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Home">Home</a>
+            </li>
+            <li class="active">
+                <strong>Perfil de @Html.Raw(((Usuario)Session["usuario"]).nome)</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>

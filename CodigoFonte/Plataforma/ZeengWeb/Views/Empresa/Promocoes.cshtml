@@ -1,0 +1,1122 @@
+﻿@model ZeengWeb.ViewModel.Empresa.EmpresaPromocoes
+@using ZeengWeb.Utils
+
+@{
+    ViewBag.Title = "Promoções";
+}
+
+<style type="text/css">
+    /*--------------------------------------------*/
+
+    .timeline-itemdetalhe .ibox-title {
+        cursor: pointer;
+    }
+
+    .timeline-itemdetalhe .ibox-content {
+        display: none;
+    }
+
+    .timeline-detalhes {
+        display: none;
+    }
+
+    .timeline-item.aberto {
+        background-color: #f6f6f6;
+    }
+
+    .timeline-item-label {
+        margin-bottom: 10px;
+    }
+
+    .timeline-itemdetalhe {
+        margin: 10px 0;
+    }
+
+
+    /*--------------------------------------------*/
+
+    .box-cor-linha-tempo {
+        background: rgba(197, 196, 255, 0.46);
+    }
+
+    #btnAnalise, #btnLinhaTempo {
+        width: 50%;
+    }
+
+    .botoes-selecao {
+        width: 100%;
+    }
+
+    ul.chosen-choices {
+        max-height: 30px;
+    }
+
+    div.jvectormap-container svg {
+        margin-left: -40px;
+    }
+
+    #valorMenor {
+        float: left;
+        margin: -143px 0 0 1px;
+        border-top: 1px dashed;
+        width: 25px;
+        padding-left: 5px;
+    }
+
+    #valorMaior {
+        float: left;
+        margin: -14px 0 0 1px;
+        border-bottom: 1px dashed;
+        width: 25px;
+        padding-left: 5px;
+    }
+
+    #barraDegrade {
+        float: left;
+        border: 1px solid;
+        height: 150px;
+        width: 20px;
+        margin-top: -144px;
+        background: linear-gradient(#94EBDA, #217E6B);
+    }
+
+    .box-grafico-situacoes {
+        height: 355px;
+        fill: #333;
+    }
+
+    .box-grafico-situacoes-legenda {
+        border-top: solid 1px #c2c2c2;
+        padding-top: 10px;
+        font-size: 11pt;
+    }
+
+        .box-grafico-situacoes-legenda span {
+            margin-right: 15px;
+            margin-left: 5px;
+            color: #676a6c;
+            font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+
+    .cor1 {
+        background-color: #E37686;
+    }
+
+    .cor2 {
+        background-color: #D2D087;
+    }
+
+    .cor3 {
+        background-color: #6AC6B6;
+    }
+
+    .cor4 {
+        background-color: #1C97B0;
+    }
+
+    .graf-PromocoesAtivasOuter {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom: 30px;
+    }
+
+    #graf-PromocoesAtivas {
+        height: 242px;
+    }
+
+    .graf-PromocoesAtivas {
+        height: 242px;
+        margin-top: 50px;
+    }
+
+        .graf-PromocoesAtivas path {
+            stroke: steelblue;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .graf-PromocoesAtivas .axis path,
+        .graf-PromocoesAtivas .axis line {
+            fill: none;
+            stroke: grey;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+        }
+
+        .graf-PromocoesAtivas .x.axis .tick text {
+            transform: translate(-36px,3px) rotate(-45deg);
+        }
+
+        .graf-PromocoesAtivas .x.axis .tick text {
+            transform: translate(-36px,0px) rotate(-45deg);
+        }
+
+    .graf-caption {
+        padding: 1px 5px;
+        color: #999;
+        border: 1px solid #AAA;
+        float: right;
+    }
+
+    #totalPromocoesAtivas {
+        font-size: 15pt;
+    }
+
+    #divEstados {
+        float: right;
+        border: 0px solid;
+        margin-top: -368px;
+        margin-right: -9px;
+        /*height: 350px;*/
+    }
+
+    #tabelaListaEstadosAbrangencia {
+        display: block;
+    }
+
+        #tabelaListaEstadosAbrangencia thead {
+            display: block;
+        }
+
+        #tabelaListaEstadosAbrangencia tbody {
+            display: block;
+            height: 340px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>Promoções</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Empresa">Home</a>
+            </li>
+            <li>
+                <a href="/Empresa/">Empresas</a>
+            </li>
+            <li>
+                <a href="/Empresa/Perfil/@Html.DisplayFor(model => model.Empresa.idempresa)/">@Html.DisplayFor(model => model.Empresa.nome)</a>
+            </li>
+            <li class="active">
+                <strong>Promoções</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-8">
+
+            <div class="profile-image">
+                <img src="@Html.Raw(Configuracoes.DiretorioImagens)/empresas/@Model.Empresa.imagem" class="img-perfil m-b-md" alt="@Html.DisplayFor(model => model.Empresa.nome)">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            @Model.Empresa.nome
+                        </h2>
+                        <small>
+                            @Model.Empresa.descricao
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ibox-content m-b-sm border-bottom">
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label class="control-label" for="product_name">Palavras-chave</label>
+                <input type="text" id="txtPalavrasChave" name="product_name" value="" placeholder="" class="form-control input-mini">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" for="status">Selecione o período</label>
+                <div class="input-daterange input-group" id="selecaoDatas">
+                    <input type="text" class="input-sm form-control" name="start" id="dtinicial" value="@DateTime.Now.AddMonths(-1).ToString(" dd/MM/yyyy")" />
+                    <span class="input-group-addon">até</span>
+                    <input type="text" class="input-sm form-control" name="end" id="dtfinal" value="@DateTime.Now.ToString(" dd/MM/yyyy")" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5" id="optFontes">
+            <div class="form-group">
+                <label class="control-label" for="status">Situação</label>
+                <div class="input-group">
+                    <select data-placeholder="Selecione as situações..." class="chosen-select" id="CampoSituacoes" multiple tabindex="4">
+
+                        @foreach (var List in Model.Situacoes)
+                        {
+                            <option value="@List.idsituacao"> @List.descricao </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5"></div>
+
+        <div class="col-md-2" style="top:20px; margin-right: -10px;">
+            <button class="ladda-button btn btn-primary" data-style="expand-left" id="BtnPesquisa">
+                <span class="ladda-label">Pesquisar</span>
+                <span class="ladda-spinner"></span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin-top :25px; margin-bottom:30px;">
+    <div class="col-md-4 col-md-push-8">
+        <div class="btn-group botoes-selecao">
+            <button class="btn btn-primary" id="btnAnalise" type="button">Análise</button>
+            <button class="btn btn-white" id="btnLinhaTempo" type="button">Linha do tempo</button>
+        </div>
+    </div>
+</div>
+
+<div class="container_analise">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Quantidade de promoções ativas</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="graf-PromocoesAtivasOuter row">
+
+
+
+
+                        <div class="graf-caption totalPromocoesAtivas"><span id="totalPromocoesAtivas"></span> Promoções ativas</div>
+
+                        <div class="graf-PromocoesAtivas">
+
+
+                            <div class="carregandoGraficoPromoAtivas" style="display:none">
+
+                                <div class="ibox-content">
+                                    <div class="sk-spinner sk-spinner-three-bounce" style="margin-top: 85px;">
+                                        <div class="sk-bounce1"></div>
+                                        <div class="sk-bounce2"></div>
+                                        <div class="sk-bounce3"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div id="graf-PromocoesAtivas">
+
+                            </div>
+
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Gráfico de situações</h5>
+                </div>
+
+                <div class="ibox-content boxGraficoSituacoes">
+                    <div id="grafico" class="row box-grafico-situacoes">
+
+                    </div>
+                    <div class="box-grafico-situacoes-legenda"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Gráfico de abrangência - mapa Brasil</h5>
+                </div>
+
+                <div class="ibox-content agrangencia">
+
+                    <div id="brazil-map" style="height: 355px; z-index: -1;"></div>
+
+                    <div id="barraDegrade">
+                        &nbsp;
+                    </div>
+                    <div id="valorMenor">0</div>
+                    <div id="valorMaior">0</div>
+
+                    <div id="divEstados">
+
+                        <table class="table table-hover margin bottom" id="tabelaListaEstadosAbrangencia">
+                            <thead>
+                                <tr>
+                                    <th>Local</th>
+                                    <th>Qtd</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row container_linhadotempo" style="display:none">
+    <div class="col-md-12">
+
+        <div class="col-lg-12">
+
+            <div class="paginacao_noticias"></div>
+
+        </div>
+
+        <div class="ibox-title">Promoções</div>
+
+        <div class="ibox-content" id="CarregarTimeLine">
+
+
+
+        </div>
+        <div class="col-lg-12">
+
+            <div class="paginacao_noticias"></div>
+
+        </div>
+    </div>
+</div>
+
+@section Styles {
+
+    @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/plugins/switcheryStyles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+
+}
+
+@section Scripts {
+
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+
+    <script src="~/Scripts/graficos/linhas.js"></script>
+    <link href="~/Content/plugins/typed/typed.css" rel="stylesheet" />
+    <script src="~/Scripts/plugins/typed/typed.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+
+    <link href="~/Content/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" />
+    <script src="~/Scripts/plugins/ladda/spin.min.js"></script>
+    <script src="~/Scripts/plugins/ladda/ladda.min.js"></script>
+    <script src="~/Scripts/plugins/ladda/ladda.jquery.min.js"></script>
+
+    <script src="~/Scripts/graficos/donut.js"></script>
+
+    <script src="/Scripts/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/Scripts/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/Scripts/plugins/jvectormap/brazil-jvectormap.js"></script>
+
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/d3")
+    @Scripts.Render("~/plugins/chosen")
+    @Scripts.Render("~/vis")
+
+    <script type="text/javascript">
+
+        var idEmpresa = @Model.Empresa.idempresa;
+        var paginacaoProcessoTimeline = new Paginacao();
+        var quantidadePag=10;
+        var dataPadraoFinal = new Date();
+        var dataPadraoInicial = new Date();
+        dataPadraoInicial.setDate(dataPadraoFinal.getDate() - 30);
+        var _pagina = 0;
+
+        $('#selecaoDatas').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        }).on('changeDate', function () {
+            //atualizaNoticias();
+        });
+
+        $('#dtinicial').datepicker('setDate', dataPadraoInicial);
+        $('#dtfinal').datepicker('setDate', dataPadraoFinal);
+
+        var _filtros = new Object();
+        _filtros.palavraChave = '';
+        _filtros.dataIni = $('#dtinicial').datepicker('getDate');
+        _filtros.dataFim = $('#dtfinal').datepicker('getDate');
+        _filtros.situacoes = [];
+        _filtros.idEmpresa = idEmpresa;
+
+        $('#dtinicial').datepicker();
+        $('#dtfinal').datepicker();
+
+        $(".chosen-select").width(400);
+
+        $(document).ready(function () {
+
+            var config = {
+                '.chosen-select': {},
+                '.chosen-select-deselect': { allow_single_deselect: true },
+                '.chosen-select-no-single': { disable_search_threshold: 10 },
+                '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+                '.chosen-select-width': { width: "95%" }
+            }
+
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+            $("#btnAnalise").click(function () {
+
+                $("#btnLinhaTempo").removeClass("btn-primary").addClass("btn-white");
+                $(this).addClass("btn-primary").removeClass("btn-white");
+
+                $(".container_analise").show();
+                $(".container_linhadotempo").hide();
+
+                CarregaGraficoAbrangencia();
+                CarregaGraficoSituacoes();
+                CarregaGraficoPromocoesAtivas();
+                LinhadoTempoPromocoes(_pagina,quantidadePag);
+            });
+
+            $("#btnLinhaTempo").click(function () {
+
+                $("#btnAnalise").removeClass("btn-primary").addClass("btn-white");
+                $(this).addClass("btn-primary").removeClass("btn-white");
+
+                $(".container_analise").hide();
+                $(".container_linhadotempo").show();
+
+                LinhadoTempoPromocoes(0,quantidadePag);
+
+            });
+
+            CarregaGraficoAbrangencia();
+            CarregaGraficoSituacoes();
+            CarregaGraficoPromocoesAtivas();
+            LinhadoTempoPromocoes(_pagina,quantidadePag);
+        });
+
+        $('#BtnPesquisa').on('click',function(){
+
+            _filtros.palavraChave = $('#txtPalavrasChave').val();
+            //_filtros.dataIni = $('#dtinicial').datepicker('getDate');
+            _filtros.dataIni = $('#dtinicial').val() != "" ? $('#dtinicial').datepicker('getDate') : null;
+            //_filtros.dataFim = $('#dtfinal').datepicker('getDate');
+            _filtros.dataFim = $('#dtfinal').val() != "" ? $('#dtfinal').datepicker('getDate') : null;
+            _filtros.situacoes = $('#CampoSituacoes').val() == null  ? [] : $('#CampoSituacoes').val();
+
+            $("#btnAnalise").trigger("click");
+
+            //CarregaGraficoAbrangencia();
+            //CarregaGraficoSituacoes();
+            //CarregaGraficoPromocoesAtivas();
+            //LinhadoTempoPromocoes(0,quantidadePag);
+        });
+
+        function CarregaGraficoAbrangencia() {
+
+            var filtro = new Object();
+            filtro.idEmpresa = idEmpresa;
+            filtro.pesquisa = _filtros.palavraChave;
+            filtro.dataInicial = _filtros.dataIni != null && _filtros.dataIni != "" ? ConverteDataParaDataJson(_filtros.dataIni) : new Date(1900, 01, 01);
+            filtro.dataFinal = _filtros.dataFim != null && _filtros.dataFim != "" ? ConverteDataParaDataJson(_filtros.dataFim) : new Date(2200, 01, 01);
+            filtro.situacoes = _filtros.situacoes;
+            
+            var url = "/api/EmpresaAPI/RetornaGraficoAbrangenciaPromocao";
+            //.getJSON(url, function (data) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: JSON.stringify(filtro),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    var tabela = $('#tabelaListaEstadosAbrangencia');
+                    tabela.find('tbody').html('');
+                    $('#brazil-map').html('');
+
+                    if (data != null ) {
+
+                        var dados = [];
+                        var totalEstados = 0;
+                        var arrTotais = [];
+
+                        //tabela.find('tbody').append('<tr> <td><b>Nacional</b></td><td class="text-center" ><b>' + data.TotalAbrangenciaNacional + '</b></td></tr> ');
+
+                        $.each(data, function (indice, obj) {
+                            if(obj.local != 'Nacional' ){
+
+                                var local = obj.local.toLowerCase();
+                                dados[local] = obj.total;
+
+                                arrTotais.push(obj.total);
+                            }
+
+                            //totalEstados += obj.total;
+
+                            //var local = obj.local.toUpperCase();
+
+                            tabela.find('tbody').append('<tr> <td class="text-center">' + obj.local + '</td> <td class="text-center">' + obj.total + '</td></tr>');
+                        })
+
+                        $('#valorMenor').html(arrTotais[arrTotais.length - 1]);
+                        $('#valorMaior').html(arrTotais[0]);
+
+                        $('#brazil-map').vectorMap({
+                            map: 'brazil',
+                            backgroundColor: "transparent",
+                            regionStyle: {
+                                initial: {
+                                    fill: '#e4e4e4',
+                                    "fill-opacity": 0.9,
+                                    stroke: 'none',
+                                    "stroke-width": 0,
+                                    "stroke-opacity": 0
+                                }
+                            },
+                            series: {
+                                regions: [{
+                                    values: dados,
+                                    scale: ["#22d6b1", "#1ab394"],
+                                    normalizeFunction: 'polynomial'
+                                }]
+                            },
+                            onRegionOver: function (e, el, code) {
+
+                            }
+                        });
+
+                    } else {
+                        $('#valorMenor').html('0');
+                        $('#valorMaior').html('0');
+
+                        //tabela.find('thead').append('<tr> <th>Brasil</th><th>0</th></tr> ');
+
+                        $('#brazil-map').vectorMap({
+                            map: 'brazil',
+                            backgroundColor: "transparent",
+                            regionStyle: {
+                                initial: {
+                                    fill: '#e4e4e4',
+                                    "fill-opacity": 0.9,
+                                    stroke: 'none',
+                                    "stroke-width": 0,
+                                    "stroke-opacity": 0
+                                }
+                            },
+                            series: {
+                                regions: [{
+                                    values: [],
+                                    scale: ["#22d6b1", "#1ab394"],
+                                    normalizeFunction: 'polynomial'
+                                }]
+                            },
+                            onRegionOver: function (e, el, code) {
+
+                            }
+                        });
+                    }
+
+                    //tabela.find('thead, tbody').css('display', 'block');
+                    //tabela.find('tbody').css('overflow-y', 'auto');
+                }
+            });
+        }
+
+        function CarregaGraficoSituacoes() {
+
+            var filtro = new Object();
+            filtro.idEmpresa = idEmpresa;
+            filtro.pesquisa = _filtros.palavraChave;
+            filtro.dataInicial = _filtros.dataIni != null && _filtros.dataIni != "" ? ConverteDataParaDataJson(_filtros.dataIni) : new Date(1900, 01, 01);
+            filtro.dataFinal = _filtros.dataFim != null && _filtros.dataFim != "" ? ConverteDataParaDataJson(_filtros.dataFim) : new Date(2200, 01, 01);
+            filtro.situacoes = _filtros.situacoes;
+
+            var url = "/api/EmpresaAPI/GraficoSituacoes"
+
+            var dataGrafico = {
+                valores: []
+            };
+
+            $(".box-grafico-situacoes").empty();
+            $(".box-grafico-situacoes-legenda").empty();
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: JSON.stringify(filtro),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                //data: filtro,
+                async: false,
+                success: function (data) {
+
+
+                    if (data.length > 0){
+                        $.each(data, function(i,item){
+
+                            dataGrafico.valores.push(parseInt(item.total));
+
+                            $(".box-grafico-situacoes-legenda").append(legendaGraficoDonut(item,RetornaCorGraficoDonut(i)));
+
+                        });
+                    }
+                }
+            });
+
+            larguraGraf = $(".box-grafico-situacoes").width();
+            alturaGraf = $(".box-grafico-situacoes").height();
+            var radius = 120;
+
+            DesenharGraficoDonut(".box-grafico-situacoes", dataGrafico, larguraGraf, alturaGraf, radius);
+
+        }
+
+        function legendaGraficoDonut(item,cor){
+
+            return "<i class='fa fa-square' aria-hidden='true' style='color:"+cor+"''><span>"+ item.situacao +"</span></i>";
+
+        }
+
+        function CarregaGraficoPromocoesAtivas(){
+
+            var filtro = new Object();
+            filtro.idEmpresa = idEmpresa;
+            filtro.pesquisa = _filtros.palavraChave;
+            filtro.dataInicial = _filtros.dataIni != null && _filtros.dataIni != "" ? ConverteDataParaDataJson(_filtros.dataIni) : ConverteDataParaDataJson(new Date(1900, 01, 01));
+            filtro.dataFinal = _filtros.dataFim != null && _filtros.dataFim != "" ? ConverteDataParaDataJson(_filtros.dataFim) : ConverteDataParaDataJson(new Date(2200, 01, 01));
+            filtro.situacoes = _filtros.situacoes;
+
+            $("#graf-PromocoesAtivas").html('');
+            $(".totalPromocoesAtivas").hide();
+            $(".carregandoGraficoPromoAtivas").show();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/EmpresaAPI/GraficoPromocoesAtivas",
+                data: filtro,
+                success: function(data){
+                    
+
+                    $(".carregandoGraficoPromoAtivas").hide();
+                    $(".totalPromocoesAtivas").show();
+                    var totalPromocoesAtivas = 0;
+
+                    if(data.length > 0){
+                        var valores = data.map(function (x) {
+                            totalPromocoesAtivas += x.valor;
+                            return x.valor;
+                        });
+
+                        $("#totalPromocoesAtivas").text(formataNumero(totalPromocoesAtivas));
+
+                        //var datas = data.map(function (x) {
+                        //    return x.data;
+                        //});
+
+                        var dados = [
+                            {"data": "2017-01-01", "valor": 28 },
+                            {"data": "2017-01-08", "valor": 12 },
+                            {"data": "2017-01-15", "valor": 35 },
+                            {"data": "2017-02-05", "valor": 18 },
+                        ];
+
+                        var coresCategoria = [];
+                        coresCategoria["Promo"] = "#18A689";
+
+                        larguraGraf = $("#graf-PromocoesAtivas").width();
+                        alturaGraf = $("#graf-PromocoesAtivas").height() ;
+                        DesenharGraficoLinhas("#graf-PromocoesAtivas", data, larguraGraf, alturaGraf, coresCategoria, "%d/%m/%y", "SEMANA");
+                    }
+
+                }
+            });
+        }
+
+        function LinhadoTempoPromocoes(pag, quantidade){
+
+            var filtro = new Object();
+            filtro.idEmpresa = _filtros.idEmpresa;
+            filtro.pesquisa = _filtros.palavraChave;
+            filtro.numproc = '';
+            filtro.dataInicial = _filtros.dataIni != null && _filtros.dataIni != "" ? ConverteDataParaDataJson(_filtros.dataIni) : new Date(1900, 01, 01);            
+            filtro.dataFinal = _filtros.dataFim != null && _filtros.dataFim != "" ? ConverteDataParaDataJson(_filtros.dataFim) : new Date(2200, 01, 01);
+            filtro.situacoes = _filtros.situacoes;
+            //filtro.Estados = [];
+            filtro.ordenacao = false;
+            filtro.pag = pag;
+            filtro.quantidade = quantidade = null || quantidade == 0 ? quantidadePag : quantidade;
+
+            //console.log(filtro);
+            //console.log(JSON.stringify(filtro));
+
+            $("#CarregarTimeLine").empty();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/EmpresaAPI/RetornaLinhadoTempo/",
+                data: filtro,
+                //data: JSON.stringify(filtro),
+                //dataType: 'json',
+                //contentType: "application/json; charset=utf-8",
+                success: function(data){
+
+                    TotalProcessos = data.TotalProcessos;
+
+                    paginacaoProcessoTimeline.CriaPaginacao(".paginacao_noticias", parseInt((TotalProcessos / 10) + 0.9), TotalProcessos, pag);
+                    paginacaoProcessoTimeline.setMudouPagina(mudouPaginaProcessos);
+
+                    $.each(data.ListaProcessos, function (e,item)
+                    {                                
+                        var modeloLinhaTempo = [];
+
+                        modeloLinhaTempo.push('<div class="timeline-item">');
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-3 date">');
+                        modeloLinhaTempo.push('<i class="fa fa-plus" style="float:right;"></i><br><br>');
+
+                        modeloLinhaTempo.push(item.dtprocesso != null ? '<strong>'+ formataDataInvertida(item.dtprocesso) +'</strong>':'<strong>Não há informação</strong>');
+                        modeloLinhaTempo.push('</div>');
+
+                        modeloLinhaTempo.push('<div class="col-md-10 content no-top-border">');
+                        // Linha Processo Nome
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-12 item-lista">');
+
+                        modeloLinhaTempo.push(item.nome != null && item.nome != "" ? '<label class="font-bold">Nome: '+item.nome +'</label>' : '<label class="font-bold">Processo Nº: '+item.numprocesso+'</label>');
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        //--------------------------------------------------------
+
+                        //Linha Processo, Vigencia e Valor
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-4 item-lista">');
+                        modeloLinhaTempo.push('<label class="font-bold">Processo nº</label>');
+                        modeloLinhaTempo.push(item.numprocesso !=null && item.numprocesso !="" ?'<p>'+item.numprocesso +'</p>': '<p>'+item.numprocesso+'</p>');
+                        modeloLinhaTempo.push('</div>');
+
+                        modeloLinhaTempo.push('<div class="col-md-4  item-lista">');
+                        modeloLinhaTempo.push('<label class="font-bold">Vigencia</label>');
+
+                        if(item.dtvigenciaini!=null){
+                            modeloLinhaTempo.push(item.dtvigenciafim == null ? '<p>'+formataDataInvertida(item.dtvigenciaini)+'</p>' : '<p>'+formataDataInvertida(item.dtvigenciaini) +' à '+formataDataInvertida(item.dtvigenciafim) +'</p>');
+                        }else{
+                            modeloLinhaTempo.push('<p> Não há informação na data de vigencia</p>');
+
+                        }
+
+                        modeloLinhaTempo.push('</div>');
+
+                        modeloLinhaTempo.push('<div class="col-md-4  item-lista">');
+                        modeloLinhaTempo.push('<label class="font-bold">Valor total de premios</label>');
+
+                        modeloLinhaTempo.push(item.valortotalpremios!=0 ? '<p>R$ '+ formataNumero(item.valortotalpremios)+'</p>':'<p>Não há informação no valor do prêmio</p>');
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        //---------------------------------------------------------------
+
+                        // Linha Situacao e Setores
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-4 item-lista">');
+                        modeloLinhaTempo.push('<label class="font-bold">Situação</label>');
+
+                        modeloLinhaTempo.push(item.situacaoatual!= null && item.situacaoatual!="" ?'<p>'+item.situacaoatual +'</p>':'<p>Não há informação da situação</p>');
+
+                        modeloLinhaTempo.push('</div>');
+
+                        modeloLinhaTempo.push('<div class="col-md-8  item-lista">');
+
+                        modeloLinhaTempo.push('<label class="font-bold">Setores</label><br>');
+
+                        if(item.setores !=0)
+                        {
+
+                            $.each(item.setores, function(i,setor){
+
+                                modeloLinhaTempo.push( setor.codsetor+'.'+setor.descsetor+'/'+setor.codsubsetor+'.'+setor.descsubsetor+'<br>');
+
+
+                            });
+
+                        }
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        //-----------------------------------------------------
+
+                        // Linha Interessados
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-12  item-lista">');
+                        modeloLinhaTempo.push('<label class="font-bold">Interessados</label>');
+
+                        modeloLinhaTempo.push(item.interessados!=null ?'<p>'+item.interessados+'</p>': '<p> Não há informação nos interessados</p>');
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        //-----------------------------------------------
+
+                        //Linha Abrangencia
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-12  item-lista">');
+                        modeloLinhaTempo.push('<label class="font-bold">Abrangencia</label><br>');
+
+                        if(item.abrangencia_nacional == true){
+
+                            modeloLinhaTempo.push('Nacional');
+
+                        }else if (item.abrangmunicipios!=0){
+
+                            var listamunicipios = [];
+                            $.each(item.abrangmunicipios,function(i,muni){
+
+                                listamunicipios.push(muni.nome+'/'+muni.uf);
+                                
+                            });
+
+                            modeloLinhaTempo.push(listamunicipios.join(', '));
+
+                        } else {
+                            modeloLinhaTempo.push('<p>Não há informação na abrangencia</p>');
+                        }
+
+                        //$("#graf-PromocoesAtivas").empty();
+                        //$(".totalPromocoesAtivas").hide();
+
+                        //$(".carregandoGraficoPromoAtivas").show();
+
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "/api/EmpresaAPI/GraficoPromocoesAtivas",
+                        //    data: filtro,
+                        //    success: function(data){
+                        //        //console.log(data);
+                        //        $(".carregandoGraficoPromoAtivas").hide();
+
+                        //        $(".totalPromocoesAtivas").show();
+                        //        var totalPromocoesAtivas = 0;
+                        //    }
+
+                        //});
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        //--------------------------------------------
+
+                        // linha Empresas
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-12  item-lista">');
+
+                        modeloLinhaTempo.push('<label class="font-bold">Empresas</label><br>');
+
+                        if(item.empresas!=0){
+                            var listaempresas = [];
+                            $.each(item.empresas,function(i,empresa){
+                                
+                                listaempresas.push(empresa.nome)
+                            });
+
+                            modeloLinhaTempo.push(listaempresas.join(', ')); 
+
+                        }else {
+
+                            modeloLinhaTempo.push('<p>Não há informação das empresas</p>');
+
+                        }
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        //---------------------------------------
+
+                        // Linha Forma de Contramplcao
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-12  item-lista">');
+
+                        modeloLinhaTempo.push('<label class="font-bold">Forma de contemplação</label>');
+                        modeloLinhaTempo.push(item.formacontemplacao!=null && item.formacontemplacao!="" ?'<p>'+item.formacontemplacao+'</p>':'<p>Não há informação da comtemplação </p>');
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        //-------------------------------------------------------------
+
+                        modeloLinhaTempo.push('<div class="row">');
+                        modeloLinhaTempo.push('<div class="col-md-12  item-lista">');
+
+                        modeloLinhaTempo.push('<label class="font-bold">Modalidade</label>');
+                        modeloLinhaTempo.push(item.modalidade!=null && item.modalidade!="" ?'<p>'+item.modalidade+'</p>':'<p>Não há informação da modalidade </p>');
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+
+
+                        modeloLinhaTempo.push('<div class="row timeline-detalhes">');
+                        modeloLinhaTempo.push('<div class="col-md-12 timeline-itemdetalhe">');
+                        modeloLinhaTempo.push('<div class="ibox-title">');
+                        modeloLinhaTempo.push('<h5>Promoção</h5>');
+                        modeloLinhaTempo.push('<div class="ibox-tools">');
+                        modeloLinhaTempo.push('<a class="collapse-link">');
+                        modeloLinhaTempo.push('<i class="fa fa-chevron-down"></i>');
+                        modeloLinhaTempo.push('</a>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('<div class="ibox-content">');
+
+                        console.log(item);
+                        modeloLinhaTempo.push(item.resumo!=null && item.resumo!="" ?''+item.resumo+'':'Não há informação da promoção');
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('<div class="col-md-12 timeline-itemdetalhe">');
+                        modeloLinhaTempo.push('<div class="ibox-title">');
+                        modeloLinhaTempo.push('<h5>Como participar</h5>');
+                        modeloLinhaTempo.push('<div class="ibox-tools">');
+                        modeloLinhaTempo.push('<a class="collapse-link">');
+                        modeloLinhaTempo.push('<i class="fa fa-chevron-down"></i>');
+                        modeloLinhaTempo.push('</a>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('<div class="ibox-content">');
+
+                        modeloLinhaTempo.push(item.comoparticipar!=null && item.comoparticipar!="" ?''+item.comoparticipar+'': 'Não há informação de como participar');
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('<div class="col-md-12 timeline-itemdetalhe">');
+                        modeloLinhaTempo.push('<div class="ibox-title">');
+                        modeloLinhaTempo.push('<h5>Premiações</h5>');
+                        modeloLinhaTempo.push('<div class="ibox-tools">');
+                        modeloLinhaTempo.push('<a class="collapse-link">');
+                        modeloLinhaTempo.push('<i class="fa fa-chevron-down"></i>');
+                        modeloLinhaTempo.push('</a>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('<div class="ibox-content">');
+                        
+                        modeloLinhaTempo.push(item.premios!=null && item.premios!="" ?''+item.premios+'': 'Não há informação do prêmio');
+
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('<div class="col-md-12 timeline-itemdetalhe">');
+                        modeloLinhaTempo.push('<div class="ibox-title">');
+                        modeloLinhaTempo.push('<h5>Documentos Complementares</h5>');
+                        modeloLinhaTempo.push('<div class="ibox-tools">');
+                        modeloLinhaTempo.push('<a class="collapse-link">');
+                        modeloLinhaTempo.push('<i class="fa fa-chevron-down"></i>');
+                        modeloLinhaTempo.push('</a>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('<div class="ibox-content">');
+                        modeloLinhaTempo.push('<table class="table links">');
+                        modeloLinhaTempo.push('<thead>');
+                        modeloLinhaTempo.push('<tr>');
+                        modeloLinhaTempo.push('<th>Nº do documento</th>');
+                        modeloLinhaTempo.push('<th>Coordenação</th>');
+                        modeloLinhaTempo.push('<th>Situação</th>');
+                        modeloLinhaTempo.push('<th>Download</th>');
+                        modeloLinhaTempo.push('</tr>');
+                        modeloLinhaTempo.push('</thead>');
+                        modeloLinhaTempo.push('<tbody>');
+
+                        if(item.arquivos)
+                        {
+                            $.each(item.arquivos,function(i,arquivo){
+
+                                modeloLinhaTempo.push('<tr>');
+                                modeloLinhaTempo.push('<td>'+arquivo.numdoc+'</td>');
+                                modeloLinhaTempo.push('<td>'+arquivo.coordenacao+'</td>');
+                                modeloLinhaTempo.push('<td>'+arquivo.situacao+'</td>');
+                                modeloLinhaTempo.push('<td> <a href="'+arquivo.link+'" target="_blank"><div class="fa fa-download" style="color:gray;"></div></a></td>');
+                                modeloLinhaTempo.push('</tr>');
+
+                            });
+
+                        }
+
+
+                        modeloLinhaTempo.push('</tbody>');
+                        modeloLinhaTempo.push('</table');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+                        modeloLinhaTempo.push('</div>');
+
+
+                        var modelo = modeloLinhaTempo.join('');
+                        $("#CarregarTimeLine").append(modelo);
+
+                    });
+
+                    $(".timeline-itemdetalhe .ibox-title").click(function () {
+
+                        if ($(this).find("i.fa").hasClass("fa-chevron-down")) {
+                            $(this).find("i.fa").addClass("fa-chevron-up").removeClass("fa-chevron-down");
+                            $(this).parent().find(".ibox-content").slideDown(500);
+                        }
+                        else {
+                            $(this).find("i.fa").addClass("fa-chevron-down").removeClass("fa-chevron-up");
+                            $(this).parent().find(".ibox-content").slideUp(500);
+                        }
+                    });
+
+                    $(".timeline-item i").click(function () {
+                        if ($(this).hasClass("fa-plus")) {
+                            $(this).parent().parent().find(".timeline-detalhes").slideDown(500);
+                            $(this).removeClass("fa-plus").addClass("fa-minus");
+                            $(this).parent().parent().parent().addClass("aberto");
+                        }
+                        else {
+                            $(this).parent().parent().find(".timeline-detalhes").slideUp(500);
+                            $(this).removeClass("fa-minus").addClass("fa-plus");
+                            $(this).parent().parent().parent().removeClass("aberto");
+                        }
+                    });
+
+                }
+
+            });
+        }
+
+        function mudouPaginaProcessos(pagina) {
+
+            //var dtInicial = $("#dtinicialface").datepicker('getDate');
+            //var dtFinal = $("#dtfinalface").datepicker('getDate');
+
+            LinhadoTempoPromocoes(pagina,quantidadePag)
+        }
+
+    </script>
+}

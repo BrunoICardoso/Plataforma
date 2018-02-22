@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4DD08F4B-4BA4-46D8-A1D4-BF9EBC53E24B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ZRN</RootNamespace>
+    <AssemblyName>ZRN</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Elasticsearch.Net, Version=5.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.5.0.0\lib\net45\Elasticsearch.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nest, Version=5.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.5.0.0\lib\net45\Nest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clientes\AcessoTrial.cs" />
+    <Compile Include="Clientes\Cliente.cs" />
+    <Compile Include="Clientes\Clientes.cs" />
+    <Compile Include="Clientes\ClienteVertentes.cs" />
+    <Compile Include="Clientes\Filtros.cs" />
+    <Compile Include="Combos\ItemCombo.cs" />
+    <Compile Include="Email\EmailModeloFormulario.cs" />
+    <Compile Include="Empresas\FiltroEmpresas.cs" />
+    <Compile Include="Empresas\NoticiaEmpresa.cs" />
+    <Compile Include="Empresas\NoticiaEmpresaFonte.cs" />
+    <Compile Include="Email\Email.cs" />
+    <Compile Include="Empresas\Empresa.cs" />
+    <Compile Include="Empresas\EmpresaNoticia.cs" />
+    <Compile Include="Empresas\Empresas.cs" />
+    <Compile Include="Empresas\FiltroNoticiasEmpresa.cs" />
+    <Compile Include="Empresas\NoticiaPerfil.cs" />
+    <Compile Include="Empresas\Noticias.cs" />
+    <Compile Include="Empresas\NoticiasEmpresa.cs" />
+    <Compile Include="Empresas\NoticiasFonte.cs" />
+    <Compile Include="Empresas\PresencaOnline.cs" />
+    <Compile Include="Empresas\Promocoes.cs" />
+    <Compile Include="Empresas\PromocoesElastic.cs" />
+    <Compile Include="Empresas\RankBrasil.cs" />
+    <Compile Include="Estados\Estado.cs" />
+    <Compile Include="Graficos\Area.cs" />
+    <Compile Include="Empresas\TotalInteracoes.cs" />
+    <Compile Include="Graficos\Barra.cs" />
+    <Compile Include="Graficos\Configuracoes.cs" />
+    <Compile Include="Graficos\ItemRosca.cs" />
+    <Compile Include="Graficos\Linha.cs" />
+    <Compile Include="Graficos\Mapas\Brasil.cs" />
+    <Compile Include="Graficos\Mapas\Estado.cs" />
+    <Compile Include="Graficos\Rosca.cs" />
+    <Compile Include="Graficos\TabelaCalor\ItemTabelaCalor.cs" />
+    <Compile Include="Graficos\TabelaCalor\TabelaCalor.cs" />
+    <Compile Include="Graficos\TagCloud\idf.cs" />
+    <Compile Include="Graficos\TagCloud\TagCloud.cs" />
+    <Compile Include="Graficos\TagCloud\Termo.cs" />
+    <Compile Include="Graficos\TagCloud\tf.cs" />
+    <Compile Include="LancamentoProdutos\FiltroLancamentoProdutos.cs" />
+    <Compile Include="LancamentoProdutos\ItemFiltro.cs" />
+    <Compile Include="LancamentoProdutos\LancamentoProduto.cs" />
+    <Compile Include="LancamentoProdutos\LancamentoProdutos.cs" />
+    <Compile Include="Listas\Item.cs" />
+    <Compile Include="Logs\Log.cs" />
+    <Compile Include="Logs\Logs.cs" />
+    <Compile Include="Marca\Marca.cs" />
+    <Compile Include="Mensagem\Mensagem.cs" />
+    <Compile Include="Municipios\Municipio.cs" />
+    <Compile Include="NoticiasElastic\Noticia.cs" />
+    <Compile Include="NoticiasElastic\NoticiasElastic.cs" />
+    <Compile Include="Noticias\Noticia.cs" />
+    <Compile Include="Noticias\NoticiaImagem.cs" />
+    <Compile Include="PrensencaOnline\Audiencia.cs" />
+    <Compile Include="PrensencaOnline\Indicadores.cs" />
+    <Compile Include="PrensencaOnline\Links.cs" />
+    <Compile Include="PrensencaOnline\PresencaOnlineCaptura.cs" />
+    <Compile Include="PrensencaOnline\Termos.cs" />
+    <Compile Include="PromocoesElastic\Noticia.cs" />
+    <Compile Include="PromocoesElastic\Processo.cs" />
+    <Compile Include="Promocoes\FiltroProcessoSeae.cs" />
+    <Compile Include="Promocoes\FiltroPromocaoNoticia.cs" />
+    <Compile Include="Promocoes\GraficoAbrangencia.cs" />
+    <Compile Include="Promocoes\FiltroPromocoes.cs" />
+    <Compile Include="Promocoes\ItemGraficoSituacoes.cs" />
+    <Compile Include="Promocoes\PesquisaPromocoes.cs" />
+    <Compile Include="Promocoes\PostPromocao.cs" />
+    <Compile Include="Promocoes\Processos.cs" />
+    <Compile Include="Promocoes\Processos_Seae.cs" />
+    <Compile Include="Promocoes\Promocao.cs" />
+    <Compile Include="Promocoes\PromocaoNoticias.cs" />
+    <Compile Include="Promocoes\PromocaoRedeSocial.cs" />
+    <Compile Include="Promocoes\PromocaoRedesSociais.cs" />
+    <Compile Include="PromocoesElastic\PromocaoElastic.cs" />
+    <Compile Include="Promocoes\Promocoes.cs" />
+    <Compile Include="Promocoes\Situacao.cs" />
+    <Compile Include="Promocoes\Situacoes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedesSociais\EmpresaRedeSocial.cs" />
+    <Compile Include="RedesSociais\Facebook\Comentario.cs" />
+    <Compile Include="RedesSociais\Facebook\CrescimentoFas.cs" />
+    <Compile Include="RedesSociais\Facebook\Facebook.cs" />
+    <Compile Include="RedesSociais\Facebook\Interacoes.cs" />
+    <Compile Include="RedesSociais\Facebook\InteracoesHora.cs" />
+    <Compile Include="RedesSociais\Facebook\Post.cs" />
+    <Compile Include="RedesSociais\Instagram\Comentario.cs" />
+    <Compile Include="RedesSociais\Instagram\CrescimentoSeguidores.cs" />
+    <Compile Include="RedesSociais\Instagram\Instagram.cs" />
+    <Compile Include="RedesSociais\Instagram\Interacoes.cs" />
+    <Compile Include="RedesSociais\Instagram\InteracoesHora.cs" />
+    <Compile Include="RedesSociais\Instagram\Post.cs" />
+    <Compile Include="RedesSociais\RedeSocial.cs" />
+    <Compile Include="RedesSociais\RedesSociais.cs" />
+    <Compile Include="RedesSociais\Seguidores.cs" />
+    <Compile Include="RedesSociais\Twitter\Comentario.cs" />
+    <Compile Include="RedesSociais\Twitter\CrescimentoFas.cs" />
+    <Compile Include="RedesSociais\Twitter\Interacoes.cs" />
+    <Compile Include="RedesSociais\Twitter\InteracoesHora.cs" />
+    <Compile Include="RedesSociais\Twitter\Post.cs" />
+    <Compile Include="RedesSociais\Twitter\Twitter.cs" />
+    <Compile Include="RedesSociais\Youtube\Comentario.cs" />
+    <Compile Include="RedesSociais\Youtube\CrescimentoSeguidores.cs" />
+    <Compile Include="RedesSociais\Youtube\Interacoes.cs" />
+    <Compile Include="RedesSociais\Youtube\InteracoesHora.cs" />
+    <Compile Include="RedesSociais\Youtube\Video.cs" />
+    <Compile Include="RedesSociais\Youtube\Youtube.cs" />
+    <Compile Include="Relatorios\FiltroRelatorio.cs" />
+    <Compile Include="Relatorios\metricasFacebook.cs" />
+    <Compile Include="Relatorios\metricasInstagram.cs" />
+    <Compile Include="Relatorios\metricasNoticias.cs" />
+    <Compile Include="Relatorios\metricasPresencaOnlineNoticias.cs" />
+    <Compile Include="Relatorios\metricasTwitter.cs" />
+    <Compile Include="Relatorios\metricasYoutube.cs" />
+    <Compile Include="Relatorios\Relatorio.cs" />
+    <Compile Include="Relatorios\Relatorios.cs" />
+    <Compile Include="Seguranca\Criptografia.cs" />
+    <Compile Include="Usuarios\Usuario.cs" />
+    <Compile Include="Usuarios\Usuarios.cs" />
+    <Compile Include="UtilsZRN\FuncoesDatas.cs" />
+    <Compile Include="Vertentes\Vertentes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZBD\ZBD.csproj">
+      <Project>{8474a183-1baf-4a03-8cfd-29361a873116}</Project>
+      <Name>ZBD</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Diagramas\Promocoes.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapa\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

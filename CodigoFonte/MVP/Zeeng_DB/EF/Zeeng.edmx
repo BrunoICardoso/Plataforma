@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="zeeng_Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cnpjempresa">
+          <Key>
+            <PropertyRef Name="idcnpjempresa" />
+          </Key>
+          <Property Name="idcnpjempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idempresa" Type="int" Nullable="false" />
+          <Property Name="cnpj" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="empresaredessociais">
+          <Key>
+            <PropertyRef Name="idempresaredessociais" />
+          </Key>
+          <Property Name="idempresaredessociais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idempresa" Type="int" Nullable="false" />
+          <Property Name="idredesocial" Type="int" Nullable="false" />
+          <Property Name="urlredesocial" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="idempresa" />
+          </Key>
+          <Property Name="idempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idsetor" Type="int" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="400" />
+          <Property Name="descricao" Type="varchar" MaxLength="2000" />
+          <Property Name="urlsite" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="redessociais">
+          <Key>
+            <PropertyRef Name="idredessociais" />
+          </Key>
+          <Property Name="idredessociais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="45" />
+          <Property Name="nomelogo" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="setoresempresa">
+          <Key>
+            <PropertyRef Name="idsetoresempresa" />
+          </Key>
+          <Property Name="idsetoresempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="fk_cnpj_empresa">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="cnpjempresa" Type="Self.cnpjempresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="idempresa" />
+            </Principal>
+            <Dependent Role="cnpjempresa">
+              <PropertyRef Name="idempresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_redessociais">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="empresaredessociais" Type="Self.empresaredessociais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="idempresa" />
+            </Principal>
+            <Dependent Role="empresaredessociais">
+              <PropertyRef Name="idempresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_setor">
+          <End Role="setoresempresa" Type="Self.setoresempresa" Multiplicity="1" />
+          <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setoresempresa">
+              <PropertyRef Name="idsetoresempresa" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="idsetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresasredes_redessociais">
+          <End Role="redessociais" Type="Self.redessociais" Multiplicity="1" />
+          <End Role="empresaredessociais" Type="Self.empresaredessociais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="redessociais">
+              <PropertyRef Name="idredessociais" />
+            </Principal>
+            <Dependent Role="empresaredessociais">
+              <PropertyRef Name="idredesocial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="zeeng_ModelStoreContainer">
+          <EntitySet Name="cnpjempresa" EntityType="Self.cnpjempresa" Schema="zeeng_dev" store:Type="Tables" />
+          <EntitySet Name="empresaredessociais" EntityType="Self.empresaredessociais" Schema="zeeng_dev" store:Type="Tables" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" Schema="zeeng_dev" store:Type="Tables" />
+          <EntitySet Name="redessociais" EntityType="Self.redessociais" Schema="zeeng_dev" store:Type="Tables" />
+          <EntitySet Name="setoresempresa" EntityType="Self.setoresempresa" Schema="zeeng_dev" store:Type="Tables" />
+          <AssociationSet Name="fk_cnpj_empresa" Association="Self.fk_cnpj_empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="cnpjempresa" EntitySet="cnpjempresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_redessociais" Association="Self.fk_empresa_redessociais">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="empresaredessociais" EntitySet="empresaredessociais" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_setor" Association="Self.fk_empresa_setor">
+            <End Role="setoresempresa" EntitySet="setoresempresa" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresasredes_redessociais" Association="Self.fk_empresasredes_redessociais">
+            <End Role="redessociais" EntitySet="redessociais" />
+            <End Role="empresaredessociais" EntitySet="empresaredessociais" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="zeeng_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cnpjempresa">
+          <Key>
+            <PropertyRef Name="idcnpjempresa" />
+          </Key>
+          <Property Name="idcnpjempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idempresa" Type="Int32" Nullable="false" />
+          <Property Name="cnpj" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresas" Relationship="Self.fk_cnpj_empresa" FromRole="cnpjempresa" ToRole="empresas" />
+        </EntityType>
+        <EntityType Name="empresaredessociais">
+          <Key>
+            <PropertyRef Name="idempresaredessociais" />
+          </Key>
+          <Property Name="idempresaredessociais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idempresa" Type="Int32" Nullable="false" />
+          <Property Name="idredesocial" Type="Int32" Nullable="false" />
+          <Property Name="urlredesocial" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresas" Relationship="Self.fk_empresa_redessociais" FromRole="empresaredessociais" ToRole="empresas" />
+          <NavigationProperty Name="redessociais" Relationship="Self.fk_empresasredes_redessociais" FromRole="empresaredessociais" ToRole="redessociais" />
+        </EntityType>
+        <EntityType Name="empresas">
+          <Key>
+            <PropertyRef Name="idempresa" />
+          </Key>
+          <Property Name="idempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idsetor" Type="Int32" Nullable="false" />
+          <Property Name="nome" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="descricao" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="urlsite" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cnpjempresa" Relationship="Self.fk_cnpj_empresa" FromRole="empresas" ToRole="cnpjempresa" />
+          <NavigationProperty Name="empresaredessociais" Relationship="Self.fk_empresa_redessociais" FromRole="empresas" ToRole="empresaredessociais" />
+          <NavigationProperty Name="setoresempresa" Relationship="Self.fk_empresa_setor" FromRole="empresas" ToRole="setoresempresa" />
+        </EntityType>
+        <EntityType Name="redessociais">
+          <Key>
+            <PropertyRef Name="idredessociais" />
+          </Key>
+          <Property Name="idredessociais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nomelogo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresaredessociais" Relationship="Self.fk_empresasredes_redessociais" FromRole="redessociais" ToRole="empresaredessociais" />
+        </EntityType>
+        <EntityType Name="setoresempresa">
+          <Key>
+            <PropertyRef Name="idsetoresempresa" />
+          </Key>
+          <Property Name="idsetoresempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="empresas" Relationship="Self.fk_empresa_setor" FromRole="setoresempresa" ToRole="empresas" />
+        </EntityType>
+        <Association Name="fk_cnpj_empresa">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="cnpjempresa" Type="Self.cnpjempresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="idempresa" />
+            </Principal>
+            <Dependent Role="cnpjempresa">
+              <PropertyRef Name="idempresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_redessociais">
+          <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+          <End Role="empresaredessociais" Type="Self.empresaredessociais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresas">
+              <PropertyRef Name="idempresa" />
+            </Principal>
+            <Dependent Role="empresaredessociais">
+              <PropertyRef Name="idempresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresasredes_redessociais">
+          <End Role="redessociais" Type="Self.redessociais" Multiplicity="1" />
+          <End Role="empresaredessociais" Type="Self.empresaredessociais" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="redessociais">
+              <PropertyRef Name="idredessociais" />
+            </Principal>
+            <Dependent Role="empresaredessociais">
+              <PropertyRef Name="idredesocial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_setor">
+          <End Role="setoresempresa" Type="Self.setoresempresa" Multiplicity="1" />
+          <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="setoresempresa">
+              <PropertyRef Name="idsetoresempresa" />
+            </Principal>
+            <Dependent Role="empresas">
+              <PropertyRef Name="idsetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="zeeng_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cnpjempresa" EntityType="Self.cnpjempresa" />
+          <EntitySet Name="empresaredessociais" EntityType="Self.empresaredessociais" />
+          <EntitySet Name="empresas" EntityType="Self.empresas" />
+          <EntitySet Name="redessociais" EntityType="Self.redessociais" />
+          <EntitySet Name="setoresempresa" EntityType="Self.setoresempresa" />
+          <AssociationSet Name="fk_cnpj_empresa" Association="Self.fk_cnpj_empresa">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="cnpjempresa" EntitySet="cnpjempresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_redessociais" Association="Self.fk_empresa_redessociais">
+            <End Role="empresas" EntitySet="empresas" />
+            <End Role="empresaredessociais" EntitySet="empresaredessociais" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresasredes_redessociais" Association="Self.fk_empresasredes_redessociais">
+            <End Role="redessociais" EntitySet="redessociais" />
+            <End Role="empresaredessociais" EntitySet="empresaredessociais" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_setor" Association="Self.fk_empresa_setor">
+            <End Role="setoresempresa" EntitySet="setoresempresa" />
+            <End Role="empresas" EntitySet="empresas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="zeeng_ModelStoreContainer" CdmEntityContainer="zeeng_Entities">
+          <EntitySetMapping Name="cnpjempresa">
+            <EntityTypeMapping TypeName="zeeng_Model.cnpjempresa">
+              <MappingFragment StoreEntitySet="cnpjempresa">
+                <ScalarProperty Name="idcnpjempresa" ColumnName="idcnpjempresa" />
+                <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresaredessociais">
+            <EntityTypeMapping TypeName="zeeng_Model.empresaredessociais">
+              <MappingFragment StoreEntitySet="empresaredessociais">
+                <ScalarProperty Name="idempresaredessociais" ColumnName="idempresaredessociais" />
+                <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+                <ScalarProperty Name="idredesocial" ColumnName="idredesocial" />
+                <ScalarProperty Name="urlredesocial" ColumnName="urlredesocial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empresas">
+            <EntityTypeMapping TypeName="zeeng_Model.empresas">
+              <MappingFragment StoreEntitySet="empresas">
+                <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+                <ScalarProperty Name="idsetor" ColumnName="idsetor" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="urlsite" ColumnName="urlsite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="redessociais">
+            <EntityTypeMapping TypeName="zeeng_Model.redessociais">
+              <MappingFragment StoreEntitySet="redessociais">
+                <ScalarProperty Name="idredessociais" ColumnName="idredessociais" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="nomelogo" ColumnName="nomelogo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="setoresempresa">
+            <EntityTypeMapping TypeName="zeeng_Model.setoresempresa">
+              <MappingFragment StoreEntitySet="setoresempresa">
+                <ScalarProperty Name="idsetoresempresa" ColumnName="idsetoresempresa" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

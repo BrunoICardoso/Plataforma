@@ -1,0 +1,193 @@
+﻿@model ZeengWeb.ViewModel.Cliente.ClienteConfiguracao
+@using ZeengWeb.Utils
+
+@{
+    ViewBag.Title = "Cliente - Configurações";
+}
+
+<style>
+    #boxSelecionarEmpresa, #boxSelecionadaEmpresa {
+        /*height: 600px;*/
+    }
+
+    #boxSelecionarEmpresa {
+    }
+
+    #boxSelecionadaEmpresa {
+    }
+
+    #qtdeRestante {
+        font-weight: bold;
+    }
+
+    .boxEmpresaSelecionar, .boxEmpresaAssociada {
+        border: 1px solid;
+        padding: 5px;
+        margin: 0 0 8px 0;
+    }
+
+    .checkSelecionaEmpresa, .checkSelecionadaEmpresa {
+        float: right;
+        margin-top: -15%;
+    }
+
+    .checkSelecionadoEmpresa {
+        float: right;
+        margin-top: -17%;
+    }
+
+    #listaEmpresasSelecionada {
+        height: 452px;
+        overflow-y: auto;
+    }
+</style>
+
+<link href="~/Content/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+
+<script type="text/javascript">
+
+    var idCliente = @Model.cliente.idcliente;
+    var caminhoImagem = '@Configuracoes.DiretorioImagens';
+    var totalEmpresasSelecionar = @Model.totalEmpresas;
+    var totalPorPagina = 8;
+    var paginaAtual = 1;
+    var totalEmpresasPermitido = @Model.cliente.qtdempresas;
+
+</script>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Configurações</h2>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-8">
+
+            <div class="profile-image">
+                <img src="@Html.Raw(Configuracoes.DiretorioImagens)/empresas/@(Model.cliente.idcliente).jpg" class="img-perfil m-b-md" alt="@Model.cliente.nome)">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            @Model.cliente.nome
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" for="status">Setores</label>
+                    <select class="form-control" data-placeholder="Selecione os setores..." id="cmbSetores"></select>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="control-label" for="product_name">Empresa</label>
+                    <input type="text" id="txtPalavrasChave" value="" placeholder="" class="form-control input-mini">
+                </div>
+            </div>
+
+            <div class="col-lg-10"></div>
+            <div class="col-lg-2">
+                <button class="btn btn-primary" id="btnPesquisa" type="button">Pesquisar</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8" id="boxSelecionarEmpresa">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Empresas cadastradas</h5>
+                </div>
+                <div class="ibox-content" id="listaEmpresasParaSelecionar">
+
+                    <div class="row">
+                        @*LISTA DE EMPRESAS PARA ASSOCIAR*@
+                    </div>
+                </div>
+
+                <div id="paginacaoSelecionarEmpresa">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4" id="boxSelecionarEmpresa">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Empresas selecionadas</h5>&nbsp;&nbsp;&nbsp;( <span id="qtdeRestante">0</span> restantes )
+                </div>
+                <div class="ibox-content" id="listaEmpresasSelecionada">
+
+                    <div class="row">
+                        @*LISTA DE EMPRESAS ASSOCIADAS*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2"><a href="/Empresa/" class="btn btn-primary">Salvar</a></div>        
+    </div>
+
+</div>
+
+@section Styles {
+
+    @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/plugins/switcheryStyles")
+    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet">
+}
+
+@section Scripts {
+
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/cliente/configuracoes.js"></script>
+
+    <script type="text/javascript">
+
+        var filtros = {};
+        filtros.idSetor = $('#cmbSetores').val();
+        filtros.expressao = $('#txtPalavrasChave').val();
+        filtros.pagina = paginaAtual;
+        filtros.qtdregistros = totalPorPagina;
+        filtros.idCliente = idCliente;
+
+        var Paginacao  = new Paginacao();
+        var objConfig = new Configuracoes();
+
+        objConfig.ListarSetores();
+
+        setTimeout(function(){
+            objConfig.ListarEmpresasAssociadas();
+        },300);
+
+        setTimeout(function(){
+            objConfig.ListarEmpresasNaoSelecionada();
+        },800);
+
+        $(document).ready(function () {
+
+            $('#btnPesquisa').on('click',function(){
+                objConfig.Pesquisar();
+            });
+
+        });
+    </script>
+}

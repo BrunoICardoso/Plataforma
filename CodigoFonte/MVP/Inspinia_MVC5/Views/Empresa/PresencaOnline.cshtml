@@ -1,0 +1,636 @@
+﻿@{
+    ViewBag.Title = "Presença Online";
+}
+
+<style type="text/css">
+    .indicador-container {
+        border: 1px solid #E5E5E5;
+        padding: 10px 20px 10px 20px;
+        margin-bottom: 20px;
+    }
+
+    .indicaodor1-tit {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .indicaodor1-icon-help, .indicaodor2-icon-help {
+        float: right;
+        color: #BBB;
+        border: 1px solid #BBB;
+        border-radius: 13px;
+        width: 13px;
+        height: 13px;
+        font-size: 10px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 11px;
+        margin-right: -10px;
+        margin-top: 2px;
+    }
+
+    .indicador1-valor {
+        display: inline-block;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+        .indicador1-valor span {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+    .indicador1-diferenca {
+        float: right;
+        line-height: 20px;
+        margin-top: 18px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+        .indicador1-diferenca i {
+            font-size: 18px;
+            margin-left: 5px;
+            vertical-align: top;
+        }
+
+        .indicador1-diferenca.cima {
+            color: #1AB394;
+        }
+
+            .indicador1-diferenca.cima i {
+                transform: rotate(7deg);
+                /* Safari */
+                -webkit-transform: rotate(-90deg);
+                /* Firefox */
+                -moz-transform: rotate(-90deg);
+                /* IE */
+                -ms-transform: rotate(-90deg);
+                /* Opera */
+                -o-transform: rotate(-90deg);
+            }
+
+        .indicador1-diferenca.baixo {
+            color: #E37686;
+        }
+
+            .indicador1-diferenca.baixo i {
+                transform: rotate(7deg);
+                /* Safari */
+                -webkit-transform: rotate(90deg);
+                /* Firefox */
+                -moz-transform: rotate(90deg);
+                /* IE */
+                -ms-transform: rotate(90deg);
+                /* Opera */
+                -o-transform: rotate(90deg);
+                margin-top: 2px;
+            }
+
+
+    .indicaodor2-tit {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .indicador2-valor {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+        .indicador2-valor span {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+    .indicador2-diferenca {
+        float: right;
+        line-height: 12px;
+        margin-top: 14px;
+    }
+
+        .indicador2-diferenca i {
+            font-size: 12px;
+            margin-left: 5px;
+            vertical-align: top;
+        }
+
+        .indicador2-diferenca.cima {
+            color: #1AB394;
+        }
+
+            .indicador2-diferenca.cima i {
+                transform: rotate(7deg);
+                /* Safari */
+                -webkit-transform: rotate(-90deg);
+                /* Firefox */
+                -moz-transform: rotate(-90deg);
+                /* IE */
+                -ms-transform: rotate(-90deg);
+                /* Opera */
+                -o-transform: rotate(-90deg);
+            }
+
+        .indicador2-diferenca.baixo {
+            color: #E37686;
+        }
+
+            .indicador2-diferenca.baixo i {
+                transform: rotate(7deg);
+                /* Safari */
+                -webkit-transform: rotate(90deg);
+                /* Firefox */
+                -moz-transform: rotate(90deg);
+                /* IE */
+                -ms-transform: rotate(90deg);
+                /* Opera */
+                -o-transform: rotate(90deg);
+            }
+
+
+
+    .audiencia-box {
+        height: 150px;
+    }
+
+    .audiencia-icon-help {
+        float: right;
+        color: #BBB;
+        border: 1px solid #BBB;
+        border-radius: 13px;
+        width: 13px;
+        height: 13px;
+        font-size: 10px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 11px;
+        margin-right: 0px;
+        margin-top: 2px;
+    }
+
+
+    .audiencia-linhagrafico {
+        margin: 10px 0 10px 0;
+    }
+
+    .audiencia-containerlabel {
+        text-align: right;
+        padding-right: 0px;
+        line-height: 13px;
+    }
+
+    .audiencia-label {
+        text-align: right;
+    }
+
+    .audiencia-grafcontainer {
+        border: 1px solid #D9D9D9;
+        height: 13px;
+    }
+
+    .audiencia-grafvalor {
+        height: 11px;
+        width: 50%;
+    }
+
+    .audiencia-verde {
+        background-color: #1AB394;
+    }
+
+    .audiencia-laranja {
+        background-color: #F8AC59;
+    }
+
+    .audiencia-vermelho {
+        background-color: #E37686;
+    }
+
+    .audiencia-legenda {
+        font-size: 9px;
+        text-align: center;
+    }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Presença Online</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Empresas</a>
+            </li>
+            <li>
+                <a>Coca Cola Company</a>
+            </li>
+            <li class="active">
+                <strong>Presença Online</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-8">
+
+            <div class="profile-image">
+                <img src="~/Images/Empresas/logo01.png" class="img-circle circle-border m-b-md" alt="profile">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            Coca Cola Company
+                        </h2>
+                        <h4>Corporação</h4>
+                        <small>
+                            The Coca-Cola Company, geralmente referida como Coca-Cola Company, Coke ou simplesmente Coca-Cola, dependendo da região, é uma corporação multinacional estadunidense, fabricante e comerciante de bebidas não-alcoólicas e concentrados de xaropes.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="indicador-container">
+                <div class="indicaodor1-tit">Rank no Brasil<i class="indicaodor1-icon-help fa fa-question"></i></div>
+                <div><div class="indicador1-valor">28.642</div><div class="indicador1-diferenca cima">48<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="indicador-container">
+                <div class="indicaodor1-tit">Autoridade do domínio<i class="indicaodor1-icon-help fa fa-question"></i></div>
+                <div><div class="indicador1-valor">28<span>/100</span></div><div class="indicador1-diferenca baixo">3<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="indicador-container">
+                <div class="indicaodor1-tit">Autoridade da página<i class="indicaodor1-icon-help fa fa-question"></i></div>
+                <div><div class="indicador1-valor">48<span>/100</span></div><div class="indicador1-diferenca baixo">5<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="indicador-container">
+                <div class="indicaodor1-tit">Visitas por pesquisa<i class="indicaodor1-icon-help fa fa-question"></i></div>
+                <div><div class="indicador1-valor">18,7%</div><div class="indicador1-diferenca cima">13%<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="indicador-container">
+                <div class="indicaodor2-tit">Taxa de rejeição<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                <div><div class="indicador2-valor">50,7%</div><div class="indicador2-diferenca baixo">8%<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="indicador-container">
+                <div class="indicaodor2-tit">Pont. de Spam<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                <div><div class="indicador2-valor">4 <span>/17</span></div><div class="indicador2-diferenca cima">4%<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="indicador-container">
+                <div class="indicaodor2-tit">Links<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                <div><div class="indicador2-valor">1.235</div><div class="indicador2-diferenca cima">48%<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="indicador-container">
+                <div class="indicaodor2-tit">Novos Links<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                <div><div class="indicador2-valor">596%</div><div class="indicador2-diferenca cima">3%<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="indicador-container">
+                <div class="indicaodor2-tit">Páginas visitadas<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                <div><div class="indicador2-valor">1.60</div><div class="indicador2-diferenca cima">7%<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="indicador-container">
+                <div class="indicaodor2-tit">Tempo de visita<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                <div><div class="indicador2-valor">02:14h</div><div class="indicador2-diferenca cima">4%<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-title">
+                    <h5>Audiência por gênero</h5>
+                    <div>
+                        <i class="audiencia-icon-help fa fa-question"></i>
+                    </div>
+                </div>
+                <div class="ibox-content audiencia-box">
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">feminino</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-verde">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">masculino</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-verde">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+
+                        <div class="col-md-8 col-md-offset-4 audiencia-legenda">
+                            média da internet
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="ibox float-e-margins">
+
+                <div class="ibox-title">
+                    <h5>Audiência por educação</h5>
+                    <div>
+                        <i class="audiencia-icon-help fa fa-question"></i>
+                    </div>
+                </div>
+                <div class="ibox-content audiencia-box">
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">s/ faculdade</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-laranja">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">al. faculdade</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-laranja">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">pós grad.</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-laranja">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">faculdade</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-laranja">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row audiencia-linhagrafico">
+
+                        <div class="col-md-8 col-md-offset-4 audiencia-legenda">
+                            média da internet
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="ibox float-e-margins ">
+
+                <div class="ibox-title">
+                    <h5>Audiência por local de acesso</h5>
+                    <div>
+                        <i class="audiencia-icon-help fa fa-question"></i>
+                    </div>
+                </div>
+                <div class="ibox-content audiencia-box">
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">casa</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-vermelho">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">escola</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-vermelho">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">trabalho</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-vermelho">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+
+                        <div class="col-md-8 col-md-offset-4 audiencia-legenda">
+                            média da internet
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins ">
+
+                <div class="ibox-title">
+                    <h5>Principais termos utilizados em sites de pesquisa</h5>
+                    <div>
+                        <i class="audiencia-icon-help fa fa-question"></i>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table principaistermos">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Palavra</th>
+                                <th>Percentual do tráfego</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Coca-cola</td>
+                                <td>58%</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Bebidas sem álcool</td>
+                                <td>18%</td>
+                            </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td>Bebidas com açucar</td>
+                                <td>15%</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Refrigerantes</td>
+                                <td>5,55%</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Melhores marcas</td>
+                                <td>2,45%</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Celulite</td>
+                                <td>2%</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Grandes sucessos</td>
+                                <td>1%</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins ">
+
+                <div class="ibox-title">
+                    <h5>Sites que linkam o site da empresa</h5>
+                    <div>
+                        <i class="audiencia-icon-help fa fa-question"></i>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table principaistermos">
+                        <thead>
+                            <tr>
+                                <th>Palavra</th>
+                                <th>Site</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>globo.com</td>
+                                <td>www.globo.com</td>
+                                <td><i class="fa fa-external-link"></i></td>
+                            </tr>
+                            <tr>
+                                <td>bebidas.com</td>
+                                <td>www.bebidas.com</td>
+                                <td><i class="fa fa-external-link"></i></td>
+                            </tr>
+
+                            <tr>
+                                <td>bebidas.com</td>
+                                <td>www.bebidas.com</td>
+                                <td><i class="fa fa-external-link"></i></td>
+                            </tr>
+                            <tr>
+                                <td>bebidas.com</td>
+                                <td>www.bebidas.com</td>
+                                <td><i class="fa fa-external-link"></i></td>
+                            </tr>
+                            <tr>
+                                <td>bebidas.com</td>
+                                <td>www.bebidas.com</td>
+                                <td><i class="fa fa-external-link"></i></td>
+                            </tr>
+                            <tr>
+                                <td>bebidas.com</td>
+                                <td>www.bebidas.com</td>
+                                <td><i class="fa fa-external-link"></i></td>
+                            </tr>
+                            <tr>
+                                <td>bebidas.com</td>
+                                <td>www.bebidas.com</td>
+                                <td><i class="fa fa-external-link"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

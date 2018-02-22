@@ -1,0 +1,826 @@
+﻿
+@{
+    ViewBag.Title = "Empresas";
+}
+
+<style type="text/css">
+
+    .empresa-box {
+    border: 1px solid #e7eaec;
+    padding: 0;
+    background-color: #ffffff;
+    height:180px;
+    margin-bottom: 30px;
+    
+    }
+
+    .btn_social {
+        width: 100px;
+        margin-bottom: 10px;
+    }
+
+    div.contact-box.center-version {
+        padding-bottom: 15px;
+    }
+
+    .box-imagem {
+        box-shadow: 0px 0px 5px #999;
+        xxborder: 1px solid #EAEAEA;
+        
+        padding: 2px;
+        width: 100px;
+        height: 100px;
+    }
+
+    .box-imagem img{
+        width: 96px;
+        height: 96px;
+    }
+
+    .img_left_box {
+        float: left;
+        height: 180px;
+        padding: 20px 20px 20px 20px;
+    }
+
+    .link-vermais, .link-vermais a {
+        color: #666;
+        text-align: center;
+        line-height: 15px;
+        vertical-align: middle;
+        margin-top:10px;
+    }
+
+        .link-vermais i {
+            line-height: 15px;
+            vertical-align: middle;
+            margin-right:2px;
+            
+        }
+
+        .link-vermais:hover {
+            color: #666;
+            text-decoration: underline;
+        }
+
+        .link-vermais span {
+            font-size: 10px;
+            line-height: 15px;
+            vertical-align: middle;
+        }
+
+    .img_right_box {
+    }
+
+    .titulo_lista_empresas_box {
+        font-size: 15px;
+        font-weight: 800;
+        float: left;
+    }
+
+    .conj_link_lista_empresa_box {
+        float: left;
+        margin-bottom:4px;
+            width: 58%;
+    }
+    .conj_link_lista_empresa_box i{
+        height:16px;
+        width:16px;
+    }
+
+    .titulo_lista_empresas_box {
+        margin-top: 0px;
+    }
+
+    .links_lista_empresa_box {
+        font-size: 12px;
+        color: #666666;
+    }
+
+    .links_bold_lista_empresa_box {
+        font-size: 14px;
+        font-weight: 700;
+        color: #666666;
+    }
+
+        .links_bold_lista_empresa_box span {
+            font-size: 12px;
+            color: #666666;
+            font-weight: normal;
+        }
+
+        .links_bold_lista_empresa_box:hover {
+            text-decoration: underline;
+            color: #666666;
+        }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Lista de empresas</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li class="active">
+                <strong>Empresas</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo01_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        Coca-Cola Company
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                13 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                28.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                2.090 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                11 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                3.752 <span>interações</span>
+                            </a>
+                        </div>
+
+
+
+
+
+                    </address>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo02_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        Cerveja Blumenau
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                13 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                28.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                2.090 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                11 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                3.752 <span>interações</span>
+                            </a>
+                        </div>
+
+
+
+
+
+                    </address>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo03_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        Brasil Kirin
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                13 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                28.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                2.090 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                11 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                3.752 <span>interações</span>
+                            </a>
+                        </div>
+
+
+
+
+
+                    </address>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo09_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        Casa Valduga
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                139 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                43.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                420 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                0 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                5.152 <span>interações</span>
+                            </a>
+                        </div>
+                    </address>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo10_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        Salton
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                142 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                26.213 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                1.790 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                6 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                1.752 <span>interações</span>
+                            </a>
+                        </div>
+                    </address>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo04_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        BRF Brasil
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                13 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                28.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                2.090 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                11 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                3.752 <span>interações</span>
+                            </a>
+                        </div>
+                    </address>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo05_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        Heineken
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                13 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                28.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                2.090 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                11 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                3.752 <span>interações</span>
+                            </a>
+                        </div>
+
+
+
+
+
+                    </address>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo06_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        JBS Foods
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                13 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                28.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                2.090 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                11 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                3.752 <span>interações</span>
+                            </a>
+                        </div>
+
+
+
+
+
+                    </address>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo07_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        Nestlé
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                13 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                28.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                2.090 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                11 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                3.752 <span>interações</span>
+                            </a>
+                        </div>
+
+
+
+
+
+                    </address>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="empresa-box center-version">
+                <div class="img_left_box">
+
+                    <div class="box-imagem">
+                        <a href="/Empresa/Perfil">
+                            <img alt="image" src="~/Images/Empresas/logo08_80.png">
+                        </a>
+                    </div>
+                    <div class="link-vermais">
+                        <a href="/Empresa/Perfil">
+                            <i class="fa fa-plus-circle"></i><span> ver mais</span>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="img_right_box">
+                    <h3 class="titulo_lista_empresas_box">
+                        McDonald's Brasil
+                    </h3>
+
+                    <address class="m-t-md">
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-binoculars"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                13 <span>produtos registrados</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-globe"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                28.327 <span>rank Brasil</span>
+                            </a>
+
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-newspaper-o"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                2.090 <span>notícias</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-comments"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                11 <span>promoções</span>
+                            </a>
+                        </div> <br />
+
+                        <div class="conj_link_lista_empresa_box">
+                            <i class="fa fa-bullhorn"></i>
+                            <a class="links_bold_lista_empresa_box" href="#">
+                                3.752 <span>interações</span>
+                            </a>
+                        </div>
+
+
+
+
+
+                    </address>
+                </div>
+
+            </div>
+        </div> 
+
+    </div>
+</div>

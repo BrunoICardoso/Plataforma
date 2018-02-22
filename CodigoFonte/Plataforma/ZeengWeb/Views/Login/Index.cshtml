@@ -1,0 +1,195 @@
+﻿@model ZRN.Mensagem.Mensagem
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Images/favicon.ico" type="image/x-icon" />
+
+    <title>ZEENG | Login</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+    <style type="text/css">
+        .form-login, .form-esqueceusenha {
+            display: inline-block;
+            width: 280px;
+        }
+
+        .formularios {
+            width: 600px;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .container-login {
+            width: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loadingEmail {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body class="blue-bg2">
+    <div class="middle-box loginscreen animated fadeInDown">
+        <div class="container-login" id="Login">
+            <div style="margin-bottom:20px;">
+                <img src="~/Images/logo_zeeng_login.png" alt="Zeeng" />
+            </div>
+
+            <div class="formularios">
+                <div class="form-login">
+                    @using (Html.BeginForm("login", "login", FormMethod.Post, new { @class = "m-t", role = "form" }))
+                    {
+
+                        if (Model.Codigo == 0)
+                        {
+                            <label class="label-msgerro" id="loginIncorreto">@Model.Texto</label>
+                            <script type="text/javascript">
+                                console.log("@Model.MensagemException");
+                            </script>
+                        }
+                        
+                        <div class="form-group">
+                            <input id="txtuser" name="login" type="text" class="blue-bg2 form-control" placeholder="Insira seu e-mail">
+                        </div>
+
+                        <div class="form-group">
+                            <input id="txtsenha" name="senha" type="password" class="blue-bg2 form-control" placeholder="Senha">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                        <span class='link-acoes'><a onclick='esqueceuSenha()'><small>Esqueceu sua senha?</small></a><br /></span>
+
+                    }
+
+
+                </div>
+                <div class="form-esqueceusenha">
+                    <div class="m-t" role="form">
+
+                        <div>
+                            <div class="form-group">
+
+                                <div class="loadingEmail sk-spinner sk-spinner-fading-circle">
+                                    <div class="sk-circle1 sk-circle"></div>
+                                    <div class="sk-circle2 sk-circle"></div>
+                                    <div class="sk-circle3 sk-circle"></div>
+                                    <div class="sk-circle4 sk-circle"></div>
+                                    <div class="sk-circle5 sk-circle"></div>
+                                    <div class="sk-circle6 sk-circle"></div>
+                                    <div class="sk-circle7 sk-circle"></div>
+                                    <div class="sk-circle8 sk-circle"></div>
+                                    <div class="sk-circle9 sk-circle"></div>
+                                    <div class="sk-circle10 sk-circle"></div>
+                                    <div class="sk-circle11 sk-circle"></div>
+                                    <div class="sk-circle12 sk-circle"></div>
+                                </div><br>
+
+                                <label class="label-formincorreto" id="emailIncorreto">Não há usuario com este email*</label>
+                                <input id="txtemail" type="email" class="blue-bg2 form-control" placeholder="Digite seu email" required="">
+                            </div>
+                            <button onclick='enviarEmail()' class="btn btn-primary block full-width m-b">Enviar</button>
+                        </div>
+
+                        <span class='link-acoes'><a onclick='voltarLogin()'><small>Voltar</small></a><br /></span>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="middle-box text-center loginscreen">
+
+
+    </div>
+
+</body>
+
+
+
+</html>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+
+
+
+<script type="text/javascript">
+
+   
+
+    $(document).ready(function () {
+
+        
+    });
+
+
+    function esqueceuSenha() {
+        $(".form-login").animate({ marginLeft: '-283px' });
+        $("#emailIncorreto").hide();
+    }
+
+    function voltarLogin() {
+        $(".form-login").animate({ marginLeft: '0px' });
+        $("#loginIncorreto").hide();
+    }
+
+    
+
+
+    function enviarEmail() {
+
+        if ($("#txtemail").val() != "") {
+
+
+            $(".loadingEmail").fadeIn();
+
+            var email = $("#txtemail").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/LoginAPI/Novasenha",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(email),
+                complete: function () {
+                    $(".loadingEmail").fadeOut();
+                },
+                success: function (data) {
+                    if (data.Codigo == 0) {
+                        $("#emailIncorreto").text(data.Texto).fadeIn();
+                    } else if (data.Codigo == 1) {
+                        $("#emailIncorreto").text(data.Texto).fadeIn();
+                    }
+                }
+            });
+
+
+        }
+        else {
+            $("#emailIncorreto").fadeIn();
+        }
+
+
+    }
+
+</script>

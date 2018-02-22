@@ -1,0 +1,53 @@
+﻿<div class="ibox-content m-b-sm border-bottom">
+    <div class="row">
+        <div class="col-md-12">
+            <label>Pesquisar</label>
+        </div>
+
+        <div class="col-md-9">
+            <input type="text" id="txtPesquisa" name="txtPesquisa" value="" placeholder="Palavra ou texto" class="form-control input-mini" />
+        </div>
+
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary">Pesquisar</button>
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+<div class="row" style="margin-bottom: 10px;">
+    <div class="col-md-4"></div>
+
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary btnPartialRede active" data-rede="Facebook"><i class="fa fa-facebook"></i>&nbsp;|&nbsp;Facebook</button>
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary btnPartialRede" data-rede="Twitter"><i class="fa fa-twitter"></i>&nbsp;|&nbsp;Twitter</button>
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary btnPartialRede" data-rede="Instagram"><i class="fa fa-instagram"></i>&nbsp;|&nbsp;Instagram</button>
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary btnPartialRede" data-rede="Youtube"><i class="fa fa-youtube"></i>&nbsp;|&nbsp;Youtube</button>
+    </div>
+</div>
+
+<br />
+
+<div id="areaFacebook">
+    @Html.Partial("Promocao/_PromocaoDetalheRedeSocial_AbaFacebook")
+</div>
+
+<div id="areaTwitter" style="display:none;">
+    @Html.Partial("Promocao/_PromocaoDetalheRedeSocial_AbaTwitter")
+</div>
+
+<div id="areaInstagram" style="display:none;">
+    @Html.Partial("Promocao/_PromocaoDetalheRedeSocial_AbaInstagram")
+</div>
+
+<div id="areaYoutube" style="display:none;">
+    @Html.Partial("Promocao/_PromocaoDetalheRedeSocial_AbaYoutube")
+</div>

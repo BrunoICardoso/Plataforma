@@ -1,0 +1,2358 @@
+﻿﻿@model ZeengWeb.ViewModel.Empresa.EmpresaSocial
+@using ZeengWeb.Utils
+
+@{
+    ViewBag.Title = "Redes sociais";
+}
+
+<script>
+    var diretorioImagens = "@Html.Raw(Configuracoes.DiretorioImagens)";
+</script>
+
+<style>
+    .highlight {
+        background-color: yellow;
+    }
+
+    .SpanCursor {
+        cursor: pointer;
+    }
+
+    .iconInput input {
+        padding-left: 28px;
+    }
+
+    .iconInput i {
+        position: absolute;
+        padding: 9px 10px;
+    }
+
+
+    .ajuda-tooltip {
+        margin: -20px 0 20px 0;
+    }
+
+    .toolAudiencia {
+        text-align: left;
+        width: 200px;
+        padding: 10px;
+    }
+
+    .indicador-container {
+        border: 1px solid #E5E5E5;
+        padding: 10px 20px 10px 20px;
+        margin-bottom: 20px;
+    }
+
+    .btn_social {
+        height: 40px;
+        padding: 5px 15px 5px 0;
+        width: 100%;
+        background-color: #B4B4B4;
+        color: #fff;
+        font-size: 20px;
+    }
+
+        .btn_social.active, .btn_cloud.active {
+            background-color: #19AA8D;
+        }
+
+        .btn_social:hover, .btn_cloud:hover {
+            background-color: #0ed1aa;
+            cursor: pointer;
+        }
+
+        .btn_social.inativo {
+            background-color: #DEDEDE;
+        }
+
+    .btn_icone {
+        border-right: 1px solid white;
+        display: inline-block;
+        width: 40px;
+        text-align: center;
+        margin-right: 5px;
+    }
+
+    .linha-botoes {
+        border-bottom: 2px solid #C9C9C9;
+        padding-bottom: 20px;
+        margin: 0px 6px 20px 15px;
+    }
+
+    .botoes-selecao {
+        width: 100%;
+        margin-top: 19px;
+    }
+
+    #btnAnalise, #btnLinhaTempo {
+        width: 50%;
+    }
+
+
+    .total_curtidas {
+        display: inline-block;
+        text-align: center;
+        width: 48%;
+        border-right: solid 1px #666;
+        line-height: 18px;
+        padding-top: 6px;
+    }
+
+        .total_curtidas .indicador {
+            font-size: 20px;
+        }
+
+    .percentual_curtidas {
+        display: inline-block;
+        font-size: 20px;
+        width: 49%;
+        text-align: center;
+        line-height: 50px;
+    }
+
+        .percentual_curtidas .indicador {
+        }
+
+    .posts_engajamento .btn-vermais {
+        cursor: pointer;
+        color: #337ab7;
+    }
+
+        .posts_engajamento .btn-vermais:hover {
+            text-decoration: underline;
+        }
+
+
+    .engajado_img, .engajado_texto {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+        .engajado_img img {
+            width: 128px;
+            height: 128px;
+        }
+
+    .engajado_texto {
+        margin-left: 10px;
+        font-size: 11px;
+    }
+
+    .engajado_data {
+        font-size: 12px;
+    }
+
+    .engajado_numero {
+        color: #19AA8D;
+    }
+
+    .engajado_texto > div {
+        margin-bottom: 10px;
+    }
+
+    .engajado_vermais {
+        text-align: right;
+        float: right;
+    }
+
+    .horarios_engajamento {
+    }
+
+        .horarios_engajamento td.diasemana {
+            /*background-color: #fff !important;*/
+            border-top: none;
+            border-bottom: none;
+            border-left: none;
+            padding-left: 6px;
+        }
+
+        .horarios_engajamento td {
+            height: 30px;
+            width: 3.5%;
+            border: 1px solid #FFF;
+        }
+
+        .horarios_engajamento .legenda_hora td {
+            /*background-color: #fff;*/
+            text-align: center;
+            border: none;
+        }
+
+    .tooltip-diahora {
+        text-align: left;
+    }
+
+    .nuvem_termos .termos {
+        width: 100%;
+        height: 400px;
+    }
+
+    .btn_cloud {
+        height: 40px;
+        padding: 5px 5px 5px 0;
+        background-color: #C9C9C9;
+        color: #fff;
+        font-size: 20px;
+        width: 200px;
+        float: right;
+        margin-left: 30px;
+    }
+
+    .loadingCrescimentoFasFace {
+        display: none;
+        margin-top: 50px;
+    }
+
+    .loadingCrescimentoFasTw {
+        display: none;
+        margin-top: 50px;
+    }
+
+    .loadingCrescimentoFasInsta {
+        display: none;
+        margin-top: 50px;
+    }
+
+    .loadingCrescimentoInscritosYt {
+        display: none;
+        margin-top: 50px;
+    }
+
+    .loadingGraficosInteracoesFace {
+        display: none;
+        margin-top: 50px;
+    }
+
+    .loadingInteracoesTw {
+        display: none;
+        margin-top: 50px;
+    }
+
+    .loadingInteracoesInsta {
+        display: none;
+        margin-top: 50px;
+    }
+
+    .loadingInteracoesYt {
+        display: none;
+        margin-top: 50px;
+    }
+
+
+
+    .loadingPostsMaiorEngajamentoFace {
+        display: none;
+        height: 378px;
+        padding-top: 200px;
+    }
+
+    .loadingPostsMaiorEngajamentoTw {
+        display: none;
+        height: 378px;
+        padding-top: 200px;
+    }
+
+    .loadingPostsMaiorEngajamentoInsta {
+        display: none;
+        height: 378px;
+        padding-top: 200px;
+    }
+
+    .loadingPostsMaiorEngajamentoYoutube {
+        display: none;
+        height: 378px;
+        padding-top: 200px;
+    }
+
+    .loadingEngajamentoHoraFace {
+        display: none;
+        height: 276px;
+        padding-top: 130px;
+    }
+
+    .loadingEngajamentoHoraTw {
+        display: none;
+        height: 276px;
+        padding-top: 130px;
+    }
+
+    .loadingEngajamentoHoraInsta {
+        display: none;
+        height: 276px;
+        padding-top: 130px;
+    }
+
+    .loadingEngajamentoHoraYoutube {
+        display: none;
+        height: 276px;
+        padding-top: 130px;
+    }
+
+    .loadingNuvemFace {
+        display: none;
+        height: 460px;
+        padding-top: 220px;
+    }
+
+    .loadingNuvemTw {
+        display: none;
+        height: 460px;
+        padding-top: 220px;
+    }
+
+    .loadingNuvemInsta {
+        display: none;
+        height: 460px;
+        padding-top: 220px;
+    }
+
+    .loadingNuvemYoutube {
+        display: none;
+        height: 460px;
+        padding-top: 220px;
+    }
+
+    .boxGraficoRedessocias {
+        height: 160px;
+    }
+
+    a.iconesRedeSocial {
+        font-weight: 600;
+        color: #676a6c;
+    }
+
+        a.iconesRedeSocial i.fa {
+            font-size: 16px;
+        }
+
+        a.iconesRedeSocial:hover {
+            color: #19AA8D;
+            text-decoration: underline;
+        }
+
+    .btn_social.inativo {
+        cursor: not-allowed;
+    }
+
+    .social-avatar {
+        padding: 0 15px 0 15px;
+    }
+
+    .ibox {
+        margin-left: 10px;
+    }
+
+    .social_subtitulo {
+        margin-left: 10px;
+    }
+
+    .paginacao-texto {
+        margin-top: 25px;
+        margin-bottom: 50px;
+    }
+
+    .boxBtnRedeSocial {
+        display: inline-block;
+        max-width: 160px;
+        margin: 0 15px 0 0;
+    }
+
+    td.active {
+        background-color: #FFDAB9;
+        background: #FFDAB9;
+        color: black;
+    }
+
+    .HoverEnga:hover {
+        background-color: orange !important;
+        background: orange !important;
+        color: black !important;
+    }
+
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>Redes sociais</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Empresa">Home</a>
+            </li>
+            <li>
+                <a href="/Empresa/">Empresas</a>
+            </li>
+            <li>
+                <a href="/Empresa/Perfil/@Html.DisplayFor(model => model.Empresa.idempresa)/">@Html.DisplayFor(model => model.Empresa.nome)</a>
+            </li>
+            <li class="active">
+                <strong>Redes sociais</strong>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" style=" padding-bottom:0px;">
+
+
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-3">
+            <div class="profile-image">
+                <img src="@String.Format("{0}/Empresas/{1}", Configuracoes.DiretorioImagens, Model.Empresa.imagem)" class="img-perfil m-b-md" alt="@Html.DisplayFor(model => model.Empresa.nome)">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 id="lblNomeEmpresa" class="no-margins">
+                            @Html.DisplayFor(model => model.Empresa.nome)
+                        </h2>
+                        <h5>@Html.DisplayFor(model => model.Empresa.nomeSetor)</h5>
+                        @*<small id="lblDescricao">
+                                @Html.DisplayFor(model => model.Empresa.descricao)
+                            </small>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1" style="border-top: 1px solid #C9C9C9; border-left: 1px solid #C9C9C9; border-bottom: 1px solid #C9C9C9; height: 115px; width: 2px !important;">
+
+        </div>
+
+        <div class="col-sm-8">
+            <div style="float:left; border: 0px solid red; margin: -3px 0 0 -20px;  padding-top: 10px; min-height: 115px;">
+                @{
+
+                    bool active = false;
+                    string activeFace = "",
+                    activeTw = "",
+                    activeInsta = "",
+                    activeYou = "";
+
+
+                    // Facebook
+                    if (Model.temRedesSocias.dadosFacebook != null)
+                    {
+                        active = true;
+                        activeFace = "active";
+
+                        string linkface = Model.temRedesSocias.dadosFacebook.Url.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0];
+
+                        <p><a class="iconesRedeSocial" href="@String.Concat("http://",linkface)" target="_blank"><i class="fa @Model.temRedesSocias.dadosFacebook.Icone"></i> @Html.Raw(linkface) </a></p>
+                    }
+                    else
+                    {
+                        <p onclick="showFormularioContato(this)"><i class="fa fa-facebook" style="font-size: 16px;"> </i> A empresa não possui perfil monitorado no Facebook &nbsp;|&nbsp; <a class="iconesRedeSocial">Clique aqui para informar</a></p>
+                    }
+
+                    // Twitter
+                    if (Model.temRedesSocias.dadosTwitter != null)
+                    {
+
+                        if (active == false)
+                        {
+                            active = true;
+                            activeTw = "active";
+                        }
+
+                        string linktwitter = Model.temRedesSocias.dadosTwitter.Url.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0];
+
+                        <p><a class="iconesRedeSocial" href="@String.Concat("http://",linktwitter)" target="_blank"><i class="fa @Model.temRedesSocias.dadosTwitter.Icone"></i> @Html.Raw(linktwitter)</a></p>
+                    }
+                    else
+                    {
+                        <p onclick="showFormularioContato(this)"><i class="fa fa-twitter" style="font-size: 16px;"> </i> A empresa não possui perfil monitorado no Twitter &nbsp;|&nbsp; <a class="iconesRedeSocial">Clique aqui para informar</a></p>
+                    }
+
+
+                    if (Model.temRedesSocias.dadosInstagram != null)
+                    {
+                        if (active == false)
+                        {
+                            active = true;
+                            activeInsta = "active";
+                        }
+                        string linkinsta = Model.temRedesSocias.dadosInstagram.Url.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0];
+
+                        <p><a class="iconesRedeSocial" href="@String.Concat("http://",linkinsta)" target="_blank"><i class="fa @Model.temRedesSocias.dadosInstagram.Icone"></i> @Html.Raw(linkinsta) </a></p>
+                    }
+                    else
+                    {
+                        <p onclick="showFormularioContato(this)"><i class="fa fa-instagram" style="font-size: 16px;"> </i> A empresa não possui perfil monitorado no Instagram &nbsp;|&nbsp; <a class="iconesRedeSocial">Clique aqui para informar</a></p>
+                    }
+
+                    if (Model.temRedesSocias.dadosYoutube != null)
+                    {
+                        if (active == false)
+                        {
+                            active = true;
+                            activeYou = "active";
+                        }
+
+                        string linkyt = Model.temRedesSocias.dadosYoutube.Url.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0];
+
+                        <p><a class="iconesRedeSocial" href="@String.Concat("http://", linkyt)" t target="_blank"><i class="fa @Model.temRedesSocias.dadosYoutube.Icone"></i> @Html.Raw(linkyt)</a></p>
+                    }
+                    else
+                    {
+                        <p onclick="showFormularioContato(this)"><i class="fa fa-youtube-play" s style="font-size: 16px;"> </i> A empresa não possui perfil monitorado no Youtube &nbsp;|&nbsp; <a class="iconesRedeSocial">Clique aqui para informar</a></p>
+                    }
+
+
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+
+        <div class="row">
+
+
+            <div class="boxBtnRedeSocial">
+                <div class="btn_social @activeFace  @Html.Raw( Model.temRedesSocias.dadosFacebook != null ? "ativo" : "inativo" )" data-nomerede="facebook">
+                    <div class="btn_icone"><i class="fa fa-facebook"></i></div>
+                    Facebook
+                </div>
+            </div>
+
+            <div class="boxBtnRedeSocial">
+                <div class="btn_social @activeTw  @Html.Raw( Model.temRedesSocias.dadosTwitter != null ? "ativo" : "inativo" )" data-nomerede="twitter">
+                    <div class="btn_icone">
+                        <i class="fa fa-twitter"></i>
+                    </div>
+                    Twitter
+                </div>
+            </div>
+            <div class="boxBtnRedeSocial">
+                <div class="btn_social @activeInsta @Html.Raw( Model.temRedesSocias.dadosInstagram != null ? "ativo" : "inativo" )" data-nomerede="instagram">
+                    <div class="btn_icone">
+                        <i class="fa fa-instagram"></i>
+                    </div>
+                    Instagram
+                </div>
+            </div>
+            <div class="boxBtnRedeSocial">
+                <div class="btn_social @activeYou  @Html.Raw( Model.temRedesSocias.dadosYoutube != null ? "ativo" : "inativo" ) " data-nomerede="youtube">
+                    <div class="btn_icone">
+                        <i class="fa fa-youtube"></i>
+                    </div>
+                    Youtube
+                </div>
+            </div>
+
+            <div class="row linha-botoes"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row container-redesocial " data-nomerede="facebook">
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-content" style="margin-top:10px;">
+                        @if (Model.TotalSeguidoresFace != null)
+                        {
+                            <div class="total_curtidas">
+                                <span class="indicador">
+                                    @if (Model.TotalSeguidoresFace != null)
+                                    {
+                                        @Html.Raw(String.Format("{0:n0}", Model.TotalSeguidoresFace.totalAtual));
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("0");
+                                    }
+                                </span><br />
+                                <span>
+                                    total de fãs
+                                </span>
+                            </div>
+                            <div class="percentual_curtidas">
+
+                                @if (Math.Round(Model.TotalSeguidoresFace.variacao, 2) < 0)
+                                {
+                                    <i class="fa fa-arrow-down indicador text-danger"></i>
+                                }
+                                else if (Math.Round(Model.TotalSeguidoresFace.variacao, 2) > 0)
+                                {
+                                    <i class="fa fa-arrow-up indicador text-navy"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-square indicador text-success"></i>
+                                }
+                                @Html.Raw(String.Format("{0:0.00}", Model.TotalSeguidoresFace.variacao) + "%")
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="total_curtidas">
+                                Ainda não capturado
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="col-md-6">
+                    Selecione o período <br />
+                    <div class="input-daterange input-group" id="facebookdatas">
+                        <input type="text" class="input-sm form-control" name="start" id="dtinicialface" value="10/09/2016" />
+                        <span class="input-group-addon">até</span>
+                        <input type="text" class="input-sm form-control" name="end" id="dtfinalface" value="10/10/2014" />
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="padding-right: 0px;">
+                    <div class="btn-group botoes-selecao">
+                        <button class="btn btn-primary" id="btnAnalise" type="button">Análise</button>
+                        <button class="btn btn-white" id="btnLinhaTempo" type="button">Linha do tempo</button>
+                    </div>
+                </div>
+
+
+                <div class="facebook_filtro_timeline col-md-12" id="FASelect" style="padding-right: 0px;">
+                    Ordenar por: <select class="form-control m-b" id="facebook_timeline_ordenacao">
+                        <option value="recentes" selected>Mais recentes</option>
+                        <option value="engajamento" selected>Mais relevantes</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+            @*<div class="col-md-8">
+                    <div class="facebook_filtro_timeline" style="margin-top:5px; display:none;">
+                        Ordenar por: <select id="facebook_timeline_ordenacao" style="width:100%; height:30px;">
+                            <option value="recentes" selected>Mais recentes</option>
+                            <option value="engajamento" selected>Mais relevantes</option>
+                        </select>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+
+    <div class="container_analise">
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Crescimento de fãs</h5>
+                    <h2 id="lblcrescfas"></h2>
+                    <div id="sparklinecrescfas"></div>
+
+                    <div class="loadingCrescimentoFasFace">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Quantidade de posts</h5>
+                    <h2 id="lblqtdposts"></h2>
+                    <div id="sparklineqtdposts"></div>
+
+                    <div class="loadingGraficosInteracoesFace">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Quantidade de interações</h5>
+                    <h2 id="lblqtdinteracoes"></h2>
+                    <div id="sparklineqtdinteracoes"></div>
+
+                    <div class="loadingGraficosInteracoesFace">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Curtidas</h5>
+                    <h2 id="lblqtdcurtidas"></h2>
+                    <div id="sparklineqtdcurtidas"></div>
+
+                    <div class="loadingGraficosInteracoesFace">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Comentários</h5>
+                    <h2 id="lblqtdcomentarios"></h2>
+                    <div id="sparklineqtdcomentarios"></div>
+
+                    <div class="loadingGraficosInteracoesFace">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Compartihamentos</h5>
+                    <h2 id="lblqtdcompartilhamentos"></h2>
+                    <div id="sparklineqtdcompartilhamentos"></div>
+
+                    <div class="loadingGraficosInteracoesFace">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="col-md-6">
+                <h2 class="social_subtitulo">Posts com maior audiência</h2>
+            </div>
+
+            <div class="col-md-6" style="left: 161px;top: 16px;">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" style="top: 8px; left: 41px;">Ordenar por:</label>
+
+
+                    <div class="col-sm-6">
+                        <select class="form-control sa-custom" name="OrdenarRedeSocial">
+
+                            <option>Ordenar</option>
+                            <option>Engajamento</option>
+                            <option>Reactions/Curtidas</option>
+                            <option>Comentários</option>
+                            <option>Compartilharmentos</option>
+
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="posts_engajamento"></div>
+
+
+        <div class="col-lg-12">
+
+            <div class="loadingPostsMaiorEngajamentoFace">
+                <div class="sk-spinner sk-spinner-three-bounce">
+                    <div class="sk-bounce1"></div>
+                    <div class="sk-bounce2"></div>
+                    <div class="sk-bounce3"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 pag-postsengajamento"></div>
+
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Audiência por dia e hora</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="face-horarios-engajamento horarios_engajamento">
+                        <tbody></tbody>
+                    </table>
+
+                    <div class="loadingEngajamentoHoraFace">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Nuvem de palavras</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div id="btnfacepostcloud" class="btn_cloud active">
+                                <div class="btn_icone">
+                                    <i class="fa fa-cloud"></i>
+                                </div>
+                                Postagens
+                            </div>
+                            <div id="btnfacecomentcloud" class="btn_cloud">
+                                <div class="btn_icone">
+                                    <i class="fa fa-cloud"></i>
+                                </div>
+                                Comentários
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fb_nuvem_semtermos" style="display:none; top:50%; left:50%; margin-top:50px; margin-left:50%;"><img src="@Html.Raw(Configuracoes.DiretorioImagens + "//icon_chateado.png")">&nbsp; Não há dados para esta consulta</div>
+
+                    <div style="display: none;" class="face_post_nuvem_termos nuvem_termos">
+                        <div class="termos"></div>
+                        <div class="range"></div>
+                    </div>
+
+                    <div style="display:none" class="face_coment_nuvem_termos nuvem_termos">
+                        <div class="termos"></div>
+                        <div class="range"></div>
+                    </div>
+
+                    <div class="loadingNuvemFace">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container_linhadotempo col-md-12" style="display:none">
+
+        @*<div class="facebook_filtro_timeline">
+                Ordenar por: <select id="facebook_timeline_ordenacao">
+                    <option value="recentes" selected>Mais recentes</option>
+                    <option value="engajamento" selected>Mais relevantes</option>
+                </select>
+            </div>*@
+        <div class="facebook_posts_timeline">
+
+        </div>
+        <div class="facebook-pag-poststimeline">
+
+        </div>
+    </div>
+</div>
+
+<div class="row container-redesocial" style="display:none" data-nomerede="twitter">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-content" style="margin-top:10px;">
+                        <div class="total_curtidas">
+                            <span class="indicador">
+                                @if (Model.TotalSeguidoresTw != null)
+                                {
+                                    @Html.Raw(String.Format("{0:n0}", Model.TotalSeguidoresTw.totalAtual))
+                                }
+                                else
+                                {
+                                    @Html.Raw("0");
+                                }
+                            </span><br />
+                            <span>
+                                total de seguidores
+                            </span>
+                        </div>
+                        <div class="percentual_curtidas">
+                            @if (Model.TotalSeguidoresTw != null)
+                            {
+                                if (Math.Round(Model.TotalSeguidoresTw.variacao, 2) < 0)
+                                {
+                                    <i class="fa fa-arrow-down indicador text-danger"></i>
+                                }
+                                else if (Math.Round(Model.TotalSeguidoresTw.variacao, 2) > 0)
+                                {
+                                    <i class="fa fa-arrow-up indicador text-navy"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-square indicador text-success"></i>
+                                }
+                                @Html.Raw(String.Format("{0:0.00}", Model.TotalSeguidoresTw.variacao) + "%")
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="col-md-6">
+                    Selecione o período <br />
+                    <div class="input-daterange input-group" id="twitterdatas">
+                        <input type="text" class="input-sm form-control" name="start" id="dtinicialtw" value="10/09/2016" />
+                        <span class="input-group-addon">até</span>
+                        <input type="text" class="input-sm form-control" name="end" id="dtfinaltw" value="10/10/2014" />
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="padding-right: 0px;">
+                    <div class="btn-group botoes-selecao">
+                        <button class="btn btn-primary" id="btnAnalise" type="button">Análise</button>
+                        <button class="btn btn-white" id="btnLinhaTempo" type="button">Linha do tempo</button>
+                    </div>
+                </div>
+
+
+                <div class="twitter_filtro_timeline col-md-12" id="TWSelect" style="padding-right: 0px;">
+                    Ordenar por: <select class="form-control m-b" id="twitter_timeline_ordenacao">
+                        <option value="recentes" selected>Mais recentes</option>
+                        <option value="engajamento" selected>Mais relevantes</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <div class="container_analise">
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Crescimento de seguidores</h5>
+                    <h2 id="lbltwcrescfas"></h2>
+                    <div id="sparklinetwcrescfas"></div>
+
+                    <div class="loadingCrescimentoFasTw">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Quantidade de tweets</h5>
+                    <h2 id="lbltwqtdtweets"></h2>
+                    <div id="sparklinetwqtdtweets"></div>
+
+                    <div class="loadingInteracoesTw">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Quantidade de interações</h5>
+                    <h2 id="lbltwqtdinteracoes"></h2>
+                    <div id="sparklinetwqtdinteracoes"></div>
+
+                    <div class="loadingInteracoesTw">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Curtidas</h5>
+                    <h2 id="lbltwqtdcurtidas"></h2>
+                    <div id="sparklinetwqtdcurtidas"></div>
+
+                    <div class="loadingInteracoesTw">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Retweets</h5>
+                    <h2 id="lbltwqtdretweets"></h2>
+                    <div id="sparklinetwqtdretweets"></div>
+
+                    <div class="loadingInteracoesTw">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12"><h2 class="social_subtitulo">Tweets com maior audiência</h2></div>
+        <div class="tweets_engajamento"></div>
+
+
+        <div class="col-lg-12">
+
+            <div class="loadingPostsMaiorEngajamentoTw">
+                <div class="sk-spinner sk-spinner-three-bounce">
+                    <div class="sk-bounce1"></div>
+                    <div class="sk-bounce2"></div>
+                    <div class="sk-bounce3"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 pag-tweetsengajamento"></div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Audiência por dia e hora</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="tw-horarios-engajamento horarios_engajamento">
+                        <tbody></tbody>
+                    </table>
+
+                    <div class="loadingEngajamentoHoraTw">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Nuvem de palavras</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div id="btntwpostcloud" class="btn_cloud active">
+                                <div class="btn_icone">
+                                    <i class="fa fa-cloud"></i>
+                                </div>
+                                Postagens
+                            </div>
+                            <div id="btntwmencoescloud" class="btn_cloud">
+                                <div class="btn_icone">
+                                    <i class="fa fa-cloud"></i>
+                                </div>
+                                Respostas
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tw_nuvem_semtermos" style="display:none; top:50%; left:50%; margin-top:50px; margin-left:50%;"><img src="@Html.Raw(Configuracoes.DiretorioImagens + "//icon_chateado.png")">&nbsp; Não há dados para esta consulta</div>
+
+                    <div class="tw_post_nuvem_termos nuvem_termos">
+                        <div class="termos"></div>
+                        <div class="range"></div>
+                    </div>
+
+                    <div style="display:none" class="tw_mencoes_nuvem_termos nuvem_termos">
+                        <div class="termos"></div>
+                        <div class="range"></div>
+                    </div>
+
+                    <div class="loadingNuvemTw">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container_linhadotempo col-md-12" style="display:none">
+
+        <div class="twitter_posts_timeline">
+
+        </div>
+        <div class="twitter-pag-poststimeline">
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row container-redesocial" style="display:none" data-nomerede="instagram">
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-content" style="margin-top:10px;">
+                        <div class="total_curtidas">
+
+                            <span class="indicador">
+                                @if (Model.TotalSeguidoresInsta != null)
+                                {
+                                    @Html.Raw(String.Format("{0:n0}", Model.TotalSeguidoresInsta.totalAtual));
+                                }
+                                else
+                                {
+                                    @Html.Raw("0");
+                                }
+                            </span><br />
+                            <span>
+                                total de seguidores
+                            </span>
+                        </div>
+                        <div class="percentual_curtidas">
+                            @if (Model.TotalSeguidoresInsta != null)
+                            {
+                                if (Math.Round(Model.TotalSeguidoresInsta.variacao, 2) < 0)
+                                {
+                                    <i class="fa fa-arrow-down indicador text-danger"></i>
+                                }
+                                else if (Math.Round(Model.TotalSeguidoresInsta.variacao, 2) > 0)
+                                {
+                                    <i class="fa fa-arrow-up indicador text-navy"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-square indicador text-success"></i>
+                                }
+                                @Html.Raw(String.Format("{0:0.00}", Model.TotalSeguidoresInsta.variacao) + "%")
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+
+                <div class="col-md-6">
+                    Selecione o período <br />
+                    <div class="input-daterange input-group" id="instagramdatas">
+                        <input type="text" class="input-sm form-control" name="start" id="dtinicialinsta" value="10/09/2016" />
+                        <span class="input-group-addon">até</span>
+                        <input type="text" class="input-sm form-control" name="end" id="dtfinalinsta" value="10/10/2014" />
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="padding-right: 0px;">
+                    <div class="btn-group botoes-selecao">
+                        <button class="btn btn-primary" id="btnAnalise" type="button">Análise</button>
+                        <button class="btn btn-white" id="btnLinhaTempo" type="button">Linha do tempo</button>
+                    </div>
+                </div>
+
+                <div class="instagram_filtro_timeline col-md-12" id="INSelect" style="padding-right: 0px;">
+                    Ordenar por: <select class="form-control m-b" id="instagram_filtro_timeline">
+                        <option value="recentes" selected>Mais recentes</option>
+                        <option value="engajamento" selected>Mais relevantes</option>
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="container_analise">
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Crescimento de seguidores</h5>
+                    <h2 id="lblinstacrescfas"></h2>
+                    <div id="sparklineinstacrescfas"></div>
+
+                    <div class="loadingCrescimentoFasInsta">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Quantidade de posts</h5>
+                    <h2 id="lblinstaqtdposts"></h2>
+                    <div id="sparklineinstaqtdposts"></div>
+
+                    <div class="loadingInteracoesInsta">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Quantidade de interações</h5>
+                    <h2 id="lblinstaqtdinteracoes"></h2>
+                    <div id="sparklineinstaqtdinteracoes"></div>
+
+                    <div class="loadingInteracoesInsta">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Curtidas</h5>
+                    <h2 id="lblinstaqtdcurtidas"></h2>
+                    <div id="sparklineinstaqtdcurtidas"></div>
+
+                    <div class="loadingInteracoesInsta">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Comentários</h5>
+                    <h2 id="lblinstaqtdcomentarios"></h2>
+                    <div id="sparklineinstaqtdcomentarios"></div>
+
+                    <div class="loadingInteracoesInsta">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12"><h2 class="social_subtitulo">Posts com maior audiência</h2></div>
+        <div class="instaposts_engajamento"></div>
+
+
+        <div class="col-lg-12">
+
+            <div class="loadingPostsMaiorEngajamentoInsta">
+                <div class="sk-spinner sk-spinner-three-bounce">
+                    <div class="sk-bounce1"></div>
+                    <div class="sk-bounce2"></div>
+                    <div class="sk-bounce3"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 pag-instapostsengajamento"></div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Audiência por dia e hora</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="insta-horarios-engajamento horarios_engajamento">
+                        <tbody></tbody>
+                    </table>
+
+                    <div class="loadingEngajamentoHoraInsta">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Nuvem de palavras</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div id="btninstapostcloud" class="btn_cloud active">
+                                <div class="btn_icone">
+                                    <i class="fa fa-cloud"></i>
+                                </div>
+                                Postagens
+                            </div>
+                            <div id="btninstacomentcloud" class="btn_cloud">
+                                <div class="btn_icone">
+                                    <i class="fa fa-cloud"></i>
+                                </div>
+                                Comentários
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insta_nuvem_semtermos" style="display:none; top:50%; left:50%; margin-top:50px; margin-left:50%;"><img src="@Html.Raw(Configuracoes.DiretorioImagens + "//icon_chateado.png")">&nbsp; Não há dados para esta consulta</div>
+
+                    <div class="insta_post_nuvem_termos nuvem_termos">
+                        <div class="termos"></div>
+                        <div class="range"></div>
+                    </div>
+
+                    <div style="display:none" class="insta_coment_nuvem_termos nuvem_termos">
+                        <div class="termos"></div>
+                        <div class="range"></div>
+                    </div>
+
+                    <div class="loadingNuvemInsta">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container_linhadotempo col-md-12" style="display:none">
+
+        <div class="instagram_posts_timeline">
+
+        </div>
+        <div class="instagram-pag-poststimeline">
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row container-redesocial" style="display:none" data-nomerede="youtube">
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-content" style="margin-top:10px;">
+                        @if (Model.TotalSeguidoresYoutube != null)
+                        {
+                            <div class="total_curtidas">
+
+                                <span class="indicador">
+                                    @if (Model.TotalSeguidoresYoutube != null)
+                                    {
+                                        @Html.Raw(String.Format("{0:n0}", Model.TotalSeguidoresYoutube.totalAtual));
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("0");
+                                    }
+                                </span><br />
+
+                                <span>
+                                    total de inscritos
+                                </span>
+                            </div>
+                            <div class="percentual_curtidas">
+                                @if (Model.TotalSeguidoresYoutube != null)
+                                {
+                                    if (Math.Round(Model.TotalSeguidoresYoutube.variacao, 2) < 0)
+                                    {
+                                        <i class="fa fa-arrow-down indicador text-danger"></i>
+                                    }
+                                    else if (Math.Round(Model.TotalSeguidoresYoutube.variacao, 2) > 0)
+                                    {
+                                        <i class="fa fa-arrow-up indicador text-navy"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-square indicador text-success"></i>
+                                    }
+                                    @Html.Raw(String.Format("{0:0.00}", Model.TotalSeguidoresYoutube.variacao) + "%")
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="total_curtidas">
+                                Ainda não capturado
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+
+                <div class="col-md-6">
+                    Selecione o período <br />
+                    <div class="input-daterange input-group" id="youtubedatas">
+                        <input type="text" class="input-sm form-control" name="start" id="dtinicialyoutube" value="10/09/2016" />
+                        <span class="input-group-addon">até</span>
+                        <input type="text" class="input-sm form-control" name="end" id="dtfinalyoutube" value="10/10/2014" />
+                    </div>
+                </div>
+
+
+                <div class="col-md-6" style="padding-right: 0px;">
+                    <div class="btn-group botoes-selecao">
+                        <button class="btn btn-primary" id="btnAnalise" type="button">Análise</button>
+                        <button class="btn btn-white" id="btnLinhaTempo" type="button">Linha do tempo</button>
+                    </div>
+                </div>
+
+
+                <div class="youtube_filtro_timeline col-md-12" id="YTSelect" style="padding-right: 0px;">
+                    Ordenar por: <select class="form-control m-b" id="youtube_filtro_timeline">
+                        <option value="recentes" selected>Mais recentes</option>
+                        <option value="engajamento" selected>Mais relevantes</option>
+                    </select>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="container_analise">
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Crescimento de inscritos</h5>
+                    <h2 id="lblyoutubecrescfas"></h2>
+                    <div id="sparklineyoutubecrescfas"></div>
+
+                    <div class="loadingCrescimentoInscritosYt">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Quantidade de videos</h5>
+                    <h2 id="lblyoutubeqtdposts"></h2>
+                    <div id="sparklineyoutubeqtdposts"></div>
+
+                    <div class="loadingInteracoesYt">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Quantidade de interações</h5>
+                    <h2 id="lblyoutubeqtdinteracoes"></h2>
+                    <div id="sparklineyoutubeqtdinteracoes"></div>
+
+                    <div class="loadingInteracoesYt">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Visualizacoes</h5>
+                    <h2 id="lblyoutubeqtdvisualizacoes"></h2>
+                    <div id="sparklineyoutubeqtdvisualizacoes"></div>
+
+                    <div class="loadingInteracoesYt">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content boxGraficoRedessocias">
+                    <h5>Curtidas</h5>
+                    <h2 id="lblyoutubeqtdcurtidas"></h2>
+                    <div id="sparklineyoutubeqtdcurtidas"></div>
+
+                    <div class="loadingInteracoesYt">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h5>Comentários</h5>
+                    <h2 id="lblyoutubeqtdcomentarios"></h2>
+                    <div id="sparklineyoutubeqtdcomentarios"></div>
+
+                    <div class="loadingInteracoesYt">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12"><h2 class="social_subtitulo">Videos com maior audiência</h2></div>
+        <div class="youtubevideos_engajamento"></div>
+
+
+        <div class="col-lg-12">
+
+            <div class="loadingPostsMaiorEngajamentoYoutube">
+                <div class="sk-spinner sk-spinner-three-bounce">
+                    <div class="sk-bounce1"></div>
+                    <div class="sk-bounce2"></div>
+                    <div class="sk-bounce3"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-12 pag-youtubevideosengajamento"></div>
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Audiência por dia e hora</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="youtube-horarios-engajamento horarios_engajamento">
+                        <tbody></tbody>
+                    </table>
+
+                    <div class="loadingEngajamentoHoraYoutube">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Nuvem de palavras</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div id="btnYoutubevideocloud" class="btn_cloud active">
+                                <div class="btn_icone">
+                                    <i class="fa fa-cloud"></i>
+                                </div>
+                                Postagens
+                            </div>
+                            <div id="btnYoutubecomentcloud" class="btn_cloud">
+                                <div class="btn_icone">
+                                    <i class="fa fa-cloud"></i>
+                                </div>
+                                Comentários
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="yt_nuvem_semtermos" style="display:none; top:50%; left:50%; margin-top:50px; margin-left:50%;"><img src="@Html.Raw(Configuracoes.DiretorioImagens + "//icon_chateado.png")">&nbsp; Não há dados para esta consulta</div>
+
+                    <div class="youtube_post_nuvem_termos nuvem_termos">
+                        <div class="termos"></div>
+                        <div class="range"></div>
+                    </div>
+
+                    <div style="display:none" class="youtube_coment_nuvem_termos nuvem_termos">
+                        <div class="termos"></div>
+                        <div class="range"></div>
+                    </div>
+
+                    <div class="loadingNuvemYoutube">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="container_linhadotempo col-md-12" style="display:none">
+
+        <div class="youtube_posts_timeline">
+
+        </div>
+        <div class="youtube-pag-poststimeline">
+
+        </div>
+    </div>
+
+
+</div>
+
+
+<div class="form-modal detalhes-post" id="modalDetalhesPostFace">
+
+    <div class="social-feed-box">
+
+        <div class="pull-right social-action">
+            <a class="close-link btn-fechar">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="social-avatar">
+            <div class="media-body">
+                <a id="usuariopost" href="">
+
+                </a>
+                <small class="text-muted" id="dataPost"></small>
+            </div>
+        </div>
+        <div class="social-body">
+            <p id="textopost">
+
+            </p>
+            <img id="imagempost" src="~/Images/facebook/posts/11.jpg" class="img-responsive">
+            <div class="btn-group">
+                <div class="post-label-interacoes"><i class="fa fa-thumbs-up"></i> <span id="curtidaspost"></span> curtidas</div>
+                <div class="post-label-interacoes"><i class="fa fa-comments"></i> <span id="comentariospost"></span> comentários</div>
+                <div class="post-label-interacoes"><i class="fa fa-share"></i> <span id="compartilhamentospost"></span> compartilhamentos</div>
+            </div>
+        </div>
+        <div class="social-footer">
+
+        </div>
+
+        <button id="btnCarregaComentariosFace" class="m-t btn btn-primary btn-block btn-sm btn-outline"><i class="fa fa-arrow-down"></i> Carregar mais comentários</button>
+
+    </div>
+
+</div>
+
+<div class="form-modal detalhes-post" id="detalhesPostTw">
+
+    <div class="social-feed-box">
+
+        <div class="pull-right social-action">
+            <a class="close-link btn-fechar">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="social-avatar">
+            <div class="media-body">
+                <a id="usuarioposttw" href="">
+
+                </a>
+                <small class="text-muted" id="dataPosttw"></small>
+            </div>
+        </div>
+        <div class="social-body">
+            <p id="textoposttw">
+
+            </p>
+            <img id="imagemposttw" src="" class="img-responsive">
+            <div class="btn-group">
+                <div class="post-label-interacoes"><i class="fa fa-thumbs-up"></i> <span id="curtidasposttw"></span> Curtidas</div>
+                <div class="post-label-interacoes"><i class="fa fa-comments"></i> <span id="comentariosposttw"></span> Retweets</div>
+            </div>
+        </div>
+        <div class="social-footer">
+
+        </div>
+
+        <button id="btnCarregaRetweets" class="m-t btn btn-primary btn-block btn-sm btn-outline"><i class="fa fa-arrow-down"></i> Carregar mais retweets</button>
+
+    </div>
+
+</div>
+
+<div class="form-modal detalhes-post" id="detalhesPostInsta">
+
+    <div class="social-feed-box">
+
+        <div class="pull-right social-action">
+            <a class="close-link btn-fechar">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="social-avatar">
+            <div class="media-body">
+                <a id="usuariopostinsta" href="">
+
+                </a>
+                <small class="text-muted" id="dataPostInsta"></small>
+            </div>
+        </div>
+        <div class="social-body">
+            <p id="textopostinsta">
+
+            </p>
+            <img id="imagempostinsta" src="" class="img-responsive">
+            <div class="btn-group">
+                <div class="post-label-interacoes"><i class="fa fa-heart"></i> <span id="curtidaspostinsta"></span> Curtidas</div>
+                <div class="post-label-interacoes"><i class="fa fa-comments"></i> <span id="comentariospostinsta"></span> Comentários</div>
+            </div>
+        </div>
+        <div class="social-footer">
+
+        </div>
+
+        <button id="btnCarregaComentariosInsta" class="m-t btn btn-primary btn-block btn-sm btn-outline"><i class="fa fa-arrow-down"></i> Carregar mais comentários</button>
+
+    </div>
+
+</div>
+
+<div class="form-modal detalhes-post" id="detalhesVideoYoutube">
+
+    <div class="social-feed-box">
+
+        <div class="pull-right social-action">
+            <a class="close-link btn-fechar" onclick="FecharModalYoutube(this)">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="social-avatar">
+            <div class="media-body">
+                <a id="usuariovideoyoutube" href="">
+
+                </a>
+                <small class="text-muted" id="dataVideoYoutube"></small>
+            </div>
+        </div>
+        <div class="social-body">
+            <p id="textovideoyoube">
+
+            </p>
+
+            <div id="videoYoutube"></div>
+
+            <img id="imagemvideoyoutube" src="~/Images/facebook/posts/11.jpg" class="img-responsive">
+            <div class="btn-group">
+                <div class="post-label-interacoes"><i class="fa fa-eye"></i> <span id="visualizacoesvideoyoutube"></span> Visualizações</div>
+                <div class="post-label-interacoes"><i class="fa fa-thumbs-o-up"></i> <span id="curtidasvideoyoutube"></span> Curtidas</div>
+                <div class="post-label-interacoes"><i class="fa fa-thumbs-o-down "></i> <span id="descurtidasvideoyoutube"></span> Descurtidas</div>
+                @*<div class="post-label-interacoes"><i class="fa fa-star"></i> <span id="favoritadosvideoyoutube"></span> Favoritados</div>*@
+                <div class="post-label-interacoes"><i class="fa fa-comments-o"></i> <span id="comentariosvideoyoutube"></span> Comentários</div>
+
+            </div>
+        </div>
+        <div class="social-footer">
+
+        </div>
+
+        <button id="btnCarregaComentariosYoutube" class="m-t btn btn-primary btn-block btn-sm btn-outline"><i class="fa fa-arrow-down"></i> Carregar mais comentários</button>
+
+    </div>
+
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/ionRangeSlider/ionRangeStyles")
+    @Styles.Render("~/plugins/dateRangeStyles")
+    @Styles.Render("~/plugins/dataPickerStyles")
+}
+
+@section Scripts{
+
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/plugins/formModal/formModal.js"></script>
+    <script src="~/Scripts/plugins/wordcloud/wordcloud2.js"></script>
+    <script src="~/Scripts/plugins/wordcloud/nuvemtermos.js"></script>
+
+    @Scripts.Render("~/plugins/sparkline")
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/dateRange")
+    @Scripts.Render("~/plugins/d3")
+    @Scripts.Render("~/plugins/ionRange")
+
+    <script src="~/Scripts/empresa/perfilfacebook.js"></script>
+    <script src="~/Scripts/empresa/perfiltwitter.js"></script>
+    <script src="~/Scripts/empresa/perfilinstagram.js"></script>
+    <script src="~/Scripts/empresa/perfilyoutube.js"></script>
+
+    <script type="text/javascript">
+
+        var idEmpresa = @Model.Empresa.idempresa;
+        var btnNuvemPalavras;
+        var paginacao = new Paginacao();
+        var totalPostsEngajamento;
+
+        var inicializandoDatas = true;
+        var dataPadraoInicial = new Date();
+        var dataPadraoFinal = new Date();
+
+        dataPadraoInicial.setDate(dataPadraoFinal.getDate() - 90);
+
+        $('#facebookdatas').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        }).on('changeDate', function() {
+            alterouDataFace();
+        });
+
+        $('#twitterdatas').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+        }).on('changeDate', function() {
+            alterouDataTwitter();
+        });
+
+        $('#instagramdatas').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+        }).on('changeDate', function() {
+            alterouDataInstagram();
+        });
+
+        $('#youtubedatas').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+        }).on('changeDate', function() {
+            alterouDataYoutube();
+        });
+
+        $('#dtinicialface').datepicker('setDate', dataPadraoInicial);
+        $('#dtfinalface').datepicker('setDate', dataPadraoFinal);
+
+        $('#dtinicialtw').datepicker('setDate', dataPadraoInicial);
+        $('#dtfinaltw').datepicker('setDate', dataPadraoFinal);
+
+        $('#dtinicialinsta').datepicker('setDate', dataPadraoInicial);
+        $('#dtfinalinsta').datepicker('setDate', dataPadraoFinal);
+
+        $('#dtinicialyoutube').datepicker('setDate', dataPadraoInicial);
+        $('#dtfinalyoutube').datepicker('setDate', dataPadraoFinal);
+
+        inicializandoDatas = false;
+
+        $(".btn_social.ativo").click(function(){
+
+            $(".btn_social").removeClass("active")
+            $(this).addClass("active")
+
+            $(".container-redesocial").hide();
+            var nomerede = $(this).attr("data-nomerede")
+
+            $(".container-redesocial[data-nomerede="+ nomerede +"]").show();
+
+            switch (nomerede) {
+                case "facebook":
+                    CarregaGraficosFace();
+                    break;
+                case "twitter":
+                    CarregaGraficosTw();
+                    break;
+                case "instagram":
+                    CarregaGraficosInsta();
+                    break;
+                case "youtube":
+                    CarregaGraficosYoutube();
+                    break;
+                default:
+
+            }
+        });
+
+
+
+        $("#btnfacepostcloud").click(function(){
+
+
+            $("#btnfacepostcloud").addClass("active");
+            $("#btnfacecomentcloud").removeClass("active");
+
+            $(".face_post_nuvem_termos").show();
+            $(".face_coment_nuvem_termos").hide();
+
+            var dtInicialFace = $("#dtinicialface").datepicker('getDate');
+            var dtFinalFace = $("#dtfinalface").datepicker('getDate');
+
+            CarregaNuvemTermosPostsFace(idEmpresa, dtInicialFace, dtFinalFace);
+        });
+
+        $("#btnfacecomentcloud").click(function(){
+
+            $("#btnfacecomentcloud").addClass("active");
+            $("#btnfacepostcloud").removeClass("active");
+
+            $(".face_coment_nuvem_termos").show();
+            $(".face_post_nuvem_termos").hide();
+
+            var dtInicialFace = $("#dtinicialface").datepicker('getDate');
+            var dtFinalFace = $("#dtfinalface").datepicker('getDate');
+
+            CarregaNuvemTermosComentariosFace(idEmpresa, dtInicialFace, dtFinalFace);
+
+        });
+
+        $("#btninstapostcloud").click(function(){
+
+            $("#btninstapostcloud").addClass("active");
+            $("#btninstacomentcloud").removeClass("active");
+
+            $(".insta_post_nuvem_termos").show();
+            $(".insta_coment_nuvem_termos").hide();
+
+            var dtInicialInst = $("#dtinicialinsta").datepicker('getDate');
+            var dtFinalInst = $("#dtfinalinsta").datepicker('getDate');
+
+            CarregaNuvemTermosPostsInstagram(idEmpresa, dtInicialInst, dtFinalInst);
+        });
+
+        $("#btninstacomentcloud").click(function(){
+
+            $("#btninstacomentcloud").addClass("active");
+            $("#btninstapostcloud").removeClass("active");
+
+            $(".insta_coment_nuvem_termos").show();
+            $(".insta_post_nuvem_termos").hide();
+
+            var dtInicialInst = $("#dtinicialinsta").datepicker('getDate');
+            var dtFinalInst = $("#dtfinalinsta").datepicker('getDate');
+
+            CarregaNuvemTermosComentariosInstagram(idEmpresa, dtInicialInst, dtFinalInst);
+
+        });
+
+        $("#btnYoutubevideocloud").click(function(){
+
+            $("#btnYoutubevideocloud").addClass("active");
+            $("#btnYoutubecomentcloud").removeClass("active");
+
+            $(".youtube_post_nuvem_termos").show();
+            $(".youtube_coment_nuvem_termos").hide();
+
+            var dtInicialYt = $("#dtinicialyoutube").datepicker('getDate');
+            var dtFinalYt = $("#dtfinalyoutube").datepicker('getDate');
+
+            CarregaNuvemDeTermosVideosYoutube(idEmpresa, dtInicialYt, dtFinalYt);
+        });
+
+        $("#btnYoutubecomentcloud").click(function(){
+
+            $("#btnYoutubecomentcloud").addClass("active");
+            $("#btnYoutubevideocloud").removeClass("active");
+
+            $(".youtube_coment_nuvem_termos").show();
+            $(".youtube_post_nuvem_termos").hide();
+
+            var dtInicialYt = $("#dtinicialyoutube").datepicker('getDate');
+            var dtFinalYt = $("#dtfinalyoutube").datepicker('getDate');
+
+            CarregaNuvemDeTermosComentariosYoutube(idEmpresa, dtInicialYt, dtFinalYt);
+        });
+
+        $("#btnCarregaComentariosFace").click(function(){
+            CarregaMaisComentariosFace();
+
+        });
+
+        $("#btnCarregaRetweets").click(function(){
+            CarregaMaisRetweets();
+        });
+
+        $("#btnCarregaComentariosInsta").click(function(){
+            CarregaMaisComentariosInsta();
+        });
+
+        $("#btnCarregaComentariosYoutube").click(function(){
+            CarregaMaisComentariosYouTube();
+        });
+
+       
+        $(document).ready(function () {
+
+            
+            $("#FASelect").hide();
+            $("#TWSelect").hide();
+            $("#INSelect").hide();
+            $("#YTSelect").hide();
+
+            inicializaFormModal();
+
+            @*var RedeSocialPadrao = '@PrimeiraRedeSocial';
+
+            if(RedeSocialPadrao == "Facebook"){
+                CarregaGraficosFace();
+            }
+            else {
+                CarregaGraficosInsta();
+            }*@
+
+        
+
+
+            $('#facebook_timeline_ordenacao').change(function(){
+
+                if(PostComent == undefined){
+                    PostComent == null
+                }
+
+                if(palavra == undefined){
+                    palavra == null
+                }
+
+                var dtInicialFace = $("#dtinicialface").datepicker('getDate');
+                var dtFinalFace = $("#dtfinalface").datepicker('getDate');
+                var ordenacao = $("#facebook_timeline_ordenacao").val();
+
+                CarregaFaceLinhaDoTempo(idEmpresa, dtInicialFace, dtFinalFace, 6, 1, ordenacao,palavra,PostComent);
+            })
+
+            $('#twitter_timeline_ordenacao').change(function(){
+
+                if( PostComentTw == undefined){
+                    PostComentTw == null
+                }
+
+                if( palavraTw == undefined){
+                    palavraTw == null
+                }
+
+                var dtInicialTw = $("#dtinicialtw").datepicker('getDate');
+                var dtFinalTw = $("#dtfinaltw").datepicker('getDate');
+                var ordenacaoTw = $("#twitter_timeline_ordenacao").val();
+                CarregaTwLinhaDoTempo(idEmpresa, dtInicialTw, dtFinalTw, 6, 1, ordenacaoTw,palavraTw,PostComentTw);
+
+            })
+
+            $('#youtube_filtro_timeline').change(function(){
+
+                if( PostComentYT == undefined){
+                    PostComentYT == null
+                }
+
+                if( palavraYT == undefined){
+                    palavraYT == null
+                }
+
+
+                var dtInicialYt = $("#dtinicialyoutube").datepicker('getDate');
+                var dtFinalYt = $("#dtfinalyoutube").datepicker('getDate');
+                var ordenacaoYt = $("#youtube_filtro_timeline").val();
+                CarregaYoutubeLinhadoTempo(idEmpresa, dtInicialYt, dtFinalYt, 6, 1, ordenacaoYt,palavraYT,PostComentYT );
+
+            })
+
+            $('#instagram_filtro_timeline').change(function(){
+
+                if(PostComentInst == undefined){
+                    PostComentInst == null
+                }
+
+                if(palavraInst == undefined){
+                    palavraInst == null
+                }
+
+                var dtInicialInst = $("#dtinicialinsta").datepicker('getDate');
+                var dtFinalInst = $("#dtfinalinsta").datepicker('getDate');
+                var ordenacaoInst = $("#instagram_filtro_timeline").val();
+                CarregaInstagramTimeline(idEmpresa, dtInicialInst, dtFinalInst, 6, 1, ordenacaoInst,palavraInst,PostComentInst);
+
+            })
+
+            $(".btn_social.active").trigger('click');
+        })
+
+        function CarregaGraficosFace(){
+
+            if(palavra == undefined){
+                palavra = null
+            }
+
+
+            if(PostComent == undefined){
+                PostComent == null
+            }
+            var dtInicialFace = $("#dtinicialface").datepicker('getDate');
+            var dtFinalFace = $("#dtfinalface").datepicker('getDate');
+            var ordenacao = $("#facebook_timeline_ordenacao").val();
+
+            CarregaGraficoCrescimentoFas(idEmpresa, dtInicialFace, dtFinalFace);
+            CarregaGraficosInteracoes(idEmpresa, dtInicialFace, dtFinalFace);
+            CarregaPostsMaiorEngajamento(idEmpresa, dtInicialFace, dtFinalFace, 6, 1);
+            CarregaGraficoEngajamentoHora(idEmpresa, dtInicialFace, dtFinalFace);
+            CarregaFaceLinhaDoTempo(idEmpresa, dtInicialFace, dtFinalFace, 6, 1, ordenacao,palavra,PostComent);
+            CarregaNuvemTermosPostsFace(idEmpresa, dtInicialFace, dtFinalFace);
+
+        }
+
+        function alterouDataFace(){
+            if(!inicializandoDatas)
+                CarregaGraficosFace();
+        }
+
+        function CarregaGraficosTw(){
+
+            if( PostComentTw == undefined){
+                PostComentTw == null
+            }
+
+            if( palavraTw == undefined){
+                palavraTw == null
+            }
+
+            var dtInicialTw = $("#dtinicialtw").datepicker('getDate');
+            var dtFinalTw = $("#dtfinaltw").datepicker('getDate');
+            var ordenacaoTw = $("#twitter_timeline_ordenacao").val();
+
+            CarregaTwGraficoCrescimentoSeguidores(idEmpresa, dtInicialTw, dtFinalTw);
+            CarregaTwGraficoQuantidadeDeInteracoes(idEmpresa, dtInicialTw, dtFinalTw);
+            CarregaTweetsMaiorEngajamento(idEmpresa, dtInicialTw, dtFinalTw, 6, 1);
+            CarregaTwGraficoEnganjamentoHora(idEmpresa, dtInicialTw, dtFinalTw);
+            CarregaTwLinhaDoTempo(idEmpresa, dtInicialTw, dtFinalTw, 6, 1, ordenacaoTw,palavraTw ,PostComentTw );
+            CarregaNuvemTermosPostsTw(idEmpresa, dtInicialTw, dtFinalTw);
+        }
+
+        function alterouDataTwitter(){
+            if(!inicializandoDatas)
+                CarregaGraficosTw();
+        }
+
+        function CarregaGraficosInsta(){
+
+            if(PostComentInst == undefined){
+                PostComentInst == null
+            }
+
+            if(palavraInst == undefined){
+                palavraInst == null
+            }
+
+            var dtInicialInsta = $("#dtinicialinsta").datepicker('getDate');
+            var dtFinalInsta = $("#dtfinalinsta").datepicker('getDate');
+            ordenacaoInsta = $("#instagram_filtro_timeline").val();
+
+            CarregaInstaPostsMaiorEngajamento(idEmpresa, dtInicialInsta, dtFinalInsta, 6, 1);
+            CarregaInstaGraficoEngajamentoHora(idEmpresa, dtInicialInsta, dtFinalInsta);
+            CarregaInstaGraficoCrescimentoSeguidores(idEmpresa, dtInicialInsta, dtFinalInsta);
+            CarregaInstaGraficosInteracoes(idEmpresa, dtInicialInsta, dtFinalInsta);
+            CarregaInstagramTimeline(idEmpresa,dtInicialInsta,dtFinalInsta, 6,1, ordenacaoInsta,palavraInst,PostComentInst);
+            CarregaNuvemTermosPostsInstagram(idEmpresa, dtInicialInsta, dtFinalInsta);
+        }
+
+        function alterouDataInstagram(){
+            if(!inicializandoDatas)
+                CarregaGraficosInsta();
+        }
+
+        function CarregaGraficosYoutube(){
+
+            if( PostComentYT == undefined){
+                PostComentYT == null
+            }
+
+            if( palavraYT == undefined){
+                palavraYT == null
+            }
+
+            var dtInicialYoutube = $("#dtinicialyoutube").datepicker('getDate');
+            var dtFinalYoutube = $("#dtfinalyoutube").datepicker('getDate');
+            var ordenacaoYoutube = $("#youtube_filtro_timeline").val();
+
+            CarregaYoutubeGraficoCrescimentoInscritos(idEmpresa, dtInicialYoutube, dtFinalYoutube);
+            CarregaYoutubeGraficosInteracoes(idEmpresa, dtInicialYoutube, dtFinalYoutube);
+            CarregaYoutubeVideosMaiorEngajamento(idEmpresa, dtInicialYoutube, dtFinalYoutube, 6, 1);
+            CarregaYoutubeGraficoEngajamentoHora(idEmpresa, dtInicialYoutube, dtFinalYoutube);
+            CarregaYoutubeLinhadoTempo(idEmpresa, dtInicialYoutube, dtFinalYoutube, 6, 1, ordenacaoYoutube,palavraYT,PostComentYT)
+            CarregaNuvemDeTermosVideosYoutube(idEmpresa, dtInicialYoutube, dtFinalYoutube);
+
+        }
+
+        function alterouDataYoutube(){
+            if(!inicializandoDatas)
+                CarregaGraficosYoutube();
+
+        }
+
+
+        function showFormularioContato(obj){
+            $('.toggle-formulario').trigger('click');
+            $('#cmbAssunto').val('Insight para Plataforma');
+
+            setTimeout(function(){
+                $('.formulario-inner').find('#txtMensagem').focus();
+            },500);
+
+            $(obj).removeAttr('onclick');
+        }
+
+
+
+    </script>
+
+}

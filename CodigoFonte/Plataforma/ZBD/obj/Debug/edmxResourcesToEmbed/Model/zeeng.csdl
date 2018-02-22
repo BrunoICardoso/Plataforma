@@ -1,0 +1,3158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="zeengModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cnpjempresa">
+    <Key>
+      <PropertyRef Name="idcnpjempresa" />
+    </Key>
+    <Property Name="idcnpjempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" Nullable="false" />
+    <Property Name="cnpj" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empresas" Relationship="Self.fk_cnpj_empresa" FromRole="cnpjempresa" ToRole="empresas" />
+  </EntityType>
+  <EntityType Name="cnpjmarca">
+    <Key>
+      <PropertyRef Name="idcnpjmarca" />
+    </Key>
+    <Property Name="idcnpjmarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idmarca" Type="Int32" Nullable="false" />
+    <Property Name="cnpj" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="marcas" Relationship="Self.fk_cnpj_marca" FromRole="cnpjmarca" ToRole="marcas" />
+  </EntityType>
+  <EntityType Name="empresaredessociais">
+    <Key>
+      <PropertyRef Name="idempresaredessociais" />
+    </Key>
+    <Property Name="idempresaredessociais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" Nullable="false" />
+    <Property Name="idredesocial" Type="Int32" Nullable="false" />
+    <Property Name="urlredesocial" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empresas" Relationship="Self.fk_empresa_redessociais" FromRole="empresaredessociais" ToRole="empresas" />
+    <NavigationProperty Name="redessociais" Relationship="Self.fk_empresasredes_redessociais" FromRole="empresaredessociais" ToRole="redessociais" />
+  </EntityType>
+  <EntityType Name="empresas">
+    <Key>
+      <PropertyRef Name="idempresa" />
+    </Key>
+    <Property Name="idempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idsetor" Type="Int32" Nullable="false" />
+    <Property Name="nome" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="urlsite" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="cnpjempresa" Relationship="Self.fk_cnpj_empresa" FromRole="empresas" ToRole="cnpjempresa" />
+    <NavigationProperty Name="empresaredessociais" Relationship="Self.fk_empresa_redessociais" FromRole="empresas" ToRole="empresaredessociais" />
+    <NavigationProperty Name="setoresempresa" Relationship="Self.fk_empresa_setor" FromRole="empresas" ToRole="setoresempresa" />
+    <NavigationProperty Name="marcas" Relationship="Self.idEmpresa" FromRole="empresas" ToRole="marcas" />
+    <Property Name="imagem" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tw_perfis" Relationship="zeengModel.FK_tw_perfis_empresas" FromRole="empresas" ToRole="tw_perfis" />
+    <NavigationProperty Name="insta_perfis" Relationship="zeengModel.FK_insta_perfis_empresas" FromRole="empresas" ToRole="insta_perfis" />
+    <NavigationProperty Name="fb_perfis" Relationship="zeengModel.FK_fb_perfis_empresas" FromRole="empresas" ToRole="fb_perfis" />
+    <NavigationProperty Name="noticias_empresa" Relationship="zeengModel.fk_noticia_empresa" FromRole="empresas" ToRole="noticias_empresa" />
+    <NavigationProperty Name="yt_canais" Relationship="zeengModel.FK_yt_canais_empresas" FromRole="empresas" ToRole="yt_canais" />
+    <NavigationProperty Name="presenca_online_capturas" Relationship="zeengModel.fk_presenca_online_empresas" FromRole="empresas" ToRole="presenca_online_capturas" />
+    <NavigationProperty Name="seae_empresa_processos" Relationship="zeengModel.fk_empresa_promo_empresa" FromRole="empresas" ToRole="seae_empresa_processos" />
+    <NavigationProperty Name="mapa_registro_empresa" Relationship="zeengModel.fk_registro_empresa_empresa" FromRole="empresas" ToRole="mapa_registro_empresa" />
+    <NavigationProperty Name="promo_promoempresas" Relationship="zeengModel.fk_promoempresas_empresa" FromRole="empresas" ToRole="promo_promoempresas" />
+    <NavigationProperty Name="cliente_empresas" Relationship="zeengModel.fk_clienteempresa_empresa" FromRole="empresas" ToRole="cliente_empresas" />
+    <NavigationProperty Name="cliente_relatorio_empresas" Relationship="zeengModel.fk_empresas" FromRole="empresas" ToRole="cliente_relatorio_empresas" />
+  </EntityType>
+  <EntityType Name="estados">
+    <Key>
+      <PropertyRef Name="idestado" />
+    </Key>
+    <Property Name="idestado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="uf" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="seae_abrang_estado" Relationship="zeengModel.fk_abrang_estado_estado" FromRole="estados" ToRole="seae_abrang_estado" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_estado" FromRole="estados" ToRole="mapa_registros" />
+    <NavigationProperty Name="promo_estadosabrangencia" Relationship="zeengModel.fk_promoestados_estados" FromRole="estados" ToRole="promo_estadosabrangencia" />
+    <NavigationProperty Name="clientes" Relationship="zeengModel.cliente_estado" FromRole="estados" ToRole="clientes" />
+    <NavigationProperty Name="municipios" Relationship="zeengModel.FK_municipios_estados" FromRole="estados" ToRole="municipios" />
+  </EntityType>
+  <EntityType Name="mapa_areas">
+    <Key>
+      <PropertyRef Name="idarea" />
+    </Key>
+    <Property Name="idarea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_area" FromRole="mapa_areas" ToRole="mapa_registros" />
+  </EntityType>
+  <EntityType Name="mapa_atributo">
+    <Key>
+      <PropertyRef Name="idatributo" />
+    </Key>
+    <Property Name="idatributo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_atributo" FromRole="mapa_atributo" ToRole="mapa_registros" />
+  </EntityType>
+  <EntityType Name="mapa_base">
+    <Key>
+      <PropertyRef Name="idbase" />
+    </Key>
+    <Property Name="idbase" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_base" FromRole="mapa_base" ToRole="mapa_registros" />
+  </EntityType>
+  <EntityType Name="mapa_caracteristica">
+    <Key>
+      <PropertyRef Name="idcaracteristica" />
+    </Key>
+    <Property Name="idcaracteristica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_caracteristica" FromRole="mapa_caracteristica" ToRole="mapa_registros" />
+  </EntityType>
+  <EntityType Name="mapa_complemento">
+    <Key>
+      <PropertyRef Name="idcomplemento" />
+    </Key>
+    <Property Name="idcomplemento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_complemento" FromRole="mapa_complemento" ToRole="mapa_registros" />
+  </EntityType>
+  <EntityType Name="mapa_especies">
+    <Key>
+      <PropertyRef Name="idespecie" />
+    </Key>
+    <Property Name="idespecie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_especie" FromRole="mapa_especies" ToRole="mapa_registros" />
+  </EntityType>
+  <EntityType Name="mapa_origens">
+    <Key>
+      <PropertyRef Name="idorigem" />
+    </Key>
+    <Property Name="idorigem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_origem" FromRole="mapa_origens" ToRole="mapa_registros" />
+  </EntityType>
+  <EntityType Name="mapa_subespecie">
+    <Key>
+      <PropertyRef Name="idsubespecie" />
+    </Key>
+    <Property Name="idsubespecie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.registros_subespecie" FromRole="mapa_subespecie" ToRole="mapa_registros" />
+  </EntityType>
+  <EntityType Name="marcaredessociais">
+    <Key>
+      <PropertyRef Name="idmarcaredessociais" />
+    </Key>
+    <Property Name="idmarcaredessociais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idmarca" Type="Int32" Nullable="false" />
+    <Property Name="idredesocial" Type="Int32" Nullable="false" />
+    <Property Name="urlredesocial" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="marcas" Relationship="Self.fk_marca_redessociais" FromRole="marcaredessociais" ToRole="marcas" />
+    <NavigationProperty Name="redessociais" Relationship="Self.fk_marcaredes_redessociais" FromRole="marcaredessociais" ToRole="redessociais" />
+  </EntityType>
+  <EntityType Name="marcas">
+    <Key>
+      <PropertyRef Name="idmarca" />
+    </Key>
+    <Property Name="idmarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="urlsite" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="cnpjmarca" Relationship="Self.fk_cnpj_marca" FromRole="marcas" ToRole="cnpjmarca" />
+    <NavigationProperty Name="empresas" Relationship="Self.idEmpresa" FromRole="marcas" ToRole="empresas" />
+    <NavigationProperty Name="marcaredessociais" Relationship="Self.fk_marca_redessociais" FromRole="marcas" ToRole="marcaredessociais" />
+    <NavigationProperty Name="produtos" Relationship="Self.fk_marca_produto" FromRole="marcas" ToRole="produtos" />
+    <Property Name="imagem" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tw_perfis" Relationship="zeengModel.FK_tw_perfis_marcas" FromRole="marcas" ToRole="tw_perfis" />
+    <NavigationProperty Name="insta_perfis" Relationship="zeengModel.FK_insta_perfis_marcas" FromRole="marcas" ToRole="insta_perfis" />
+    <NavigationProperty Name="fb_perfis" Relationship="zeengModel.FK_fb_perfis_marcas" FromRole="marcas" ToRole="fb_perfis" />
+    <NavigationProperty Name="noticias_marca" Relationship="zeengModel.fk_noticia_marca" FromRole="marcas" ToRole="noticias_marca" />
+    <NavigationProperty Name="yt_canais" Relationship="zeengModel.FK_yt_canais_marcas" FromRole="marcas" ToRole="yt_canais" />
+  </EntityType>
+  <EntityType Name="produtoredessociais">
+    <Key>
+      <PropertyRef Name="idprodutoredessociais" />
+    </Key>
+    <Property Name="idprodutoredessociais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idproduto" Type="Int32" Nullable="false" />
+    <Property Name="idredesocial" Type="Int32" Nullable="false" />
+    <Property Name="urlredesocial" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="redessociais" Relationship="Self.fk_mprodutoredes_redessociais" FromRole="produtoredessociais" ToRole="redessociais" />
+    <NavigationProperty Name="produtos" Relationship="Self.fk_produto_redessociais" FromRole="produtoredessociais" ToRole="produtos" />
+  </EntityType>
+  <EntityType Name="produtos">
+    <Key>
+      <PropertyRef Name="idproduto" />
+    </Key>
+    <Property Name="idproduto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idmarca" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="urlsite" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="marcas" Relationship="Self.fk_marca_produto" FromRole="produtos" ToRole="marcas" />
+    <NavigationProperty Name="produtoredessociais" Relationship="Self.fk_produto_redessociais" FromRole="produtos" ToRole="produtoredessociais" />
+    <Property Name="imagem" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="redessociais">
+    <Key>
+      <PropertyRef Name="idredessociais" />
+    </Key>
+    <Property Name="idredessociais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="nomelogo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empresaredessociais" Relationship="Self.fk_empresasredes_redessociais" FromRole="redessociais" ToRole="empresaredessociais" />
+    <NavigationProperty Name="marcaredessociais" Relationship="Self.fk_marcaredes_redessociais" FromRole="redessociais" ToRole="marcaredessociais" />
+    <NavigationProperty Name="produtoredessociais" Relationship="Self.fk_mprodutoredes_redessociais" FromRole="redessociais" ToRole="produtoredessociais" />
+  </EntityType>
+  <EntityType Name="setoresempresa">
+    <Key>
+      <PropertyRef Name="idsetoresempresa" />
+    </Key>
+    <Property Name="idsetoresempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="empresas" Relationship="Self.fk_empresa_setor" FromRole="setoresempresa" ToRole="empresas" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="idusuario" />
+    </Key>
+    <Property Name="idusuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcliente" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="login" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="senha" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ativo" Type="Boolean" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="logs" Relationship="zeengModel.fk_usuarios" FromRole="usuarios" ToRole="logs" />
+    <NavigationProperty Name="clientes" Relationship="zeengModel.clientes_usuario" FromRole="usuarios" ToRole="clientes" />
+    <NavigationProperty Name="cliente_relatorios" Relationship="zeengModel.fk_usuario" FromRole="usuarios" ToRole="cliente_relatorios" />
+  </EntityType>
+  <Association Name="fk_cnpj_empresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+    <End Role="cnpjempresa" Type="Self.cnpjempresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="cnpjempresa">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cnpj_marca">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="1" />
+    <End Role="cnpjmarca" Type="Self.cnpjmarca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="cnpjmarca">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresa_redessociais">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+    <End Role="empresaredessociais" Type="Self.empresaredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="empresaredessociais">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresasredes_redessociais">
+    <End Role="redessociais" Type="Self.redessociais" Multiplicity="1" />
+    <End Role="empresaredessociais" Type="Self.empresaredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="redessociais">
+        <PropertyRef Name="idredessociais" />
+      </Principal>
+      <Dependent Role="empresaredessociais">
+        <PropertyRef Name="idredesocial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresa_setor">
+    <End Role="setoresempresa" Type="Self.setoresempresa" Multiplicity="1" />
+    <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="setoresempresa">
+        <PropertyRef Name="idsetoresempresa" />
+      </Principal>
+      <Dependent Role="empresas">
+        <PropertyRef Name="idsetor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idEmpresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="marcas" Type="Self.marcas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="marcas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_marca_redessociais">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="1" />
+    <End Role="marcaredessociais" Type="Self.marcaredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="marcaredessociais">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_marcaredes_redessociais">
+    <End Role="redessociais" Type="Self.redessociais" Multiplicity="1" />
+    <End Role="marcaredessociais" Type="Self.marcaredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="redessociais">
+        <PropertyRef Name="idredessociais" />
+      </Principal>
+      <Dependent Role="marcaredessociais">
+        <PropertyRef Name="idredesocial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_marca_produto">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="produtos" Type="Self.produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="produtos">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_mprodutoredes_redessociais">
+    <End Role="redessociais" Type="Self.redessociais" Multiplicity="1" />
+    <End Role="produtoredessociais" Type="Self.produtoredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="redessociais">
+        <PropertyRef Name="idredessociais" />
+      </Principal>
+      <Dependent Role="produtoredessociais">
+        <PropertyRef Name="idredesocial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_produto_redessociais">
+    <End Role="produtos" Type="Self.produtos" Multiplicity="1" />
+    <End Role="produtoredessociais" Type="Self.produtoredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="produtos">
+        <PropertyRef Name="idproduto" />
+      </Principal>
+      <Dependent Role="produtoredessociais">
+        <PropertyRef Name="idproduto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="zeengEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cnpjempresa" EntityType="Self.cnpjempresa" />
+    <EntitySet Name="cnpjmarca" EntityType="Self.cnpjmarca" />
+    <EntitySet Name="empresaredessociais" EntityType="Self.empresaredessociais" />
+    <EntitySet Name="empresas" EntityType="Self.empresas" />
+    <EntitySet Name="estados" EntityType="Self.estados" />
+    <EntitySet Name="mapa_areas" EntityType="Self.mapa_areas" />
+    <EntitySet Name="mapa_atributo" EntityType="Self.mapa_atributo" />
+    <EntitySet Name="mapa_base" EntityType="Self.mapa_base" />
+    <EntitySet Name="mapa_caracteristica" EntityType="Self.mapa_caracteristica" />
+    <EntitySet Name="mapa_complemento" EntityType="Self.mapa_complemento" />
+    <EntitySet Name="mapa_especies" EntityType="Self.mapa_especies" />
+    <EntitySet Name="mapa_origens" EntityType="Self.mapa_origens" />
+    <EntitySet Name="mapa_subespecie" EntityType="Self.mapa_subespecie" />
+    <EntitySet Name="marcaredessociais" EntityType="Self.marcaredessociais" />
+    <EntitySet Name="marcas" EntityType="Self.marcas" />
+    <EntitySet Name="produtoredessociais" EntityType="Self.produtoredessociais" />
+    <EntitySet Name="produtos" EntityType="Self.produtos" />
+    <EntitySet Name="redessociais" EntityType="Self.redessociais" />
+    <EntitySet Name="setoresempresa" EntityType="Self.setoresempresa" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+    <AssociationSet Name="fk_cnpj_empresa" Association="Self.fk_cnpj_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="cnpjempresa" EntitySet="cnpjempresa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cnpj_marca" Association="Self.fk_cnpj_marca">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="cnpjmarca" EntitySet="cnpjmarca" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresa_redessociais" Association="Self.fk_empresa_redessociais">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="empresaredessociais" EntitySet="empresaredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresasredes_redessociais" Association="Self.fk_empresasredes_redessociais">
+      <End Role="redessociais" EntitySet="redessociais" />
+      <End Role="empresaredessociais" EntitySet="empresaredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresa_setor" Association="Self.fk_empresa_setor">
+      <End Role="setoresempresa" EntitySet="setoresempresa" />
+      <End Role="empresas" EntitySet="empresas" />
+    </AssociationSet>
+    <AssociationSet Name="idEmpresa" Association="Self.idEmpresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="marcas" EntitySet="marcas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_marca_redessociais" Association="Self.fk_marca_redessociais">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="marcaredessociais" EntitySet="marcaredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_marcaredes_redessociais" Association="Self.fk_marcaredes_redessociais">
+      <End Role="redessociais" EntitySet="redessociais" />
+      <End Role="marcaredessociais" EntitySet="marcaredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_marca_produto" Association="Self.fk_marca_produto">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="produtos" EntitySet="produtos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_mprodutoredes_redessociais" Association="Self.fk_mprodutoredes_redessociais">
+      <End Role="redessociais" EntitySet="redessociais" />
+      <End Role="produtoredessociais" EntitySet="produtoredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_produto_redessociais" Association="Self.fk_produto_redessociais">
+      <End Role="produtos" EntitySet="produtos" />
+      <End Role="produtoredessociais" EntitySet="produtoredessociais" />
+    </AssociationSet>
+    <FunctionImport Name="GetTotalMapaPorSemana" ReturnType="Collection(zeengModel.GetTotalMapaPorSemana_Result)">
+      <Parameter Name="idEmpresa" Mode="In" Type="Int32" />
+      <Parameter Name="datainicial" Mode="In" Type="DateTime" />
+      <Parameter Name="datafinal" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetFacebookCrescimentoFas">
+      <Parameter Name="idempresaface" Mode="In" Type="Int32" />
+      <Parameter Name="dataInicial" Mode="In" Type="DateTime" />
+      <Parameter Name="dataFinal" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetFacebookInteracoes" ReturnType="Collection(zeengModel.GetFacebookInteracoes_Result)">
+      <Parameter Name="idempresa" Mode="In" Type="Int32" />
+      <Parameter Name="dtInicial" Mode="In" Type="DateTime" />
+      <Parameter Name="dtFinal" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetFacebookInteracoesPorHora" ReturnType="Collection(zeengModel.GetFacebookInteracoesPorHora_Result)">
+      <Parameter Name="idempresa" Mode="In" Type="Int32" />
+      <Parameter Name="dtInicial" Mode="In" Type="DateTime" />
+      <Parameter Name="dtFinal" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetFacebookInteracoesSemana">
+      <Parameter Name="idempresa" Mode="In" Type="Int32" />
+      <Parameter Name="dtInicial" Mode="In" Type="DateTime" />
+      <Parameter Name="dtFinal" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="tw_mencoes" EntityType="zeengModel.tw_mencoes" />
+    <EntitySet Name="tw_perfis" EntityType="zeengModel.tw_perfis" />
+    <EntitySet Name="tw_perfis_stats" EntityType="zeengModel.tw_perfis_stats" />
+    <EntitySet Name="tw_posts" EntityType="zeengModel.tw_posts" />
+    <AssociationSet Name="FK_tw_perfis_empresas" Association="zeengModel.FK_tw_perfis_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tw_perfis_marcas" Association="zeengModel.FK_tw_perfis_marcas">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="tw_mecoes_perfil" Association="zeengModel.tw_mecoes_perfil">
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+      <End Role="tw_mencoes" EntitySet="tw_mencoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tw_perfis" Association="zeengModel.FK__tw_perfis">
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+      <End Role="tw_perfis_stats" EntitySet="tw_perfis_stats" />
+    </AssociationSet>
+    <AssociationSet Name="tw_perfil_posts" Association="zeengModel.tw_perfil_posts">
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+      <End Role="tw_posts" EntitySet="tw_posts" />
+    </AssociationSet>
+    <EntitySet Name="fb_comentarios" EntityType="zeengModel.fb_comentarios" />
+    <EntitySet Name="insta_perfis" EntityType="zeengModel.insta_perfis" />
+    <EntitySet Name="insta_perfis_stats" EntityType="zeengModel.insta_perfis_stats" />
+    <AssociationSet Name="FK_insta_perfis_empresas" Association="zeengModel.FK_insta_perfis_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="insta_perfis" EntitySet="insta_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="FK___insta_perfis" Association="zeengModel.FK___insta_perfis">
+      <End Role="insta_perfis" EntitySet="insta_perfis" />
+      <End Role="insta_perfis_stats" EntitySet="insta_perfis_stats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_insta_perfis_marcas" Association="zeengModel.FK_insta_perfis_marcas">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="insta_perfis" EntitySet="insta_perfis" />
+    </AssociationSet>
+    <EntitySet Name="yt_canais_stats" EntityType="zeengModel.yt_canais_stats" />
+    <EntitySet Name="yt_comentarios" EntityType="zeengModel.yt_comentarios" />
+    <EntitySet Name="fb_comentarios_termos" EntityType="zeengModel.fb_comentarios_termos" />
+    <EntitySet Name="fb_post_termos" EntityType="zeengModel.fb_post_termos" />
+    <AssociationSet Name="fk_fbcomentarioss_fbtermos" Association="zeengModel.fk_fbcomentarioss_fbtermos">
+      <End Role="fb_comentarios" EntitySet="fb_comentarios" />
+      <End Role="fb_comentarios_termos" EntitySet="fb_comentarios_termos" />
+    </AssociationSet>
+    <EntitySet Name="insta_comentarios" EntityType="zeengModel.insta_comentarios" />
+    <EntitySet Name="insta_posts" EntityType="zeengModel.insta_posts" />
+    <AssociationSet Name="FK__insta_posts" Association="zeengModel.FK__insta_posts">
+      <End Role="insta_posts" EntitySet="insta_posts" />
+      <End Role="insta_comentarios" EntitySet="insta_comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__insta_perfis" Association="zeengModel.FK__insta_perfis">
+      <End Role="insta_perfis" EntitySet="insta_perfis" />
+      <End Role="insta_posts" EntitySet="insta_posts" />
+    </AssociationSet>
+    <EntitySet Name="insta_comentario_termos" EntityType="zeengModel.insta_comentario_termos" />
+    <EntitySet Name="insta_post_termos" EntityType="zeengModel.insta_post_termos" />
+    <EntitySet Name="tw_post_termos" EntityType="zeengModel.tw_post_termos" />
+    <AssociationSet Name="fk_insta_comentarios_termos" Association="zeengModel.fk_insta_comentarios_termos">
+      <End Role="insta_comentarios" EntitySet="insta_comentarios" />
+      <End Role="insta_comentario_termos" EntitySet="insta_comentario_termos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_insta_post_termos" Association="zeengModel.fk_insta_post_termos">
+      <End Role="insta_posts" EntitySet="insta_posts" />
+      <End Role="insta_post_termos" EntitySet="insta_post_termos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_post_termos" Association="zeengModel.fk_post_termos">
+      <End Role="tw_posts" EntitySet="tw_posts" />
+      <End Role="tw_post_termos" EntitySet="tw_post_termos" />
+    </AssociationSet>
+    <EntitySet Name="yt_comentario_termos" EntityType="zeengModel.yt_comentario_termos" />
+    <EntitySet Name="yt_video_termos" EntityType="zeengModel.yt_video_termos" />
+    <AssociationSet Name="fk_yt_comentario_termos" Association="zeengModel.fk_yt_comentario_termos">
+      <End Role="yt_comentarios" EntitySet="yt_comentarios" />
+      <End Role="yt_comentario_termos" EntitySet="yt_comentario_termos" />
+    </AssociationSet>
+    <EntitySet Name="fb_perfis" EntityType="zeengModel.fb_perfis" />
+    <EntitySet Name="fb_perfis_stats" EntityType="zeengModel.fb_perfis_stats" />
+    <AssociationSet Name="FK_fb_perfis_empresas" Association="zeengModel.FK_fb_perfis_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="fb_perfis" EntitySet="fb_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fb_perfis_marcas" Association="zeengModel.FK_fb_perfis_marcas">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="fb_perfis" EntitySet="fb_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fb_perfis_stats_fb_perfis" Association="zeengModel.FK_fb_perfis_stats_fb_perfis">
+      <End Role="fb_perfis" EntitySet="fb_perfis" />
+      <End Role="fb_perfis_stats" EntitySet="fb_perfis_stats" />
+    </AssociationSet>
+    <EntitySet Name="fb_posts" EntityType="zeengModel.fb_posts" />
+    <AssociationSet Name="FK_fb_comentarios_fb_posts" Association="zeengModel.FK_fb_comentarios_fb_posts">
+      <End Role="fb_posts" EntitySet="fb_posts" />
+      <End Role="fb_comentarios" EntitySet="fb_comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fb_posts_fb_perfis" Association="zeengModel.FK_fb_posts_fb_perfis">
+      <End Role="fb_perfis" EntitySet="fb_perfis" />
+      <End Role="fb_posts" EntitySet="fb_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fbposts_fbtermos" Association="zeengModel.fk_fbposts_fbtermos">
+      <End Role="fb_posts" EntitySet="fb_posts" />
+      <End Role="fb_post_termos" EntitySet="fb_post_termos" />
+    </AssociationSet>
+    <EntitySet Name="noticias" EntityType="zeengModel.noticias" />
+    <EntitySet Name="noticias_empresa" EntityType="zeengModel.noticias_empresa" />
+    <AssociationSet Name="fk_noticia_empresa" Association="zeengModel.fk_noticia_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="noticias_empresa" EntitySet="noticias_empresa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_noticia" Association="zeengModel.fk_noticia_noticia">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticias_empresa" EntitySet="noticias_empresa" />
+    </AssociationSet>
+    <EntitySet Name="fontes_noticias" EntityType="zeengModel.fontes_noticias" />
+    <EntitySet Name="noticia_imagens" EntityType="zeengModel.noticia_imagens" />
+    <EntitySet Name="noticia_termos" EntityType="zeengModel.noticia_termos" />
+    <EntitySet Name="noticias_marca" EntityType="zeengModel.noticias_marca" />
+    <EntitySet Name="noticias_relacionadas" EntityType="zeengModel.noticias_relacionadas" />
+    <AssociationSet Name="fk_noticia_fonte" Association="zeengModel.fk_noticia_fonte">
+      <End Role="fontes_noticias" EntitySet="fontes_noticias" />
+      <End Role="noticias" EntitySet="noticias" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_marca" Association="zeengModel.fk_noticia_marca">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="noticias_marca" EntitySet="noticias_marca" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_imagem" Association="zeengModel.fk_noticia_imagem">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticia_imagens" EntitySet="noticia_imagens" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_termos" Association="zeengModel.fk_noticia_termos">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticia_termos" EntitySet="noticia_termos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_marc_noticia" Association="zeengModel.fk_noticia_marc_noticia">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticias_marca" EntitySet="noticias_marca" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_princ" Association="zeengModel.fk_noticia_princ">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticias_relacionadas" EntitySet="noticias_relacionadas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_rel" Association="zeengModel.fk_noticia_rel">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticias_relacionadas" EntitySet="noticias_relacionadas" />
+    </AssociationSet>
+    <EntitySet Name="tw_mencao_termos" EntityType="zeengModel.tw_mencao_termos" />
+    <AssociationSet Name="FK_tw_mencao_termos_tw_mencoes" Association="zeengModel.FK_tw_mencao_termos_tw_mencoes">
+      <End Role="tw_mencoes" EntitySet="tw_mencoes" />
+      <End Role="tw_mencao_termos" EntitySet="tw_mencao_termos" />
+    </AssociationSet>
+    <EntitySet Name="presenca_online_linkadopor" EntityType="zeengModel.presenca_online_linkadopor" />
+    <EntitySet Name="presenca_online_palavraspesquisa" EntityType="zeengModel.presenca_online_palavraspesquisa" />
+    <AssociationSet Name="FK_yt_comentarios_yt_comentarios" Association="zeengModel.FK_yt_comentarios_yt_comentarios">
+      <End Role="yt_comentarios" EntitySet="yt_comentarios" />
+      <End Role="yt_comentarios1" EntitySet="yt_comentarios" />
+    </AssociationSet>
+    <EntitySet Name="yt_canais" EntityType="zeengModel.yt_canais" />
+    <AssociationSet Name="FK_yt_canais_empresas" Association="zeengModel.FK_yt_canais_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="yt_canais" EntitySet="yt_canais" />
+    </AssociationSet>
+    <AssociationSet Name="FK_yt_canais_marcas" Association="zeengModel.FK_yt_canais_marcas">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="yt_canais" EntitySet="yt_canais" />
+    </AssociationSet>
+    <AssociationSet Name="FK__yt_canais" Association="zeengModel.FK__yt_canais">
+      <End Role="yt_canais" EntitySet="yt_canais" />
+      <End Role="yt_canais_stats" EntitySet="yt_canais_stats" />
+    </AssociationSet>
+    <EntitySet Name="yt_videos" EntityType="zeengModel.yt_videos" />
+    <AssociationSet Name="FK__yt_perfis" Association="zeengModel.FK__yt_perfis">
+      <End Role="yt_canais" EntitySet="yt_canais" />
+      <End Role="yt_videos" EntitySet="yt_videos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_yt_comentarios_yt_videos" Association="zeengModel.FK_yt_comentarios_yt_videos">
+      <End Role="yt_videos" EntitySet="yt_videos" />
+      <End Role="yt_comentarios" EntitySet="yt_comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_yt_video_termos" Association="zeengModel.fk_yt_video_termos">
+      <End Role="yt_videos" EntitySet="yt_videos" />
+      <End Role="yt_video_termos" EntitySet="yt_video_termos" />
+    </AssociationSet>
+    <EntitySet Name="presenca_online_capturas" EntityType="zeengModel.presenca_online_capturas" />
+    <AssociationSet Name="fk_presenca_online_empresas" Association="zeengModel.fk_presenca_online_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="presenca_online_capturas" EntitySet="presenca_online_capturas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_presenca_captura_palavras" Association="zeengModel.fk_presenca_captura_palavras">
+      <End Role="presenca_online_capturas" EntitySet="presenca_online_capturas" />
+      <End Role="presenca_online_palavraspesquisa" EntitySet="presenca_online_palavraspesquisa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_presenca_linkadopor" Association="zeengModel.fk_presenca_linkadopor">
+      <End Role="presenca_online_capturas" EntitySet="presenca_online_capturas" />
+      <End Role="presenca_online_linkadopor" EntitySet="presenca_online_linkadopor" />
+    </AssociationSet>
+    <EntitySet Name="seae_setores_proc" EntityType="zeengModel.seae_setores_proc" />
+    <EntitySet Name="municipios" EntityType="zeengModel.municipios" />
+    <EntitySet Name="seae_abrang_estado" EntityType="zeengModel.seae_abrang_estado" />
+    <EntitySet Name="seae_abrang_municipio" EntityType="zeengModel.seae_abrang_municipio" />
+    <EntitySet Name="seae_arquivos_proc" EntityType="zeengModel.seae_arquivos_proc" />
+    <EntitySet Name="seae_empresa_processos" EntityType="zeengModel.seae_empresa_processos" />
+    <EntitySet Name="seae_mov_situacao" EntityType="zeengModel.seae_mov_situacao" />
+    <EntitySet Name="seae_processo_setor" EntityType="zeengModel.seae_processo_setor" />
+    <EntitySet Name="seae_processo_solicitantes" EntityType="zeengModel.seae_processo_solicitantes" />
+    <EntitySet Name="seae_processos" EntityType="zeengModel.seae_processos" />
+    <EntitySet Name="seae_situacoes" EntityType="zeengModel.seae_situacoes" />
+    <EntitySet Name="seae_subsetores_proc" EntityType="zeengModel.seae_subsetores_proc" />
+    <AssociationSet Name="fk_empresa_promo_empresa" Association="zeengModel.fk_empresa_promo_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="seae_empresa_processos" EntitySet="seae_empresa_processos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_abrang_estado_estado" Association="zeengModel.fk_abrang_estado_estado">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="seae_abrang_estado" EntitySet="seae_abrang_estado" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promo_municipio_muni" Association="zeengModel.fk_promo_municipio_muni">
+      <End Role="municipios" EntitySet="municipios" />
+      <End Role="seae_abrang_municipio" EntitySet="seae_abrang_municipio" />
+    </AssociationSet>
+    <AssociationSet Name="fk_abrang_estado_processo" Association="zeengModel.fk_abrang_estado_processo">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_abrang_estado" EntitySet="seae_abrang_estado" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promo_municipio" Association="zeengModel.fk_promo_municipio">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_abrang_municipio" EntitySet="seae_abrang_municipio" />
+    </AssociationSet>
+    <AssociationSet Name="fk_arqui_proc_proc" Association="zeengModel.fk_arqui_proc_proc">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_arquivos_proc" EntitySet="seae_arquivos_proc" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresa_processo_promo" Association="zeengModel.fk_empresa_processo_promo">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_empresa_processos" EntitySet="seae_empresa_processos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_mov_situacao" Association="zeengModel.fk_mov_situacao">
+      <End Role="seae_situacoes" EntitySet="seae_situacoes" />
+      <End Role="seae_mov_situacao" EntitySet="seae_mov_situacao" />
+    </AssociationSet>
+    <AssociationSet Name="fk_situacao_processo" Association="zeengModel.fk_situacao_processo">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_mov_situacao" EntitySet="seae_mov_situacao" />
+    </AssociationSet>
+    <AssociationSet Name="fk_processos" Association="zeengModel.fk_processos">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_processo_setor" EntitySet="seae_processo_setor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_seae_processo_setor_seae_subsetores_proc" Association="zeengModel.FK_seae_processo_setor_seae_subsetores_proc">
+      <End Role="seae_subsetores_proc" EntitySet="seae_subsetores_proc" />
+      <End Role="seae_processo_setor" EntitySet="seae_processo_setor" />
+    </AssociationSet>
+    <AssociationSet Name="fk_setores_proc" Association="zeengModel.fk_setores_proc">
+      <End Role="seae_setores_proc" EntitySet="seae_setores_proc" />
+      <End Role="seae_processo_setor" EntitySet="seae_processo_setor" />
+    </AssociationSet>
+    <AssociationSet Name="fk_seae_proc_solicitante" Association="zeengModel.fk_seae_proc_solicitante">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_processo_solicitantes" EntitySet="seae_processo_solicitantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_seae_subsetores_proc_seae_setores_proc" Association="zeengModel.FK_seae_subsetores_proc_seae_setores_proc">
+      <End Role="seae_setores_proc" EntitySet="seae_setores_proc" />
+      <End Role="seae_subsetores_proc" EntitySet="seae_subsetores_proc" />
+    </AssociationSet>
+    <EntitySet Name="mapa_registro_empresa" EntityType="zeengModel.mapa_registro_empresa" />
+    <AssociationSet Name="fk_registro_empresa_empresa" Association="zeengModel.fk_registro_empresa_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="mapa_registro_empresa" EntitySet="mapa_registro_empresa" />
+    </AssociationSet>
+    <EntitySet Name="mapa_registros" EntityType="zeengModel.mapa_registros" />
+    <AssociationSet Name="registros_estado" Association="zeengModel.registros_estado">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_area" Association="zeengModel.registros_area">
+      <End Role="mapa_areas" EntitySet="mapa_areas" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_atributo" Association="zeengModel.registros_atributo">
+      <End Role="mapa_atributo" EntitySet="mapa_atributo" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_base" Association="zeengModel.registros_base">
+      <End Role="mapa_base" EntitySet="mapa_base" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_caracteristica" Association="zeengModel.registros_caracteristica">
+      <End Role="mapa_caracteristica" EntitySet="mapa_caracteristica" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_complemento" Association="zeengModel.registros_complemento">
+      <End Role="mapa_complemento" EntitySet="mapa_complemento" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_especie" Association="zeengModel.registros_especie">
+      <End Role="mapa_especies" EntitySet="mapa_especies" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_origem" Association="zeengModel.registros_origem">
+      <End Role="mapa_origens" EntitySet="mapa_origens" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="fk_registro_empresa_registro" Association="zeengModel.fk_registro_empresa_registro">
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+      <End Role="mapa_registro_empresa" EntitySet="mapa_registro_empresa" />
+    </AssociationSet>
+    <AssociationSet Name="registros_subespecie" Association="zeengModel.registros_subespecie">
+      <End Role="mapa_subespecie" EntitySet="mapa_subespecie" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <EntitySet Name="logs" EntityType="zeengModel.logs" />
+    <AssociationSet Name="fk_usuarios" Association="zeengModel.fk_usuarios">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="logs" EntitySet="logs" />
+    </AssociationSet>
+    <EntitySet Name="promo_arquivos" EntityType="zeengModel.promo_arquivos" />
+    <EntitySet Name="promo_estadosabrangencia" EntityType="zeengModel.promo_estadosabrangencia" />
+    <EntitySet Name="promo_fb_posts" EntityType="zeengModel.promo_fb_posts" />
+    <EntitySet Name="promo_insta_posts" EntityType="zeengModel.promo_insta_posts" />
+    <EntitySet Name="promo_modalidades" EntityType="zeengModel.promo_modalidades" />
+    <EntitySet Name="promo_municipiosabrangencia" EntityType="zeengModel.promo_municipiosabrangencia" />
+    <EntitySet Name="promo_orgaosreguladores" EntityType="zeengModel.promo_orgaosreguladores" />
+    <EntitySet Name="promo_promocoes" EntityType="zeengModel.promo_promocoes" />
+    <EntitySet Name="promo_promoempresas" EntityType="zeengModel.promo_promoempresas" />
+    <EntitySet Name="promo_promonoticias" EntityType="zeengModel.promo_promonoticias" />
+    <EntitySet Name="promo_regulamentoarquivos" EntityType="zeengModel.promo_regulamentoarquivos" />
+    <EntitySet Name="promo_tw_posts" EntityType="zeengModel.promo_tw_posts" />
+    <EntitySet Name="promo_yt_videos" EntityType="zeengModel.promo_yt_videos" />
+    <AssociationSet Name="fk_promoempresas_empresa" Association="zeengModel.fk_promoempresas_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="promo_promoempresas" EntitySet="promo_promoempresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoestados_estados" Association="zeengModel.fk_promoestados_estados">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="promo_estadosabrangencia" EntitySet="promo_estadosabrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoposts_post" Association="zeengModel.fk_promoposts_post">
+      <End Role="fb_posts" EntitySet="fb_posts" />
+      <End Role="promo_fb_posts" EntitySet="promo_fb_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoinsta_post" Association="zeengModel.fk_promoinsta_post">
+      <End Role="insta_posts" EntitySet="insta_posts" />
+      <End Role="promo_insta_posts" EntitySet="promo_insta_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promomunicipios_municipios" Association="zeengModel.fk_promomunicipios_municipios">
+      <End Role="municipios" EntitySet="municipios" />
+      <End Role="promo_municipiosabrangencia" EntitySet="promo_municipiosabrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promonoticias_noticias" Association="zeengModel.fk_promonoticias_noticias">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="promo_promonoticias" EntitySet="promo_promonoticias" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoarquivos_promocao" Association="zeengModel.fk_promoarquivos_promocao">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_arquivos" EntitySet="promo_arquivos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoestados_promo" Association="zeengModel.fk_promoestados_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_estadosabrangencia" EntitySet="promo_estadosabrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoposts_promo" Association="zeengModel.fk_promoposts_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_fb_posts" EntitySet="promo_fb_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoinsta_promo" Association="zeengModel.fk_promoinsta_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_insta_posts" EntitySet="promo_insta_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promocao_modalidade" Association="zeengModel.fk_promocao_modalidade">
+      <End Role="promo_modalidades" EntitySet="promo_modalidades" />
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promomunicipios_promocao" Association="zeengModel.fk_promomunicipios_promocao">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_municipiosabrangencia" EntitySet="promo_municipiosabrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promocao_orgaoreg" Association="zeengModel.fk_promocao_orgaoreg">
+      <End Role="promo_orgaosreguladores" EntitySet="promo_orgaosreguladores" />
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoempresas_promocao" Association="zeengModel.fk_promoempresas_promocao">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_promoempresas" EntitySet="promo_promoempresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promonoticias_promo" Association="zeengModel.fk_promonoticias_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_promonoticias" EntitySet="promo_promonoticias" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promotw_promo" Association="zeengModel.fk_promotw_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_tw_posts" EntitySet="promo_tw_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoyt_promo" Association="zeengModel.fk_promoyt_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_yt_videos" EntitySet="promo_yt_videos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_regulamentoarquivos_promo" Association="zeengModel.fk_regulamentoarquivos_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_regulamentoarquivos" EntitySet="promo_regulamentoarquivos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promotw_posts" Association="zeengModel.fk_promotw_posts">
+      <End Role="tw_posts" EntitySet="tw_posts" />
+      <End Role="promo_tw_posts" EntitySet="promo_tw_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoyt_videos" Association="zeengModel.fk_promoyt_videos">
+      <End Role="yt_videos" EntitySet="yt_videos" />
+      <End Role="promo_yt_videos" EntitySet="promo_yt_videos" />
+    </AssociationSet>
+    <EntitySet Name="cliente_empresas" EntityType="zeengModel.cliente_empresas" />
+    <EntitySet Name="cliente_vertentes" EntityType="zeengModel.cliente_vertentes" />
+    <AssociationSet Name="fk_clienteempresa_empresa" Association="zeengModel.fk_clienteempresa_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="cliente_empresas" EntitySet="cliente_empresas" />
+    </AssociationSet>
+    <EntitySet Name="clientes" EntityType="zeengModel.clientes" />
+    <AssociationSet Name="fk_clienteempresa_cliente" Association="zeengModel.fk_clienteempresa_cliente">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="cliente_empresas" EntitySet="cliente_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_clientes_vertentes_clientes" Association="zeengModel.fk_clientes_vertentes_clientes">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="cliente_vertentes" EntitySet="cliente_vertentes" />
+    </AssociationSet>
+    <AssociationSet Name="cliente_estado" Association="zeengModel.cliente_estado">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="clientes" EntitySet="clientes" />
+    </AssociationSet>
+    <AssociationSet Name="clientes_usuario" Association="zeengModel.clientes_usuario">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+    <EntitySet Name="cliente_relatorios" EntityType="zeengModel.cliente_relatorios" />
+    <AssociationSet Name="fk_clientes" Association="zeengModel.fk_clientes">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="cliente_relatorios" EntitySet="cliente_relatorios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuario" Association="zeengModel.fk_usuario">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="cliente_relatorios" EntitySet="cliente_relatorios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_municipios_estados" Association="zeengModel.FK_municipios_estados">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="municipios" EntitySet="municipios" />
+    </AssociationSet>
+    <EntitySet Name="cliente_relatorio_empresas" EntityType="zeengModel.cliente_relatorio_empresas" />
+    <EntitySet Name="cliente_relatorio_metricas" EntityType="zeengModel.cliente_relatorio_metricas" />
+    <AssociationSet Name="fk_cliente_relatorios" Association="zeengModel.fk_cliente_relatorios">
+      <End Role="cliente_relatorios" EntitySet="cliente_relatorios" />
+      <End Role="cliente_relatorio_empresas" EntitySet="cliente_relatorio_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresas" Association="zeengModel.fk_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="cliente_relatorio_empresas" EntitySet="cliente_relatorio_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cliente_relatorio" Association="zeengModel.fk_cliente_relatorio">
+      <End Role="cliente_relatorios" EntitySet="cliente_relatorios" />
+      <End Role="cliente_relatorio_metricas" EntitySet="cliente_relatorio_metricas" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="GetTotalMapaPorSemana_Result" />
+  <ComplexType Name="MapaPorSemana" />
+  <ComplexType Name="GetFacebookInteracoes_Result" />
+  <ComplexType Name="GetFacebookInteracoesPorHora_Result" />
+  <EntityType Name="tw_mencoes">
+    <Key>
+      <PropertyRef Name="idmencao" />
+    </Key>
+    <Property Name="idmencao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idperfil" Type="Int32" />
+    <Property Name="idtwitter" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="idtwrespondido" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="postagem" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="datahora" Type="DateTime" />
+    <Property Name="is_retweet" Type="Boolean" />
+    <Property Name="is_reply" Type="Boolean" />
+    <Property Name="qtdretweets" Type="Int32" />
+    <Property Name="qtdfavoritado" Type="Int32" />
+    <NavigationProperty Name="tw_perfis" Relationship="zeengModel.tw_mecoes_perfil" FromRole="tw_mencoes" ToRole="tw_perfis" />
+    <Property Name="urlimagem" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="nomeusuario" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="idusuario" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="termoscapturados" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tw_mencao_termos" Relationship="zeengModel.FK_tw_mencao_termos_tw_mencoes" FromRole="tw_mencoes" ToRole="tw_mencao_termos" />
+  </EntityType>
+  <EntityType Name="tw_perfis">
+    <Key>
+      <PropertyRef Name="idperfil" />
+    </Key>
+    <Property Name="idperfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="idmarca" Type="Int32" />
+    <Property Name="idtwitter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="screenname" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="ultimotwcapturado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ultimotwmencaocapturado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.FK_tw_perfis_empresas" FromRole="tw_perfis" ToRole="empresas" />
+    <NavigationProperty Name="marcas" Relationship="zeengModel.FK_tw_perfis_marcas" FromRole="tw_perfis" ToRole="marcas" />
+    <NavigationProperty Name="tw_mencoes" Relationship="zeengModel.tw_mecoes_perfil" FromRole="tw_perfis" ToRole="tw_mencoes" />
+    <NavigationProperty Name="tw_perfis_stats" Relationship="zeengModel.FK__tw_perfis" FromRole="tw_perfis" ToRole="tw_perfis_stats" />
+    <NavigationProperty Name="tw_posts" Relationship="zeengModel.tw_perfil_posts" FromRole="tw_perfis" ToRole="tw_posts" />
+    <Property Name="ultimaatualizacao" Type="DateTime" />
+    <Property Name="urlimagem" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tw_perfis_stats">
+    <Key>
+      <PropertyRef Name="idperfilstats" />
+    </Key>
+    <Property Name="idperfilstats" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idperfil" Type="Int32" Nullable="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="qtdseguidores" Type="Int32" Nullable="false" />
+    <Property Name="qtdseguidos" Type="Int32" Nullable="false" />
+    <Property Name="qtdfavoritado" Type="Int32" Nullable="false" />
+    <Property Name="qtdlistado" Type="Int32" Nullable="false" />
+    <Property Name="qtdtweets" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tw_perfis" Relationship="zeengModel.FK__tw_perfis" FromRole="tw_perfis_stats" ToRole="tw_perfis" />
+  </EntityType>
+  <EntityType Name="tw_posts">
+    <Key>
+      <PropertyRef Name="idpost" />
+    </Key>
+    <Property Name="idpost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idperfil" Type="Int32" />
+    <Property Name="idtwitter" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="postagem" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="datahora" Type="DateTime" />
+    <Property Name="is_retweet" Type="Boolean" />
+    <Property Name="is_reply" Type="Boolean" />
+    <Property Name="qtdretweets" Type="Int32" />
+    <Property Name="qtdfavoritado" Type="Int32" />
+    <Property Name="idtwrespondido" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tw_perfis" Relationship="zeengModel.tw_perfil_posts" FromRole="tw_posts" ToRole="tw_perfis" />
+    <NavigationProperty Name="tw_post_termos" Relationship="zeengModel.fk_post_termos" FromRole="tw_posts" ToRole="tw_post_termos" />
+    <Property Name="urlimagem" Type="String" MaxLength="600" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="termoscapturados" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="promo_tw_posts" Relationship="zeengModel.fk_promotw_posts" FromRole="tw_posts" ToRole="promo_tw_posts" />
+  </EntityType>
+  <Association Name="FK_tw_perfis_empresas">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.tw_perfis" Role="tw_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="tw_perfis">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tw_perfis_marcas">
+    <End Type="zeengModel.marcas" Role="marcas" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.tw_perfis" Role="tw_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="tw_perfis">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tw_mecoes_perfil">
+    <End Type="zeengModel.tw_perfis" Role="tw_perfis" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.tw_mencoes" Role="tw_mencoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="tw_mencoes">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tw_perfis">
+    <End Type="zeengModel.tw_perfis" Role="tw_perfis" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.tw_perfis_stats" Role="tw_perfis_stats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="tw_perfis_stats">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tw_perfil_posts">
+    <End Type="zeengModel.tw_perfis" Role="tw_perfis" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.tw_posts" Role="tw_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="tw_posts">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="fb_comentarios">
+    <Key>
+      <PropertyRef Name="idcomentario" />
+    </Key>
+    <Property Name="idcomentario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idfacebook" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="idpost" Type="Int64" Nullable="false" />
+    <Property Name="postagem" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="curtidas" Type="Int64" Nullable="false" />
+    <Property Name="respostas" Type="Int64" />
+    <Property Name="idcomentarioresposta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nomeusuario" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="idusuario" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="fb_comentarios_termos" Relationship="zeengModel.fk_fbcomentarioss_fbtermos" FromRole="fb_comentarios" ToRole="fb_comentarios_termos" />
+    <Property Name="urlimagem" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="fb_posts" Relationship="zeengModel.FK_fb_comentarios_fb_posts" FromRole="fb_comentarios" ToRole="fb_posts" />
+    <Property Name="termoscapturados" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="insta_perfis">
+    <Key>
+      <PropertyRef Name="idperfil" />
+    </Key>
+    <Property Name="idperfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="idmarca" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idinstagram" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sobre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="website" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.FK_insta_perfis_empresas" FromRole="insta_perfis" ToRole="empresas" />
+    <NavigationProperty Name="insta_perfis_stats" Relationship="zeengModel.FK___insta_perfis" FromRole="insta_perfis" ToRole="insta_perfis_stats" />
+    <NavigationProperty Name="marcas" Relationship="zeengModel.FK_insta_perfis_marcas" FromRole="insta_perfis" ToRole="marcas" />
+    <Property Name="ultimaatualizacao" Type="DateTime" />
+    <NavigationProperty Name="insta_posts" Relationship="zeengModel.FK__insta_perfis" FromRole="insta_perfis" ToRole="insta_posts" />
+    <Property Name="urlimagem" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="link" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="datahoraultimopost" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="insta_perfis_stats">
+    <Key>
+      <PropertyRef Name="idperfilstats" />
+    </Key>
+    <Property Name="idperfilstats" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idperfil" Type="Int32" Nullable="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="qtdmidias" Type="Int64" />
+    <Property Name="qtdseguidores" Type="Int64" />
+    <Property Name="qtdseguidos" Type="Int64" />
+    <NavigationProperty Name="insta_perfis" Relationship="zeengModel.FK___insta_perfis" FromRole="insta_perfis_stats" ToRole="insta_perfis" />
+  </EntityType>
+  <Association Name="FK_insta_perfis_empresas">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1" />
+    <End Type="zeengModel.insta_perfis" Role="insta_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="insta_perfis">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___insta_perfis">
+    <End Type="zeengModel.insta_perfis" Role="insta_perfis" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.insta_perfis_stats" Role="insta_perfis_stats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="insta_perfis_stats">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_insta_perfis_marcas">
+    <End Type="zeengModel.marcas" Role="marcas" Multiplicity="0..1" />
+    <End Type="zeengModel.insta_perfis" Role="insta_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="insta_perfis">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="yt_canais_stats">
+    <Key>
+      <PropertyRef Name="idcanalstats" />
+    </Key>
+    <Property Name="idcanalstats" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcanal" Type="Int32" Nullable="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="qtdvisualizacoes" Type="Int32" Nullable="false" />
+    <Property Name="qtdseguidores" Type="Int32" Nullable="false" />
+    <Property Name="qtdvideos" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="yt_canais" Relationship="zeengModel.FK__yt_canais" FromRole="yt_canais_stats" ToRole="yt_canais" />
+  </EntityType>
+  <EntityType Name="yt_comentarios">
+    <Key>
+      <PropertyRef Name="idcomentario" />
+    </Key>
+    <Property Name="idcomentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idyoutube" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="idvideo" Type="Int32" Nullable="false" />
+    <Property Name="postagem" Type="String" Nullable="false" MaxLength="10000" FixedLength="false" Unicode="false" />
+    <Property Name="qtdcurtidas" Type="Int32" Nullable="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="qtdrespostas" Type="Int32" />
+    <Property Name="nomeusuario" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="idusuario" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="yt_comentario_termos" Relationship="zeengModel.fk_yt_comentario_termos" FromRole="yt_comentarios" ToRole="yt_comentario_termos" />
+    <Property Name="idcomentarioresposta" Type="Int32" />
+    <Property Name="termoscapturados" Type="Boolean" Nullable="false" />
+    <Property Name="datahoraultimoreply" Type="DateTime" />
+    <NavigationProperty Name="yt_comentarios1" Relationship="zeengModel.FK_yt_comentarios_yt_comentarios" FromRole="yt_comentarios" ToRole="yt_comentarios1" />
+    <NavigationProperty Name="yt_comentarios2" Relationship="zeengModel.FK_yt_comentarios_yt_comentarios" FromRole="yt_comentarios1" ToRole="yt_comentarios" />
+    <NavigationProperty Name="yt_videos" Relationship="zeengModel.FK_yt_comentarios_yt_videos" FromRole="yt_comentarios" ToRole="yt_videos" />
+  </EntityType>
+  <EntityType Name="fb_comentarios_termos">
+    <Key>
+      <PropertyRef Name="idcomentariotermos" />
+    </Key>
+    <Property Name="idcomentariotermos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcomentario" Type="Int64" />
+    <Property Name="termo" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="fb_comentarios" Relationship="zeengModel.fk_fbcomentarioss_fbtermos" FromRole="fb_comentarios_termos" ToRole="fb_comentarios" />
+  </EntityType>
+  <EntityType Name="fb_post_termos">
+    <Key>
+      <PropertyRef Name="idposttermos" />
+    </Key>
+    <Property Name="idposttermos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpost" Type="Int64" />
+    <Property Name="termo" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="fb_posts" Relationship="zeengModel.fk_fbposts_fbtermos" FromRole="fb_post_termos" ToRole="fb_posts" />
+  </EntityType>
+  <Association Name="fk_fbcomentarioss_fbtermos">
+    <End Type="zeengModel.fb_comentarios" Role="fb_comentarios" Multiplicity="0..1" />
+    <End Type="zeengModel.fb_comentarios_termos" Role="fb_comentarios_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_comentarios">
+        <PropertyRef Name="idcomentario" />
+      </Principal>
+      <Dependent Role="fb_comentarios_termos">
+        <PropertyRef Name="idcomentario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="insta_comentarios">
+    <Key>
+      <PropertyRef Name="idcomentario" />
+    </Key>
+    <Property Name="idcomentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpost" Type="Int32" Nullable="false" />
+    <Property Name="idinstagram" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="postagem" Type="String" Nullable="false" MaxLength="10000" FixedLength="false" Unicode="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="idusuario" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="insta_posts" Relationship="zeengModel.FK__insta_posts" FromRole="insta_comentarios" ToRole="insta_posts" />
+    <NavigationProperty Name="insta_comentario_termos" Relationship="zeengModel.fk_insta_comentarios_termos" FromRole="insta_comentarios" ToRole="insta_comentario_termos" />
+    <Property Name="nomeusuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="termoscapturados" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="insta_posts">
+    <Key>
+      <PropertyRef Name="idpost" />
+    </Key>
+    <Property Name="idpost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idperfil" Type="Int32" Nullable="false" />
+    <Property Name="idinstagram" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="postagem" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="qtdcomentarios" Type="Int32" Nullable="false" />
+    <Property Name="qtdcurtidas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="insta_comentarios" Relationship="zeengModel.FK__insta_posts" FromRole="insta_posts" ToRole="insta_comentarios" />
+    <NavigationProperty Name="insta_perfis" Relationship="zeengModel.FK__insta_perfis" FromRole="insta_posts" ToRole="insta_perfis" />
+    <NavigationProperty Name="insta_post_termos" Relationship="zeengModel.fk_insta_post_termos" FromRole="insta_posts" ToRole="insta_post_termos" />
+    <Property Name="link" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="urlimagem" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="datahoraultimocomentario" Type="DateTime" />
+    <Property Name="termoscapturados" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="promo_insta_posts" Relationship="zeengModel.fk_promoinsta_post" FromRole="insta_posts" ToRole="promo_insta_posts" />
+  </EntityType>
+  <Association Name="FK__insta_posts">
+    <End Type="zeengModel.insta_posts" Role="insta_posts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.insta_comentarios" Role="insta_comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="insta_comentarios">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__insta_perfis">
+    <End Type="zeengModel.insta_perfis" Role="insta_perfis" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.insta_posts" Role="insta_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="insta_posts">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="insta_comentario_termos">
+    <Key>
+      <PropertyRef Name="idcomentariotermo" />
+    </Key>
+    <Property Name="idcomentariotermo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcomentario" Type="Int32" />
+    <Property Name="termo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" />
+    <NavigationProperty Name="insta_comentarios" Relationship="zeengModel.fk_insta_comentarios_termos" FromRole="insta_comentario_termos" ToRole="insta_comentarios" />
+  </EntityType>
+  <EntityType Name="insta_post_termos">
+    <Key>
+      <PropertyRef Name="idposttermo" />
+    </Key>
+    <Property Name="idposttermo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpost" Type="Int32" />
+    <Property Name="termo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="insta_posts" Relationship="zeengModel.fk_insta_post_termos" FromRole="insta_post_termos" ToRole="insta_posts" />
+  </EntityType>
+  <EntityType Name="tw_post_termos">
+    <Key>
+      <PropertyRef Name="idposttermos" />
+    </Key>
+    <Property Name="idposttermos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpost" Type="Int32" />
+    <Property Name="termo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tw_posts" Relationship="zeengModel.fk_post_termos" FromRole="tw_post_termos" ToRole="tw_posts" />
+  </EntityType>
+  <Association Name="fk_insta_comentarios_termos">
+    <End Type="zeengModel.insta_comentarios" Role="insta_comentarios" Multiplicity="0..1" />
+    <End Type="zeengModel.insta_comentario_termos" Role="insta_comentario_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_comentarios">
+        <PropertyRef Name="idcomentario" />
+      </Principal>
+      <Dependent Role="insta_comentario_termos">
+        <PropertyRef Name="idcomentario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_insta_post_termos">
+    <End Type="zeengModel.insta_posts" Role="insta_posts" Multiplicity="0..1" />
+    <End Type="zeengModel.insta_post_termos" Role="insta_post_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="insta_post_termos">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_post_termos">
+    <End Type="zeengModel.tw_posts" Role="tw_posts" Multiplicity="0..1" />
+    <End Type="zeengModel.tw_post_termos" Role="tw_post_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="tw_post_termos">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="yt_comentario_termos">
+    <Key>
+      <PropertyRef Name="idcomentariotermo" />
+    </Key>
+    <Property Name="idcomentariotermo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcomentario" Type="Int32" />
+    <Property Name="termo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" />
+    <NavigationProperty Name="yt_comentarios" Relationship="zeengModel.fk_yt_comentario_termos" FromRole="yt_comentario_termos" ToRole="yt_comentarios" />
+  </EntityType>
+  <EntityType Name="yt_video_termos">
+    <Key>
+      <PropertyRef Name="idvideotermo" />
+    </Key>
+    <Property Name="idvideotermo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idvideo" Type="Int32" />
+    <Property Name="termo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" />
+    <NavigationProperty Name="yt_videos" Relationship="zeengModel.fk_yt_video_termos" FromRole="yt_video_termos" ToRole="yt_videos" />
+  </EntityType>
+  <Association Name="fk_yt_comentario_termos">
+    <End Type="zeengModel.yt_comentarios" Role="yt_comentarios" Multiplicity="0..1" />
+    <End Type="zeengModel.yt_comentario_termos" Role="yt_comentario_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_comentarios">
+        <PropertyRef Name="idcomentario" />
+      </Principal>
+      <Dependent Role="yt_comentario_termos">
+        <PropertyRef Name="idcomentario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="fb_perfis">
+    <Key>
+      <PropertyRef Name="idperfil" />
+    </Key>
+    <Property Name="idperfil" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="idmarca" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="idfacebook" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="sobre" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="urlimagem" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="datahoraultimopost" Type="DateTime" />
+    <Property Name="link" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ultimaatualizacao" Type="DateTime" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.FK_fb_perfis_empresas" FromRole="fb_perfis" ToRole="empresas" />
+    <NavigationProperty Name="marcas" Relationship="zeengModel.FK_fb_perfis_marcas" FromRole="fb_perfis" ToRole="marcas" />
+    <NavigationProperty Name="fb_perfis_stats" Relationship="zeengModel.FK_fb_perfis_stats_fb_perfis" FromRole="fb_perfis" ToRole="fb_perfis_stats" />
+    <NavigationProperty Name="fb_posts" Relationship="zeengModel.FK_fb_posts_fb_perfis" FromRole="fb_perfis" ToRole="fb_posts" />
+  </EntityType>
+  <EntityType Name="fb_perfis_stats">
+    <Key>
+      <PropertyRef Name="idperfilstats" />
+    </Key>
+    <Property Name="idperfilstats" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idperfil" Type="Int64" Nullable="false" />
+    <Property Name="datahora" Type="DateTime" />
+    <Property Name="qtdlikes" Type="Int64" />
+    <Property Name="qtdestrelas" Type="Int64" />
+    <Property Name="qtdavaliacoes" Type="Int64" />
+    <Property Name="qtdpessoasfalando" Type="Int64" />
+    <NavigationProperty Name="fb_perfis" Relationship="zeengModel.FK_fb_perfis_stats_fb_perfis" FromRole="fb_perfis_stats" ToRole="fb_perfis" />
+  </EntityType>
+  <Association Name="FK_fb_perfis_empresas">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1" />
+    <End Type="zeengModel.fb_perfis" Role="fb_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="fb_perfis">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fb_perfis_marcas">
+    <End Type="zeengModel.marcas" Role="marcas" Multiplicity="0..1" />
+    <End Type="zeengModel.fb_perfis" Role="fb_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="fb_perfis">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fb_perfis_stats_fb_perfis">
+    <End Type="zeengModel.fb_perfis" Role="fb_perfis" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.fb_perfis_stats" Role="fb_perfis_stats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="fb_perfis_stats">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="fb_posts">
+    <Key>
+      <PropertyRef Name="idpost" />
+    </Key>
+    <Property Name="idpost" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idperfil" Type="Int64" Nullable="false" />
+    <Property Name="idfacebook" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="postagem" Type="String" MaxLength="10000" FixedLength="false" Unicode="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="compartilhamentos" Type="Int64" Nullable="false" />
+    <Property Name="reacoes" Type="Int32" Nullable="false" />
+    <Property Name="comentarios" Type="Int64" Nullable="false" />
+    <Property Name="tipo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="urlimagem" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="link" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="datahoraultimocomentario" Type="DateTime" />
+    <NavigationProperty Name="fb_comentarios" Relationship="zeengModel.FK_fb_comentarios_fb_posts" FromRole="fb_posts" ToRole="fb_comentarios" />
+    <NavigationProperty Name="fb_perfis" Relationship="zeengModel.FK_fb_posts_fb_perfis" FromRole="fb_posts" ToRole="fb_perfis" />
+    <NavigationProperty Name="fb_post_termos" Relationship="zeengModel.fk_fbposts_fbtermos" FromRole="fb_posts" ToRole="fb_post_termos" />
+    <Property Name="termoscapturados" Type="Boolean" />
+    <NavigationProperty Name="promo_fb_posts" Relationship="zeengModel.fk_promoposts_post" FromRole="fb_posts" ToRole="promo_fb_posts" />
+  </EntityType>
+  <Association Name="FK_fb_comentarios_fb_posts">
+    <End Type="zeengModel.fb_posts" Role="fb_posts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.fb_comentarios" Role="fb_comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="fb_comentarios">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fb_posts_fb_perfis">
+    <End Type="zeengModel.fb_perfis" Role="fb_perfis" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.fb_posts" Role="fb_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="fb_posts">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fbposts_fbtermos">
+    <End Type="zeengModel.fb_posts" Role="fb_posts" Multiplicity="0..1" />
+    <End Type="zeengModel.fb_post_termos" Role="fb_post_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="fb_post_termos">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="noticias">
+    <Key>
+      <PropertyRef Name="idnoticia" />
+    </Key>
+    <Property Name="idnoticia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idfonte" Type="Int32" Nullable="false" />
+    <Property Name="idnoticia_knewin" Type="Int32" />
+    <Property Name="titulo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="subtitulo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="dominio" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="autor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="conteudo" Type="String" MaxLength="10000" FixedLength="false" Unicode="false" />
+    <Property Name="url" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="datapublicacao" Type="DateTime" />
+    <Property Name="datacaptura_knewin" Type="DateTime" />
+    <Property Name="datacaptura_zeeng" Type="DateTime" />
+    <Property Name="categoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="localidade" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="linguagem" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="noticias_empresa" Relationship="zeengModel.fk_noticia_noticia" FromRole="noticias" ToRole="noticias_empresa" />
+    <Property Name="termoscapturados" Type="Boolean" />
+    <NavigationProperty Name="fontes_noticias" Relationship="zeengModel.fk_noticia_fonte" FromRole="noticias" ToRole="fontes_noticias" />
+    <NavigationProperty Name="noticia_imagens" Relationship="zeengModel.fk_noticia_imagem" FromRole="noticias" ToRole="noticia_imagens" />
+    <NavigationProperty Name="noticia_termos" Relationship="zeengModel.fk_noticia_termos" FromRole="noticias" ToRole="noticia_termos" />
+    <NavigationProperty Name="noticias_marca" Relationship="zeengModel.fk_noticia_marc_noticia" FromRole="noticias" ToRole="noticias_marca" />
+    <NavigationProperty Name="noticias_relacionadas" Relationship="zeengModel.fk_noticia_princ" FromRole="noticias" ToRole="noticias_relacionadas" />
+    <NavigationProperty Name="noticias_relacionadas1" Relationship="zeengModel.fk_noticia_rel" FromRole="noticias" ToRole="noticias_relacionadas" />
+    <NavigationProperty Name="promo_promonoticias" Relationship="zeengModel.fk_promonoticias_noticias" FromRole="noticias" ToRole="promo_promonoticias" />
+  </EntityType>
+  <EntityType Name="noticias_empresa">
+    <Key>
+      <PropertyRef Name="idnoticiaempresa" />
+    </Key>
+    <Property Name="idnoticiaempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="idnoticia" Type="Int32" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.fk_noticia_empresa" FromRole="noticias_empresa" ToRole="empresas" />
+    <NavigationProperty Name="noticias" Relationship="zeengModel.fk_noticia_noticia" FromRole="noticias_empresa" ToRole="noticias" />
+  </EntityType>
+  <Association Name="fk_noticia_empresa">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1" />
+    <End Type="zeengModel.noticias_empresa" Role="noticias_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="noticias_empresa">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_noticia">
+    <End Type="zeengModel.noticias" Role="noticias" Multiplicity="0..1" />
+    <End Type="zeengModel.noticias_empresa" Role="noticias_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticias_empresa">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="fontes_noticias">
+    <Key>
+      <PropertyRef Name="idfonte" />
+    </Key>
+    <Property Name="idfonte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idfonte_knewin" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="url" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="pais" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="estado" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="cidade" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="ativo" Type="Boolean" Nullable="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <Property Name="manual" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="noticias" Relationship="zeengModel.fk_noticia_fonte" FromRole="fontes_noticias" ToRole="noticias" />
+  </EntityType>
+  <EntityType Name="noticia_imagens">
+    <Key>
+      <PropertyRef Name="idimagem" />
+    </Key>
+    <Property Name="idimagem" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idnoticia" Type="Int32" Nullable="false" />
+    <Property Name="url" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="titulo" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+    <Property Name="creditos" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="noticias" Relationship="zeengModel.fk_noticia_imagem" FromRole="noticia_imagens" ToRole="noticias" />
+  </EntityType>
+  <EntityType Name="noticia_termos">
+    <Key>
+      <PropertyRef Name="idnoticiatermos" />
+    </Key>
+    <Property Name="idnoticiatermos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idnoticia" Type="Int32" />
+    <Property Name="termo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" />
+    <NavigationProperty Name="noticias" Relationship="zeengModel.fk_noticia_termos" FromRole="noticia_termos" ToRole="noticias" />
+  </EntityType>
+  <EntityType Name="noticias_marca">
+    <Key>
+      <PropertyRef Name="idnoticiamarca" />
+    </Key>
+    <Property Name="idnoticiamarca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idmarca" Type="Int32" />
+    <Property Name="idnoticia" Type="Int32" />
+    <NavigationProperty Name="marcas" Relationship="zeengModel.fk_noticia_marca" FromRole="noticias_marca" ToRole="marcas" />
+    <NavigationProperty Name="noticias" Relationship="zeengModel.fk_noticia_marc_noticia" FromRole="noticias_marca" ToRole="noticias" />
+  </EntityType>
+  <EntityType Name="noticias_relacionadas">
+    <Key>
+      <PropertyRef Name="idnoticiarelacionadas" />
+    </Key>
+    <Property Name="idnoticiarelacionadas" Type="Int32" Nullable="false" />
+    <Property Name="idnoticia_princ" Type="Int32" />
+    <Property Name="idnoticia_rel" Type="Int32" />
+    <NavigationProperty Name="noticias" Relationship="zeengModel.fk_noticia_princ" FromRole="noticias_relacionadas" ToRole="noticias" />
+    <NavigationProperty Name="noticias1" Relationship="zeengModel.fk_noticia_rel" FromRole="noticias_relacionadas" ToRole="noticias" />
+  </EntityType>
+  <Association Name="fk_noticia_fonte">
+    <End Type="zeengModel.fontes_noticias" Role="fontes_noticias" Multiplicity="1" />
+    <End Type="zeengModel.noticias" Role="noticias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fontes_noticias">
+        <PropertyRef Name="idfonte" />
+      </Principal>
+      <Dependent Role="noticias">
+        <PropertyRef Name="idfonte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_marca">
+    <End Type="zeengModel.marcas" Role="marcas" Multiplicity="0..1" />
+    <End Type="zeengModel.noticias_marca" Role="noticias_marca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="noticias_marca">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_imagem">
+    <End Type="zeengModel.noticias" Role="noticias" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.noticia_imagens" Role="noticia_imagens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticia_imagens">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_termos">
+    <End Type="zeengModel.noticias" Role="noticias" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.noticia_termos" Role="noticia_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticia_termos">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_marc_noticia">
+    <End Type="zeengModel.noticias" Role="noticias" Multiplicity="0..1" />
+    <End Type="zeengModel.noticias_marca" Role="noticias_marca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticias_marca">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_princ">
+    <End Type="zeengModel.noticias" Role="noticias" Multiplicity="0..1" />
+    <End Type="zeengModel.noticias_relacionadas" Role="noticias_relacionadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticias_relacionadas">
+        <PropertyRef Name="idnoticia_princ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_rel">
+    <End Type="zeengModel.noticias" Role="noticias" Multiplicity="0..1" />
+    <End Type="zeengModel.noticias_relacionadas" Role="noticias_relacionadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticias_relacionadas">
+        <PropertyRef Name="idnoticia_rel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tw_mencao_termos">
+    <Key>
+      <PropertyRef Name="idmencaotermo" />
+    </Key>
+    <Property Name="idmencaotermo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idmencao" Type="Int32" />
+    <Property Name="termo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="frequencia" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tw_mencoes" Relationship="zeengModel.FK_tw_mencao_termos_tw_mencoes" FromRole="tw_mencao_termos" ToRole="tw_mencoes" />
+  </EntityType>
+  <Association Name="FK_tw_mencao_termos_tw_mencoes">
+    <End Type="zeengModel.tw_mencoes" Role="tw_mencoes" Multiplicity="0..1" />
+    <End Type="zeengModel.tw_mencao_termos" Role="tw_mencao_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_mencoes">
+        <PropertyRef Name="idmencao" />
+      </Principal>
+      <Dependent Role="tw_mencao_termos">
+        <PropertyRef Name="idmencao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="presenca_online_linkadopor">
+    <Key>
+      <PropertyRef Name="idlink" />
+    </Key>
+    <Property Name="idlink" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcaptura" Type="Int32" Nullable="false" />
+    <Property Name="site" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="link" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="presenca_online_capturas" Relationship="zeengModel.fk_presenca_linkadopor" FromRole="presenca_online_linkadopor" ToRole="presenca_online_capturas" />
+  </EntityType>
+  <EntityType Name="presenca_online_palavraspesquisa">
+    <Key>
+      <PropertyRef Name="idpalavrapesquisa" />
+    </Key>
+    <Property Name="idpalavrapesquisa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcaptura" Type="Int32" Nullable="false" />
+    <Property Name="palavra" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="percentual" Type="Decimal" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="presenca_online_capturas" Relationship="zeengModel.fk_presenca_captura_palavras" FromRole="presenca_online_palavraspesquisa" ToRole="presenca_online_capturas" />
+  </EntityType>
+  <Association Name="FK_yt_comentarios_yt_comentarios">
+    <End Type="zeengModel.yt_comentarios" Role="yt_comentarios" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.yt_comentarios" Role="yt_comentarios1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_comentarios">
+        <PropertyRef Name="idcomentario" />
+      </Principal>
+      <Dependent Role="yt_comentarios1">
+        <PropertyRef Name="idcomentarioresposta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="yt_canais">
+    <Key>
+      <PropertyRef Name="idcanal" />
+    </Key>
+    <Property Name="idcanal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="idmarca" Type="Int32" />
+    <Property Name="idyoutube" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="urlimagem" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="idlistavideos" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ultimaatualizacao" Type="DateTime" />
+    <Property Name="datahoraultimovideo" Type="DateTime" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.FK_yt_canais_empresas" FromRole="yt_canais" ToRole="empresas" />
+    <NavigationProperty Name="marcas" Relationship="zeengModel.FK_yt_canais_marcas" FromRole="yt_canais" ToRole="marcas" />
+    <NavigationProperty Name="yt_canais_stats" Relationship="zeengModel.FK__yt_canais" FromRole="yt_canais" ToRole="yt_canais_stats" />
+    <NavigationProperty Name="yt_videos" Relationship="zeengModel.FK__yt_perfis" FromRole="yt_canais" ToRole="yt_videos" />
+  </EntityType>
+  <Association Name="FK_yt_canais_empresas">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1" />
+    <End Type="zeengModel.yt_canais" Role="yt_canais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="yt_canais">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_yt_canais_marcas">
+    <End Type="zeengModel.marcas" Role="marcas" Multiplicity="0..1" />
+    <End Type="zeengModel.yt_canais" Role="yt_canais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="yt_canais">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__yt_canais">
+    <End Type="zeengModel.yt_canais" Role="yt_canais" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.yt_canais_stats" Role="yt_canais_stats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_canais">
+        <PropertyRef Name="idcanal" />
+      </Principal>
+      <Dependent Role="yt_canais_stats">
+        <PropertyRef Name="idcanal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="yt_videos">
+    <Key>
+      <PropertyRef Name="idvideo" />
+    </Key>
+    <Property Name="idvideo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcanal" Type="Int32" Nullable="false" />
+    <Property Name="idyoutube" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="10000" FixedLength="false" Unicode="false" />
+    <Property Name="datahora" Type="DateTime" Nullable="false" />
+    <Property Name="qtdvisualizacoes" Type="Int32" Nullable="false" />
+    <Property Name="qtdcurtidas" Type="Int32" Nullable="false" />
+    <Property Name="qtddescurtidas" Type="Int32" Nullable="false" />
+    <Property Name="qtdfavoritados" Type="Int32" Nullable="false" />
+    <Property Name="qtdcomentarios" Type="Int32" Nullable="false" />
+    <Property Name="urlimagem" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="nomeimagem" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+    <Property Name="termoscapturados" Type="Boolean" Nullable="false" />
+    <Property Name="datahoraultimocomentario" Type="DateTime" />
+    <NavigationProperty Name="yt_canais" Relationship="zeengModel.FK__yt_perfis" FromRole="yt_videos" ToRole="yt_canais" />
+    <NavigationProperty Name="yt_comentarios" Relationship="zeengModel.FK_yt_comentarios_yt_videos" FromRole="yt_videos" ToRole="yt_comentarios" />
+    <NavigationProperty Name="yt_video_termos" Relationship="zeengModel.fk_yt_video_termos" FromRole="yt_videos" ToRole="yt_video_termos" />
+    <NavigationProperty Name="promo_yt_videos" Relationship="zeengModel.fk_promoyt_videos" FromRole="yt_videos" ToRole="promo_yt_videos" />
+  </EntityType>
+  <Association Name="FK__yt_perfis">
+    <End Type="zeengModel.yt_canais" Role="yt_canais" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.yt_videos" Role="yt_videos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_canais">
+        <PropertyRef Name="idcanal" />
+      </Principal>
+      <Dependent Role="yt_videos">
+        <PropertyRef Name="idcanal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_yt_comentarios_yt_videos">
+    <End Type="zeengModel.yt_videos" Role="yt_videos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.yt_comentarios" Role="yt_comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_videos">
+        <PropertyRef Name="idvideo" />
+      </Principal>
+      <Dependent Role="yt_comentarios">
+        <PropertyRef Name="idvideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_yt_video_termos">
+    <End Type="zeengModel.yt_videos" Role="yt_videos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.yt_video_termos" Role="yt_video_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_videos">
+        <PropertyRef Name="idvideo" />
+      </Principal>
+      <Dependent Role="yt_video_termos">
+        <PropertyRef Name="idvideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="presenca_online_capturas">
+    <Key>
+      <PropertyRef Name="idcaptura" />
+    </Key>
+    <Property Name="idcaptura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" Nullable="false" />
+    <Property Name="datacaptura" Type="DateTime" Nullable="false" />
+    <Property Name="rankbrasil" Type="Int32" />
+    <Property Name="rankglobal" Type="Int32" />
+    <Property Name="autoridadedominio" Type="Int32" />
+    <Property Name="autoridadepagina" Type="Int32" />
+    <Property Name="visitaspesquisa" Type="Decimal" />
+    <Property Name="taxarejeicao" Type="Decimal" />
+    <Property Name="pontuacaospam" Type="Int32" />
+    <Property Name="links" Type="Int32" />
+    <Property Name="novoslinks" Type="Int32" />
+    <Property Name="paginasvisitadas" Type="Decimal" />
+    <Property Name="tempovisita" Type="Time" />
+    <Property Name="audi_feminino" Type="Decimal" />
+    <Property Name="audi_masculino" Type="Decimal" />
+    <Property Name="audi_semfaculdade" Type="Decimal" />
+    <Property Name="audi_algumafaculdade" Type="Decimal" />
+    <Property Name="audi_posgraduacao" Type="Decimal" />
+    <Property Name="audi_faculdade" Type="Decimal" />
+    <Property Name="audi_casa" Type="Decimal" />
+    <Property Name="audi_escola" Type="Decimal" />
+    <Property Name="audi_trabalho" Type="Decimal" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.fk_presenca_online_empresas" FromRole="presenca_online_capturas" ToRole="empresas" />
+    <NavigationProperty Name="presenca_online_palavraspesquisa" Relationship="zeengModel.fk_presenca_captura_palavras" FromRole="presenca_online_capturas" ToRole="presenca_online_palavraspesquisa" />
+    <NavigationProperty Name="presenca_online_linkadopor" Relationship="zeengModel.fk_presenca_linkadopor" FromRole="presenca_online_capturas" ToRole="presenca_online_linkadopor" />
+  </EntityType>
+  <Association Name="fk_presenca_online_empresas">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="1" />
+    <End Type="zeengModel.presenca_online_capturas" Role="presenca_online_capturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="presenca_online_capturas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_presenca_captura_palavras">
+    <End Type="zeengModel.presenca_online_capturas" Role="presenca_online_capturas" Multiplicity="1" />
+    <End Type="zeengModel.presenca_online_palavraspesquisa" Role="presenca_online_palavraspesquisa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="presenca_online_capturas">
+        <PropertyRef Name="idcaptura" />
+      </Principal>
+      <Dependent Role="presenca_online_palavraspesquisa">
+        <PropertyRef Name="idcaptura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_presenca_linkadopor">
+    <End Type="zeengModel.presenca_online_capturas" Role="presenca_online_capturas" Multiplicity="1" />
+    <End Type="zeengModel.presenca_online_linkadopor" Role="presenca_online_linkadopor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="presenca_online_capturas">
+        <PropertyRef Name="idcaptura" />
+      </Principal>
+      <Dependent Role="presenca_online_linkadopor">
+        <PropertyRef Name="idcaptura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="seae_setores_proc">
+    <Key>
+      <PropertyRef Name="idsetor" />
+    </Key>
+    <Property Name="idsetor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codsetor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="seae_processo_setor" Relationship="zeengModel.fk_setores_proc" FromRole="seae_setores_proc" ToRole="seae_processo_setor" />
+    <NavigationProperty Name="seae_subsetores_proc" Relationship="zeengModel.FK_seae_subsetores_proc_seae_setores_proc" FromRole="seae_setores_proc" ToRole="seae_subsetores_proc" />
+  </EntityType>
+  <EntityType Name="municipios">
+    <Key>
+      <PropertyRef Name="idmunicipio" />
+    </Key>
+    <Property Name="idmunicipio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idestado" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="codibge" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="atualizado" Type="Boolean" />
+    <NavigationProperty Name="seae_abrang_municipio" Relationship="zeengModel.fk_promo_municipio_muni" FromRole="municipios" ToRole="seae_abrang_municipio" />
+    <NavigationProperty Name="promo_municipiosabrangencia" Relationship="zeengModel.fk_promomunicipios_municipios" FromRole="municipios" ToRole="promo_municipiosabrangencia" />
+    <NavigationProperty Name="estados" Relationship="zeengModel.FK_municipios_estados" FromRole="municipios" ToRole="estados" />
+  </EntityType>
+  <EntityType Name="seae_abrang_estado">
+    <Key>
+      <PropertyRef Name="idabrangestado" />
+    </Key>
+    <Property Name="idabrangestado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idprocesso" Type="Int32" />
+    <Property Name="idestado" Type="Int32" />
+    <NavigationProperty Name="estados" Relationship="zeengModel.fk_abrang_estado_estado" FromRole="seae_abrang_estado" ToRole="estados" />
+    <NavigationProperty Name="seae_processos" Relationship="zeengModel.fk_abrang_estado_processo" FromRole="seae_abrang_estado" ToRole="seae_processos" />
+  </EntityType>
+  <EntityType Name="seae_abrang_municipio">
+    <Key>
+      <PropertyRef Name="idabrangmunicipio" />
+    </Key>
+    <Property Name="idabrangmunicipio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idprocesso" Type="Int32" />
+    <Property Name="idmunicipio" Type="Int32" />
+    <NavigationProperty Name="municipios" Relationship="zeengModel.fk_promo_municipio_muni" FromRole="seae_abrang_municipio" ToRole="municipios" />
+    <NavigationProperty Name="seae_processos" Relationship="zeengModel.fk_promo_municipio" FromRole="seae_abrang_municipio" ToRole="seae_processos" />
+  </EntityType>
+  <EntityType Name="seae_arquivos_proc">
+    <Key>
+      <PropertyRef Name="idarquivo" />
+    </Key>
+    <Property Name="idarquivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idprocesso" Type="Int32" />
+    <Property Name="numdoc" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="coordenacao" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="situacao" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+    <Property Name="link" Type="String" MaxLength="1500" FixedLength="false" Unicode="false" />
+    <Property Name="nomearquivo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="textoarquivo" Type="String" MaxLength="16777215" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="seae_processos" Relationship="zeengModel.fk_arqui_proc_proc" FromRole="seae_arquivos_proc" ToRole="seae_processos" />
+    <Property Name="excluido" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="seae_empresa_processos">
+    <Key>
+      <PropertyRef Name="idempresaprocesso" />
+    </Key>
+    <Property Name="idempresaprocesso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idprocesso" Type="Int32" />
+    <Property Name="idempresa" Type="Int32" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.fk_empresa_promo_empresa" FromRole="seae_empresa_processos" ToRole="empresas" />
+    <NavigationProperty Name="seae_processos" Relationship="zeengModel.fk_empresa_processo_promo" FromRole="seae_empresa_processos" ToRole="seae_processos" />
+  </EntityType>
+  <EntityType Name="seae_mov_situacao">
+    <Key>
+      <PropertyRef Name="idmovsituacao" />
+    </Key>
+    <Property Name="idmovsituacao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idprocesso" Type="Int32" />
+    <Property Name="idsituacao" Type="Int32" />
+    <Property Name="dtsituacao" Type="DateTime" />
+    <NavigationProperty Name="seae_situacoes" Relationship="zeengModel.fk_mov_situacao" FromRole="seae_mov_situacao" ToRole="seae_situacoes" />
+    <NavigationProperty Name="seae_processos" Relationship="zeengModel.fk_situacao_processo" FromRole="seae_mov_situacao" ToRole="seae_processos" />
+  </EntityType>
+  <EntityType Name="seae_processo_setor">
+    <Key>
+      <PropertyRef Name="idprocessosetor" />
+    </Key>
+    <Property Name="idprocessosetor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idprocesso" Type="Int32" />
+    <Property Name="idsetor" Type="Int32" />
+    <Property Name="idsubsetor" Type="Int32" />
+    <NavigationProperty Name="seae_processos" Relationship="zeengModel.fk_processos" FromRole="seae_processo_setor" ToRole="seae_processos" />
+    <NavigationProperty Name="seae_subsetores_proc" Relationship="zeengModel.FK_seae_processo_setor_seae_subsetores_proc" FromRole="seae_processo_setor" ToRole="seae_subsetores_proc" />
+    <NavigationProperty Name="seae_setores_proc" Relationship="zeengModel.fk_setores_proc" FromRole="seae_processo_setor" ToRole="seae_setores_proc" />
+  </EntityType>
+  <EntityType Name="seae_processo_solicitantes">
+    <Key>
+      <PropertyRef Name="idsolicitante" />
+    </Key>
+    <Property Name="idsolicitante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idprocesso" Type="Int32" />
+    <Property Name="solicitante" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="cnpj" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="seae_processos" Relationship="zeengModel.fk_seae_proc_solicitante" FromRole="seae_processo_solicitantes" ToRole="seae_processos" />
+  </EntityType>
+  <EntityType Name="seae_processos">
+    <Key>
+      <PropertyRef Name="idprocesso" />
+    </Key>
+    <Property Name="idprocesso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="numprocesso" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="dtprocesso" Type="DateTime" />
+    <Property Name="dtvigenciaini" Type="DateTime" />
+    <Property Name="dtvigenciafim" Type="DateTime" />
+    <Property Name="interessados" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="premios" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="valortotalpremios" Type="Decimal" />
+    <Property Name="modalidade" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="formacontemplacao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="abrangencia_nacional" Type="Boolean" />
+    <Property Name="numdocs" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="resumo" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="comoparticipar" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+    <Property Name="atualizarElastic" Type="Boolean" Nullable="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="seae_abrang_estado" Relationship="zeengModel.fk_abrang_estado_processo" FromRole="seae_processos" ToRole="seae_abrang_estado" />
+    <NavigationProperty Name="seae_abrang_municipio" Relationship="zeengModel.fk_promo_municipio" FromRole="seae_processos" ToRole="seae_abrang_municipio" />
+    <NavigationProperty Name="seae_arquivos_proc" Relationship="zeengModel.fk_arqui_proc_proc" FromRole="seae_processos" ToRole="seae_arquivos_proc" />
+    <NavigationProperty Name="seae_empresa_processos" Relationship="zeengModel.fk_empresa_processo_promo" FromRole="seae_processos" ToRole="seae_empresa_processos" />
+    <NavigationProperty Name="seae_mov_situacao" Relationship="zeengModel.fk_situacao_processo" FromRole="seae_processos" ToRole="seae_mov_situacao" />
+    <NavigationProperty Name="seae_processo_setor" Relationship="zeengModel.fk_processos" FromRole="seae_processos" ToRole="seae_processo_setor" />
+    <NavigationProperty Name="seae_processo_solicitantes" Relationship="zeengModel.fk_seae_proc_solicitante" FromRole="seae_processos" ToRole="seae_processo_solicitantes" />
+    <Property Name="dadosExtraidos" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="seae_situacoes">
+    <Key>
+      <PropertyRef Name="idsituacao" />
+    </Key>
+    <Property Name="idsituacao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="seae_mov_situacao" Relationship="zeengModel.fk_mov_situacao" FromRole="seae_situacoes" ToRole="seae_mov_situacao" />
+  </EntityType>
+  <EntityType Name="seae_subsetores_proc">
+    <Key>
+      <PropertyRef Name="idsubsetor" />
+    </Key>
+    <Property Name="idsubsetor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idsetor" Type="Int32" />
+    <Property Name="codsubsetor" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="seae_processo_setor" Relationship="zeengModel.FK_seae_processo_setor_seae_subsetores_proc" FromRole="seae_subsetores_proc" ToRole="seae_processo_setor" />
+    <NavigationProperty Name="seae_setores_proc" Relationship="zeengModel.FK_seae_subsetores_proc_seae_setores_proc" FromRole="seae_subsetores_proc" ToRole="seae_setores_proc" />
+  </EntityType>
+  <Association Name="fk_empresa_promo_empresa">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_empresa_processos" Role="seae_empresa_processos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="seae_empresa_processos">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_abrang_estado_estado">
+    <End Type="zeengModel.estados" Role="estados" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_abrang_estado" Role="seae_abrang_estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="seae_abrang_estado">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promo_municipio_muni">
+    <End Type="zeengModel.municipios" Role="municipios" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_abrang_municipio" Role="seae_abrang_municipio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="municipios">
+        <PropertyRef Name="idmunicipio" />
+      </Principal>
+      <Dependent Role="seae_abrang_municipio">
+        <PropertyRef Name="idmunicipio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_abrang_estado_processo">
+    <End Type="zeengModel.seae_processos" Role="seae_processos" Multiplicity="0..1" />
+    <End Type="zeengModel.seae_abrang_estado" Role="seae_abrang_estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_abrang_estado">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promo_municipio">
+    <End Type="zeengModel.seae_processos" Role="seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_abrang_municipio" Role="seae_abrang_municipio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_abrang_municipio">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_arqui_proc_proc">
+    <End Type="zeengModel.seae_processos" Role="seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_arquivos_proc" Role="seae_arquivos_proc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_arquivos_proc">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresa_processo_promo">
+    <End Type="zeengModel.seae_processos" Role="seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_empresa_processos" Role="seae_empresa_processos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_empresa_processos">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_mov_situacao">
+    <End Type="zeengModel.seae_situacoes" Role="seae_situacoes" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_mov_situacao" Role="seae_mov_situacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_situacoes">
+        <PropertyRef Name="idsituacao" />
+      </Principal>
+      <Dependent Role="seae_mov_situacao">
+        <PropertyRef Name="idsituacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_situacao_processo">
+    <End Type="zeengModel.seae_processos" Role="seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_mov_situacao" Role="seae_mov_situacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_mov_situacao">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_processos">
+    <End Type="zeengModel.seae_processos" Role="seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_processo_setor" Role="seae_processo_setor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_processo_setor">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_seae_processo_setor_seae_subsetores_proc">
+    <End Type="zeengModel.seae_subsetores_proc" Role="seae_subsetores_proc" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_processo_setor" Role="seae_processo_setor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_subsetores_proc">
+        <PropertyRef Name="idsubsetor" />
+      </Principal>
+      <Dependent Role="seae_processo_setor">
+        <PropertyRef Name="idsubsetor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_setores_proc">
+    <End Type="zeengModel.seae_setores_proc" Role="seae_setores_proc" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_processo_setor" Role="seae_processo_setor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_setores_proc">
+        <PropertyRef Name="idsetor" />
+      </Principal>
+      <Dependent Role="seae_processo_setor">
+        <PropertyRef Name="idsetor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_seae_proc_solicitante">
+    <End Type="zeengModel.seae_processos" Role="seae_processos" Multiplicity="0..1" />
+    <End Type="zeengModel.seae_processo_solicitantes" Role="seae_processo_solicitantes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_processo_solicitantes">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_seae_subsetores_proc_seae_setores_proc">
+    <End Type="zeengModel.seae_setores_proc" Role="seae_setores_proc" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="zeengModel.seae_subsetores_proc" Role="seae_subsetores_proc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_setores_proc">
+        <PropertyRef Name="idsetor" />
+      </Principal>
+      <Dependent Role="seae_subsetores_proc">
+        <PropertyRef Name="idsetor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="mapa_registro_empresa">
+    <Key>
+      <PropertyRef Name="idregistroempresa" />
+    </Key>
+    <Property Name="idregistroempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idregistro" Type="Int32" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="dataregistro" Type="DateTime" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.fk_registro_empresa_empresa" FromRole="mapa_registro_empresa" ToRole="empresas" />
+    <NavigationProperty Name="mapa_registros" Relationship="zeengModel.fk_registro_empresa_registro" FromRole="mapa_registro_empresa" ToRole="mapa_registros" />
+  </EntityType>
+  <Association Name="fk_registro_empresa_empresa">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registro_empresa" Role="mapa_registro_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="mapa_registro_empresa">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="mapa_registros">
+    <Key>
+      <PropertyRef Name="idregistro" />
+    </Key>
+    <Property Name="idregistro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idestado" Type="Int32" />
+    <Property Name="idarea" Type="Int32" />
+    <Property Name="idespecie" Type="Int32" />
+    <Property Name="idsubespecie" Type="Int32" />
+    <Property Name="idbase" Type="Int32" />
+    <Property Name="idcaracteristica" Type="Int32" />
+    <Property Name="idatributo" Type="Int32" />
+    <Property Name="idcomplemento" Type="Int32" />
+    <Property Name="idorigem" Type="Int32" />
+    <Property Name="cnpj" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="nomeMarca" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="nomeProduto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="dataconcessao" Type="DateTime" />
+    <Property Name="numregistro" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="modoaplicacao" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="estados" Relationship="zeengModel.registros_estado" FromRole="mapa_registros" ToRole="estados" />
+    <NavigationProperty Name="mapa_areas" Relationship="zeengModel.registros_area" FromRole="mapa_registros" ToRole="mapa_areas" />
+    <NavigationProperty Name="mapa_atributo" Relationship="zeengModel.registros_atributo" FromRole="mapa_registros" ToRole="mapa_atributo" />
+    <NavigationProperty Name="mapa_base" Relationship="zeengModel.registros_base" FromRole="mapa_registros" ToRole="mapa_base" />
+    <NavigationProperty Name="mapa_caracteristica" Relationship="zeengModel.registros_caracteristica" FromRole="mapa_registros" ToRole="mapa_caracteristica" />
+    <NavigationProperty Name="mapa_complemento" Relationship="zeengModel.registros_complemento" FromRole="mapa_registros" ToRole="mapa_complemento" />
+    <NavigationProperty Name="mapa_especies" Relationship="zeengModel.registros_especie" FromRole="mapa_registros" ToRole="mapa_especies" />
+    <NavigationProperty Name="mapa_origens" Relationship="zeengModel.registros_origem" FromRole="mapa_registros" ToRole="mapa_origens" />
+    <NavigationProperty Name="mapa_registro_empresa" Relationship="zeengModel.fk_registro_empresa_registro" FromRole="mapa_registros" ToRole="mapa_registro_empresa" />
+    <NavigationProperty Name="mapa_subespecie" Relationship="zeengModel.registros_subespecie" FromRole="mapa_registros" ToRole="mapa_subespecie" />
+  </EntityType>
+  <Association Name="registros_estado">
+    <End Type="zeengModel.estados" Role="estados" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_area">
+    <End Type="zeengModel.mapa_areas" Role="mapa_areas" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_areas">
+        <PropertyRef Name="idarea" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_atributo">
+    <End Type="zeengModel.mapa_atributo" Role="mapa_atributo" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_atributo">
+        <PropertyRef Name="idatributo" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idatributo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_base">
+    <End Type="zeengModel.mapa_base" Role="mapa_base" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_base">
+        <PropertyRef Name="idbase" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idbase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_caracteristica">
+    <End Type="zeengModel.mapa_caracteristica" Role="mapa_caracteristica" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_caracteristica">
+        <PropertyRef Name="idcaracteristica" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idcaracteristica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_complemento">
+    <End Type="zeengModel.mapa_complemento" Role="mapa_complemento" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_complemento">
+        <PropertyRef Name="idcomplemento" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idcomplemento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_especie">
+    <End Type="zeengModel.mapa_especies" Role="mapa_especies" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_especies">
+        <PropertyRef Name="idespecie" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idespecie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_origem">
+    <End Type="zeengModel.mapa_origens" Role="mapa_origens" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_origens">
+        <PropertyRef Name="idorigem" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idorigem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_registro_empresa_registro">
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registro_empresa" Role="mapa_registro_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_registros">
+        <PropertyRef Name="idregistro" />
+      </Principal>
+      <Dependent Role="mapa_registro_empresa">
+        <PropertyRef Name="idregistro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_subespecie">
+    <End Type="zeengModel.mapa_subespecie" Role="mapa_subespecie" Multiplicity="0..1" />
+    <End Type="zeengModel.mapa_registros" Role="mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_subespecie">
+        <PropertyRef Name="idsubespecie" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idsubespecie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="logs">
+    <Key>
+      <PropertyRef Name="idlogs" />
+    </Key>
+    <Property Name="idlogs" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idusuario" Type="Int32" Nullable="false" />
+    <Property Name="datahora" Type="DateTime" />
+    <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="controle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="acao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="descricao" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="nivel" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuarios" Relationship="zeengModel.fk_usuarios" FromRole="logs" ToRole="usuarios" />
+  </EntityType>
+  <Association Name="fk_usuarios">
+    <End Type="zeengModel.usuarios" Role="usuarios" Multiplicity="1" />
+    <End Type="zeengModel.logs" Role="logs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="idusuario" />
+      </Principal>
+      <Dependent Role="logs">
+        <PropertyRef Name="idusuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="promo_arquivos">
+    <Key>
+      <PropertyRef Name="idpromoarquivo" />
+    </Key>
+    <Property Name="idpromoarquivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpromocao" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="url" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="conteudo" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promoarquivos_promocao" FromRole="promo_arquivos" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_estadosabrangencia">
+    <Key>
+      <PropertyRef Name="idestadoabrangencia" />
+    </Key>
+    <Property Name="idestadoabrangencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idestado" Type="Int32" />
+    <Property Name="idpromocao" Type="Int32" />
+    <NavigationProperty Name="estados" Relationship="zeengModel.fk_promoestados_estados" FromRole="promo_estadosabrangencia" ToRole="estados" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promoestados_promo" FromRole="promo_estadosabrangencia" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_fb_posts">
+    <Key>
+      <PropertyRef Name="idpromofbpost" />
+    </Key>
+    <Property Name="idpromofbpost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpost" Type="Int64" />
+    <Property Name="idpromocao" Type="Int32" />
+    <NavigationProperty Name="fb_posts" Relationship="zeengModel.fk_promoposts_post" FromRole="promo_fb_posts" ToRole="fb_posts" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promoposts_promo" FromRole="promo_fb_posts" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_insta_posts">
+    <Key>
+      <PropertyRef Name="idpromoinstapost" />
+    </Key>
+    <Property Name="idpromoinstapost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpost" Type="Int32" />
+    <Property Name="idpromocao" Type="Int32" />
+    <NavigationProperty Name="insta_posts" Relationship="zeengModel.fk_promoinsta_post" FromRole="promo_insta_posts" ToRole="insta_posts" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promoinsta_promo" FromRole="promo_insta_posts" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_modalidades">
+    <Key>
+      <PropertyRef Name="idpromomodalidade" />
+    </Key>
+    <Property Name="idpromomodalidade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promocao_modalidade" FromRole="promo_modalidades" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_municipiosabrangencia">
+    <Key>
+      <PropertyRef Name="idmunicipiosabrangencia" />
+    </Key>
+    <Property Name="idmunicipiosabrangencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idmunicipio" Type="Int32" />
+    <Property Name="idpromocao" Type="Int32" />
+    <NavigationProperty Name="municipios" Relationship="zeengModel.fk_promomunicipios_municipios" FromRole="promo_municipiosabrangencia" ToRole="municipios" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promomunicipios_promocao" FromRole="promo_municipiosabrangencia" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_orgaosreguladores">
+    <Key>
+      <PropertyRef Name="idorgao" />
+    </Key>
+    <Property Name="idorgao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promocao_orgaoreg" FromRole="promo_orgaosreguladores" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_promocoes">
+    <Key>
+      <PropertyRef Name="idpromocao" />
+    </Key>
+    <Property Name="idpromocao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idorgaoregulador" Type="Int32" />
+    <Property Name="idmodalidade" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="certificadoautorizacao" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="outrosinteressados" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="abrangencianacional" Type="Boolean" />
+    <Property Name="dtcadastro" Type="DateTime" />
+    <Property Name="dtvigenciaini" Type="DateTime" />
+    <Property Name="dtvigenciafim" Type="DateTime" />
+    <Property Name="valorpremios" Type="Decimal" />
+    <Property Name="linksitepromocao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="linkfacebook" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="linkinstagram" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="linktwitter" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="linkyoutube" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="mecanicapromo" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="produtosparticipantes" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="premiospromo" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="linkregulamento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="textoregulamento" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="promo_arquivos" Relationship="zeengModel.fk_promoarquivos_promocao" FromRole="promo_promocoes" ToRole="promo_arquivos" />
+    <NavigationProperty Name="promo_estadosabrangencia" Relationship="zeengModel.fk_promoestados_promo" FromRole="promo_promocoes" ToRole="promo_estadosabrangencia" />
+    <NavigationProperty Name="promo_fb_posts" Relationship="zeengModel.fk_promoposts_promo" FromRole="promo_promocoes" ToRole="promo_fb_posts" />
+    <NavigationProperty Name="promo_insta_posts" Relationship="zeengModel.fk_promoinsta_promo" FromRole="promo_promocoes" ToRole="promo_insta_posts" />
+    <NavigationProperty Name="promo_modalidades" Relationship="zeengModel.fk_promocao_modalidade" FromRole="promo_promocoes" ToRole="promo_modalidades" />
+    <NavigationProperty Name="promo_municipiosabrangencia" Relationship="zeengModel.fk_promomunicipios_promocao" FromRole="promo_promocoes" ToRole="promo_municipiosabrangencia" />
+    <NavigationProperty Name="promo_orgaosreguladores" Relationship="zeengModel.fk_promocao_orgaoreg" FromRole="promo_promocoes" ToRole="promo_orgaosreguladores" />
+    <NavigationProperty Name="promo_promoempresas" Relationship="zeengModel.fk_promoempresas_promocao" FromRole="promo_promocoes" ToRole="promo_promoempresas" />
+    <NavigationProperty Name="promo_promonoticias" Relationship="zeengModel.fk_promonoticias_promo" FromRole="promo_promocoes" ToRole="promo_promonoticias" />
+    <NavigationProperty Name="promo_tw_posts" Relationship="zeengModel.fk_promotw_promo" FromRole="promo_promocoes" ToRole="promo_tw_posts" />
+    <NavigationProperty Name="promo_yt_videos" Relationship="zeengModel.fk_promoyt_promo" FromRole="promo_promocoes" ToRole="promo_yt_videos" />
+    <NavigationProperty Name="promo_regulamentoarquivos" Relationship="zeengModel.fk_regulamentoarquivos_promo" FromRole="promo_promocoes" ToRole="promo_regulamentoarquivos" />
+  </EntityType>
+  <EntityType Name="promo_promoempresas">
+    <Key>
+      <PropertyRef Name="idpromoempresas" />
+    </Key>
+    <Property Name="idpromoempresas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="idpromocao" Type="Int32" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.fk_promoempresas_empresa" FromRole="promo_promoempresas" ToRole="empresas" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promoempresas_promocao" FromRole="promo_promoempresas" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_promonoticias">
+    <Key>
+      <PropertyRef Name="idpromonoticias" />
+    </Key>
+    <Property Name="idpromonoticias" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpromocao" Type="Int32" />
+    <Property Name="idnoticia" Type="Int32" />
+    <NavigationProperty Name="noticias" Relationship="zeengModel.fk_promonoticias_noticias" FromRole="promo_promonoticias" ToRole="noticias" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promonoticias_promo" FromRole="promo_promonoticias" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_regulamentoarquivos">
+    <Key>
+      <PropertyRef Name="idregulamentoarquivos" />
+    </Key>
+    <Property Name="idregulamentoarquivos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpromocao" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="tipo" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_regulamentoarquivos_promo" FromRole="promo_regulamentoarquivos" ToRole="promo_promocoes" />
+  </EntityType>
+  <EntityType Name="promo_tw_posts">
+    <Key>
+      <PropertyRef Name="idpromotwposts" />
+    </Key>
+    <Property Name="idpromotwposts" Type="Int32" Nullable="false" />
+    <Property Name="idpost" Type="Int32" />
+    <Property Name="idpromocao" Type="Int32" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promotw_promo" FromRole="promo_tw_posts" ToRole="promo_promocoes" />
+    <NavigationProperty Name="tw_posts" Relationship="zeengModel.fk_promotw_posts" FromRole="promo_tw_posts" ToRole="tw_posts" />
+  </EntityType>
+  <EntityType Name="promo_yt_videos">
+    <Key>
+      <PropertyRef Name="idpromoytvideos" />
+    </Key>
+    <Property Name="idpromoytvideos" Type="Int32" Nullable="false" />
+    <Property Name="idvideo" Type="Int32" />
+    <Property Name="idpromocao" Type="Int32" />
+    <NavigationProperty Name="promo_promocoes" Relationship="zeengModel.fk_promoyt_promo" FromRole="promo_yt_videos" ToRole="promo_promocoes" />
+    <NavigationProperty Name="yt_videos" Relationship="zeengModel.fk_promoyt_videos" FromRole="promo_yt_videos" ToRole="yt_videos" />
+  </EntityType>
+  <Association Name="fk_promoempresas_empresa">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_promoempresas" Role="promo_promoempresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="promo_promoempresas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoestados_estados">
+    <End Type="zeengModel.estados" Role="estados" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_estadosabrangencia" Role="promo_estadosabrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="promo_estadosabrangencia">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoposts_post">
+    <End Type="zeengModel.fb_posts" Role="fb_posts" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_fb_posts" Role="promo_fb_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="promo_fb_posts">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoinsta_post">
+    <End Type="zeengModel.insta_posts" Role="insta_posts" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_insta_posts" Role="promo_insta_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="promo_insta_posts">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promomunicipios_municipios">
+    <End Type="zeengModel.municipios" Role="municipios" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_municipiosabrangencia" Role="promo_municipiosabrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="municipios">
+        <PropertyRef Name="idmunicipio" />
+      </Principal>
+      <Dependent Role="promo_municipiosabrangencia">
+        <PropertyRef Name="idmunicipio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promonoticias_noticias">
+    <End Type="zeengModel.noticias" Role="noticias" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_promonoticias" Role="promo_promonoticias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="promo_promonoticias">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoarquivos_promocao">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_arquivos" Role="promo_arquivos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_arquivos">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoestados_promo">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_estadosabrangencia" Role="promo_estadosabrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_estadosabrangencia">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoposts_promo">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_fb_posts" Role="promo_fb_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_fb_posts">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoinsta_promo">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_insta_posts" Role="promo_insta_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_insta_posts">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promocao_modalidade">
+    <End Type="zeengModel.promo_modalidades" Role="promo_modalidades" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_modalidades">
+        <PropertyRef Name="idpromomodalidade" />
+      </Principal>
+      <Dependent Role="promo_promocoes">
+        <PropertyRef Name="idmodalidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promomunicipios_promocao">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_municipiosabrangencia" Role="promo_municipiosabrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_municipiosabrangencia">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promocao_orgaoreg">
+    <End Type="zeengModel.promo_orgaosreguladores" Role="promo_orgaosreguladores" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_orgaosreguladores">
+        <PropertyRef Name="idorgao" />
+      </Principal>
+      <Dependent Role="promo_promocoes">
+        <PropertyRef Name="idorgaoregulador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoempresas_promocao">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_promoempresas" Role="promo_promoempresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_promoempresas">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promonoticias_promo">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_promonoticias" Role="promo_promonoticias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_promonoticias">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promotw_promo">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_tw_posts" Role="promo_tw_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_tw_posts">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoyt_promo">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_yt_videos" Role="promo_yt_videos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_yt_videos">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_regulamentoarquivos_promo">
+    <End Type="zeengModel.promo_promocoes" Role="promo_promocoes" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_regulamentoarquivos" Role="promo_regulamentoarquivos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_regulamentoarquivos">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promotw_posts">
+    <End Type="zeengModel.tw_posts" Role="tw_posts" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_tw_posts" Role="promo_tw_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="promo_tw_posts">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoyt_videos">
+    <End Type="zeengModel.yt_videos" Role="yt_videos" Multiplicity="0..1" />
+    <End Type="zeengModel.promo_yt_videos" Role="promo_yt_videos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_videos">
+        <PropertyRef Name="idvideo" />
+      </Principal>
+      <Dependent Role="promo_yt_videos">
+        <PropertyRef Name="idvideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="cliente_empresas">
+    <Key>
+      <PropertyRef Name="idclienteempresa" />
+    </Key>
+    <Property Name="idclienteempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcliente" Type="Int32" />
+    <Property Name="idempresa" Type="Int32" />
+    <Property Name="dtcadastro" Type="DateTime" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.fk_clienteempresa_empresa" FromRole="cliente_empresas" ToRole="empresas" />
+    <NavigationProperty Name="clientes" Relationship="zeengModel.fk_clienteempresa_cliente" FromRole="cliente_empresas" ToRole="clientes" />
+  </EntityType>
+  <EntityType Name="cliente_vertentes">
+    <Key>
+      <PropertyRef Name="idclientevertente" />
+    </Key>
+    <Property Name="idclientevertente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcliente" Type="Int32" />
+    <Property Name="redessociais" Type="Boolean" />
+    <Property Name="presencaonline" Type="Boolean" />
+    <Property Name="noticias" Type="Boolean" />
+    <Property Name="produtos" Type="Boolean" />
+    <Property Name="promocoes" Type="Boolean" />
+    <NavigationProperty Name="clientes" Relationship="zeengModel.fk_clientes_vertentes_clientes" FromRole="cliente_vertentes" ToRole="clientes" />
+  </EntityType>
+  <Association Name="fk_clienteempresa_empresa">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="0..1" />
+    <End Type="zeengModel.cliente_empresas" Role="cliente_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="cliente_empresas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="idclientes" />
+    </Key>
+    <Property Name="idclientes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idestado" Type="Int32" />
+    <Property Name="nome" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="site" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="endereco" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="cidade" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="telefone" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="celular" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="nomecontato" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="cnpj" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="cep" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="inscestadual" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="inscmunicial" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="vertodasempresas" Type="Boolean" />
+    <Property Name="dtexpiracaolicenca" Type="DateTime" />
+    <Property Name="qtdempresas" Type="Int32" />
+    <Property Name="excluido" Type="Boolean" />
+    <NavigationProperty Name="cliente_empresas" Relationship="zeengModel.fk_clienteempresa_cliente" FromRole="clientes" ToRole="cliente_empresas" />
+    <NavigationProperty Name="cliente_vertentes" Relationship="zeengModel.fk_clientes_vertentes_clientes" FromRole="clientes" ToRole="cliente_vertentes" />
+    <NavigationProperty Name="estados" Relationship="zeengModel.cliente_estado" FromRole="clientes" ToRole="estados" />
+    <NavigationProperty Name="usuarios" Relationship="zeengModel.clientes_usuario" FromRole="clientes" ToRole="usuarios" />
+    <NavigationProperty Name="cliente_relatorios" Relationship="zeengModel.fk_clientes" FromRole="clientes" ToRole="cliente_relatorios" />
+  </EntityType>
+  <Association Name="fk_clienteempresa_cliente">
+    <End Type="zeengModel.clientes" Role="clientes" Multiplicity="0..1" />
+    <End Type="zeengModel.cliente_empresas" Role="cliente_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idclientes" />
+      </Principal>
+      <Dependent Role="cliente_empresas">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_clientes_vertentes_clientes">
+    <End Type="zeengModel.clientes" Role="clientes" Multiplicity="0..1" />
+    <End Type="zeengModel.cliente_vertentes" Role="cliente_vertentes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idclientes" />
+      </Principal>
+      <Dependent Role="cliente_vertentes">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="cliente_estado">
+    <End Type="zeengModel.estados" Role="estados" Multiplicity="0..1" />
+    <End Type="zeengModel.clientes" Role="clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="clientes">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="clientes_usuario">
+    <End Type="zeengModel.clientes" Role="clientes" Multiplicity="0..1" />
+    <End Type="zeengModel.usuarios" Role="usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idclientes" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="cliente_relatorios">
+    <Key>
+      <PropertyRef Name="idclienterelatorio" />
+    </Key>
+    <Property Name="idclienterelatorio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idcliente" Type="Int32" Nullable="false" />
+    <Property Name="idusuario" Type="Int32" Nullable="false" />
+    <Property Name="nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="datahora" Type="DateTime" />
+    <Property Name="dataini" Type="DateTime" />
+    <Property Name="datafim" Type="DateTime" />
+    <Property Name="excluido" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="clientes" Relationship="zeengModel.fk_clientes" FromRole="cliente_relatorios" ToRole="clientes" />
+    <NavigationProperty Name="usuarios" Relationship="zeengModel.fk_usuario" FromRole="cliente_relatorios" ToRole="usuarios" />
+    <NavigationProperty Name="cliente_relatorio_empresas" Relationship="zeengModel.fk_cliente_relatorios" FromRole="cliente_relatorios" ToRole="cliente_relatorio_empresas" />
+    <NavigationProperty Name="cliente_relatorio_metricas" Relationship="zeengModel.fk_cliente_relatorio" FromRole="cliente_relatorios" ToRole="cliente_relatorio_metricas" />
+  </EntityType>
+  <Association Name="fk_clientes">
+    <End Type="zeengModel.clientes" Role="clientes" Multiplicity="1" />
+    <End Type="zeengModel.cliente_relatorios" Role="cliente_relatorios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idclientes" />
+      </Principal>
+      <Dependent Role="cliente_relatorios">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usuario">
+    <End Type="zeengModel.usuarios" Role="usuarios" Multiplicity="1" />
+    <End Type="zeengModel.cliente_relatorios" Role="cliente_relatorios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="idusuario" />
+      </Principal>
+      <Dependent Role="cliente_relatorios">
+        <PropertyRef Name="idusuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_municipios_estados">
+    <End Type="zeengModel.estados" Role="estados" Multiplicity="0..1" />
+    <End Type="zeengModel.municipios" Role="municipios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="municipios">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="cliente_relatorio_empresas">
+    <Key>
+      <PropertyRef Name="idclienterelatorioempresa" />
+    </Key>
+    <Property Name="idclienterelatorioempresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idclienterelatorio" Type="Int32" Nullable="false" />
+    <Property Name="idempresa" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cliente_relatorios" Relationship="zeengModel.fk_cliente_relatorios" FromRole="cliente_relatorio_empresas" ToRole="cliente_relatorios" />
+    <NavigationProperty Name="empresas" Relationship="zeengModel.fk_empresas" FromRole="cliente_relatorio_empresas" ToRole="empresas" />
+  </EntityType>
+  <EntityType Name="cliente_relatorio_metricas">
+    <Key>
+      <PropertyRef Name="idclienterelatoriometricas" />
+    </Key>
+    <Property Name="idclienterelatoriometricas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idclienterelatorio" Type="Int32" Nullable="false" />
+    <Property Name="campo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cliente_relatorios" Relationship="zeengModel.fk_cliente_relatorio" FromRole="cliente_relatorio_metricas" ToRole="cliente_relatorios" />
+  </EntityType>
+  <Association Name="fk_cliente_relatorios">
+    <End Type="zeengModel.cliente_relatorios" Role="cliente_relatorios" Multiplicity="1" />
+    <End Type="zeengModel.cliente_relatorio_empresas" Role="cliente_relatorio_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente_relatorios">
+        <PropertyRef Name="idclienterelatorio" />
+      </Principal>
+      <Dependent Role="cliente_relatorio_empresas">
+        <PropertyRef Name="idclienterelatorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresas">
+    <End Type="zeengModel.empresas" Role="empresas" Multiplicity="1" />
+    <End Type="zeengModel.cliente_relatorio_empresas" Role="cliente_relatorio_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="cliente_relatorio_empresas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cliente_relatorio">
+    <End Type="zeengModel.cliente_relatorios" Role="cliente_relatorios" Multiplicity="1" />
+    <End Type="zeengModel.cliente_relatorio_metricas" Role="cliente_relatorio_metricas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente_relatorios">
+        <PropertyRef Name="idclienterelatorio" />
+      </Principal>
+      <Dependent Role="cliente_relatorio_metricas">
+        <PropertyRef Name="idclienterelatorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

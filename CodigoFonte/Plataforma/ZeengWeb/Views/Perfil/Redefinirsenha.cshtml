@@ -1,0 +1,235 @@
+﻿@model ZRN.Mensagem.Mensagem
+
+@{
+    ViewBag.Title = "Redefinir senha";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Redefinir senha</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Home">Home</a>
+            </li>
+            <li>
+                <a href="/Perfil">Perfil</a>
+            </li>
+            <li class="active">
+                <strong>Redefinir Senha</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h4>Redefinir senha</h4>
+                </div>
+              
+                  @if (Model != null && Model.Tipo == ZRN.Mensagem.Mensagem.tipoMensagem.Sucesso)
+                {
+
+                    <div class="form-group">
+                        <div class="col-sm-3 col-sm-offset-2">
+                            <label class="label-correto" id="msgSucesso">Senha alterado com sucesso</label>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+
+                    using (Html.BeginForm("RedefinirSenha", "perfil", FormMethod.Post, new { @class = "m-t", role = "form" }))
+                {
+
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="form-horizontal" enctype="multipart/form-data" method="POST">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Senha atual</label>
+                                        <div class="col-sm-10">
+                                            @if (Model != null && Model.Codigo == 2)
+                                            {
+                                                <label class="label-msgerro" id="ConfirmaErro">Senha atual não confere</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="label-msgerro" style="display:none" id="ConfirmaErro">Senha atual não confere</label>
+                                            }
+                                            <input id="txtSenhaAtual" type="password" name="senhaantiga" placeholder="Senha atual" class="typeahead form-control senhausuario">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Nova senha</label>
+                                        <div class="col-sm-10">
+                                            <label class="label-formincorreto" id="ConfirmaErro1">Nova senha deve ter 8 ou mais caracteres</label>
+                                            <input id="txtSenha" type="password" name="senhanova" placeholder="Nova senha" class="typeahead form-control senhausuario">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Confirmar nova senha</label>
+                                        <div class="col-sm-10">
+                                            <label class="label-formincorreto" id="ConfirmaErro2">A senha deve ser igual a senha informada em nova senha</label>
+                                            <input id="txtSenha2" type="password" name="confirmasenha" placeholder="Confirmar nova senha" class="typeahead form-control senhausuario">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <div class="col-sm-3 col-sm-offset-2">
+                                            <button class="btn btn-white" onclick="cancelar()" type="button">Cancelar</button>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button class="btn btn-primary" id="btnSalvar" type="submit">Salvar</button>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-3 col-sm-offset-2">
+                                                <label class="label-correto" id="msgSucesso">Senha alterado com sucesso</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+
+@section styles{
+    <style type="text/css">
+        .senhausuario {
+            max-width: 260px;
+        }
+
+        button {
+            width: 100%;
+        }
+
+        #msgSucesso {
+            display: none;
+            margin:auto;
+            font-size:medium;
+          
+        }
+    </style>
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        @if(Model != null && Model.Tipo == ZRN.Mensagem.Mensagem.tipoMensagem.Sucesso) {
+
+            @Html.Raw("$('#msgSucesso').show(500);");
+            @Html.Raw("setTimeout(function(){ cancelar(); }, 3000);");
+
+        }
+
+
+
+        $(document).ready(function () {
+
+            $("#txtSenhaAtual").focusout(function () {
+
+                if ($("#txtSenhaAtual").val().length > 7) {
+                    $("#ConfirmaErro").hide();
+                    $(txtSenhaAtual).removeClass("campo-invalido");
+                }
+            });
+
+            $("#txtSenha").focusout(function () {
+
+                if ($("#txtSenha").val().length > 7) {
+                    $("#ConfirmaErro1").hide();
+                    $(txtSenha).removeClass("campo-invalido");
+                }
+            });
+
+            $("#txtSenha2").focusout(function () {
+
+                if (txtSenha2.value == txtSenha.value) {
+                    $("#ConfirmaErro2").hide();
+                    $(txtSenha2).removeClass("campo-invalido");
+                }
+            });
+
+
+            $("#btnSalvar").click(function (event) { SalvarSenhaUsuario(event) });
+
+        });
+
+        function verificaSenhasUsuario() {
+
+            var SenhaAtual = true;
+            var Senha = true;
+            var Senha2 = true;
+
+            if ($("#txtSenha").val().length < 8) {
+                $("#ConfirmaErro1").show();
+                $(txtSenha).addClass("campo-invalido");
+                Senha = false;
+            }
+
+            if ($("#txtSenha").val().length < 8 || txtSenha.value != txtSenha2.value) {
+
+                $("#ConfirmaErro2").show();
+                $(txtSenha2).addClass("campo-invalido");
+                Senha2 = false;
+            }
+
+            if ($("#txtSenhaAtual").val().length < 8) {
+                $("#ConfirmaErro").show();
+                $(txtSenhaAtual).addClass("campo-invalido");
+                SenhaAtual = false;
+            }
+
+            return (Senha && Senha2 && SenhaAtual)
+        }
+
+        function SalvarSenhaUsuario(event) {
+
+            if (!verificaSenhasUsuario()) {
+
+                
+                event.preventDefault();
+
+            }
+
+        }
+
+        function sleep(milliseconds) {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
+                }
+            }
+        }
+
+        function cancelar() {
+            window.location = "/Home/";
+        }
+
+
+
+
+    </script>
+}

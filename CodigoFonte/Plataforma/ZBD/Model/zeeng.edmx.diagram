@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5501f77bbce04a8ab589a2c0576f2559" Name="Diagram1" ZoomLevel="101">
+        <EntityTypeShape EntityType="zeengModel.cnpjempresa" Width="1.5" PointX="8" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.cnpjmarca" Width="1.5" PointX="8" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.empresaredessociais" Width="1.5" PointX="13.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.empresas" Width="1.5" PointX="13.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.estados" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.mapa_areas" Width="1.5" PointX="5.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.mapa_atributo" Width="1.5" PointX="5.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.mapa_base" Width="1.5" PointX="5.75" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.mapa_caracteristica" Width="1.5" PointX="5.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.mapa_complemento" Width="1.5" PointX="5.75" PointY="25.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.mapa_especies" Width="1.5" PointX="5.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.mapa_origens" Width="1.5" PointX="5.75" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.mapa_subespecie" Width="1.5" PointX="5.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.marcaredessociais" Width="1.5" PointX="13" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.marcas" Width="1.5" PointX="5.75" PointY="35.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.produtoredessociais" Width="1.5" PointX="13" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.produtos" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.redessociais" Width="1.5" PointX="10.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.setoresempresa" Width="1.5" PointX="15.5" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeengModel.usuarios" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="zeengModel.fk_cnpj_empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_cnpj_marca" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_empresa_redessociais" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_empresasredes_redessociais" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_empresa_setor" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.idEmpresa" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_marca_redessociais" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_marcaredes_redessociais" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_marca_produto" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_mprodutoredes_redessociais" ManuallyRouted="false" />
+        <AssociationConnector Association="zeengModel.fk_produto_redessociais" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="zeengModel.tw_mencoes" Width="1.5" PointX="22.5" PointY="19.5" />
+        <EntityTypeShape EntityType="zeengModel.tw_perfis" Width="1.5" PointX="15.5" PointY="23.125" />
+        <EntityTypeShape EntityType="zeengModel.tw_perfis_stats" Width="1.5" PointX="17.75" PointY="27.5" />
+        <EntityTypeShape EntityType="zeengModel.tw_posts" Width="1.5" PointX="17.625" PointY="23.875" />
+        <AssociationConnector Association="zeengModel.FK_tw_perfis_empresas" />
+        <AssociationConnector Association="zeengModel.FK_tw_perfis_marcas" />
+        <AssociationConnector Association="zeengModel.tw_mecoes_perfil" />
+        <AssociationConnector Association="zeengModel.FK__tw_perfis" />
+        <AssociationConnector Association="zeengModel.tw_perfil_posts" />
+        <EntityTypeShape EntityType="zeengModel.fb_comentarios" Width="1.5" PointX="11" PointY="29" />
+        <EntityTypeShape EntityType="zeengModel.insta_perfis" Width="1.5" PointX="15.5" PointY="18.375" />
+        <EntityTypeShape EntityType="zeengModel.insta_perfis_stats" Width="1.5" PointX="17.75" PointY="31.125" />
+        <AssociationConnector Association="zeengModel.FK_insta_perfis_empresas" />
+        <AssociationConnector Association="zeengModel.FK___insta_perfis" />
+        <AssociationConnector Association="zeengModel.FK_insta_perfis_marcas" />
+        <EntityTypeShape EntityType="zeengModel.yt_canais_stats" Width="1.5" PointX="17.75" PointY="34.875" />
+        <EntityTypeShape EntityType="zeengModel.yt_comentarios" Width="1.5" PointX="20" PointY="38.5" />
+        <EntityTypeShape EntityType="zeengModel.fb_comentarios_termos" Width="1.5" PointX="13.25" PointY="29.75" />
+        <EntityTypeShape EntityType="zeengModel.fb_post_termos" Width="1.5" PointX="13.375" PointY="33" />
+        <AssociationConnector Association="zeengModel.fk_fbcomentarioss_fbtermos" />
+        <EntityTypeShape EntityType="zeengModel.insta_comentarios" Width="1.5" PointX="20" PointY="15" />
+        <EntityTypeShape EntityType="zeengModel.insta_posts" Width="1.5" PointX="17.75" PointY="14.5" />
+        <AssociationConnector Association="zeengModel.FK__insta_posts" />
+        <AssociationConnector Association="zeengModel.FK__insta_perfis" />
+        <EntityTypeShape EntityType="zeengModel.insta_comentario_termos" Width="1.5" PointX="22.25" PointY="15.375" />
+        <EntityTypeShape EntityType="zeengModel.insta_post_termos" Width="1.5" PointX="20" PointY="12.125" />
+        <EntityTypeShape EntityType="zeengModel.tw_post_termos" Width="1.5" PointX="20" PointY="24.375" />
+        <AssociationConnector Association="zeengModel.fk_insta_comentarios_termos" />
+        <AssociationConnector Association="zeengModel.fk_insta_post_termos" />
+        <AssociationConnector Association="zeengModel.fk_post_termos" />
+        <EntityTypeShape EntityType="zeengModel.yt_comentario_termos" Width="1.5" PointX="22.25" PointY="39.125" />
+        <EntityTypeShape EntityType="zeengModel.yt_video_termos" Width="1.5" PointX="20" PointY="34.75" />
+        <AssociationConnector Association="zeengModel.fk_yt_comentario_termos" />
+        <EntityTypeShape EntityType="zeengModel.fb_perfis" Width="1.5" PointX="20.5" PointY="28" />
+        <EntityTypeShape EntityType="zeengModel.fb_perfis_stats" Width="1.5" PointX="22.75" PointY="29" />
+        <AssociationConnector Association="zeengModel.FK_fb_perfis_empresas" />
+        <AssociationConnector Association="zeengModel.FK_fb_perfis_marcas" />
+        <AssociationConnector Association="zeengModel.FK_fb_perfis_stats_fb_perfis" />
+        <EntityTypeShape EntityType="zeengModel.fb_posts" Width="1.5" PointX="22.75" PointY="33.25" />
+        <AssociationConnector Association="zeengModel.FK_fb_comentarios_fb_posts" />
+        <AssociationConnector Association="zeengModel.FK_fb_posts_fb_perfis" />
+        <AssociationConnector Association="zeengModel.fk_fbposts_fbtermos" />
+        <EntityTypeShape EntityType="zeengModel.noticias" Width="1.5" PointX="21.25" PointY="3.125" />
+        <EntityTypeShape EntityType="zeengModel.noticias_empresa" Width="1.5" PointX="17.5" PointY="11.5" />
+        <AssociationConnector Association="zeengModel.fk_noticia_empresa" />
+        <AssociationConnector Association="zeengModel.fk_noticia_noticia" />
+        <EntityTypeShape EntityType="zeengModel.fontes_noticias" Width="1.5" PointX="19" PointY="4.25" />
+        <EntityTypeShape EntityType="zeengModel.noticia_imagens" Width="1.5" PointX="23.5" PointY="7.625" />
+        <EntityTypeShape EntityType="zeengModel.noticia_termos" Width="1.5" PointX="23.5" PointY="2.125" />
+        <EntityTypeShape EntityType="zeengModel.noticias_marca" Width="1.5" PointX="25.5" PointY="20.375" />
+        <EntityTypeShape EntityType="zeengModel.noticias_relacionadas" Width="1.5" PointX="23.5" PointY="4.875" />
+        <AssociationConnector Association="zeengModel.fk_noticia_fonte" />
+        <AssociationConnector Association="zeengModel.fk_noticia_marca" />
+        <AssociationConnector Association="zeengModel.fk_noticia_imagem" />
+        <AssociationConnector Association="zeengModel.fk_noticia_termos" />
+        <AssociationConnector Association="zeengModel.fk_noticia_marc_noticia" />
+        <AssociationConnector Association="zeengModel.fk_noticia_princ" />
+        <AssociationConnector Association="zeengModel.fk_noticia_rel" />
+        <EntityTypeShape EntityType="zeengModel.tw_mencao_termos" Width="1.5" PointX="24.625" PointY="17.5" />
+        <AssociationConnector Association="zeengModel.FK_tw_mencao_termos_tw_mencoes" />
+        <EntityTypeShape EntityType="zeengModel.presenca_online_linkadopor" Width="1.5" PointX="18.25" PointY="24.5" />
+        <EntityTypeShape EntityType="zeengModel.presenca_online_palavraspesquisa" Width="1.5" PointX="17.75" PointY="4.75" />
+        <AssociationConnector Association="zeengModel.FK_yt_comentarios_yt_comentarios" />
+        <EntityTypeShape EntityType="zeengModel.yt_canais" Width="1.5" PointX="25.5" PointY="23.25" />
+        <AssociationConnector Association="zeengModel.FK_yt_canais_empresas" />
+        <AssociationConnector Association="zeengModel.FK_yt_canais_marcas" />
+        <AssociationConnector Association="zeengModel.FK__yt_canais" />
+        <EntityTypeShape EntityType="zeengModel.yt_videos" Width="1.5" PointX="27.75" PointY="23" />
+        <AssociationConnector Association="zeengModel.FK__yt_perfis" />
+        <AssociationConnector Association="zeengModel.FK_yt_comentarios_yt_videos" />
+        <AssociationConnector Association="zeengModel.fk_yt_video_termos" />
+        <EntityTypeShape EntityType="zeengModel.presenca_online_capturas" Width="1.5" PointX="15.5" PointY="0.75" />
+        <AssociationConnector Association="zeengModel.fk_presenca_online_empresas" />
+        <AssociationConnector Association="zeengModel.fk_presenca_captura_palavras" />
+        <AssociationConnector Association="zeengModel.fk_presenca_linkadopor" />
+        <EntityTypeShape EntityType="zeengModel.seae_setores_proc" Width="1.5" PointX="23.125" PointY="43.625" />
+        <EntityTypeShape EntityType="zeengModel.municipios" Width="1.5" PointX="25.375" PointY="43.625" />
+        <EntityTypeShape EntityType="zeengModel.seae_abrang_estado" Width="1.5" PointX="30.625" PointY="23.375" />
+        <EntityTypeShape EntityType="zeengModel.seae_abrang_municipio" Width="1.5" PointX="27.625" PointY="38.625" />
+        <EntityTypeShape EntityType="zeengModel.seae_arquivos_proc" Width="1.5" PointX="27.625" PointY="53.875" />
+        <EntityTypeShape EntityType="zeengModel.seae_empresa_processos" Width="1.5" PointX="27.625" PointY="28.75" />
+        <EntityTypeShape EntityType="zeengModel.seae_mov_situacao" Width="1.5" PointX="27.625" PointY="35.625" />
+        <EntityTypeShape EntityType="zeengModel.seae_processo_setor" Width="1.5" PointX="27.625" PointY="42" />
+        <EntityTypeShape EntityType="zeengModel.seae_processo_solicitantes" Width="1.5" PointX="27.625" PointY="48" />
+        <EntityTypeShape EntityType="zeengModel.seae_processos" Width="1.5" PointX="25.375" PointY="36.875" />
+        <EntityTypeShape EntityType="zeengModel.seae_situacoes" Width="1.5" PointX="25.375" PointY="33.875" />
+        <EntityTypeShape EntityType="zeengModel.seae_subsetores_proc" Width="1.5" PointX="25.375" PointY="47.125" />
+        <AssociationConnector Association="zeengModel.fk_empresa_promo_empresa" />
+        <AssociationConnector Association="zeengModel.fk_abrang_estado_estado" />
+        <AssociationConnector Association="zeengModel.fk_promo_municipio_muni" />
+        <AssociationConnector Association="zeengModel.fk_abrang_estado_processo" />
+        <AssociationConnector Association="zeengModel.fk_promo_municipio" />
+        <AssociationConnector Association="zeengModel.fk_arqui_proc_proc" />
+        <AssociationConnector Association="zeengModel.fk_empresa_processo_promo" />
+        <AssociationConnector Association="zeengModel.fk_mov_situacao" />
+        <AssociationConnector Association="zeengModel.fk_situacao_processo" />
+        <AssociationConnector Association="zeengModel.fk_processos" />
+        <AssociationConnector Association="zeengModel.FK_seae_processo_setor_seae_subsetores_proc" />
+        <AssociationConnector Association="zeengModel.fk_setores_proc" />
+        <AssociationConnector Association="zeengModel.fk_seae_proc_solicitante" />
+        <AssociationConnector Association="zeengModel.FK_seae_subsetores_proc_seae_setores_proc" />
+        <EntityTypeShape EntityType="zeengModel.mapa_registro_empresa" Width="1.5" PointX="12.125" PointY="16.375" />
+        <AssociationConnector Association="zeengModel.fk_registro_empresa_empresa" />
+        <EntityTypeShape EntityType="zeengModel.mapa_registros" Width="1.5" PointX="9.375" PointY="13.75" />
+        <AssociationConnector Association="zeengModel.registros_estado" />
+        <AssociationConnector Association="zeengModel.registros_area" />
+        <AssociationConnector Association="zeengModel.registros_atributo" />
+        <AssociationConnector Association="zeengModel.registros_base" />
+        <AssociationConnector Association="zeengModel.registros_caracteristica" />
+        <AssociationConnector Association="zeengModel.registros_complemento" />
+        <AssociationConnector Association="zeengModel.registros_especie" />
+        <AssociationConnector Association="zeengModel.registros_origem" />
+        <AssociationConnector Association="zeengModel.fk_registro_empresa_registro" />
+        <AssociationConnector Association="zeengModel.registros_subespecie" />
+        <EntityTypeShape EntityType="zeengModel.logs" Width="1.5" PointX="7.5" PointY="6" />
+        <AssociationConnector Association="zeengModel.fk_usuarios" />
+        <EntityTypeShape EntityType="zeengModel.promo_arquivos" Width="1.5" PointX="34.875" PointY="63.875" />
+        <EntityTypeShape EntityType="zeengModel.promo_estadosabrangencia" Width="1.5" PointX="34.875" PointY="26.875" />
+        <EntityTypeShape EntityType="zeengModel.promo_fb_posts" Width="1.5" PointX="34.875" PointY="40.5" />
+        <EntityTypeShape EntityType="zeengModel.promo_insta_posts" Width="1.5" PointX="37.875" PointY="29.125" />
+        <EntityTypeShape EntityType="zeengModel.promo_modalidades" Width="1.5" PointX="30.375" PointY="38" />
+        <EntityTypeShape EntityType="zeengModel.promo_municipiosabrangencia" Width="1.5" PointX="34.875" PointY="44" />
+        <EntityTypeShape EntityType="zeengModel.promo_orgaosreguladores" Width="1.5" PointX="30.375" PointY="41" />
+        <EntityTypeShape EntityType="zeengModel.promo_promocoes" Width="1.5" PointX="32.625" PointY="38.125" />
+        <EntityTypeShape EntityType="zeengModel.promo_promoempresas" Width="1.5" PointX="34.875" PointY="30.375" />
+        <EntityTypeShape EntityType="zeengModel.promo_promonoticias" Width="1.5" PointX="34.875" PointY="23.375" />
+        <EntityTypeShape EntityType="zeengModel.promo_regulamentoarquivos" Width="1.5" PointX="34.875" PointY="61" />
+        <EntityTypeShape EntityType="zeengModel.promo_tw_posts" Width="1.5" PointX="34.875" PointY="36.75" />
+        <EntityTypeShape EntityType="zeengModel.promo_yt_videos" Width="1.5" PointX="34.875" PointY="33.375" />
+        <AssociationConnector Association="zeengModel.fk_promoempresas_empresa" />
+        <AssociationConnector Association="zeengModel.fk_promoestados_estados" />
+        <AssociationConnector Association="zeengModel.fk_promoposts_post" />
+        <AssociationConnector Association="zeengModel.fk_promoinsta_post" />
+        <AssociationConnector Association="zeengModel.fk_promomunicipios_municipios" />
+        <AssociationConnector Association="zeengModel.fk_promonoticias_noticias" />
+        <AssociationConnector Association="zeengModel.fk_promoarquivos_promocao" />
+        <AssociationConnector Association="zeengModel.fk_promoestados_promo" />
+        <AssociationConnector Association="zeengModel.fk_promoposts_promo" />
+        <AssociationConnector Association="zeengModel.fk_promoinsta_promo" />
+        <AssociationConnector Association="zeengModel.fk_promocao_modalidade" />
+        <AssociationConnector Association="zeengModel.fk_promomunicipios_promocao" />
+        <AssociationConnector Association="zeengModel.fk_promocao_orgaoreg" />
+        <AssociationConnector Association="zeengModel.fk_promoempresas_promocao" />
+        <AssociationConnector Association="zeengModel.fk_promonoticias_promo" />
+        <AssociationConnector Association="zeengModel.fk_promotw_promo" />
+        <AssociationConnector Association="zeengModel.fk_promoyt_promo" />
+        <AssociationConnector Association="zeengModel.fk_regulamentoarquivos_promo" />
+        <AssociationConnector Association="zeengModel.fk_promotw_posts" />
+        <AssociationConnector Association="zeengModel.fk_promoyt_videos" />
+        <EntityTypeShape EntityType="zeengModel.cliente_empresas" Width="1.5" PointX="15.5" PointY="14.75" />
+        <EntityTypeShape EntityType="zeengModel.cliente_vertentes" Width="1.5" PointX="5.25" PointY="9.875" />
+        <AssociationConnector Association="zeengModel.fk_clienteempresa_empresa" />
+        <EntityTypeShape EntityType="zeengModel.clientes" Width="1.5" PointX="3" PointY="4.75" />
+        <AssociationConnector Association="zeengModel.fk_clienteempresa_cliente" />
+        <AssociationConnector Association="zeengModel.fk_clientes_vertentes_clientes" />
+        <AssociationConnector Association="zeengModel.cliente_estado" />
+        <AssociationConnector Association="zeengModel.clientes_usuario" />
+        <EntityTypeShape EntityType="zeengModel.cliente_relatorios" Width="1.5" PointX="10.5" PointY="8" />
+        <AssociationConnector Association="zeengModel.fk_clientes" />
+        <AssociationConnector Association="zeengModel.fk_usuario" />
+        <AssociationConnector Association="zeengModel.FK_municipios_estados" />
+        <EntityTypeShape EntityType="zeengModel.cliente_relatorio_empresas" Width="1.5" PointX="22.5" PointY="11.125" />
+        <EntityTypeShape EntityType="zeengModel.cliente_relatorio_metricas" Width="1.5" PointX="12.75" PointY="24.5" />
+        <AssociationConnector Association="zeengModel.fk_cliente_relatorios" />
+        <AssociationConnector Association="zeengModel.fk_empresas" />
+        <AssociationConnector Association="zeengModel.fk_cliente_relatorio" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="zeengModelStoreContainer" CdmEntityContainer="zeengEntities">
+    <EntitySetMapping Name="cnpjempresa">
+      <EntityTypeMapping TypeName="zeengModel.cnpjempresa">
+        <MappingFragment StoreEntitySet="cnpjempresa">
+          <ScalarProperty Name="idcnpjempresa" ColumnName="idcnpjempresa" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cnpjmarca">
+      <EntityTypeMapping TypeName="zeengModel.cnpjmarca">
+        <MappingFragment StoreEntitySet="cnpjmarca">
+          <ScalarProperty Name="idcnpjmarca" ColumnName="idcnpjmarca" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="empresaredessociais">
+      <EntityTypeMapping TypeName="zeengModel.empresaredessociais">
+        <MappingFragment StoreEntitySet="empresaredessociais">
+          <ScalarProperty Name="idempresaredessociais" ColumnName="idempresaredessociais" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idredesocial" ColumnName="idredesocial" />
+          <ScalarProperty Name="urlredesocial" ColumnName="urlredesocial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="empresas">
+      <EntityTypeMapping TypeName="zeengModel.empresas">
+        <MappingFragment StoreEntitySet="empresas">
+          <ScalarProperty Name="imagem" ColumnName="imagem" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idsetor" ColumnName="idsetor" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="urlsite" ColumnName="urlsite" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="estados">
+      <EntityTypeMapping TypeName="zeengModel.estados">
+        <MappingFragment StoreEntitySet="estados">
+          <ScalarProperty Name="idestado" ColumnName="idestado" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="uf" ColumnName="uf" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_areas">
+      <EntityTypeMapping TypeName="zeengModel.mapa_areas">
+        <MappingFragment StoreEntitySet="mapa_areas">
+          <ScalarProperty Name="idarea" ColumnName="idarea" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_atributo">
+      <EntityTypeMapping TypeName="zeengModel.mapa_atributo">
+        <MappingFragment StoreEntitySet="mapa_atributo">
+          <ScalarProperty Name="idatributo" ColumnName="idatributo" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_base">
+      <EntityTypeMapping TypeName="zeengModel.mapa_base">
+        <MappingFragment StoreEntitySet="mapa_base">
+          <ScalarProperty Name="idbase" ColumnName="idbase" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_caracteristica">
+      <EntityTypeMapping TypeName="zeengModel.mapa_caracteristica">
+        <MappingFragment StoreEntitySet="mapa_caracteristica">
+          <ScalarProperty Name="idcaracteristica" ColumnName="idcaracteristica" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_complemento">
+      <EntityTypeMapping TypeName="zeengModel.mapa_complemento">
+        <MappingFragment StoreEntitySet="mapa_complemento">
+          <ScalarProperty Name="idcomplemento" ColumnName="idcomplemento" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_especies">
+      <EntityTypeMapping TypeName="zeengModel.mapa_especies">
+        <MappingFragment StoreEntitySet="mapa_especies">
+          <ScalarProperty Name="idespecie" ColumnName="idespecie" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_origens">
+      <EntityTypeMapping TypeName="zeengModel.mapa_origens">
+        <MappingFragment StoreEntitySet="mapa_origens">
+          <ScalarProperty Name="idorigem" ColumnName="idorigem" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_subespecie">
+      <EntityTypeMapping TypeName="zeengModel.mapa_subespecie">
+        <MappingFragment StoreEntitySet="mapa_subespecie">
+          <ScalarProperty Name="idsubespecie" ColumnName="idsubespecie" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="marcaredessociais">
+      <EntityTypeMapping TypeName="zeengModel.marcaredessociais">
+        <MappingFragment StoreEntitySet="marcaredessociais">
+          <ScalarProperty Name="idmarcaredessociais" ColumnName="idmarcaredessociais" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="idredesocial" ColumnName="idredesocial" />
+          <ScalarProperty Name="urlredesocial" ColumnName="urlredesocial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="marcas">
+      <EntityTypeMapping TypeName="zeengModel.marcas">
+        <MappingFragment StoreEntitySet="marcas">
+          <ScalarProperty Name="imagem" ColumnName="imagem" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="urlsite" ColumnName="urlsite" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="produtoredessociais">
+      <EntityTypeMapping TypeName="zeengModel.produtoredessociais">
+        <MappingFragment StoreEntitySet="produtoredessociais">
+          <ScalarProperty Name="idprodutoredessociais" ColumnName="idprodutoredessociais" />
+          <ScalarProperty Name="idproduto" ColumnName="idproduto" />
+          <ScalarProperty Name="idredesocial" ColumnName="idredesocial" />
+          <ScalarProperty Name="urlredesocial" ColumnName="urlredesocial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="produtos">
+      <EntityTypeMapping TypeName="zeengModel.produtos">
+        <MappingFragment StoreEntitySet="produtos">
+          <ScalarProperty Name="imagem" ColumnName="imagem" />
+          <ScalarProperty Name="idproduto" ColumnName="idproduto" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="urlsite" ColumnName="urlsite" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="redessociais">
+      <EntityTypeMapping TypeName="zeengModel.redessociais">
+        <MappingFragment StoreEntitySet="redessociais">
+          <ScalarProperty Name="idredessociais" ColumnName="idredessociais" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="nomelogo" ColumnName="nomelogo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="setoresempresa">
+      <EntityTypeMapping TypeName="zeengModel.setoresempresa">
+        <MappingFragment StoreEntitySet="setoresempresa">
+          <ScalarProperty Name="idsetoresempresa" ColumnName="idsetoresempresa" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios">
+      <EntityTypeMapping TypeName="zeengModel.usuarios">
+        <MappingFragment StoreEntitySet="usuarios">
+          <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+          <ScalarProperty Name="idcliente" ColumnName="idcliente" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="senha" ColumnName="senha" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetTotalMapaPorSemana" FunctionName="zeengModel.Store.GetTotalMapaPorSemana">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="zeengModel.GetTotalMapaPorSemana_Result" />
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetFacebookCrescimentoFas" FunctionName="zeengModel.Store.GetFacebookCrescimentoFas" />
+    <FunctionImportMapping FunctionImportName="GetFacebookInteracoesPorHora" FunctionName="zeengModel.Store.GetFacebookInteracoesPorHora">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="zeengModel.GetFacebookInteracoesPorHora_Result" />
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetFacebookInteracoesSemana" FunctionName="zeengModel.Store.GetFacebookInteracoesSemana" />
+    <EntitySetMapping Name="tw_mencoes">
+      <EntityTypeMapping TypeName="zeengModel.tw_mencoes">
+        <MappingFragment StoreEntitySet="tw_mencoes">
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+          <ScalarProperty Name="nomeusuario" ColumnName="nomeusuario" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="qtdfavoritado" ColumnName="qtdfavoritado" />
+          <ScalarProperty Name="qtdretweets" ColumnName="qtdretweets" />
+          <ScalarProperty Name="is_reply" ColumnName="is_reply" />
+          <ScalarProperty Name="is_retweet" ColumnName="is_retweet" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="postagem" ColumnName="postagem" />
+          <ScalarProperty Name="idtwrespondido" ColumnName="idtwrespondido" />
+          <ScalarProperty Name="idtwitter" ColumnName="idtwitter" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+          <ScalarProperty Name="idmencao" ColumnName="idmencao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tw_perfis">
+      <EntityTypeMapping TypeName="zeengModel.tw_perfis">
+        <MappingFragment StoreEntitySet="tw_perfis">
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="ultimaatualizacao" ColumnName="ultimaatualizacao" />
+          <ScalarProperty Name="ultimotwmencaocapturado" ColumnName="ultimotwmencaocapturado" />
+          <ScalarProperty Name="ultimotwcapturado" ColumnName="ultimotwcapturado" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="screenname" ColumnName="screenname" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idtwitter" ColumnName="idtwitter" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tw_perfis_stats">
+      <EntityTypeMapping TypeName="zeengModel.tw_perfis_stats">
+        <MappingFragment StoreEntitySet="tw_perfis_stats">
+          <ScalarProperty Name="qtdtweets" ColumnName="qtdtweets" />
+          <ScalarProperty Name="qtdlistado" ColumnName="qtdlistado" />
+          <ScalarProperty Name="qtdfavoritado" ColumnName="qtdfavoritado" />
+          <ScalarProperty Name="qtdseguidos" ColumnName="qtdseguidos" />
+          <ScalarProperty Name="qtdseguidores" ColumnName="qtdseguidores" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+          <ScalarProperty Name="idperfilstats" ColumnName="idperfilstats" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tw_posts">
+      <EntityTypeMapping TypeName="zeengModel.tw_posts">
+        <MappingFragment StoreEntitySet="tw_posts">
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="idtwrespondido" ColumnName="idtwrespondido" />
+          <ScalarProperty Name="qtdfavoritado" ColumnName="qtdfavoritado" />
+          <ScalarProperty Name="qtdretweets" ColumnName="qtdretweets" />
+          <ScalarProperty Name="is_reply" ColumnName="is_reply" />
+          <ScalarProperty Name="is_retweet" ColumnName="is_retweet" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="postagem" ColumnName="postagem" />
+          <ScalarProperty Name="idtwitter" ColumnName="idtwitter" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fb_comentarios">
+      <EntityTypeMapping TypeName="zeengModel.fb_comentarios">
+        <MappingFragment StoreEntitySet="fb_comentarios">
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+          <ScalarProperty Name="nomeusuario" ColumnName="nomeusuario" />
+          <ScalarProperty Name="idcomentarioresposta" ColumnName="idcomentarioresposta" />
+          <ScalarProperty Name="respostas" ColumnName="respostas" />
+          <ScalarProperty Name="curtidas" ColumnName="curtidas" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="postagem" ColumnName="postagem" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+          <ScalarProperty Name="idfacebook" ColumnName="idfacebook" />
+          <ScalarProperty Name="idcomentario" ColumnName="idcomentario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insta_perfis">
+      <EntityTypeMapping TypeName="zeengModel.insta_perfis">
+        <MappingFragment StoreEntitySet="insta_perfis">
+          <ScalarProperty Name="datahoraultimopost" ColumnName="datahoraultimopost" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="ultimaatualizacao" ColumnName="ultimaatualizacao" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="sobre" ColumnName="sobre" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="idinstagram" ColumnName="idinstagram" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insta_perfis_stats">
+      <EntityTypeMapping TypeName="zeengModel.insta_perfis_stats">
+        <MappingFragment StoreEntitySet="insta_perfis_stats">
+          <ScalarProperty Name="qtdseguidos" ColumnName="qtdseguidos" />
+          <ScalarProperty Name="qtdseguidores" ColumnName="qtdseguidores" />
+          <ScalarProperty Name="qtdmidias" ColumnName="qtdmidias" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+          <ScalarProperty Name="idperfilstats" ColumnName="idperfilstats" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="yt_canais_stats">
+      <EntityTypeMapping TypeName="zeengModel.yt_canais_stats">
+        <MappingFragment StoreEntitySet="yt_canais_stats">
+          <ScalarProperty Name="qtdvideos" ColumnName="qtdvideos" />
+          <ScalarProperty Name="qtdseguidores" ColumnName="qtdseguidores" />
+          <ScalarProperty Name="qtdvisualizacoes" ColumnName="qtdvisualizacoes" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="idcanal" ColumnName="idcanal" />
+          <ScalarProperty Name="idcanalstats" ColumnName="idcanalstats" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="yt_comentarios">
+      <EntityTypeMapping TypeName="zeengModel.yt_comentarios">
+        <MappingFragment StoreEntitySet="yt_comentarios">
+          <ScalarProperty Name="datahoraultimoreply" ColumnName="datahoraultimoreply" />
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="idcomentarioresposta" ColumnName="idcomentarioresposta" />
+          <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+          <ScalarProperty Name="nomeusuario" ColumnName="nomeusuario" />
+          <ScalarProperty Name="qtdrespostas" ColumnName="qtdrespostas" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="qtdcurtidas" ColumnName="qtdcurtidas" />
+          <ScalarProperty Name="postagem" ColumnName="postagem" />
+          <ScalarProperty Name="idvideo" ColumnName="idvideo" />
+          <ScalarProperty Name="idyoutube" ColumnName="idyoutube" />
+          <ScalarProperty Name="idcomentario" ColumnName="idcomentario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fb_comentarios_termos">
+      <EntityTypeMapping TypeName="zeengModel.fb_comentarios_termos">
+        <MappingFragment StoreEntitySet="fb_comentarios_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idcomentario" ColumnName="idcomentario" />
+          <ScalarProperty Name="idcomentariotermos" ColumnName="idcomentariotermos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fb_post_termos">
+      <EntityTypeMapping TypeName="zeengModel.fb_post_termos">
+        <MappingFragment StoreEntitySet="fb_post_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+          <ScalarProperty Name="idposttermos" ColumnName="idposttermos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insta_comentarios">
+      <EntityTypeMapping TypeName="zeengModel.insta_comentarios">
+        <MappingFragment StoreEntitySet="insta_comentarios">
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="nomeusuario" ColumnName="nomeusuario" />
+          <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="postagem" ColumnName="postagem" />
+          <ScalarProperty Name="idinstagram" ColumnName="idinstagram" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+          <ScalarProperty Name="idcomentario" ColumnName="idcomentario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insta_posts">
+      <EntityTypeMapping TypeName="zeengModel.insta_posts">
+        <MappingFragment StoreEntitySet="insta_posts">
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="datahoraultimocomentario" ColumnName="datahoraultimocomentario" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="qtdcurtidas" ColumnName="qtdcurtidas" />
+          <ScalarProperty Name="qtdcomentarios" ColumnName="qtdcomentarios" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="postagem" ColumnName="postagem" />
+          <ScalarProperty Name="idinstagram" ColumnName="idinstagram" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insta_comentario_termos">
+      <EntityTypeMapping TypeName="zeengModel.insta_comentario_termos">
+        <MappingFragment StoreEntitySet="insta_comentario_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idcomentario" ColumnName="idcomentario" />
+          <ScalarProperty Name="idcomentariotermo" ColumnName="idcomentariotermo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="insta_post_termos">
+      <EntityTypeMapping TypeName="zeengModel.insta_post_termos">
+        <MappingFragment StoreEntitySet="insta_post_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+          <ScalarProperty Name="idposttermo" ColumnName="idposttermo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tw_post_termos">
+      <EntityTypeMapping TypeName="zeengModel.tw_post_termos">
+        <MappingFragment StoreEntitySet="tw_post_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+          <ScalarProperty Name="idposttermos" ColumnName="idposttermos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="yt_comentario_termos">
+      <EntityTypeMapping TypeName="zeengModel.yt_comentario_termos">
+        <MappingFragment StoreEntitySet="yt_comentario_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idcomentario" ColumnName="idcomentario" />
+          <ScalarProperty Name="idcomentariotermo" ColumnName="idcomentariotermo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="yt_video_termos">
+      <EntityTypeMapping TypeName="zeengModel.yt_video_termos">
+        <MappingFragment StoreEntitySet="yt_video_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idvideo" ColumnName="idvideo" />
+          <ScalarProperty Name="idvideotermo" ColumnName="idvideotermo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fb_perfis">
+      <EntityTypeMapping TypeName="zeengModel.fb_perfis">
+        <MappingFragment StoreEntitySet="fb_perfis">
+          <ScalarProperty Name="ultimaatualizacao" ColumnName="ultimaatualizacao" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="datahoraultimopost" ColumnName="datahoraultimopost" />
+          <ScalarProperty Name="website" ColumnName="website" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="sobre" ColumnName="sobre" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="idfacebook" ColumnName="idfacebook" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fb_perfis_stats">
+      <EntityTypeMapping TypeName="zeengModel.fb_perfis_stats">
+        <MappingFragment StoreEntitySet="fb_perfis_stats">
+          <ScalarProperty Name="qtdpessoasfalando" ColumnName="qtdpessoasfalando" />
+          <ScalarProperty Name="qtdavaliacoes" ColumnName="qtdavaliacoes" />
+          <ScalarProperty Name="qtdestrelas" ColumnName="qtdestrelas" />
+          <ScalarProperty Name="qtdlikes" ColumnName="qtdlikes" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+          <ScalarProperty Name="idperfilstats" ColumnName="idperfilstats" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fb_posts">
+      <EntityTypeMapping TypeName="zeengModel.fb_posts">
+        <MappingFragment StoreEntitySet="fb_posts">
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="datahoraultimocomentario" ColumnName="datahoraultimocomentario" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="comentarios" ColumnName="comentarios" />
+          <ScalarProperty Name="reacoes" ColumnName="reacoes" />
+          <ScalarProperty Name="compartilhamentos" ColumnName="compartilhamentos" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="postagem" ColumnName="postagem" />
+          <ScalarProperty Name="idfacebook" ColumnName="idfacebook" />
+          <ScalarProperty Name="idperfil" ColumnName="idperfil" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="noticias">
+      <EntityTypeMapping TypeName="zeengModel.noticias">
+        <MappingFragment StoreEntitySet="noticias">
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="linguagem" ColumnName="linguagem" />
+          <ScalarProperty Name="localidade" ColumnName="localidade" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="datacaptura_zeeng" ColumnName="datacaptura_zeeng" />
+          <ScalarProperty Name="datacaptura_knewin" ColumnName="datacaptura_knewin" />
+          <ScalarProperty Name="datapublicacao" ColumnName="datapublicacao" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="conteudo" ColumnName="conteudo" />
+          <ScalarProperty Name="autor" ColumnName="autor" />
+          <ScalarProperty Name="dominio" ColumnName="dominio" />
+          <ScalarProperty Name="subtitulo" ColumnName="subtitulo" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="idnoticia_knewin" ColumnName="idnoticia_knewin" />
+          <ScalarProperty Name="idfonte" ColumnName="idfonte" />
+          <ScalarProperty Name="idnoticia" ColumnName="idnoticia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="noticias_empresa">
+      <EntityTypeMapping TypeName="zeengModel.noticias_empresa">
+        <MappingFragment StoreEntitySet="noticias_empresa">
+          <ScalarProperty Name="idnoticia" ColumnName="idnoticia" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idnoticiaempresa" ColumnName="idnoticiaempresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fontes_noticias">
+      <EntityTypeMapping TypeName="zeengModel.fontes_noticias">
+        <MappingFragment StoreEntitySet="fontes_noticias">
+          <ScalarProperty Name="manual" ColumnName="manual" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="ativo" ColumnName="ativo" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="cidade" ColumnName="cidade" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="pais" ColumnName="pais" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idfonte_knewin" ColumnName="idfonte_knewin" />
+          <ScalarProperty Name="idfonte" ColumnName="idfonte" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="noticia_imagens">
+      <EntityTypeMapping TypeName="zeengModel.noticia_imagens">
+        <MappingFragment StoreEntitySet="noticia_imagens">
+          <ScalarProperty Name="creditos" ColumnName="creditos" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="idnoticia" ColumnName="idnoticia" />
+          <ScalarProperty Name="idimagem" ColumnName="idimagem" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="noticia_termos">
+      <EntityTypeMapping TypeName="zeengModel.noticia_termos">
+        <MappingFragment StoreEntitySet="noticia_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idnoticia" ColumnName="idnoticia" />
+          <ScalarProperty Name="idnoticiatermos" ColumnName="idnoticiatermos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="noticias_marca">
+      <EntityTypeMapping TypeName="zeengModel.noticias_marca">
+        <MappingFragment StoreEntitySet="noticias_marca">
+          <ScalarProperty Name="idnoticia" ColumnName="idnoticia" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="idnoticiamarca" ColumnName="idnoticiamarca" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="noticias_relacionadas">
+      <EntityTypeMapping TypeName="zeengModel.noticias_relacionadas">
+        <MappingFragment StoreEntitySet="noticias_relacionadas">
+          <ScalarProperty Name="idnoticia_rel" ColumnName="idnoticia_rel" />
+          <ScalarProperty Name="idnoticia_princ" ColumnName="idnoticia_princ" />
+          <ScalarProperty Name="idnoticiarelacionadas" ColumnName="idnoticiarelacionadas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tw_mencao_termos">
+      <EntityTypeMapping TypeName="zeengModel.tw_mencao_termos">
+        <MappingFragment StoreEntitySet="tw_mencao_termos">
+          <ScalarProperty Name="frequencia" ColumnName="frequencia" />
+          <ScalarProperty Name="termo" ColumnName="termo" />
+          <ScalarProperty Name="idmencao" ColumnName="idmencao" />
+          <ScalarProperty Name="idmencaotermo" ColumnName="idmencaotermo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="presenca_online_linkadopor">
+      <EntityTypeMapping TypeName="zeengModel.presenca_online_linkadopor">
+        <MappingFragment StoreEntitySet="presenca_online_linkadopor">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="site" ColumnName="site" />
+          <ScalarProperty Name="idcaptura" ColumnName="idcaptura" />
+          <ScalarProperty Name="idlink" ColumnName="idlink" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="presenca_online_palavraspesquisa">
+      <EntityTypeMapping TypeName="zeengModel.presenca_online_palavraspesquisa">
+        <MappingFragment StoreEntitySet="presenca_online_palavraspesquisa">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="percentual" ColumnName="percentual" />
+          <ScalarProperty Name="palavra" ColumnName="palavra" />
+          <ScalarProperty Name="idcaptura" ColumnName="idcaptura" />
+          <ScalarProperty Name="idpalavrapesquisa" ColumnName="idpalavrapesquisa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="yt_canais">
+      <EntityTypeMapping TypeName="zeengModel.yt_canais">
+        <MappingFragment StoreEntitySet="yt_canais">
+          <ScalarProperty Name="datahoraultimovideo" ColumnName="datahoraultimovideo" />
+          <ScalarProperty Name="ultimaatualizacao" ColumnName="ultimaatualizacao" />
+          <ScalarProperty Name="idlistavideos" ColumnName="idlistavideos" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="idyoutube" ColumnName="idyoutube" />
+          <ScalarProperty Name="idmarca" ColumnName="idmarca" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idcanal" ColumnName="idcanal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="yt_videos">
+      <EntityTypeMapping TypeName="zeengModel.yt_videos">
+        <MappingFragment StoreEntitySet="yt_videos">
+          <ScalarProperty Name="datahoraultimocomentario" ColumnName="datahoraultimocomentario" />
+          <ScalarProperty Name="termoscapturados" ColumnName="termoscapturados" />
+          <ScalarProperty Name="nomeimagem" ColumnName="nomeimagem" />
+          <ScalarProperty Name="urlimagem" ColumnName="urlimagem" />
+          <ScalarProperty Name="qtdcomentarios" ColumnName="qtdcomentarios" />
+          <ScalarProperty Name="qtdfavoritados" ColumnName="qtdfavoritados" />
+          <ScalarProperty Name="qtddescurtidas" ColumnName="qtddescurtidas" />
+          <ScalarProperty Name="qtdcurtidas" ColumnName="qtdcurtidas" />
+          <ScalarProperty Name="qtdvisualizacoes" ColumnName="qtdvisualizacoes" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="titulo" ColumnName="titulo" />
+          <ScalarProperty Name="idyoutube" ColumnName="idyoutube" />
+          <ScalarProperty Name="idcanal" ColumnName="idcanal" />
+          <ScalarProperty Name="idvideo" ColumnName="idvideo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="presenca_online_capturas">
+      <EntityTypeMapping TypeName="zeengModel.presenca_online_capturas">
+        <MappingFragment StoreEntitySet="presenca_online_capturas">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="audi_trabalho" ColumnName="audi_trabalho" />
+          <ScalarProperty Name="audi_escola" ColumnName="audi_escola" />
+          <ScalarProperty Name="audi_casa" ColumnName="audi_casa" />
+          <ScalarProperty Name="audi_faculdade" ColumnName="audi_faculdade" />
+          <ScalarProperty Name="audi_posgraduacao" ColumnName="audi_posgraduacao" />
+          <ScalarProperty Name="audi_algumafaculdade" ColumnName="audi_algumafaculdade" />
+          <ScalarProperty Name="audi_semfaculdade" ColumnName="audi_semfaculdade" />
+          <ScalarProperty Name="audi_masculino" ColumnName="audi_masculino" />
+          <ScalarProperty Name="audi_feminino" ColumnName="audi_feminino" />
+          <ScalarProperty Name="tempovisita" ColumnName="tempovisita" />
+          <ScalarProperty Name="paginasvisitadas" ColumnName="paginasvisitadas" />
+          <ScalarProperty Name="novoslinks" ColumnName="novoslinks" />
+          <ScalarProperty Name="links" ColumnName="links" />
+          <ScalarProperty Name="pontuacaospam" ColumnName="pontuacaospam" />
+          <ScalarProperty Name="taxarejeicao" ColumnName="taxarejeicao" />
+          <ScalarProperty Name="visitaspesquisa" ColumnName="visitaspesquisa" />
+          <ScalarProperty Name="autoridadepagina" ColumnName="autoridadepagina" />
+          <ScalarProperty Name="autoridadedominio" ColumnName="autoridadedominio" />
+          <ScalarProperty Name="rankglobal" ColumnName="rankglobal" />
+          <ScalarProperty Name="rankbrasil" ColumnName="rankbrasil" />
+          <ScalarProperty Name="datacaptura" ColumnName="datacaptura" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idcaptura" ColumnName="idcaptura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_setores_proc">
+      <EntityTypeMapping TypeName="zeengModel.seae_setores_proc">
+        <MappingFragment StoreEntitySet="seae_setores_proc">
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="codsetor" ColumnName="codsetor" />
+          <ScalarProperty Name="idsetor" ColumnName="idsetor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="municipios">
+      <EntityTypeMapping TypeName="zeengModel.municipios">
+        <MappingFragment StoreEntitySet="municipios">
+          <ScalarProperty Name="atualizado" ColumnName="atualizado" />
+          <ScalarProperty Name="codibge" ColumnName="codibge" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idestado" ColumnName="idestado" />
+          <ScalarProperty Name="idmunicipio" ColumnName="idmunicipio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_abrang_estado">
+      <EntityTypeMapping TypeName="zeengModel.seae_abrang_estado">
+        <MappingFragment StoreEntitySet="seae_abrang_estado">
+          <ScalarProperty Name="idestado" ColumnName="idestado" />
+          <ScalarProperty Name="idprocesso" ColumnName="idprocesso" />
+          <ScalarProperty Name="idabrangestado" ColumnName="idabrangestado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_abrang_municipio">
+      <EntityTypeMapping TypeName="zeengModel.seae_abrang_municipio">
+        <MappingFragment StoreEntitySet="seae_abrang_municipio">
+          <ScalarProperty Name="idmunicipio" ColumnName="idmunicipio" />
+          <ScalarProperty Name="idprocesso" ColumnName="idprocesso" />
+          <ScalarProperty Name="idabrangmunicipio" ColumnName="idabrangmunicipio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_arquivos_proc">
+      <EntityTypeMapping TypeName="zeengModel.seae_arquivos_proc">
+        <MappingFragment StoreEntitySet="seae_arquivos_proc">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="textoarquivo" ColumnName="textoarquivo" />
+          <ScalarProperty Name="nomearquivo" ColumnName="nomearquivo" />
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="situacao" ColumnName="situacao" />
+          <ScalarProperty Name="coordenacao" ColumnName="coordenacao" />
+          <ScalarProperty Name="numdoc" ColumnName="numdoc" />
+          <ScalarProperty Name="idprocesso" ColumnName="idprocesso" />
+          <ScalarProperty Name="idarquivo" ColumnName="idarquivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_empresa_processos">
+      <EntityTypeMapping TypeName="zeengModel.seae_empresa_processos">
+        <MappingFragment StoreEntitySet="seae_empresa_processos">
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idprocesso" ColumnName="idprocesso" />
+          <ScalarProperty Name="idempresaprocesso" ColumnName="idempresaprocesso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_mov_situacao">
+      <EntityTypeMapping TypeName="zeengModel.seae_mov_situacao">
+        <MappingFragment StoreEntitySet="seae_mov_situacao">
+          <ScalarProperty Name="dtsituacao" ColumnName="dtsituacao" />
+          <ScalarProperty Name="idsituacao" ColumnName="idsituacao" />
+          <ScalarProperty Name="idprocesso" ColumnName="idprocesso" />
+          <ScalarProperty Name="idmovsituacao" ColumnName="idmovsituacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_processo_setor">
+      <EntityTypeMapping TypeName="zeengModel.seae_processo_setor">
+        <MappingFragment StoreEntitySet="seae_processo_setor">
+          <ScalarProperty Name="idsubsetor" ColumnName="idsubsetor" />
+          <ScalarProperty Name="idsetor" ColumnName="idsetor" />
+          <ScalarProperty Name="idprocesso" ColumnName="idprocesso" />
+          <ScalarProperty Name="idprocessosetor" ColumnName="idprocessosetor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_processo_solicitantes">
+      <EntityTypeMapping TypeName="zeengModel.seae_processo_solicitantes">
+        <MappingFragment StoreEntitySet="seae_processo_solicitantes">
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="solicitante" ColumnName="solicitante" />
+          <ScalarProperty Name="idprocesso" ColumnName="idprocesso" />
+          <ScalarProperty Name="idsolicitante" ColumnName="idsolicitante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_processos">
+      <EntityTypeMapping TypeName="zeengModel.seae_processos">
+        <MappingFragment StoreEntitySet="seae_processos">
+          <ScalarProperty Name="dadosExtraidos" ColumnName="dadosExtraidos" />
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="atualizarElastic" ColumnName="atualizarElastic" />
+          <ScalarProperty Name="comoparticipar" ColumnName="comoparticipar" />
+          <ScalarProperty Name="resumo" ColumnName="resumo" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="numdocs" ColumnName="numdocs" />
+          <ScalarProperty Name="abrangencia_nacional" ColumnName="abrangencia_nacional" />
+          <ScalarProperty Name="formacontemplacao" ColumnName="formacontemplacao" />
+          <ScalarProperty Name="modalidade" ColumnName="modalidade" />
+          <ScalarProperty Name="valortotalpremios" ColumnName="valortotalpremios" />
+          <ScalarProperty Name="premios" ColumnName="premios" />
+          <ScalarProperty Name="interessados" ColumnName="interessados" />
+          <ScalarProperty Name="dtvigenciafim" ColumnName="dtvigenciafim" />
+          <ScalarProperty Name="dtvigenciaini" ColumnName="dtvigenciaini" />
+          <ScalarProperty Name="dtprocesso" ColumnName="dtprocesso" />
+          <ScalarProperty Name="numprocesso" ColumnName="numprocesso" />
+          <ScalarProperty Name="idprocesso" ColumnName="idprocesso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_situacoes">
+      <EntityTypeMapping TypeName="zeengModel.seae_situacoes">
+        <MappingFragment StoreEntitySet="seae_situacoes">
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="idsituacao" ColumnName="idsituacao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seae_subsetores_proc">
+      <EntityTypeMapping TypeName="zeengModel.seae_subsetores_proc">
+        <MappingFragment StoreEntitySet="seae_subsetores_proc">
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="codsubsetor" ColumnName="codsubsetor" />
+          <ScalarProperty Name="idsetor" ColumnName="idsetor" />
+          <ScalarProperty Name="idsubsetor" ColumnName="idsubsetor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_registro_empresa">
+      <EntityTypeMapping TypeName="zeengModel.mapa_registro_empresa">
+        <MappingFragment StoreEntitySet="mapa_registro_empresa">
+          <ScalarProperty Name="dataregistro" ColumnName="dataregistro" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idregistro" ColumnName="idregistro" />
+          <ScalarProperty Name="idregistroempresa" ColumnName="idregistroempresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mapa_registros">
+      <EntityTypeMapping TypeName="zeengModel.mapa_registros">
+        <MappingFragment StoreEntitySet="mapa_registros">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="modoaplicacao" ColumnName="modoaplicacao" />
+          <ScalarProperty Name="numregistro" ColumnName="numregistro" />
+          <ScalarProperty Name="dataconcessao" ColumnName="dataconcessao" />
+          <ScalarProperty Name="nomeProduto" ColumnName="nomeProduto" />
+          <ScalarProperty Name="nomeMarca" ColumnName="nomeMarca" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="idorigem" ColumnName="idorigem" />
+          <ScalarProperty Name="idcomplemento" ColumnName="idcomplemento" />
+          <ScalarProperty Name="idatributo" ColumnName="idatributo" />
+          <ScalarProperty Name="idcaracteristica" ColumnName="idcaracteristica" />
+          <ScalarProperty Name="idbase" ColumnName="idbase" />
+          <ScalarProperty Name="idsubespecie" ColumnName="idsubespecie" />
+          <ScalarProperty Name="idespecie" ColumnName="idespecie" />
+          <ScalarProperty Name="idarea" ColumnName="idarea" />
+          <ScalarProperty Name="idestado" ColumnName="idestado" />
+          <ScalarProperty Name="idregistro" ColumnName="idregistro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="logs">
+      <EntityTypeMapping TypeName="zeengModel.logs">
+        <MappingFragment StoreEntitySet="logs">
+          <ScalarProperty Name="nivel" ColumnName="nivel" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="acao" ColumnName="acao" />
+          <ScalarProperty Name="controle" ColumnName="controle" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+          <ScalarProperty Name="idlogs" ColumnName="idlogs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_arquivos">
+      <EntityTypeMapping TypeName="zeengModel.promo_arquivos">
+        <MappingFragment StoreEntitySet="promo_arquivos">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="conteudo" ColumnName="conteudo" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idpromoarquivo" ColumnName="idpromoarquivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_estadosabrangencia">
+      <EntityTypeMapping TypeName="zeengModel.promo_estadosabrangencia">
+        <MappingFragment StoreEntitySet="promo_estadosabrangencia">
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idestado" ColumnName="idestado" />
+          <ScalarProperty Name="idestadoabrangencia" ColumnName="idestadoabrangencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_fb_posts">
+      <EntityTypeMapping TypeName="zeengModel.promo_fb_posts">
+        <MappingFragment StoreEntitySet="promo_fb_posts">
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+          <ScalarProperty Name="idpromofbpost" ColumnName="idpromofbpost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_insta_posts">
+      <EntityTypeMapping TypeName="zeengModel.promo_insta_posts">
+        <MappingFragment StoreEntitySet="promo_insta_posts">
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+          <ScalarProperty Name="idpromoinstapost" ColumnName="idpromoinstapost" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_modalidades">
+      <EntityTypeMapping TypeName="zeengModel.promo_modalidades">
+        <MappingFragment StoreEntitySet="promo_modalidades">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idpromomodalidade" ColumnName="idpromomodalidade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_municipiosabrangencia">
+      <EntityTypeMapping TypeName="zeengModel.promo_municipiosabrangencia">
+        <MappingFragment StoreEntitySet="promo_municipiosabrangencia">
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idmunicipio" ColumnName="idmunicipio" />
+          <ScalarProperty Name="idmunicipiosabrangencia" ColumnName="idmunicipiosabrangencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_orgaosreguladores">
+      <EntityTypeMapping TypeName="zeengModel.promo_orgaosreguladores">
+        <MappingFragment StoreEntitySet="promo_orgaosreguladores">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idorgao" ColumnName="idorgao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_promocoes">
+      <EntityTypeMapping TypeName="zeengModel.promo_promocoes">
+        <MappingFragment StoreEntitySet="promo_promocoes">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="textoregulamento" ColumnName="textoregulamento" />
+          <ScalarProperty Name="linkregulamento" ColumnName="linkregulamento" />
+          <ScalarProperty Name="premiospromo" ColumnName="premiospromo" />
+          <ScalarProperty Name="produtosparticipantes" ColumnName="produtosparticipantes" />
+          <ScalarProperty Name="mecanicapromo" ColumnName="mecanicapromo" />
+          <ScalarProperty Name="linkyoutube" ColumnName="linkyoutube" />
+          <ScalarProperty Name="linktwitter" ColumnName="linktwitter" />
+          <ScalarProperty Name="linkinstagram" ColumnName="linkinstagram" />
+          <ScalarProperty Name="linkfacebook" ColumnName="linkfacebook" />
+          <ScalarProperty Name="linksitepromocao" ColumnName="linksitepromocao" />
+          <ScalarProperty Name="valorpremios" ColumnName="valorpremios" />
+          <ScalarProperty Name="dtvigenciafim" ColumnName="dtvigenciafim" />
+          <ScalarProperty Name="dtvigenciaini" ColumnName="dtvigenciaini" />
+          <ScalarProperty Name="dtcadastro" ColumnName="dtcadastro" />
+          <ScalarProperty Name="abrangencianacional" ColumnName="abrangencianacional" />
+          <ScalarProperty Name="outrosinteressados" ColumnName="outrosinteressados" />
+          <ScalarProperty Name="certificadoautorizacao" ColumnName="certificadoautorizacao" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idmodalidade" ColumnName="idmodalidade" />
+          <ScalarProperty Name="idorgaoregulador" ColumnName="idorgaoregulador" />
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_promoempresas">
+      <EntityTypeMapping TypeName="zeengModel.promo_promoempresas">
+        <MappingFragment StoreEntitySet="promo_promoempresas">
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idpromoempresas" ColumnName="idpromoempresas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_promonoticias">
+      <EntityTypeMapping TypeName="zeengModel.promo_promonoticias">
+        <MappingFragment StoreEntitySet="promo_promonoticias">
+          <ScalarProperty Name="idnoticia" ColumnName="idnoticia" />
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idpromonoticias" ColumnName="idpromonoticias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_regulamentoarquivos">
+      <EntityTypeMapping TypeName="zeengModel.promo_regulamentoarquivos">
+        <MappingFragment StoreEntitySet="promo_regulamentoarquivos">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idregulamentoarquivos" ColumnName="idregulamentoarquivos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_tw_posts">
+      <EntityTypeMapping TypeName="zeengModel.promo_tw_posts">
+        <MappingFragment StoreEntitySet="promo_tw_posts">
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idpost" ColumnName="idpost" />
+          <ScalarProperty Name="idpromotwposts" ColumnName="idpromotwposts" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promo_yt_videos">
+      <EntityTypeMapping TypeName="zeengModel.promo_yt_videos">
+        <MappingFragment StoreEntitySet="promo_yt_videos">
+          <ScalarProperty Name="idpromocao" ColumnName="idpromocao" />
+          <ScalarProperty Name="idvideo" ColumnName="idvideo" />
+          <ScalarProperty Name="idpromoytvideos" ColumnName="idpromoytvideos" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cliente_empresas">
+      <EntityTypeMapping TypeName="zeengModel.cliente_empresas">
+        <MappingFragment StoreEntitySet="cliente_empresas">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="dtcadastro" ColumnName="dtcadastro" />
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idcliente" ColumnName="idcliente" />
+          <ScalarProperty Name="idclienteempresa" ColumnName="idclienteempresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cliente_vertentes">
+      <EntityTypeMapping TypeName="zeengModel.cliente_vertentes">
+        <MappingFragment StoreEntitySet="cliente_vertentes">
+          <ScalarProperty Name="promocoes" ColumnName="promocoes" />
+          <ScalarProperty Name="produtos" ColumnName="produtos" />
+          <ScalarProperty Name="noticias" ColumnName="noticias" />
+          <ScalarProperty Name="presencaonline" ColumnName="presencaonline" />
+          <ScalarProperty Name="redessociais" ColumnName="redessociais" />
+          <ScalarProperty Name="idcliente" ColumnName="idcliente" />
+          <ScalarProperty Name="idclientevertente" ColumnName="idclientevertente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clientes">
+      <EntityTypeMapping TypeName="zeengModel.clientes">
+        <MappingFragment StoreEntitySet="clientes">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="qtdempresas" ColumnName="qtdempresas" />
+          <ScalarProperty Name="dtexpiracaolicenca" ColumnName="dtexpiracaolicenca" />
+          <ScalarProperty Name="vertodasempresas" ColumnName="vertodasempresas" />
+          <ScalarProperty Name="inscmunicial" ColumnName="inscmunicial" />
+          <ScalarProperty Name="inscestadual" ColumnName="inscestadual" />
+          <ScalarProperty Name="cep" ColumnName="cep" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+          <ScalarProperty Name="nomecontato" ColumnName="nomecontato" />
+          <ScalarProperty Name="celular" ColumnName="celular" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="cidade" ColumnName="cidade" />
+          <ScalarProperty Name="endereco" ColumnName="endereco" />
+          <ScalarProperty Name="site" ColumnName="site" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idestado" ColumnName="idestado" />
+          <ScalarProperty Name="idclientes" ColumnName="idclientes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cliente_relatorios">
+      <EntityTypeMapping TypeName="zeengModel.cliente_relatorios">
+        <MappingFragment StoreEntitySet="cliente_relatorios">
+          <ScalarProperty Name="excluido" ColumnName="excluido" />
+          <ScalarProperty Name="datafim" ColumnName="datafim" />
+          <ScalarProperty Name="dataini" ColumnName="dataini" />
+          <ScalarProperty Name="datahora" ColumnName="datahora" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idusuario" ColumnName="idusuario" />
+          <ScalarProperty Name="idcliente" ColumnName="idcliente" />
+          <ScalarProperty Name="idclienterelatorio" ColumnName="idclienterelatorio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cliente_relatorio_empresas">
+      <EntityTypeMapping TypeName="zeengModel.cliente_relatorio_empresas">
+        <MappingFragment StoreEntitySet="cliente_relatorio_empresas">
+          <ScalarProperty Name="idempresa" ColumnName="idempresa" />
+          <ScalarProperty Name="idclienterelatorio" ColumnName="idclienterelatorio" />
+          <ScalarProperty Name="idclienterelatorioempresa" ColumnName="idclienterelatorioempresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cliente_relatorio_metricas">
+      <EntityTypeMapping TypeName="zeengModel.cliente_relatorio_metricas">
+        <MappingFragment StoreEntitySet="cliente_relatorio_metricas">
+          <ScalarProperty Name="campo" ColumnName="campo" />
+          <ScalarProperty Name="idclienterelatorio" ColumnName="idclienterelatorio" />
+          <ScalarProperty Name="idclienterelatoriometricas" ColumnName="idclienterelatoriometricas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

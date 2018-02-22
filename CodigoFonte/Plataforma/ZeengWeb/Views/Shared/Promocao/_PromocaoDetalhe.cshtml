@@ -1,0 +1,539 @@
+﻿@using ZeengWeb.Utils
+
+@model ZeengWeb.ViewModel.Empresa.EmpresaPromoDetralhes
+@{
+    ViewBag.Title = "PromocaoDetalhe";
+}
+<div class="ibox float-e-margins m-b-sm border-bottom">
+
+    <div class="row">
+
+        <div class="ibox-content col-md-12">
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-12 espacotexto">
+                        <label>Abrangência</label><br>
+                        @{
+
+                            if (Model.promocao.Abrangecia != null)
+                            {
+                                if (Model.promocao.Abrangecia.Nacional == true)
+                                {
+                                    @Html.Raw("Nacional")
+                                }
+                            }
+                            else
+                            {
+                                @Html.Raw("Não tem abrangência nacional.")
+
+                            }
+                        }
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 espacotexto">
+                        <label>Estados participantes</label><br>
+                        @{
+                            if (Model.promocao.Abrangecia != null && Model.promocao.Abrangecia.Estados.Count > 0)
+                            {
+
+                                @String.Join(", ", Model.promocao.Abrangecia.Estados.Select(s => s.UF).ToArray())
+
+                            }
+                            else
+                            {
+                                @Html.Raw("Nã há informação dos estados participantes.")
+
+
+                            }
+                        }
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 espacotexto">
+                        <label>Municipios participantes</label><br>
+
+                        @{
+                            if (Model.promocao.Abrangecia != null && Model.promocao.Abrangecia.Municipios.Count > 0)
+                            {
+
+                                @String.Join(", ", Model.promocao.Abrangecia.Municipios.Select(s => String.Concat(s.Nome, "/", s.UF)).ToArray())
+
+
+                            }
+                            else
+                            {
+                                @Html.Raw("Nã há informação dos municipios participantes.")
+
+
+                            }
+                        }
+
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12 espacotexto">
+                        <label>Outros interessados</label><br>
+
+                        @{
+                            if (Model.promocao.OutrosInteressados != null)
+                            {
+
+                                @Html.Raw(Model.promocao.OutrosInteressados.Replace("\n", "<br>"))
+
+
+                            }
+                            else
+                            {
+                                @Html.Raw("Nã há informação nos interessados.")
+
+
+
+                            }
+                        }
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12 espacotexto">
+                        <label>Orgão regulador</label><br>
+                        @{
+
+                            if (Model.promocao.NomeOrgaoRegulador != null)
+                            {
+
+                                @Model.promocao.NomeOrgaoRegulador
+
+
+
+                            }
+                            else
+                            {
+                                @Html.Raw("Nã há informação do orgão regulador.")
+
+
+
+                            }
+
+
+
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 espacotexto">
+                        <label>Número do registro</label><br>
+
+                        @{
+
+                            if (Model.promocao.CertificadoAutorizacao != null)
+                            {
+
+                                @Model.promocao.CertificadoAutorizacao
+
+
+                            }
+                            else
+                            {
+                                @Html.Raw("Nã há informação do número do registro.")
+
+
+                            }
+
+
+
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <h4>Redes Sociais</h4>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @{
+
+                            if (Model.promocao.LinkFacebook != null)
+                            {
+                                string linkface = Model.promocao.LinkFacebook.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0];
+
+                                <p><i class="fa fa-facebook-official fa-2x" style="padding-right: 7px;"></i><a class="iconesRedeSocial" href="@String.Concat("http://", linkface)"> @Html.Raw(linkface)</a></p>
+                            }
+                            else
+                            {
+                                <p title="Facebook">
+                                    <i class="fa fa-facebook-official fa-2x" style="padding-right: 7px;"></i>Não há promoção associada
+                                </p>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @{
+
+                            if (Model.promocao.LinkInstagram != null)
+                            {
+                                string linkinsta = Model.promocao.LinkInstagram.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0];
+
+                                <p><i class="fa fa-instagram fa-2x" style="padding-right: 7px;"></i><a class="iconesRedeSocial" href="@String.Concat("http://", linkinsta)"> @Html.Raw(linkinsta)</a></p>
+                            }
+                            else
+                            {
+                                <p title="Instagram"><i class="fa fa-instagram fa-2x" style="padding-right: 7px;"></i>Não há promoção associada</p>
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @{
+
+                            if (Model.promocao.LinkTwitter != null)
+                            {
+                                string linktwitter = Model.promocao.LinkTwitter.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0];
+
+                                <p><i class="fa fa-twitter fa-2x" style="padding-right: 7px;"></i><a class="iconesRedeSocial" href="@String.Concat("http://", linktwitter)"> @Html.Raw(linktwitter)</a></p>
+                            }
+                            else
+                            {
+                                <p title="Twitter"><i class="fa fa-twitter fa-2x" style="padding-right: 7px;"></i>Não há promoção associada</p>
+                            }
+
+                        }
+
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        @{
+
+                            if (Model.promocao.LinkYoutube != null)
+                            {
+                                string linkyt = Model.promocao.LinkYoutube.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0];
+                                <p><i class="fa fa-youtube-play fa-2x" style="padding-right: 7px;"></i><a class="iconesRedeSocial" href="@String.Concat("http://", linkyt)">@Html> @Html.Raw(linkyt)</a></p>
+                            }
+                            else
+                            {
+                                <p title="Youtube"><i class="fa fa-youtube-play fa-2x" style="padding-right: 7px;"></i>Não há promoção associada</p>
+                            }
+                        }
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        @{
+                            if (Model.promocao.LinkRegulamento != null)
+                            {
+
+                                <p><i class="fa fa-link fa-2x" style="padding-right: 7px;"></i><a class="iconesRedeSocial" href="@Model.promocao.LinkRegulamento">@Model.promocao.LinkRegulamento.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0]</a></p>
+
+                            }
+                            else
+                            {
+
+
+                                <p><i class="fa fa-link fa-2x" style="padding-right: 7px;"></i>Não há o link do regulamento</p>
+
+                            }
+                        }
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+                <h4>Imagens</h4>
+
+                <div class="ibox-content">
+                    <div class="lightBoxGallery" style="height: 300px; overflow-y: scroll;">
+
+                        <div id="links">
+                            @{
+                                if (Model.promocao.arquivosregulamento != null && Model.promocao.arquivosregulamento.Count > 0)
+                                {
+                                    foreach (var imagem in Model.promocao.arquivosregulamento)
+                                    {
+                                        if (imagem.Tipo == "Imagem")
+                                        {
+                                            @*<a href="@imagem.Url" title="@imagem.Nome" data-description="" data-gallery=""><img src="@imagem.Url" width="80" height="80"></a>*@
+                                            <img src="@(Configuracoes.DiretorioImagens + "/promocoes/" + @imagem.NomeArquivo)" width="80" height="80">
+                                        }
+                                    }
+                                }
+
+                                if (Model.promocao.arquivosrelacionados != null && Model.promocao.arquivosrelacionados.Count > 0)
+                                {
+                                    foreach (var imagem in Model.promocao.arquivosrelacionados)
+                                    {
+                                        if (imagem.Tipo == "Imagem")
+                                        {
+                                            @*<a href="@imagem.Url" title="@imagem.Nome" data-description="" data-gallery=""><img src="@imagem.Url" width="80" height="80"></a>*@
+                                            <img src="@(Configuracoes.DiretorioImagens + "/promocoes/" + @imagem.NomeArquivo)" width="80" height="80">
+                                        }
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 timeline-itemdetalhe">
+            <div class="ibox-title">
+                <h5>Mecânica da promoção</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link" style="pointer-events: none;">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                @{
+                    if (Model.promocao.Mecanica != null)
+                    {
+                        @Html.Raw(Model.promocao.Mecanica.Replace("\n", "<br>"))
+                    }
+                    else
+                    {
+                        @Html.Raw("Não há informação da mecânica")
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="col-md-12 timeline-itemdetalhe">
+            <div class="ibox-title">
+                <h5>Produtos da promoção</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link" style="pointer-events: none;">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                @{
+                    if (Model.promocao.ProdutosParticipantes != null)
+                    {
+
+                        @Html.Raw(Model.promocao.ProdutosParticipantes.Replace("\n", "<br>"))
+
+                    }
+                    else
+                    {
+                        @Html.Raw("Não há informação dos produtos")
+                    }
+
+                }
+
+            </div>
+        </div>
+        <div class="col-md-12 timeline-itemdetalhe">
+            <div class="ibox-title">
+                <h5>Prêmios</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link" style="pointer-events: none;">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                @{
+                    if (Model.promocao.Premios != null)
+                    {
+
+                        @Html.Raw(Model.promocao.Premios.Replace("\n", "<br>"))
+
+                    }
+                    else
+                    {
+                        @Html.Raw("Não há informação dos premios")
+                    }
+
+                }
+
+            </div>
+        </div>
+
+        <div class="col-md-12 timeline-itemdetalhe">
+
+            <div class="ibox-title">
+                <h5>Regulamento</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link" style="pointer-events: none;">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-12 ibox-content">
+
+                @{
+                    if (Model.promocao.LinkRegulamento != null)
+                    {
+
+                        <p><i class="fa fa-link fa-2x" style="padding-right: 7px;"></i><a class="iconesRedeSocial" href="@Model.promocao.LinkRegulamento">@Model.promocao.LinkRegulamento.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('?')[0]</a></p>
+
+                    }
+                    else
+                    {
+
+
+                        <p><i class="fa fa-link fa-2x" style="padding-right: 7px;"></i>Não há o link do regulamento</p>
+
+                    }
+                }
+
+                <div class="col-md-6 fa-border" style="margin-top: 15px;">
+
+                    <div class="text-box">
+                        <div>
+                            <h3>Texto do regulamento</h3>
+                        </div>
+
+                        @{
+                            if (Model.promocao.TextoRegulamento != null)
+                            {
+
+                                @Html.Raw(Model.promocao.TextoRegulamento.Replace("\n", "<br>"))
+
+                            }
+                            else
+                            {
+                                @Html.Raw("Não há informação do regulamento.")
+                            }
+
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="margin-top: 15px;">
+                    <table class="table table-bordered table-hover" style="margin-left: 12px;">
+                        <thead>
+                            <tr>
+                                <th>Arquivo</th>
+                                <th>Download</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+
+                                if (Model.promocao.arquivosregulamento != null)
+                                {
+                                    foreach (var imagem in Model.promocao.arquivosregulamento)
+                                    {
+
+                                        <tr>
+                                            <td>@imagem.NomeArquivo</td>
+                                            <td><a href="@(Configuracoes.DiretorioImagens + "/promocoes/" + @imagem.NomeArquivo)" target="_blank"><div class="fa fa-download" style="color:gray;"></div></a></td>
+                                        </tr>
+
+                                    }
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 timeline-itemdetalhe">
+
+            <div class="ibox-title">
+                <h5>Arquivos Relacionados</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link" style="pointer-events: none;">
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-12 ibox-content">
+
+                <table class="table table-bordered table-hover" style="margin-left: 12px;">
+                    <thead>
+                        <tr>
+                            <th>Arquivo</th>
+                            <th>Tipo</th>
+                            <th>Download</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+
+                            if (Model.promocao.arquivosrelacionados != null)
+                            {
+                                foreach (var imagem in Model.promocao.arquivosrelacionados)
+                                {
+
+                                    <tr>
+                                        <td>@imagem.NomeArquivo</td>
+                                        <td>@imagem.Tipo</td>
+
+                                        @{
+
+                                            if (imagem.Tipo == "Link")
+                                            {
+
+                                                <td><a href="@imagem.Url" target="_blank"><div class="fa fa-download" style="color:gray;"></div></a></td>
+
+                                            }
+                                            else
+                                            {
+
+                                                <td><a href="@(Configuracoes.DiretorioImagens + "/promocoes/" + @imagem.NomeArquivo)" target="_blank"><div class="fa fa-download" style="color:gray;"></div></a></td>
+
+                                            }
+
+                                        }
+
+
+                                    </tr>
+
+                                                }
+                                            }
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>

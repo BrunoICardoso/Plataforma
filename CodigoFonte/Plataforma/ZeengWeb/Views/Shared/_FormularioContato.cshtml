@@ -1,0 +1,460 @@
+﻿@using ZeengWeb.Utils
+
+<style>
+    .formulario-outer {
+        pointer-events: none;
+        background-color: yellow;
+        position: absolute;
+        z-index: 99999;
+        top: 25%;
+        right: 0;
+        float: right;
+        padding: 0;
+        overflow: hidden;
+        background-color: transparent;
+        width: 460px;
+        margin-right: -235px;
+        -moz-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+        display: normal;
+    }
+
+    .form-to-right {
+        pointer-events: none;
+        position: absolute;
+        z-index: 99999;
+        top: 25%;
+        right: 0;
+        float: right;
+        padding: 0;
+        overflow: hidden;
+        background-color: transparent;
+        width: 460px;
+        margin-right: 0;
+        -moz-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+        display: normal;
+    }
+
+    @@media (max-width: 1000px) {
+        .formulario-outer {
+            display: none;
+        }
+    }
+
+    .toggle-formulario {
+        pointer-events: visiblePainted;
+        background: #1ab394;
+        padding: 7px 10px 7px 9px;
+        border-radius: 20px 0 0 20px;
+        font-size: 16px;
+        top: 0;
+        left: 0;
+        width: 40px;
+        color: #fff;
+        cursor: pointer;
+        background-image: url("/Images/support.png");
+        background-repeat: no-repeat;
+        background-position: 9px 7px;
+        height: 39px;
+        width: 40px;
+    }
+
+
+    .formulario-inner {
+        pointer-events: visiblePainted;
+        background-color: #efefef;
+        display: block;
+        padding-right: 0;
+        padding-left: 0;
+        float: right;
+    }
+
+        .formulario-inner .fileinput-filename {
+            white-space: nowrap;
+            width: 61px;
+            text-overflow: ellipsis;
+        }
+
+    .formulario-titulo {
+        margin-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+        .formulario-titulo p {
+            font-size: 9pt;
+        }
+
+    .btn-primary {
+        width: 100%;
+        border-radius: 0px;
+    }
+
+    .fileinput-new {
+        font-size: 7pt;
+        font-weight: bold;
+    }
+
+    .alert-success {
+        background-color: #1ab394;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .loadingEmail {
+        display: none;
+        color: black;
+    }
+
+    .box-formulario-outer {
+        background-color: transparent;
+        width: 190px;
+        height: 190px;
+        margin: 0;
+        padding: 0;
+        margin-top: 35px;
+    }
+
+    .box-formulario {
+        pointer-events: visiblePainted;
+        background-image: url("/Images/box.png");
+        background-repeat: no-repeat;
+        background-position: right top;
+        line-height: 15px;
+        width: 100%;
+        height: 100%;
+        text-align: justify;
+        font-size: 9pt;
+        padding-top: 55px;
+        padding-right: 20px;
+        padding-left: 25px;
+        -webkit-user-select: none; /* Chrome all / Safari all */
+        -moz-user-select: none; /* Firefox all */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none;
+        display: none;
+    }
+
+    .restricaoArquivo p {
+        padding-left: 16px;
+        text-align: justify;
+        font-size: 8pt;
+        margin-top: -10px;
+        padding-top: 0;
+    }
+
+    .aNaoExibirMais {
+        float: right;
+        color: #ED5565;
+    }
+</style>
+
+<link href="~/Content/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet" />
+
+<div id="formularioOuter" class="formulario-outer col-md-12">
+
+    <div class="col-md-4 box-formulario-outer">
+        <div class="box-formulario">
+            <p>
+                Em caso de dúvidas e/ou sugestões, entre em contato conosco através do formulário. Será um prazer atendê-lo.
+            </p>
+            <a href="#" class="aNaoExibirMais" id="btnBoxNaoExibirMais">Não exibir mais</a>
+        </div>
+    </div>
+
+    <div class="col-md-1 toggle-formulario-outer" style="padding-left:0;">
+        <div class="toggle-formulario">
+            @*<img src="~/Images/support.png" alt="Smiley face" height="20px" width="20px">*@
+        </div>
+    </div>
+
+    <div class="formulario-inner col-md-6">
+
+        <div class="text-center formulario-titulo">
+            <h3>CONTATO</h3>
+            <p>Está com dúvida? Preencha o formulário abaixo e nós ajudaremos.</p>
+        </div>
+
+        <div class="form-group" style="padding:10px; margin-bottom: 0;">
+
+            <label class="col-lg-2 control-label" style="padding-left: 0;">Assunto</label>
+            <select class="form-control m-b" name="assunto" id="cmbAssunto">
+                <option value="0" disabled selected>Selecione um assunto</option>
+                <option>Dúvida técnica</option>
+                <option>Problema na Plataforma</option>
+                <option>Insight para Plataforma</option>
+                <option>Outros</option>
+            </select>
+            <textarea class="form-control" rows="5" id="txtMensagem" placeholder="Mensagem" style="margin-top:10px;"></textarea>
+        </div>
+
+        <div>
+            <input type="hidden" id="nomeUsuario" value="@Configuracoes.NomeUsuarioLogado" />
+            <input type="hidden" id="emailUsuario" value="@Configuracoes.emailUsuarioLogado" />
+            <input type="hidden" id="idUsuario" value="@Configuracoes.idUsuarioLogado" />
+            <input type="hidden" id="urlAtual" value="@Configuracoes.retornaUrlAtual" />
+
+        </div>
+
+        <div class="fileinput fileinput-new input-group" data-provides="fileinput" style="padding:10px; padding-top:0; margin-top:0;">
+            <div class="form-control" data-trigger="fileinput">
+                <span class="fileinput-filename"></span>
+            </div>
+            <span class="input-group-addon btn btn-default btn-file">
+                <span class="fileinput-new">Selecione um arquivo</span>
+                <span class="fileinput-exists"><i class="glyphicon glyphicon-file fileinput-exists"></i></span>
+                <input type="file" id="arquivosEmail" name="arquivosEmail"/>
+            </span>
+            <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remover</a>
+        </div>
+
+        <div class="restricaoArquivo">
+            <p>
+                * .doc, .png, .jpg, .doc ou .pdf<br />
+                tamanho máximo 5MB.
+            </p>
+        </div>
+
+        <div id="msgEnviada"></div>
+
+        <button type="button" class="btn btn-primary" onclick="enviarEmail()">
+
+            <span id="txtEnviar" class="" style="display: inline-block;">
+                ENVIAR
+            </span>
+
+            <div class="loadingEmail sk-spinner sk-spinner-fading-circle">
+                <div class="sk-circle1 sk-circle"></div>
+                <div class="sk-circle2 sk-circle"></div>
+                <div class="sk-circle3 sk-circle"></div>
+                <div class="sk-circle4 sk-circle"></div>
+                <div class="sk-circle5 sk-circle"></div>
+                <div class="sk-circle6 sk-circle"></div>
+                <div class="sk-circle7 sk-circle"></div>
+                <div class="sk-circle8 sk-circle"></div>
+                <div class="sk-circle9 sk-circle"></div>
+                <div class="sk-circle10 sk-circle"></div>
+                <div class="sk-circle11 sk-circle"></div>
+                <div class="sk-circle12 sk-circle"></div>
+            </div>
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+
+
+<script src="~/Scripts/plugins/jasny/jasny-bootstrap.min.js"></script>
+
+
+<script type="text/javascript">
+
+    var boxAtivo = 1;
+    var tamanhoArquivoFormulario = 0;
+
+    $(document).ready(function () {
+
+        var boxFormulario;
+
+        showBoxFormulario();
+
+        $(".toggle-formulario").click(function () {            
+            $("#formularioOuter").toggleClass("form-to-right");
+        });
+
+        $(".toggle-formulario").mouseover(function () {
+            resetTimeOutBoxFormulario();
+            $(".box-formulario").fadeIn(100);
+            $(".box-formulario").delay(3000).fadeOut(100);
+        });
+
+        //$(".box-formulario").mouseout(function () {
+        //    $(".box-formulario").fadeOut(100);
+        //});
+
+        resetTimeOutBoxFormulario();
+
+        $("#btnBoxNaoExibirMais").click(function (req, res) {
+            boxFormulario = null;
+            $(".box-formulario").remove();
+        });
+
+    
+        $('#arquivosEmail').bind('change', function () {
+            tamanhoArquivoFormulario = this.files[0].size;
+        });
+        
+    });
+
+    function resetTimeOutBoxFormulario() {
+
+        $(window).mouseover(function () {
+
+            clearTimeout(boxFormulario);
+            boxFormulario = setTimeout(function () {
+                $(".box-formulario").fadeIn(100);
+                $(".box-formulario").delay(3000).fadeOut(100);
+            }, 30000);
+
+        });
+
+    }
+
+    function showBoxFormulario() {
+
+        boxFormulario = setTimeout(function () {
+
+            $(".box-formulario").fadeIn(100);
+            $(".box-formulario").delay(3000).fadeOut(100);
+
+        }, 30000);
+
+    }
+
+    function enviarEmail() {
+        $("#msgEnviada").empty();
+        //verificar campos vazios
+        if (verificaTamanhoArquivo()){
+
+        if (verificaFormulario()) {
+
+
+            $("#txtEnviar").hide();
+            $(".loadingEmail").fadeIn();
+
+            var dadosEmail = {
+                assunto: $("#cmbAssunto").val(),
+                mensagem: $("#txtMensagem").val(),
+                nomeUsuario: $("#nomeUsuario").val(),
+                emailUsuario: $("#emailUsuario").val(),
+                idUsuario: $("#idUsuario").val(),
+                urlAtual: $("#urlAtual").val()
+            }
+
+            var data = new FormData();
+
+            var arquivos = $("#arquivosEmail").get(0).files;
+
+            if (arquivos.length > 0) {
+                data.append("arquivosEmail", arquivos[0]);
+            }
+
+            data.append("dadosEmail", JSON.stringify(dadosEmail));
+
+
+            $.ajax({
+                type: "POST",
+                url: '/api/EmailAPI/Post',
+                data: data,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                   
+                    $(".loadingEmail").hide();
+                    $("#txtEnviar").show();
+
+                    if (response.Codigo == 1) {
+                        mensagemEnviada(response.Texto);
+                    } else if (response.Codigo == 0) {
+                        mensagemErro(response.Texto);
+                    }
+
+                },
+                error: function (error) {
+                    //$('#GeneralSection').html(error.responseText);
+                }
+            });
+
+
+        } else {
+        
+            var notificacao = "<div class='alert alert-success' id='balaoNotificacao'>Mensagem não enviada! Por favor selecionar o assunto e preencher o campo mensagem.</div>";
+
+            $("#msgEnviada").append(notificacao);
+
+            $("#balaoNotificacao").delay(7500).fadeOut(500);
+
+        }
+        } else {
+            var notificacao = "<div class='alert alert-success' id='balaoNotificacao'>O tamanho do anexo é muito grande!<br/> * máximo de 5MB.</div>";
+
+            $("#msgEnviada").append(notificacao);
+
+            $("#balaoNotificacao").delay(7500).fadeOut(500);
+        }
+
+    }
+
+    function verificaTamanhoArquivo() {
+
+        var valorArquivoFormulario = $("#arquivosEmail").val();
+
+        if (valorArquivoFormulario != null || valorArquivoFormulario != ""){
+            if (tamanhoArquivoFormulario > 6000000) {
+                return false;
+                } else {
+                    return true;
+                }
+        } else {
+            return true;
+        }
+
+    }
+
+    function verificaFormulario() {
+
+       
+        if ($("#cmbAssunto").val() == null) {
+
+            return false;
+
+        } else if ($("#txtMensagem").val() == "" || $("#txtMensagem").val() == null) {
+
+            return false;
+
+        } else {
+
+            return true;
+
+        }
+
+    }
+
+    function mensagemEnviada(response) {
+     
+        var notificacao = "<div class='alert alert-success' id='balaoNotificacao'>" + response + "</div>";
+
+        $(".fileinput-filename").text("");
+        $("#cmbAssunto").val("");
+        $("#txtMensagem").val("");
+
+        $("#msgEnviada").append(notificacao);
+
+        $("#balaoNotificacao").delay(12500).fadeOut(1000);
+
+    }
+
+    function mensagemErro(response) {
+       
+        var notificacao = "<div class='alert alert-success' id='balaoNotificacao'>" + response + "</div>";
+
+        $("#msgEnviada").append(notificacao);
+
+        $("#balaoNotificacao").delay(6500).fadeOut(1000);
+
+    }
+
+</script>

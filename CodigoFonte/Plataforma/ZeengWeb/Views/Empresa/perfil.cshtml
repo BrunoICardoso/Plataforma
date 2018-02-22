@@ -1,0 +1,574 @@
+﻿@model ZeengWeb.ViewModel.Empresa.EmpresaPerfil
+
+@using ZeengWeb.Utils
+@using System.Text.RegularExpressions
+
+
+@{
+    ViewBag.Title = "Perfil da empresa";
+}
+
+<style>
+    .slick_marcas .ibox-content {
+        margin: 0 5px;
+        padding: 5px;
+        height: 115px;
+        text-align: center;
+    }
+
+    .celltext {
+        display: inline-block;
+        text-overflow: ellipsis;
+        width: 86%;
+        /* word-wrap: break-word; */
+        white-space: nowrap;
+        overflow: hidden;
+        padding-left: 4px;
+    }
+
+
+
+    .img-marca {
+        height: 60px;
+        width: 120px;
+    }
+
+    .scroll {
+        display: block;
+        height: 107px;
+        overflow-y: scroll;
+    }
+
+    #legendabubble {
+        margin-bottom: 30px;
+    }
+
+    .bubble_tooltip {
+        position: absolute;
+        top: 300px;
+        left: 130px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 2px solid #000;
+        /* background: #222222; */
+        background: #fff;
+        /* color: #eeeeee; */
+        color: black;
+        padding: 10px;
+        width: 300px;
+        font-size: 12px;
+        z-index: 10;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #666;
+        shape-rendering: crispEdges;
+    }
+
+    .area {
+        fill: #FFDB80;
+    }
+
+    .graf-caption {
+        padding: 1px 5px;
+        color: #999;
+        border: 1px solid #AAA;
+        float: right;
+    }
+
+        .graf-caption span {
+            font-size: 20px;
+        }
+
+    .graf-legenda {
+        display: inline-block;
+    }
+
+    .graf-vermais {
+        float: right;
+    }
+
+    .graf-presencaonline {
+        height: 420px;
+        margin-top: 2px;
+    }
+
+
+
+    .graf-noticias {
+        height: 392px;
+        margin-bottom: 30px;
+    }
+
+    .graf-promocoes {
+        padding-top: -10px;
+        height: 330px;
+    }
+
+    .graf-promocoes-legenda {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        border-top: solid 0px #c2c2c2;
+        padding-top: 10px;
+        font-size: 11pt;
+    }
+
+        .graf-promocoes-legenda span {
+            margin-right: 15px;
+            margin-left: 5px;
+            color: #676a6c;
+            font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+
+    .label_percent {
+        font-size: 16px;
+        color: #AAAAAA;
+    }
+
+    .label_absolute {
+        font-size: 12px;
+        color: #AAAAAA;
+    }
+
+    .barra {
+        fill: #8DD9CA;
+    }
+
+        .barra:hover {
+            fill: #abe8dc;
+        }
+
+    .axis--x path {
+        display: none;
+    }
+
+    .legenda_donut {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .item_legenda {
+        width: 30%;
+        display: inline-block;
+    }
+
+    .cor_legenda {
+        display: inline-block;
+        margin-right: 5px;
+        width: 20px;
+        height: 10px;
+    }
+
+    .texto_legenda {
+    }
+
+    .cor1 {
+        background-color: #E37686;
+    }
+
+    .cor2 {
+        background-color: #D2D087;
+    }
+
+    .cor3 {
+        background-color: #6AC6B6;
+    }
+
+    .cor4 {
+        background-color: #1C97B0;
+    }
+
+    .lancamento-produtos {
+        height: 475px;
+    }
+
+    .presenca-online-box {
+        height: 475px;
+    }
+
+    .box-promocoes {
+        height: 475px;
+    }
+
+    .box-noticias {
+        height: 475px;
+    }
+
+    .redes-sociais {
+        height: 475px;
+    }
+
+    .graf-lancamento {
+        height: 370px;
+        margin-top: 50px;
+    }
+
+    .graf-redesSociais {
+        height: 376px;
+        margin-top: 50px;
+    }
+
+        .graf-lancamento path, .graf-redesSociais path {
+            xxstroke: steelblue;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .graf-lancamento .axis path,
+        .graf-lancamento .axis line,
+        .graf-redesSociais .axis path,
+        .graf-redesSociais .axis line {
+            fill: none;
+            stroke: grey;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+        }
+
+        .graf-lancamento .x.axis .tick text,
+        .graf-redesSociais .x.axis .tick text {
+            transform: translate(-36px,3px) rotate(-45deg);
+        }
+
+        .graf-presencaonline .x.axis .tick text, .graf-redesSociais .x.axis .tick text {
+            transform: translate(-36px,0px) rotate(-45deg);
+        }
+
+    .graf-noticias .x.axis .tick text {
+        transform: translate(9px,3px) rotate(-45deg);
+    }
+
+    .informacoesEmpresa {
+        text-align: justify;
+    }
+
+    .loadingPerfilEmpresa {
+        height: 95%;
+        width: 100%;
+        margin: auto;
+        -webkit-user-select: none; /* Chrome all / Safari all */
+        -moz-user-select: none; /* Firefox all */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none;
+        display: table;
+    }
+
+    .loadingPerfilEmpresaInner {
+        padding-top: 25%;
+    }
+
+    .nenhumResultado {
+        height: 95%;
+        width: 100%;
+        text-align: center;
+        color: #999999;
+        margin: auto;
+        -webkit-user-select: none; /* Chrome all / Safari all */
+        -moz-user-select: none; /* Firefox all */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none;
+        display: table;
+    }
+
+        .nenhumResultado div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+    .imgNenhumResultado {
+        display: block;
+        margin: auto;
+    }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Perfil da empresa</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Empresa">Home</a>
+            </li>
+            <li>
+                <a href="/Empresa/">Empresas</a>
+            </li>
+            <li class="active">
+                <strong>@Model.Empresa.nome</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-9 informacoesEmpresa">
+
+            <div class="profile-image">
+                <img src="@String.Format("{0}/Empresas/{1}", Configuracoes.DiretorioImagens, Model.Empresa.imagem)" class="img-perfil m-b-md" alt="@Html.DisplayFor(model => model.Empresa.nome)">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 id="lblNomeEmpresa" class="no-margins">
+                            @Html.DisplayFor(model => model.Empresa.nome)
+                        </h2>
+                        <h5>@Html.DisplayFor(model => model.Empresa.nomeSetor)</h5>
+                        <small id="lblDescricao">
+                            @Html.DisplayFor(model => model.Empresa.descricao)
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*<div class="col-md-6">
+                <h2 class="no-margins">Marcas</h2>
+                <div class="slick_marcas">
+                    @foreach (var marca in Model.Empresa.marcas)
+                    {
+                        <div>
+                            <div class="ibox-content">
+                                <img class="img-marca" src="@Configuracoes.DiretorioImagens/marcas/@Html.Raw(@marca.idmarca + "slider.png")" alt="@marca.nome" />
+                                <p class="text-center">@marca.nome</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>*@
+
+    </div>
+    <div class="row">
+
+     @Html.Partial("GraficoVertentesPerfil/_Perfil")
+
+    </div>
+
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/plugins/slickStyles")
+    @Styles.Render("~/plugins/slickThemeStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/slick")
+    @Scripts.Render("~/plugins/d3")
+
+    <script src="~/Scripts/GraficosVertentesPerfil/GraficosPerfilEmpresa.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/graficos/linhas.js"></script>
+    <script src="~/Scripts/graficos/barras.js"></script>
+    <script src="~/Scripts/graficos/area.js"></script>
+    <script src="~/Scripts/graficos/donut.js"></script>
+    <script type="text/javascript">
+
+        var DiretorioImagens = "@Configuracoes.DiretorioImagens";
+        var qtdeMeses = 12;
+        var idEmpresa = @Model.Empresa.idempresa;
+        
+
+        $('.slick_marcas').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            centerMode: true,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 450,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+        $(document).ready(function () {
+
+                GraficosPerfil(idEmpresa, qtdeMeses);
+            
+
+        });
+
+
+        function GraficosPerfil(idEmpresa, qtdeMeses){
+
+            var RedesSociais = @Model.VertentesCliente.redessociais.ToString().ToLower();
+            var Noticia = @Model.VertentesCliente.noticias.ToString().ToLower();
+            var PresencaOnline = @Model.VertentesCliente.presencaonline.ToString().ToLower();
+            var Promocoes = @Model.VertentesCliente.promocoes.ToString().ToLower();
+            var Produtos = @Model.VertentesCliente.produtos.ToString().ToLower();
+
+            var lista = new Array();
+
+
+            if (RedesSociais == true){
+
+                lista[lista.length] = "RedeSocial";
+            }
+
+            if(Noticia ==true ){
+
+                lista[lista.length] = "Noticia";
+            }
+
+            if(PresencaOnline==true){
+
+                lista[lista.length] = "PresencaOnline";
+            }
+
+            if(Promocoes== true){
+
+                lista[lista.length] = "Promocoes";
+            }
+
+            if(Produtos == true){
+
+                lista[lista.length] = "Produtos";
+            }
+
+
+            if(lista.length % 2 == 0){
+
+                if(lista.length >0 ){
+
+                    $.each(lista, function (key, listav) {
+
+                        if(listav == "RedeSocial"){
+                            $("#ClasseRedeSociais").addClass( "col-lg-6" );
+                            $("#ClasseRedeSociais").show();
+                            GraficosVertentes.GraficoRedesSociais(idEmpresa, qtdeMeses);
+                        }
+
+                        if(listav == "Noticia" ){
+                            $("#ClasseNoticias").addClass( "col-lg-6" );
+                            $("#ClasseNoticias").show();
+                            GraficosVertentes.GraficoNoticias(idEmpresa, qtdeMeses);
+                        }
+
+                        if(listav == "PresencaOnline" ){
+                            $("#ClassePresenca").addClass( "col-lg-6" );
+                            $("#ClassePresenca").show();
+                            GraficosVertentes.GraficoPresencaOnline(idEmpresa, qtdeMeses);
+                        }
+                        if(listav == "Promocoes" ){
+                            $("#ClassePromocoes").addClass( "col-lg-6" );
+                            $("#ClassePromocoes").show();
+                            GraficosVertentes.GraficoPromocoes(idEmpresa);
+                        }
+                        if(listav == "Produtos" ){
+                            $("#ClasseProduto").addClass( "col-lg-6" );
+                            $("#ClasseProduto").show();
+                            GraficosVertentes.GraficoLancamentoProdutos(idEmpresa, qtdeMeses)
+                        }
+
+                    });
+                }
+            }
+
+            else {
+
+                if(lista.length >0 ){
+
+                    switch (lista[0]) {
+                        case "RedeSocial" :
+                            $("#ClasseRedeSociais").addClass( "col-lg-12" );
+                            $("#ClasseRedeSociais").show();
+                            lista.splice(0,1);
+                            GraficosVertentes.GraficoRedesSociais(idEmpresa, qtdeMeses);
+                            break;
+
+                        case "Noticia" :
+                            $("#ClasseNoticias").addClass( "col-lg-12" );
+                            $("#ClasseNoticias").show();
+                            lista.splice(0,1);
+                            GraficosVertentes.GraficoNoticias(idEmpresa, qtdeMeses);
+                            break;
+
+                        case "PresencaOnline" :
+                            $("#ClassePresenca").addClass( "col-lg-12" );
+                            $("#ClassePresenca").show();
+                            lista.splice(0,1);
+                            GraficosVertentes.GraficoPresencaOnline(idEmpresa, qtdeMeses);
+                            break;
+
+                        case "Promocoes" :
+                            $("#ClassePromocoes").addClass( "col-lg-12" );
+                            $("#ClassePromocoes").show();
+                            lista.splice(0,1);
+                            GraficosVertentes.GraficoPromocoes(idEmpresa);
+                            break;
+
+                        case "Produtos" :
+                            $("#ClasseProduto").addClass( "col-lg-12" );
+                            $("#ClasseProduto").show();
+                            lista.splice(0,1);
+                            GraficosVertentes.GraficoLancamentoProdutos(idEmpresa, qtdeMeses);
+                            break;
+
+                    }
+
+
+                    $.each(lista, function (key, listav) {
+
+                        if(listav == "RedeSocial"){
+                            $("#ClasseRedeSociais").addClass( "col-lg-6" );
+                            $("#ClasseRedeSociais").show();
+                            GraficosVertentes.GraficoRedesSociais(idEmpresa, qtdeMeses);
+                        }
+
+                        if(listav == "Noticia" ){
+                            $("#ClasseNoticias").addClass( "col-lg-6" );
+                            $("#ClasseNoticias").show();
+                            GraficosVertentes.GraficoNoticias(idEmpresa, qtdeMeses);
+                        }
+
+                        if(listav == "PresencaOnline" ){
+                            $("#ClassePresenca").addClass( "col-lg-6" );
+                            $("#ClassePresenca").show();
+                            GraficosVertentes.GraficoPresencaOnline(idEmpresa, qtdeMeses);
+                        }
+                        if(listav == "Promocoes" ){
+                            $("#ClassePromocoes").addClass( "col-lg-6" );
+                            $("#ClassePromocoes").show();
+                            GraficosVertentes.GraficoPromocoes(idEmpresa);
+                        }
+                        if(listav == "Produtos" ){
+                            $("#ClasseProduto").addClass( "col-lg-6" );
+                            $("#ClasseProduto").show();
+                            GraficosVertentes.GraficoLancamentoProdutos(idEmpresa, qtdeMeses)
+                        }
+
+                    });
+                }
+            }
+
+
+        }
+
+
+
+    </script>
+}

@@ -1,0 +1,363 @@
+@model ZeengWeb.ViewModel.Empresa.EmpresaPromoDetralhes
+@{
+    ViewBag.Title = "Promoção - Detalhes";
+}
+<style type="text/css">
+
+    .espacotexto {
+    padding-bottom: 15px;
+    
+    }
+    
+
+    .btn-primary.btnPartial, .btn-primary.btnPartialRede {
+        border-color: #B4B4B4;
+    }
+
+    .btnPartial {
+        background-color: #B4B4B4;
+    }
+
+        .btnPartial:hover {
+            background-color: #0ed1aa;
+            cursor: pointer;
+        }
+
+    .btnPartialRede {
+        background-color: #B4B4B4;
+    }
+
+        .btnPartialRede:hover {
+            background-color: #0ed1aa;
+            cursor: pointer;
+        }
+
+    a.iconesRedeSocial {
+        font-weight: 600;
+        color: #676a6c;
+    }
+
+        a.iconesRedeSocial i.fa {
+            font-size: 16px;
+        }
+
+        a.iconesRedeSocial:hover {
+            color: #19AA8D;
+            text-decoration: underline;
+        }
+
+    .lightBoxGallery {
+        text-align: center;
+    }
+
+        .lightBoxGallery img {
+            margin: 5px;
+        }
+
+    .blueimp-gallery > .description {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+        color: #fff;
+        display: none;
+        font-style: italic;
+    }
+    /*-------------------------------------------*/
+
+    .blueimp-gallery-controls > .description {
+        display: block;
+    }
+
+    .timeline-itemdetalhe .ibox-title {
+        cursor: pointer;
+    }
+
+    .timeline-itemdetalhe .ibox-content {
+        display: none;
+    }
+
+    /*.timeline-item.aberto {
+        background-color: #f6f6f6;
+    }
+
+    .timeline-item-label {
+        margin-bottom: 10px;
+    }
+    */
+    .timeline-itemdetalhe {
+        margin: 10px 0;
+    }
+
+    /*--------------------------------------------*/
+    .texto_noticia {
+        margin: 10px 0 10px;
+        height: 250px;
+        overflow: hidden;
+    }
+
+    .titulo_noticia {
+        height: 15px;
+        overflow: hidden;
+    }
+
+    .rodape_noticia {
+        height: 72px;
+        overflow: hidden;
+    }
+
+    .text-muted.datahoranoticia {
+        float: right;
+    }
+</style>
+
+<script type="text/javascript">
+
+    // variáveis globais
+    var idPromocao = @Model.promocao.idPromocao;
+    var idEmpresa = @Model.idEmpresa;
+
+</script>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>Promoção - Detalhes</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/Empresa/">Empresas</a>
+            </li>
+            <li>
+                <a href="/Empresa/Perfil/@Model.idEmpresa">@Model.NomeEmpresa</a>
+            </li>
+            <li>
+                <a href="/Empresa/Promo/@Model.idEmpresa">Promoções</a>
+            </li>
+            <li class="active">
+                <strong>Promoção - Detalhes</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content m-b-sm border-bottom">
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Nome da promoção</label>
+                <br />
+                @{
+                    if (Model.promocao.nomePromocao != null)
+                    {
+
+                        @Model.promocao.nomePromocao
+                    }
+                    else
+                    {
+
+                        @Html.Raw("Não há informação no nome da empresa")
+
+                    }
+
+                }
+            </div>
+            <div class="col-md-6">
+                <label>Empresas associadas</label>
+                <br />
+                @Model.empresas
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:15px;">
+            <div class="col-md-6">
+                <label>Modalidade da promoção</label>
+                <br />
+                @* AJUSTAR ESTE TRECHO PARA CARREGAR A ABRANGÊNCIA *@
+                Não informado
+            </div>
+            <div class="col-md-6">
+                <label>Vigência</label>
+                <br />
+                @Model.promocao.dtvigenciaini.ToString("dd/MM/yyyy") a @Model.promocao.dtvigenciafim.ToString("dd/MM/yyyy")
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="col-md-6"></div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary btnPartial active" data-area="Detalhes">Detalhes</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary btnPartial" data-area="Noticias">Notícias</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary btnPartial" data-area="RedesSociais">Redes Sociais</button>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="partials Detalhes">
+            @Html.Partial("Promocao/_PromocaoDetalhe")
+        </div>
+        <div class="partials Noticias" style="display:none;">
+            @Html.Partial("Promocao/_PromocaoDetalheNoticias")
+        </div>
+        <div class="partials RedesSociais" style="display:none;">
+            @Html.Partial("Promocao/_PromocaoDetalheRedeSocial")
+        </div>
+    </div>
+</div>
+@section Styles {
+    <link href="~/Content/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet" type="text/css" />
+}
+@section scripts
+{
+    <script src="~/Scripts/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/promocoes/PromocaoDetalhes_AbaFacebook.js"></script>
+    <script src="~/Scripts/promocoes/PromocaoDetalhes_AbaTwitter.js"></script>
+    <script src="~/Scripts/promocoes/PromocaoDetalhes_AbaInstagram.js"></script>
+    <script src="~/Scripts/promocoes/PromocaoDetalhes_AbaYoutube.js"></script>
+    <script src="~/Scripts/promocoes/PromocaoDetalhes_AbaNoticias.js"></script>
+
+    <script type="text/javascript">
+
+        // FACEBOOK - Informações para linha do tempo
+        // ===============================================================
+        var _totalPostsFacebook = 0;
+        var objDataFacebook = {};
+        var PromoFace = new PromoDetalhesFacebook();
+        _totalPostsFacebook = PromoFace.TotalPostsFacebook();
+        // ===============================================================
+
+        // TWITTER - Informações para linha do tempo
+        // ===============================================================
+        var _totalPostsTwitter = 0;
+        var objDataTwitter = {};
+        var PromoTw = new PromoDetalhesTwitter();
+        _totalPostsTwitter = PromoTw.TotalPostsTwitter();
+        // ===============================================================
+
+        // INSTAGRAM - Informações para linha do tempo
+        // ===============================================================
+        var _totalPostsInstagram = 0;
+        var objDataInstagram = {};
+        var PromoIns = new PromoDetalhesInstagram();
+        _totalPostsInstagram = PromoIns.TotalPostsInstagram();
+        // ===============================================================
+
+        // YOUTUBE - Informações para linha do tempo
+        // ===============================================================
+        var _totalPostsYoutube = 0;
+        var objDataYoutube = {};
+        var PromoYt = new PromoDetalhesYoutube();
+        _totalPostsYoutube = PromoYt.TotalPostsYoutube();
+        // ===============================================================
+
+        // NOTÍCIAS
+        // ===============================================================
+        _totalNoticias = 0;
+        var PromoNoti = new PromoDetalhesNoticias();
+        _totalNoticias = PromoNoti.TotaNoticias();
+
+        // variáveis globais
+
+        $(document).ready(function () {
+
+            $(".timeline-itemdetalhe .ibox-title").click(function () {
+
+                if ($(this).find("i.fa").hasClass("fa-chevron-down")) {
+                    $(this).find("i.fa").addClass("fa-chevron-up").removeClass("fa-chevron-down");
+                    $(this).parent().find(".ibox-content").slideDown(500);
+                }
+                else {
+                    $(this).find("i.fa").addClass("fa-chevron-down").removeClass("fa-chevron-up");
+                    $(this).parent().find(".ibox-content").slideUp(500);
+                }
+            });
+
+            $('#blueimp-gallery').on('slide', function (event, index, slide) {
+
+                $(this).children('.description')
+                    .text($('#links a').eq(index).data('description'));
+            });
+
+          
+            // Comportamneto botões Detalhes, Notícias, Redes Sociais
+            // =================================================================
+            $('.btnPartial').on('click', function () {
+                var area = $(this).data('area');
+
+                $('.btnPartial').each(function () {
+                    if (area == $(this).data('area')) {
+                        $('.partials.' + area).show();
+                        $(this).addClass('active');
+
+                    } else {
+                        $('.partials.' + $(this).data('area')).hide();
+                        $(this).removeClass('active');
+                    }
+                });
+            });
+
+            // Comportamneto botões Facebook, Twitter, Instagram, Youtube
+            // =================================================================
+            $('.btnPartialRede').on('click', function () {
+                var rede = $(this).data('rede');
+
+                $('.btnPartialRede').each(function () {
+                    if (rede == $(this).data('rede')) {
+                        $('#area' + rede).show();
+                        $(this).addClass('active');
+
+                    } else {
+                        $('#area' + $(this).data('rede')).hide();
+                        $(this).removeClass('active');
+                    }
+                });
+            });
+
+            // FACEBOOK - carregando linha do tempo
+            // ===============================================================
+            setTimeout(function(){
+                PromoFace.ListarPostsFace();
+            },500);
+
+            // TWITTER - carregando linha do tempo
+            // ===============================================================
+            setTimeout(function(){
+                PromoTw.ListarPostsTw();
+            },500);
+
+            // INSTAGRAM - carregando linha do tempo
+            // ===============================================================
+            setTimeout(function(){
+                PromoIns.ListarPostsIns();
+            },500);
+
+            // YOUTUBE - carregando linha do tempo
+            // ===============================================================
+            setTimeout(function(){
+                PromoYt.ListarPostsYt();
+            },500);
+
+            // NOTÍCIAS
+            // ===============================================================
+            setTimeout(function(){
+                PromoNoti.ListarNoticias();
+            },500);
+        });
+
+        // NOTÍCIAS
+        // ===============================================================
+        function PesquisaNoticias(){
+            PromoNoti.ListarNoticias();
+        }
+        // ===============================================================
+
+       
+
+    </script>
+}

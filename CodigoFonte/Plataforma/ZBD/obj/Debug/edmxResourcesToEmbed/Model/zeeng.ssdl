@@ -1,0 +1,2935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="zeengModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cliente_empresas">
+    <Key>
+      <PropertyRef Name="idclienteempresa" />
+    </Key>
+    <Property Name="idclienteempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcliente" Type="int" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="dtcadastro" Type="datetime" Precision="0" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="cliente_relatorio_empresas">
+    <Key>
+      <PropertyRef Name="idclienterelatorioempresa" />
+    </Key>
+    <Property Name="idclienterelatorioempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idclienterelatorio" Type="int" Nullable="false" />
+    <Property Name="idempresa" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cliente_relatorio_metricas">
+    <Key>
+      <PropertyRef Name="idclienterelatoriometricas" />
+    </Key>
+    <Property Name="idclienterelatoriometricas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idclienterelatorio" Type="int" Nullable="false" />
+    <Property Name="campo" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="cliente_relatorios">
+    <Key>
+      <PropertyRef Name="idclienterelatorio" />
+    </Key>
+    <Property Name="idclienterelatorio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcliente" Type="int" Nullable="false" />
+    <Property Name="idusuario" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="datahora" Type="datetime" Precision="0" />
+    <Property Name="dataini" Type="date" />
+    <Property Name="datafim" Type="date" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cliente_vertentes">
+    <Key>
+      <PropertyRef Name="idclientevertente" />
+    </Key>
+    <Property Name="idclientevertente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcliente" Type="int" />
+    <Property Name="redessociais" Type="bit" />
+    <Property Name="presencaonline" Type="bit" />
+    <Property Name="noticias" Type="bit" />
+    <Property Name="produtos" Type="bit" />
+    <Property Name="promocoes" Type="bit" />
+  </EntityType>
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="idclientes" />
+    </Key>
+    <Property Name="idclientes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idestado" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="45" />
+    <Property Name="site" Type="varchar" MaxLength="45" />
+    <Property Name="endereco" Type="varchar" MaxLength="45" />
+    <Property Name="cidade" Type="varchar" MaxLength="45" />
+    <Property Name="telefone" Type="varchar" MaxLength="45" />
+    <Property Name="celular" Type="varchar" MaxLength="45" />
+    <Property Name="nomecontato" Type="varchar" MaxLength="45" />
+    <Property Name="cnpj" Type="varchar" MaxLength="45" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="cep" Type="varchar" MaxLength="20" />
+    <Property Name="inscestadual" Type="varchar" MaxLength="45" />
+    <Property Name="inscmunicial" Type="varchar" MaxLength="45" />
+    <Property Name="vertodasempresas" Type="bit" />
+    <Property Name="dtexpiracaolicenca" Type="datetime" Precision="0" />
+    <Property Name="qtdempresas" Type="int" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="cnpjempresa">
+    <Key>
+      <PropertyRef Name="idcnpjempresa" />
+    </Key>
+    <Property Name="idcnpjempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" Nullable="false" />
+    <Property Name="cnpj" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="cnpjmarca">
+    <Key>
+      <PropertyRef Name="idcnpjmarca" />
+    </Key>
+    <Property Name="idcnpjmarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idmarca" Type="int" Nullable="false" />
+    <Property Name="cnpj" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="empresaredessociais">
+    <Key>
+      <PropertyRef Name="idempresaredessociais" />
+    </Key>
+    <Property Name="idempresaredessociais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" Nullable="false" />
+    <Property Name="idredesocial" Type="int" Nullable="false" />
+    <Property Name="urlredesocial" Type="varchar" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="empresas">
+    <Key>
+      <PropertyRef Name="idempresa" />
+    </Key>
+    <Property Name="idempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idsetor" Type="int" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="400" />
+    <Property Name="descricao" Type="varchar" MaxLength="2000" />
+    <Property Name="urlsite" Type="varchar" MaxLength="400" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+    <Property Name="imagem" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="estados">
+    <Key>
+      <PropertyRef Name="idestado" />
+    </Key>
+    <Property Name="idestado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="45" />
+    <Property Name="uf" Type="varchar" MaxLength="45" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="fb_comentarios">
+    <Key>
+      <PropertyRef Name="idcomentario" />
+    </Key>
+    <Property Name="idcomentario" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idfacebook" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="idpost" Type="uint" Nullable="false" />
+    <Property Name="postagem" Type="varchar" MaxLength="8000" />
+    <Property Name="datahora" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="curtidas" Type="uint" Nullable="false" />
+    <Property Name="respostas" Type="uint" />
+    <Property Name="idcomentarioresposta" Type="varchar" MaxLength="100" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="500" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="70" />
+    <Property Name="nomeusuario" Type="varchar" MaxLength="150" />
+    <Property Name="idusuario" Type="varchar" MaxLength="70" />
+    <Property Name="termoscapturados" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fb_comentarios_termos">
+    <Key>
+      <PropertyRef Name="idcomentariotermos" />
+    </Key>
+    <Property Name="idcomentariotermos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcomentario" Type="uint" />
+    <Property Name="termo" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="frequencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fb_perfis">
+    <Key>
+      <PropertyRef Name="idperfil" />
+    </Key>
+    <Property Name="idperfil" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="idmarca" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="100" />
+    <Property Name="idfacebook" Type="varchar" MaxLength="20" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="sobre" Type="varchar" MaxLength="500" />
+    <Property Name="descricao" Type="varchar" MaxLength="12000" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="3000" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="50" />
+    <Property Name="website" Type="varchar" MaxLength="200" />
+    <Property Name="datahoraultimopost" Type="datetime" Precision="0" />
+    <Property Name="link" Type="varchar" MaxLength="200" />
+    <Property Name="ultimaatualizacao" Type="date" />
+  </EntityType>
+  <EntityType Name="fb_perfis_stats">
+    <Key>
+      <PropertyRef Name="idperfilstats" />
+    </Key>
+    <Property Name="idperfilstats" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idperfil" Type="uint" Nullable="false" />
+    <Property Name="datahora" Type="datetime" Precision="0" />
+    <Property Name="qtdlikes" Type="uint" />
+    <Property Name="qtdestrelas" Type="uint" />
+    <Property Name="qtdavaliacoes" Type="uint" />
+    <Property Name="qtdpessoasfalando" Type="uint" />
+  </EntityType>
+  <EntityType Name="fb_post_termos">
+    <Key>
+      <PropertyRef Name="idposttermos" />
+    </Key>
+    <Property Name="idposttermos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpost" Type="uint" />
+    <Property Name="termo" Type="varchar" MaxLength="300" Nullable="false" />
+    <Property Name="frequencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="fb_posts">
+    <Key>
+      <PropertyRef Name="idpost" />
+    </Key>
+    <Property Name="idpost" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idperfil" Type="uint" Nullable="false" />
+    <Property Name="idfacebook" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="postagem" Type="varchar" MaxLength="10000" />
+    <Property Name="datahora" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="compartilhamentos" Type="uint" Nullable="false" />
+    <Property Name="reacoes" Type="int" Nullable="false" />
+    <Property Name="comentarios" Type="uint" Nullable="false" />
+    <Property Name="tipo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="2000" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="100" />
+    <Property Name="link" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="datahoraultimocomentario" Type="datetime" Precision="0" />
+    <Property Name="termoscapturados" Type="bit" />
+  </EntityType>
+  <EntityType Name="fontes_noticias">
+    <Key>
+      <PropertyRef Name="idfonte" />
+    </Key>
+    <Property Name="idfonte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idfonte_knewin" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="100" />
+    <Property Name="url" Type="varchar" MaxLength="1000" />
+    <Property Name="pais" Type="varchar" MaxLength="45" />
+    <Property Name="estado" Type="varchar" MaxLength="45" />
+    <Property Name="cidade" Type="varchar" MaxLength="45" />
+    <Property Name="tipo" Type="varchar" MaxLength="45" />
+    <Property Name="ativo" Type="bit" Nullable="false" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+    <Property Name="manual" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="insta_comentario_termos">
+    <Key>
+      <PropertyRef Name="idcomentariotermo" />
+    </Key>
+    <Property Name="idcomentariotermo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcomentario" Type="int" />
+    <Property Name="termo" Type="varchar" MaxLength="100" />
+    <Property Name="frequencia" Type="int" />
+  </EntityType>
+  <EntityType Name="insta_comentarios">
+    <Key>
+      <PropertyRef Name="idcomentario" />
+    </Key>
+    <Property Name="idcomentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpost" Type="int" Nullable="false" />
+    <Property Name="idinstagram" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="postagem" Type="varchar" MaxLength="2200" Nullable="false" />
+    <Property Name="datahora" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="idusuario" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="nomeusuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="termoscapturados" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="insta_perfis">
+    <Key>
+      <PropertyRef Name="idperfil" />
+    </Key>
+    <Property Name="idperfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="idmarca" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="50" />
+    <Property Name="idinstagram" Type="varchar" MaxLength="20" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="sobre" Type="varchar" MaxLength="200" />
+    <Property Name="website" Type="varchar" MaxLength="70" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="400" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="400" />
+    <Property Name="datahoraultimopost" Type="datetime" Precision="0" />
+    <Property Name="ultimaatualizacao" Type="date" />
+    <Property Name="link" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="insta_perfis_stats">
+    <Key>
+      <PropertyRef Name="idperfilstats" />
+    </Key>
+    <Property Name="idperfilstats" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idperfil" Type="int" Nullable="false" />
+    <Property Name="datahora" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="qtdmidias" Type="uint" />
+    <Property Name="qtdseguidores" Type="uint" />
+    <Property Name="qtdseguidos" Type="uint" />
+  </EntityType>
+  <EntityType Name="insta_post_termos">
+    <Key>
+      <PropertyRef Name="idposttermo" />
+    </Key>
+    <Property Name="idposttermo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpost" Type="int" />
+    <Property Name="termo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="frequencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="insta_posts">
+    <Key>
+      <PropertyRef Name="idpost" />
+    </Key>
+    <Property Name="idpost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idperfil" Type="int" />
+    <Property Name="idinstagram" Type="varchar" MaxLength="50" />
+    <Property Name="postagem" Type="varchar" MaxLength="2200" />
+    <Property Name="datahora" Type="datetime" Precision="0" />
+    <Property Name="qtdcomentarios" Type="int" />
+    <Property Name="qtdcurtidas" Type="int" />
+    <Property Name="tipo" Type="varchar" MaxLength="10" />
+    <Property Name="link" Type="varchar" MaxLength="300" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="300" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="70" />
+    <Property Name="datahoraultimocomentario" Type="datetime" Precision="0" />
+    <Property Name="termoscapturados" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="logs">
+    <Key>
+      <PropertyRef Name="idlogs" />
+    </Key>
+    <Property Name="idlogs" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idusuario" Type="int" Nullable="false" />
+    <Property Name="datahora" Type="datetime" Precision="0" />
+    <Property Name="url" Type="varchar" MaxLength="300" />
+    <Property Name="controle" Type="varchar" MaxLength="100" />
+    <Property Name="acao" Type="varchar" MaxLength="100" />
+    <Property Name="descricao" Type="text" />
+    <Property Name="nivel" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="mapa_areas">
+    <Key>
+      <PropertyRef Name="idarea" />
+    </Key>
+    <Property Name="idarea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="45" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="mapa_atributo">
+    <Key>
+      <PropertyRef Name="idatributo" />
+    </Key>
+    <Property Name="idatributo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="mapa_base">
+    <Key>
+      <PropertyRef Name="idbase" />
+    </Key>
+    <Property Name="idbase" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="100" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="mapa_caracteristica">
+    <Key>
+      <PropertyRef Name="idcaracteristica" />
+    </Key>
+    <Property Name="idcaracteristica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="mapa_complemento">
+    <Key>
+      <PropertyRef Name="idcomplemento" />
+    </Key>
+    <Property Name="idcomplemento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="mapa_especies">
+    <Key>
+      <PropertyRef Name="idespecie" />
+    </Key>
+    <Property Name="idespecie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="100" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="mapa_origens">
+    <Key>
+      <PropertyRef Name="idorigem" />
+    </Key>
+    <Property Name="idorigem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="100" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="mapa_registro_empresa">
+    <Key>
+      <PropertyRef Name="idregistroempresa" />
+    </Key>
+    <Property Name="idregistroempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idregistro" Type="int" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="dataregistro" Type="datetime" Precision="0" />
+  </EntityType>
+  <EntityType Name="mapa_registros">
+    <Key>
+      <PropertyRef Name="idregistro" />
+    </Key>
+    <Property Name="idregistro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idestado" Type="int" />
+    <Property Name="idarea" Type="int" />
+    <Property Name="idespecie" Type="int" />
+    <Property Name="idsubespecie" Type="int" />
+    <Property Name="idbase" Type="int" />
+    <Property Name="idcaracteristica" Type="int" />
+    <Property Name="idatributo" Type="int" />
+    <Property Name="idcomplemento" Type="int" />
+    <Property Name="idorigem" Type="int" />
+    <Property Name="cnpj" Type="varchar" MaxLength="45" />
+    <Property Name="nomeMarca" Type="varchar" MaxLength="200" />
+    <Property Name="nomeProduto" Type="varchar" MaxLength="500" />
+    <Property Name="dataconcessao" Type="datetime" Precision="0" />
+    <Property Name="numregistro" Type="varchar" MaxLength="45" />
+    <Property Name="modoaplicacao" Type="varchar" MaxLength="200" />
+    <Property Name="status" Type="varchar" MaxLength="45" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="mapa_subespecie">
+    <Key>
+      <PropertyRef Name="idsubespecie" />
+    </Key>
+    <Property Name="idsubespecie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="100" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="marcaredessociais">
+    <Key>
+      <PropertyRef Name="idmarcaredessociais" />
+    </Key>
+    <Property Name="idmarcaredessociais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idmarca" Type="int" Nullable="false" />
+    <Property Name="idredesocial" Type="int" Nullable="false" />
+    <Property Name="urlredesocial" Type="varchar" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="marcas">
+    <Key>
+      <PropertyRef Name="idmarca" />
+    </Key>
+    <Property Name="idmarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="urlsite" Type="varchar" MaxLength="500" />
+    <Property Name="descricao" Type="varchar" MaxLength="500" />
+    <Property Name="excluido" Type="bit" />
+    <Property Name="imagem" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="municipios">
+    <Key>
+      <PropertyRef Name="idmunicipio" />
+    </Key>
+    <Property Name="idmunicipio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idestado" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="500" />
+    <Property Name="codibge" Type="varchar" MaxLength="45" />
+    <Property Name="atualizado" Type="bit" />
+  </EntityType>
+  <EntityType Name="noticia_imagens">
+    <Key>
+      <PropertyRef Name="idimagem" />
+    </Key>
+    <Property Name="idimagem" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idnoticia" Type="int" Nullable="false" />
+    <Property Name="url" Type="varchar" MaxLength="500" />
+    <Property Name="titulo" Type="varchar" MaxLength="3000" />
+    <Property Name="creditos" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="noticia_termos">
+    <Key>
+      <PropertyRef Name="idnoticiatermos" />
+    </Key>
+    <Property Name="idnoticiatermos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idnoticia" Type="int" />
+    <Property Name="termo" Type="varchar" MaxLength="200" />
+    <Property Name="frequencia" Type="int" />
+  </EntityType>
+  <EntityType Name="noticias">
+    <Key>
+      <PropertyRef Name="idnoticia" />
+    </Key>
+    <Property Name="idnoticia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idfonte" Type="int" Nullable="false" />
+    <Property Name="idnoticia_knewin" Type="int" />
+    <Property Name="titulo" Type="varchar" MaxLength="500" />
+    <Property Name="subtitulo" Type="varchar" MaxLength="800" />
+    <Property Name="dominio" Type="varchar" MaxLength="500" />
+    <Property Name="autor" Type="varchar" MaxLength="120" />
+    <Property Name="conteudo" Type="varchar" MaxLength="11000" />
+    <Property Name="url" Type="varchar" MaxLength="3000" />
+    <Property Name="datapublicacao" Type="datetime" Precision="0" />
+    <Property Name="datacaptura_knewin" Type="datetime" Precision="0" />
+    <Property Name="datacaptura_zeeng" Type="datetime" Precision="0" />
+    <Property Name="categoria" Type="varchar" MaxLength="100" />
+    <Property Name="localidade" Type="varchar" MaxLength="300" />
+    <Property Name="linguagem" Type="varchar" MaxLength="45" />
+    <Property Name="excluido" Type="bit" />
+    <Property Name="termoscapturados" Type="bit" />
+  </EntityType>
+  <EntityType Name="noticias_empresa">
+    <Key>
+      <PropertyRef Name="idnoticiaempresa" />
+    </Key>
+    <Property Name="idnoticiaempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="idnoticia" Type="int" />
+  </EntityType>
+  <EntityType Name="noticias_marca">
+    <Key>
+      <PropertyRef Name="idnoticiamarca" />
+    </Key>
+    <Property Name="idnoticiamarca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idmarca" Type="int" />
+    <Property Name="idnoticia" Type="int" />
+  </EntityType>
+  <EntityType Name="noticias_relacionadas">
+    <Key>
+      <PropertyRef Name="idnoticiarelacionadas" />
+    </Key>
+    <Property Name="idnoticiarelacionadas" Type="int" Nullable="false" />
+    <Property Name="idnoticia_princ" Type="int" />
+    <Property Name="idnoticia_rel" Type="int" />
+  </EntityType>
+  <EntityType Name="presenca_online_capturas">
+    <Key>
+      <PropertyRef Name="idcaptura" />
+    </Key>
+    <Property Name="idcaptura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" Nullable="false" />
+    <Property Name="datacaptura" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="rankbrasil" Type="int" />
+    <Property Name="rankglobal" Type="int" />
+    <Property Name="autoridadedominio" Type="int" />
+    <Property Name="autoridadepagina" Type="int" />
+    <Property Name="visitaspesquisa" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="taxarejeicao" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="pontuacaospam" Type="int" />
+    <Property Name="links" Type="int" />
+    <Property Name="novoslinks" Type="int" />
+    <Property Name="paginasvisitadas" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="tempovisita" Type="time" Precision="0" />
+    <Property Name="audi_feminino" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="audi_masculino" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="audi_semfaculdade" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="audi_algumafaculdade" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="audi_posgraduacao" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="audi_faculdade" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="audi_casa" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="audi_escola" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="audi_trabalho" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="presenca_online_linkadopor">
+    <Key>
+      <PropertyRef Name="idlink" />
+    </Key>
+    <Property Name="idlink" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcaptura" Type="int" Nullable="false" />
+    <Property Name="site" Type="varchar" MaxLength="500" />
+    <Property Name="link" Type="varchar" MaxLength="1000" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="presenca_online_palavraspesquisa">
+    <Key>
+      <PropertyRef Name="idpalavrapesquisa" />
+    </Key>
+    <Property Name="idpalavrapesquisa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcaptura" Type="int" Nullable="false" />
+    <Property Name="palavra" Type="varchar" MaxLength="200" />
+    <Property Name="percentual" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="produtoredessociais">
+    <Key>
+      <PropertyRef Name="idprodutoredessociais" />
+    </Key>
+    <Property Name="idprodutoredessociais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idproduto" Type="int" Nullable="false" />
+    <Property Name="idredesocial" Type="int" Nullable="false" />
+    <Property Name="urlredesocial" Type="varchar" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="produtos">
+    <Key>
+      <PropertyRef Name="idproduto" />
+    </Key>
+    <Property Name="idproduto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idmarca" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="descricao" Type="varchar" MaxLength="500" />
+    <Property Name="urlsite" Type="varchar" MaxLength="500" />
+    <Property Name="excluido" Type="bit" />
+    <Property Name="imagem" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="promo_arquivos">
+    <Key>
+      <PropertyRef Name="idpromoarquivo" />
+    </Key>
+    <Property Name="idpromoarquivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpromocao" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="url" Type="varchar" MaxLength="300" />
+    <Property Name="conteudo" Type="text" />
+    <Property Name="tipo" Type="varchar" MaxLength="45" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="promo_estadosabrangencia">
+    <Key>
+      <PropertyRef Name="idestadoabrangencia" />
+    </Key>
+    <Property Name="idestadoabrangencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idestado" Type="int" />
+    <Property Name="idpromocao" Type="int" />
+  </EntityType>
+  <EntityType Name="promo_fb_posts">
+    <Key>
+      <PropertyRef Name="idpromofbpost" />
+    </Key>
+    <Property Name="idpromofbpost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpost" Type="uint" />
+    <Property Name="idpromocao" Type="int" />
+  </EntityType>
+  <EntityType Name="promo_insta_posts">
+    <Key>
+      <PropertyRef Name="idpromoinstapost" />
+    </Key>
+    <Property Name="idpromoinstapost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpost" Type="int" />
+    <Property Name="idpromocao" Type="int" />
+  </EntityType>
+  <EntityType Name="promo_modalidades">
+    <Key>
+      <PropertyRef Name="idpromomodalidade" />
+    </Key>
+    <Property Name="idpromomodalidade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="promo_municipiosabrangencia">
+    <Key>
+      <PropertyRef Name="idmunicipiosabrangencia" />
+    </Key>
+    <Property Name="idmunicipiosabrangencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idmunicipio" Type="int" />
+    <Property Name="idpromocao" Type="int" />
+  </EntityType>
+  <EntityType Name="promo_orgaosreguladores">
+    <Key>
+      <PropertyRef Name="idorgao" />
+    </Key>
+    <Property Name="idorgao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="promo_promocoes">
+    <Key>
+      <PropertyRef Name="idpromocao" />
+    </Key>
+    <Property Name="idpromocao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idorgaoregulador" Type="int" />
+    <Property Name="idmodalidade" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="500" />
+    <Property Name="certificadoautorizacao" Type="varchar" MaxLength="100" />
+    <Property Name="outrosinteressados" Type="varchar" MaxLength="1000" />
+    <Property Name="abrangencianacional" Type="bit" />
+    <Property Name="dtcadastro" Type="date" />
+    <Property Name="dtvigenciaini" Type="date" />
+    <Property Name="dtvigenciafim" Type="date" />
+    <Property Name="valorpremios" Type="decimal" Precision="12" Scale="2" />
+    <Property Name="linksitepromocao" Type="varchar" MaxLength="500" />
+    <Property Name="linkfacebook" Type="varchar" MaxLength="500" />
+    <Property Name="linkinstagram" Type="varchar" MaxLength="500" />
+    <Property Name="linktwitter" Type="varchar" MaxLength="500" />
+    <Property Name="linkyoutube" Type="varchar" MaxLength="500" />
+    <Property Name="mecanicapromo" Type="text" />
+    <Property Name="produtosparticipantes" Type="text" />
+    <Property Name="premiospromo" Type="text" />
+    <Property Name="linkregulamento" Type="varchar" MaxLength="500" />
+    <Property Name="textoregulamento" Type="text" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="promo_promoempresas">
+    <Key>
+      <PropertyRef Name="idpromoempresas" />
+    </Key>
+    <Property Name="idpromoempresas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="idpromocao" Type="int" />
+  </EntityType>
+  <EntityType Name="promo_promonoticias">
+    <Key>
+      <PropertyRef Name="idpromonoticias" />
+    </Key>
+    <Property Name="idpromonoticias" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpromocao" Type="int" />
+    <Property Name="idnoticia" Type="int" />
+  </EntityType>
+  <EntityType Name="promo_regulamentoarquivos">
+    <Key>
+      <PropertyRef Name="idregulamentoarquivos" />
+    </Key>
+    <Property Name="idregulamentoarquivos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpromocao" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="tipo" Type="varchar" MaxLength="45" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="promo_tw_posts">
+    <Key>
+      <PropertyRef Name="idpromotwposts" />
+    </Key>
+    <Property Name="idpromotwposts" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpost" Type="int" />
+    <Property Name="idpromocao" Type="int" />
+  </EntityType>
+  <EntityType Name="promo_yt_videos">
+    <Key>
+      <PropertyRef Name="idpromoytvideos" />
+    </Key>
+    <Property Name="idpromoytvideos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idvideo" Type="int" />
+    <Property Name="idpromocao" Type="int" />
+  </EntityType>
+  <EntityType Name="redessociais">
+    <Key>
+      <PropertyRef Name="idredessociais" />
+    </Key>
+    <Property Name="idredessociais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="45" />
+    <Property Name="nomelogo" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="seae_abrang_estado">
+    <Key>
+      <PropertyRef Name="idabrangestado" />
+    </Key>
+    <Property Name="idabrangestado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idprocesso" Type="int" />
+    <Property Name="idestado" Type="int" />
+  </EntityType>
+  <EntityType Name="seae_abrang_municipio">
+    <Key>
+      <PropertyRef Name="idabrangmunicipio" />
+    </Key>
+    <Property Name="idabrangmunicipio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idprocesso" Type="int" />
+    <Property Name="idmunicipio" Type="int" />
+  </EntityType>
+  <EntityType Name="seae_arquivos_proc">
+    <Key>
+      <PropertyRef Name="idarquivo" />
+    </Key>
+    <Property Name="idarquivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idprocesso" Type="int" />
+    <Property Name="numdoc" Type="varchar" MaxLength="45" />
+    <Property Name="coordenacao" Type="varchar" MaxLength="45" />
+    <Property Name="situacao" Type="varchar" MaxLength="1500" />
+    <Property Name="link" Type="varchar" MaxLength="1500" />
+    <Property Name="nomearquivo" Type="varchar" MaxLength="500" />
+    <Property Name="textoarquivo" Type="mediumtext" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="seae_empresa_processos">
+    <Key>
+      <PropertyRef Name="idempresaprocesso" />
+    </Key>
+    <Property Name="idempresaprocesso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idprocesso" Type="int" />
+    <Property Name="idempresa" Type="int" />
+  </EntityType>
+  <EntityType Name="seae_mov_situacao">
+    <Key>
+      <PropertyRef Name="idmovsituacao" />
+    </Key>
+    <Property Name="idmovsituacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idprocesso" Type="int" />
+    <Property Name="idsituacao" Type="int" />
+    <Property Name="dtsituacao" Type="date" />
+  </EntityType>
+  <EntityType Name="seae_processo_setor">
+    <Key>
+      <PropertyRef Name="idprocessosetor" />
+    </Key>
+    <Property Name="idprocessosetor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idprocesso" Type="int" />
+    <Property Name="idsetor" Type="int" />
+    <Property Name="idsubsetor" Type="int" />
+  </EntityType>
+  <EntityType Name="seae_processo_solicitantes">
+    <Key>
+      <PropertyRef Name="idsolicitante" />
+    </Key>
+    <Property Name="idsolicitante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idprocesso" Type="int" />
+    <Property Name="solicitante" Type="varchar" MaxLength="500" />
+    <Property Name="cnpj" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="seae_processos">
+    <Key>
+      <PropertyRef Name="idprocesso" />
+    </Key>
+    <Property Name="idprocesso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numprocesso" Type="varchar" MaxLength="45" />
+    <Property Name="dtprocesso" Type="date" />
+    <Property Name="dtvigenciaini" Type="date" />
+    <Property Name="dtvigenciafim" Type="date" />
+    <Property Name="interessados" Type="varchar" MaxLength="5000" />
+    <Property Name="premios" Type="varchar" MaxLength="5000" />
+    <Property Name="valortotalpremios" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="modalidade" Type="varchar" MaxLength="500" />
+    <Property Name="formacontemplacao" Type="varchar" MaxLength="500" />
+    <Property Name="abrangencia_nacional" Type="bit" />
+    <Property Name="numdocs" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="resumo" Type="varchar" MaxLength="5000" />
+    <Property Name="comoparticipar" Type="varchar" MaxLength="5000" />
+    <Property Name="atualizarElastic" Type="bit" Nullable="false" />
+    <Property Name="dadosExtraidos" Type="bit" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="seae_setores_proc">
+    <Key>
+      <PropertyRef Name="idsetor" />
+    </Key>
+    <Property Name="idsetor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codsetor" Type="varchar" MaxLength="45" />
+    <Property Name="descricao" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="seae_situacoes">
+    <Key>
+      <PropertyRef Name="idsituacao" />
+    </Key>
+    <Property Name="idsituacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descricao" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="seae_subsetores_proc">
+    <Key>
+      <PropertyRef Name="idsubsetor" />
+    </Key>
+    <Property Name="idsubsetor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idsetor" Type="int" />
+    <Property Name="codsubsetor" Type="varchar" MaxLength="45" />
+    <Property Name="descricao" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="setoresempresa">
+    <Key>
+      <PropertyRef Name="idsetoresempresa" />
+    </Key>
+    <Property Name="idsetoresempresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="200" />
+    <Property Name="excluido" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tw_mencao_termos">
+    <Key>
+      <PropertyRef Name="idmencaotermo" />
+    </Key>
+    <Property Name="idmencaotermo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idmencao" Type="int" />
+    <Property Name="termo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="frequencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tw_mencoes">
+    <Key>
+      <PropertyRef Name="idmencao" />
+    </Key>
+    <Property Name="idmencao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idperfil" Type="int" />
+    <Property Name="idtwitter" Type="varchar" MaxLength="45" />
+    <Property Name="idtwrespondido" Type="varchar" MaxLength="45" />
+    <Property Name="postagem" Type="varchar" MaxLength="500" />
+    <Property Name="datahora" Type="datetime" Precision="0" />
+    <Property Name="is_retweet" Type="bit" />
+    <Property Name="is_reply" Type="bit" />
+    <Property Name="qtdretweets" Type="int" />
+    <Property Name="qtdfavoritado" Type="int" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="300" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="70" />
+    <Property Name="nomeusuario" Type="varchar" MaxLength="70" />
+    <Property Name="idusuario" Type="varchar" MaxLength="70" />
+    <Property Name="termoscapturados" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tw_perfis">
+    <Key>
+      <PropertyRef Name="idperfil" />
+    </Key>
+    <Property Name="idperfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="idmarca" Type="int" />
+    <Property Name="idtwitter" Type="varchar" MaxLength="50" />
+    <Property Name="nome" Type="varchar" MaxLength="45" />
+    <Property Name="screenname" Type="varchar" MaxLength="200" />
+    <Property Name="descricao" Type="varchar" MaxLength="400" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="400" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="70" />
+    <Property Name="ultimotwcapturado" Type="varchar" MaxLength="45" />
+    <Property Name="ultimotwmencaocapturado" Type="varchar" MaxLength="45" />
+    <Property Name="ultimaatualizacao" Type="date" />
+  </EntityType>
+  <EntityType Name="tw_perfis_stats">
+    <Key>
+      <PropertyRef Name="idperfilstats" />
+    </Key>
+    <Property Name="idperfilstats" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idperfil" Type="int" Nullable="false" />
+    <Property Name="datahora" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="qtdseguidores" Type="uint" Nullable="false" />
+    <Property Name="qtdseguidos" Type="uint" Nullable="false" />
+    <Property Name="qtdfavoritado" Type="uint" Nullable="false" />
+    <Property Name="qtdlistado" Type="uint" Nullable="false" />
+    <Property Name="qtdtweets" Type="uint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tw_post_termos">
+    <Key>
+      <PropertyRef Name="idposttermos" />
+    </Key>
+    <Property Name="idposttermos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpost" Type="int" />
+    <Property Name="termo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="frequencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tw_posts">
+    <Key>
+      <PropertyRef Name="idpost" />
+    </Key>
+    <Property Name="idpost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idperfil" Type="int" />
+    <Property Name="idtwitter" Type="varchar" MaxLength="45" />
+    <Property Name="postagem" Type="varchar" MaxLength="500" />
+    <Property Name="datahora" Type="datetime" Precision="0" />
+    <Property Name="is_retweet" Type="bit" />
+    <Property Name="is_reply" Type="bit" />
+    <Property Name="qtdretweets" Type="int" />
+    <Property Name="qtdfavoritado" Type="int" />
+    <Property Name="idtwrespondido" Type="varchar" MaxLength="45" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="600" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="50" />
+    <Property Name="termoscapturados" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="idusuario" />
+    </Key>
+    <Property Name="idusuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcliente" Type="int" />
+    <Property Name="nome" Type="varchar" MaxLength="100" />
+    <Property Name="login" Type="varchar" MaxLength="45" />
+    <Property Name="senha" Type="varchar" MaxLength="45" />
+    <Property Name="email" Type="varchar" MaxLength="45" />
+    <Property Name="ativo" Type="bit" />
+    <Property Name="excluido" Type="bit" />
+  </EntityType>
+  <EntityType Name="yt_canais">
+    <Key>
+      <PropertyRef Name="idcanal" />
+    </Key>
+    <Property Name="idcanal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idempresa" Type="int" />
+    <Property Name="idmarca" Type="int" />
+    <Property Name="idyoutube" Type="varchar" MaxLength="50" />
+    <Property Name="username" Type="varchar" MaxLength="30" />
+    <Property Name="nome" Type="varchar" MaxLength="50" />
+    <Property Name="descricao" Type="varchar" MaxLength="1000" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="1500" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="70" />
+    <Property Name="idlistavideos" Type="varchar" MaxLength="30" />
+    <Property Name="ultimaatualizacao" Type="date" />
+    <Property Name="datahoraultimovideo" Type="datetime" Precision="0" />
+  </EntityType>
+  <EntityType Name="yt_canais_stats">
+    <Key>
+      <PropertyRef Name="idcanalstats" />
+    </Key>
+    <Property Name="idcanalstats" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcanal" Type="int" Nullable="false" />
+    <Property Name="datahora" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="qtdvisualizacoes" Type="int" Nullable="false" />
+    <Property Name="qtdseguidores" Type="int" Nullable="false" />
+    <Property Name="qtdvideos" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="yt_comentario_termos">
+    <Key>
+      <PropertyRef Name="idcomentariotermo" />
+    </Key>
+    <Property Name="idcomentariotermo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcomentario" Type="int" />
+    <Property Name="termo" Type="varchar" MaxLength="100" />
+    <Property Name="frequencia" Type="int" />
+  </EntityType>
+  <EntityType Name="yt_comentarios">
+    <Key>
+      <PropertyRef Name="idcomentario" />
+    </Key>
+    <Property Name="idcomentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idyoutube" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="idvideo" Type="int" Nullable="false" />
+    <Property Name="idcomentarioresposta" Type="int" />
+    <Property Name="postagem" Type="varchar" MaxLength="10000" Nullable="false" />
+    <Property Name="qtdcurtidas" Type="int" Nullable="false" />
+    <Property Name="datahora" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="qtdrespostas" Type="int" />
+    <Property Name="nomeusuario" Type="varchar" MaxLength="150" />
+    <Property Name="idusuario" Type="varchar" MaxLength="80" />
+    <Property Name="termoscapturados" Type="bit" Nullable="false" />
+    <Property Name="datahoraultimoreply" Type="datetime" Precision="0" />
+  </EntityType>
+  <EntityType Name="yt_video_termos">
+    <Key>
+      <PropertyRef Name="idvideotermo" />
+    </Key>
+    <Property Name="idvideotermo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idvideo" Type="int" />
+    <Property Name="termo" Type="varchar" MaxLength="100" />
+    <Property Name="frequencia" Type="int" />
+  </EntityType>
+  <EntityType Name="yt_videos">
+    <Key>
+      <PropertyRef Name="idvideo" />
+    </Key>
+    <Property Name="idvideo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idcanal" Type="int" Nullable="false" />
+    <Property Name="idyoutube" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="descricao" Type="varchar" MaxLength="10000" />
+    <Property Name="datahora" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="qtdvisualizacoes" Type="int" Nullable="false" />
+    <Property Name="qtdcurtidas" Type="int" Nullable="false" />
+    <Property Name="qtddescurtidas" Type="int" Nullable="false" />
+    <Property Name="qtdfavoritados" Type="int" Nullable="false" />
+    <Property Name="qtdcomentarios" Type="int" Nullable="false" />
+    <Property Name="urlimagem" Type="varchar" MaxLength="300" />
+    <Property Name="nomeimagem" Type="varchar" MaxLength="70" />
+    <Property Name="termoscapturados" Type="bit" Nullable="false" />
+    <Property Name="datahoraultimocomentario" Type="datetime" Precision="0" />
+  </EntityType>
+  <Association Name="cliente_estado">
+    <End Role="estados" Type="Self.estados" Multiplicity="0..1" />
+    <End Role="clientes" Type="Self.clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="clientes">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="clientes_usuario">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idclientes" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___insta_perfis">
+    <End Role="insta_perfis" Type="Self.insta_perfis" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="insta_perfis_stats" Type="Self.insta_perfis_stats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="insta_perfis_stats">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__insta_perfis">
+    <End Role="insta_perfis" Type="Self.insta_perfis" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="insta_posts" Type="Self.insta_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="insta_posts">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__insta_posts">
+    <End Role="insta_posts" Type="Self.insta_posts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="insta_comentarios" Type="Self.insta_comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="insta_comentarios">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tw_perfis">
+    <End Role="tw_perfis" Type="Self.tw_perfis" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tw_perfis_stats" Type="Self.tw_perfis_stats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="tw_perfis_stats">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__yt_canais">
+    <End Role="yt_canais" Type="Self.yt_canais" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="yt_canais_stats" Type="Self.yt_canais_stats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_canais">
+        <PropertyRef Name="idcanal" />
+      </Principal>
+      <Dependent Role="yt_canais_stats">
+        <PropertyRef Name="idcanal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__yt_perfis">
+    <End Role="yt_canais" Type="Self.yt_canais" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="yt_videos" Type="Self.yt_videos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_canais">
+        <PropertyRef Name="idcanal" />
+      </Principal>
+      <Dependent Role="yt_videos">
+        <PropertyRef Name="idcanal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_abrang_estado_estado">
+    <End Role="estados" Type="Self.estados" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_abrang_estado" Type="Self.seae_abrang_estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="seae_abrang_estado">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_abrang_estado_processo">
+    <End Role="seae_processos" Type="Self.seae_processos" Multiplicity="0..1" />
+    <End Role="seae_abrang_estado" Type="Self.seae_abrang_estado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_abrang_estado">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_arqui_proc_proc">
+    <End Role="seae_processos" Type="Self.seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_arquivos_proc" Type="Self.seae_arquivos_proc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_arquivos_proc">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cliente_relatorio">
+    <End Role="cliente_relatorios" Type="Self.cliente_relatorios" Multiplicity="1" />
+    <End Role="cliente_relatorio_metricas" Type="Self.cliente_relatorio_metricas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente_relatorios">
+        <PropertyRef Name="idclienterelatorio" />
+      </Principal>
+      <Dependent Role="cliente_relatorio_metricas">
+        <PropertyRef Name="idclienterelatorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cliente_relatorios">
+    <End Role="cliente_relatorios" Type="Self.cliente_relatorios" Multiplicity="1" />
+    <End Role="cliente_relatorio_empresas" Type="Self.cliente_relatorio_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cliente_relatorios">
+        <PropertyRef Name="idclienterelatorio" />
+      </Principal>
+      <Dependent Role="cliente_relatorio_empresas">
+        <PropertyRef Name="idclienterelatorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_clienteempresa_cliente">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="cliente_empresas" Type="Self.cliente_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idclientes" />
+      </Principal>
+      <Dependent Role="cliente_empresas">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_clienteempresa_empresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="cliente_empresas" Type="Self.cliente_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="cliente_empresas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_clientes">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="1" />
+    <End Role="cliente_relatorios" Type="Self.cliente_relatorios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idclientes" />
+      </Principal>
+      <Dependent Role="cliente_relatorios">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_clientes_vertentes_clientes">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="cliente_vertentes" Type="Self.cliente_vertentes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idclientes" />
+      </Principal>
+      <Dependent Role="cliente_vertentes">
+        <PropertyRef Name="idcliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cnpj_empresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+    <End Role="cnpjempresa" Type="Self.cnpjempresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="cnpjempresa">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cnpj_marca">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="1" />
+    <End Role="cnpjmarca" Type="Self.cnpjmarca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="cnpjmarca">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresa_processo_promo">
+    <End Role="seae_processos" Type="Self.seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_empresa_processos" Type="Self.seae_empresa_processos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_empresa_processos">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresa_promo_empresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_empresa_processos" Type="Self.seae_empresa_processos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="seae_empresa_processos">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresa_redessociais">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+    <End Role="empresaredessociais" Type="Self.empresaredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="empresaredessociais">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresa_setor">
+    <End Role="setoresempresa" Type="Self.setoresempresa" Multiplicity="1" />
+    <End Role="empresas" Type="Self.empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="setoresempresa">
+        <PropertyRef Name="idsetoresempresa" />
+      </Principal>
+      <Dependent Role="empresas">
+        <PropertyRef Name="idsetor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresas">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+    <End Role="cliente_relatorio_empresas" Type="Self.cliente_relatorio_empresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="cliente_relatorio_empresas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresasredes_redessociais">
+    <End Role="redessociais" Type="Self.redessociais" Multiplicity="1" />
+    <End Role="empresaredessociais" Type="Self.empresaredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="redessociais">
+        <PropertyRef Name="idredessociais" />
+      </Principal>
+      <Dependent Role="empresaredessociais">
+        <PropertyRef Name="idredesocial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fb_comentarios_fb_posts">
+    <End Role="fb_posts" Type="Self.fb_posts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="fb_comentarios" Type="Self.fb_comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="fb_comentarios">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fb_perfil_stats">
+    <End Role="fb_perfis" Type="Self.fb_perfis" Multiplicity="1" />
+    <End Role="fb_perfis_stats" Type="Self.fb_perfis_stats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="fb_perfis_stats">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fb_perfis_empresas">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="fb_perfis" Type="Self.fb_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="fb_perfis">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fb_perfis_marcas">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="fb_perfis" Type="Self.fb_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="fb_perfis">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_fb_posts_fb_perfis">
+    <End Role="fb_perfis" Type="Self.fb_perfis" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="fb_posts" Type="Self.fb_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="fb_posts">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fbcomentarioss_fbtermos">
+    <End Role="fb_comentarios" Type="Self.fb_comentarios" Multiplicity="0..1" />
+    <End Role="fb_comentarios_termos" Type="Self.fb_comentarios_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_comentarios">
+        <PropertyRef Name="idcomentario" />
+      </Principal>
+      <Dependent Role="fb_comentarios_termos">
+        <PropertyRef Name="idcomentario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fbposts_fbtermos">
+    <End Role="fb_posts" Type="Self.fb_posts" Multiplicity="0..1" />
+    <End Role="fb_post_termos" Type="Self.fb_post_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="fb_post_termos">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_insta_comentarios_termos">
+    <End Role="insta_comentarios" Type="Self.insta_comentarios" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="insta_comentario_termos" Type="Self.insta_comentario_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_comentarios">
+        <PropertyRef Name="idcomentario" />
+      </Principal>
+      <Dependent Role="insta_comentario_termos">
+        <PropertyRef Name="idcomentario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_insta_perfis_empresas">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="insta_perfis" Type="Self.insta_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="insta_perfis">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_insta_perfis_marcas">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="insta_perfis" Type="Self.insta_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="insta_perfis">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_insta_post_termos">
+    <End Role="insta_posts" Type="Self.insta_posts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="insta_post_termos" Type="Self.insta_post_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="insta_post_termos">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_marca_produto">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="produtos" Type="Self.produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="produtos">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_marca_redessociais">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="1" />
+    <End Role="marcaredessociais" Type="Self.marcaredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="marcaredessociais">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_marcaredes_redessociais">
+    <End Role="redessociais" Type="Self.redessociais" Multiplicity="1" />
+    <End Role="marcaredessociais" Type="Self.marcaredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="redessociais">
+        <PropertyRef Name="idredessociais" />
+      </Principal>
+      <Dependent Role="marcaredessociais">
+        <PropertyRef Name="idredesocial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_mov_situacao">
+    <End Role="seae_situacoes" Type="Self.seae_situacoes" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_mov_situacao" Type="Self.seae_mov_situacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_situacoes">
+        <PropertyRef Name="idsituacao" />
+      </Principal>
+      <Dependent Role="seae_mov_situacao">
+        <PropertyRef Name="idsituacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_mprodutoredes_redessociais">
+    <End Role="redessociais" Type="Self.redessociais" Multiplicity="1" />
+    <End Role="produtoredessociais" Type="Self.produtoredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="redessociais">
+        <PropertyRef Name="idredessociais" />
+      </Principal>
+      <Dependent Role="produtoredessociais">
+        <PropertyRef Name="idredesocial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_municipios_estados">
+    <End Role="estados" Type="Self.estados" Multiplicity="0..1" />
+    <End Role="municipios" Type="Self.municipios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="municipios">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_empresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="noticias_empresa" Type="Self.noticias_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="noticias_empresa">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_fonte">
+    <End Role="fontes_noticias" Type="Self.fontes_noticias" Multiplicity="1" />
+    <End Role="noticias" Type="Self.noticias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fontes_noticias">
+        <PropertyRef Name="idfonte" />
+      </Principal>
+      <Dependent Role="noticias">
+        <PropertyRef Name="idfonte" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_imagem">
+    <End Role="noticias" Type="Self.noticias" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="noticia_imagens" Type="Self.noticia_imagens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticia_imagens">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_marc_noticia">
+    <End Role="noticias" Type="Self.noticias" Multiplicity="0..1" />
+    <End Role="noticias_marca" Type="Self.noticias_marca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticias_marca">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_marca">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="noticias_marca" Type="Self.noticias_marca" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="noticias_marca">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_noticia">
+    <End Role="noticias" Type="Self.noticias" Multiplicity="0..1" />
+    <End Role="noticias_empresa" Type="Self.noticias_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticias_empresa">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_princ">
+    <End Role="noticias" Type="Self.noticias" Multiplicity="0..1" />
+    <End Role="noticias_relacionadas" Type="Self.noticias_relacionadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticias_relacionadas">
+        <PropertyRef Name="idnoticia_princ" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_rel">
+    <End Role="noticias" Type="Self.noticias" Multiplicity="0..1" />
+    <End Role="noticias_relacionadas" Type="Self.noticias_relacionadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticias_relacionadas">
+        <PropertyRef Name="idnoticia_rel" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_noticia_termos">
+    <End Role="noticias" Type="Self.noticias" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="noticia_termos" Type="Self.noticia_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="noticia_termos">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_post_termos">
+    <End Role="tw_posts" Type="Self.tw_posts" Multiplicity="0..1" />
+    <End Role="tw_post_termos" Type="Self.tw_post_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="tw_post_termos">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_presenca_captura_palavras">
+    <End Role="presenca_online_capturas" Type="Self.presenca_online_capturas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="presenca_online_palavraspesquisa" Type="Self.presenca_online_palavraspesquisa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="presenca_online_capturas">
+        <PropertyRef Name="idcaptura" />
+      </Principal>
+      <Dependent Role="presenca_online_palavraspesquisa">
+        <PropertyRef Name="idcaptura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_presenca_linkadopor">
+    <End Role="presenca_online_capturas" Type="Self.presenca_online_capturas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="presenca_online_linkadopor" Type="Self.presenca_online_linkadopor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="presenca_online_capturas">
+        <PropertyRef Name="idcaptura" />
+      </Principal>
+      <Dependent Role="presenca_online_linkadopor">
+        <PropertyRef Name="idcaptura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_presenca_online_capturas_empresas">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="1" />
+    <End Role="presenca_online_capturas" Type="Self.presenca_online_capturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="presenca_online_capturas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_processos">
+    <End Role="seae_processos" Type="Self.seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_processo_setor" Type="Self.seae_processo_setor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_processo_setor">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_produto_redessociais">
+    <End Role="produtos" Type="Self.produtos" Multiplicity="1" />
+    <End Role="produtoredessociais" Type="Self.produtoredessociais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="produtos">
+        <PropertyRef Name="idproduto" />
+      </Principal>
+      <Dependent Role="produtoredessociais">
+        <PropertyRef Name="idproduto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promo_municipio">
+    <End Role="seae_processos" Type="Self.seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_abrang_municipio" Type="Self.seae_abrang_municipio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_abrang_municipio">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promo_municipio_muni">
+    <End Role="municipios" Type="Self.municipios" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_abrang_municipio" Type="Self.seae_abrang_municipio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="municipios">
+        <PropertyRef Name="idmunicipio" />
+      </Principal>
+      <Dependent Role="seae_abrang_municipio">
+        <PropertyRef Name="idmunicipio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoarquivos_promocao">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_arquivos" Type="Self.promo_arquivos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_arquivos">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promocao_modalidade">
+    <End Role="promo_modalidades" Type="Self.promo_modalidades" Multiplicity="0..1" />
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_modalidades">
+        <PropertyRef Name="idpromomodalidade" />
+      </Principal>
+      <Dependent Role="promo_promocoes">
+        <PropertyRef Name="idmodalidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promocao_orgaoreg">
+    <End Role="promo_orgaosreguladores" Type="Self.promo_orgaosreguladores" Multiplicity="0..1" />
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_orgaosreguladores">
+        <PropertyRef Name="idorgao" />
+      </Principal>
+      <Dependent Role="promo_promocoes">
+        <PropertyRef Name="idorgaoregulador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoempresas_empresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="promo_promoempresas" Type="Self.promo_promoempresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="promo_promoempresas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoempresas_promocao">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_promoempresas" Type="Self.promo_promoempresas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_promoempresas">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoestados_estados">
+    <End Role="estados" Type="Self.estados" Multiplicity="0..1" />
+    <End Role="promo_estadosabrangencia" Type="Self.promo_estadosabrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="promo_estadosabrangencia">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoestados_promo">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_estadosabrangencia" Type="Self.promo_estadosabrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_estadosabrangencia">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoinsta_post">
+    <End Role="insta_posts" Type="Self.insta_posts" Multiplicity="0..1" />
+    <End Role="promo_insta_posts" Type="Self.promo_insta_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="insta_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="promo_insta_posts">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoinsta_promo">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_insta_posts" Type="Self.promo_insta_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_insta_posts">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promomunicipios_municipios">
+    <End Role="municipios" Type="Self.municipios" Multiplicity="0..1" />
+    <End Role="promo_municipiosabrangencia" Type="Self.promo_municipiosabrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="municipios">
+        <PropertyRef Name="idmunicipio" />
+      </Principal>
+      <Dependent Role="promo_municipiosabrangencia">
+        <PropertyRef Name="idmunicipio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promomunicipios_promocao">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_municipiosabrangencia" Type="Self.promo_municipiosabrangencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_municipiosabrangencia">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promonoticias_noticias">
+    <End Role="noticias" Type="Self.noticias" Multiplicity="0..1" />
+    <End Role="promo_promonoticias" Type="Self.promo_promonoticias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="noticias">
+        <PropertyRef Name="idnoticia" />
+      </Principal>
+      <Dependent Role="promo_promonoticias">
+        <PropertyRef Name="idnoticia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promonoticias_promo">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_promonoticias" Type="Self.promo_promonoticias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_promonoticias">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoposts_post">
+    <End Role="fb_posts" Type="Self.fb_posts" Multiplicity="0..1" />
+    <End Role="promo_fb_posts" Type="Self.promo_fb_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="fb_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="promo_fb_posts">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoposts_promo">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_fb_posts" Type="Self.promo_fb_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_fb_posts">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promotw_posts">
+    <End Role="tw_posts" Type="Self.tw_posts" Multiplicity="0..1" />
+    <End Role="promo_tw_posts" Type="Self.promo_tw_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_posts">
+        <PropertyRef Name="idpost" />
+      </Principal>
+      <Dependent Role="promo_tw_posts">
+        <PropertyRef Name="idpost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promotw_promo">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_tw_posts" Type="Self.promo_tw_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_tw_posts">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoyt_promo">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_yt_videos" Type="Self.promo_yt_videos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_yt_videos">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_promoyt_videos">
+    <End Role="yt_videos" Type="Self.yt_videos" Multiplicity="0..1" />
+    <End Role="promo_yt_videos" Type="Self.promo_yt_videos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_videos">
+        <PropertyRef Name="idvideo" />
+      </Principal>
+      <Dependent Role="promo_yt_videos">
+        <PropertyRef Name="idvideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_registro_empresa_empresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="mapa_registro_empresa" Type="Self.mapa_registro_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="mapa_registro_empresa">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_registro_empresa_registro">
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="0..1" />
+    <End Role="mapa_registro_empresa" Type="Self.mapa_registro_empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_registros">
+        <PropertyRef Name="idregistro" />
+      </Principal>
+      <Dependent Role="mapa_registro_empresa">
+        <PropertyRef Name="idregistro" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_regulamentoarquivos_promo">
+    <End Role="promo_promocoes" Type="Self.promo_promocoes" Multiplicity="0..1" />
+    <End Role="promo_regulamentoarquivos" Type="Self.promo_regulamentoarquivos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promo_promocoes">
+        <PropertyRef Name="idpromocao" />
+      </Principal>
+      <Dependent Role="promo_regulamentoarquivos">
+        <PropertyRef Name="idpromocao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_seae_proc_solicitante">
+    <End Role="seae_processos" Type="Self.seae_processos" Multiplicity="0..1" />
+    <End Role="seae_processo_solicitantes" Type="Self.seae_processo_solicitantes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_processo_solicitantes">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_seae_processo_setor_seae_subsetores_proc">
+    <End Role="seae_subsetores_proc" Type="Self.seae_subsetores_proc" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_processo_setor" Type="Self.seae_processo_setor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_subsetores_proc">
+        <PropertyRef Name="idsubsetor" />
+      </Principal>
+      <Dependent Role="seae_processo_setor">
+        <PropertyRef Name="idsubsetor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_seae_subsetores_proc_seae_setores_proc">
+    <End Role="seae_setores_proc" Type="Self.seae_setores_proc" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_subsetores_proc" Type="Self.seae_subsetores_proc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_setores_proc">
+        <PropertyRef Name="idsetor" />
+      </Principal>
+      <Dependent Role="seae_subsetores_proc">
+        <PropertyRef Name="idsetor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_setores_proc">
+    <End Role="seae_setores_proc" Type="Self.seae_setores_proc" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_processo_setor" Type="Self.seae_processo_setor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_setores_proc">
+        <PropertyRef Name="idsetor" />
+      </Principal>
+      <Dependent Role="seae_processo_setor">
+        <PropertyRef Name="idsetor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_situacao_processo">
+    <End Role="seae_processos" Type="Self.seae_processos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="seae_mov_situacao" Type="Self.seae_mov_situacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="seae_processos">
+        <PropertyRef Name="idprocesso" />
+      </Principal>
+      <Dependent Role="seae_mov_situacao">
+        <PropertyRef Name="idprocesso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tw_mencao_termos_tw_mencoes">
+    <End Role="tw_mencoes" Type="Self.tw_mencoes" Multiplicity="0..1" />
+    <End Role="tw_mencao_termos" Type="Self.tw_mencao_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_mencoes">
+        <PropertyRef Name="idmencao" />
+      </Principal>
+      <Dependent Role="tw_mencao_termos">
+        <PropertyRef Name="idmencao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tw_perfis_empresas">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="tw_perfis" Type="Self.tw_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="tw_perfis">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tw_perfis_marcas">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="tw_perfis" Type="Self.tw_perfis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="tw_perfis">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usuario">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="cliente_relatorios" Type="Self.cliente_relatorios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="idusuario" />
+      </Principal>
+      <Dependent Role="cliente_relatorios">
+        <PropertyRef Name="idusuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usuarios">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="logs" Type="Self.logs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="idusuario" />
+      </Principal>
+      <Dependent Role="logs">
+        <PropertyRef Name="idusuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_yt_canais_empresas">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="yt_canais" Type="Self.yt_canais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="yt_canais">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_yt_canais_marcas">
+    <End Role="marcas" Type="Self.marcas" Multiplicity="0..1" />
+    <End Role="yt_canais" Type="Self.yt_canais" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="marcas">
+        <PropertyRef Name="idmarca" />
+      </Principal>
+      <Dependent Role="yt_canais">
+        <PropertyRef Name="idmarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_yt_comentario_termos">
+    <End Role="yt_comentarios" Type="Self.yt_comentarios" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="yt_comentario_termos" Type="Self.yt_comentario_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_comentarios">
+        <PropertyRef Name="idcomentario" />
+      </Principal>
+      <Dependent Role="yt_comentario_termos">
+        <PropertyRef Name="idcomentario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_yt_comentarios_yt_comentarios">
+    <End Role="yt_comentarios" Type="Self.yt_comentarios" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="yt_comentarios1" Type="Self.yt_comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_comentarios">
+        <PropertyRef Name="idcomentario" />
+      </Principal>
+      <Dependent Role="yt_comentarios1">
+        <PropertyRef Name="idcomentarioresposta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_yt_comentarios_yt_videos">
+    <End Role="yt_videos" Type="Self.yt_videos" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="yt_comentarios" Type="Self.yt_comentarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_videos">
+        <PropertyRef Name="idvideo" />
+      </Principal>
+      <Dependent Role="yt_comentarios">
+        <PropertyRef Name="idvideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_yt_video_termos">
+    <End Role="yt_videos" Type="Self.yt_videos" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="yt_video_termos" Type="Self.yt_video_termos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yt_videos">
+        <PropertyRef Name="idvideo" />
+      </Principal>
+      <Dependent Role="yt_video_termos">
+        <PropertyRef Name="idvideo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="idEmpresa">
+    <End Role="empresas" Type="Self.empresas" Multiplicity="0..1" />
+    <End Role="marcas" Type="Self.marcas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresas">
+        <PropertyRef Name="idempresa" />
+      </Principal>
+      <Dependent Role="marcas">
+        <PropertyRef Name="idempresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_area">
+    <End Role="mapa_areas" Type="Self.mapa_areas" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_areas">
+        <PropertyRef Name="idarea" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idarea" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_atributo">
+    <End Role="mapa_atributo" Type="Self.mapa_atributo" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_atributo">
+        <PropertyRef Name="idatributo" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idatributo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_base">
+    <End Role="mapa_base" Type="Self.mapa_base" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_base">
+        <PropertyRef Name="idbase" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idbase" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_caracteristica">
+    <End Role="mapa_caracteristica" Type="Self.mapa_caracteristica" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_caracteristica">
+        <PropertyRef Name="idcaracteristica" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idcaracteristica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_complemento">
+    <End Role="mapa_complemento" Type="Self.mapa_complemento" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_complemento">
+        <PropertyRef Name="idcomplemento" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idcomplemento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_especie">
+    <End Role="mapa_especies" Type="Self.mapa_especies" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_especies">
+        <PropertyRef Name="idespecie" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idespecie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_estado">
+    <End Role="estados" Type="Self.estados" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="idestado" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idestado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_origem">
+    <End Role="mapa_origens" Type="Self.mapa_origens" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_origens">
+        <PropertyRef Name="idorigem" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idorigem" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="registros_subespecie">
+    <End Role="mapa_subespecie" Type="Self.mapa_subespecie" Multiplicity="0..1" />
+    <End Role="mapa_registros" Type="Self.mapa_registros" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mapa_subespecie">
+        <PropertyRef Name="idsubespecie" />
+      </Principal>
+      <Dependent Role="mapa_registros">
+        <PropertyRef Name="idsubespecie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tw_mecoes_perfil">
+    <End Role="tw_perfis" Type="Self.tw_perfis" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tw_mencoes" Type="Self.tw_mencoes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="tw_mencoes">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tw_perfil_posts">
+    <End Role="tw_perfis" Type="Self.tw_perfis" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tw_posts" Type="Self.tw_posts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tw_perfis">
+        <PropertyRef Name="idperfil" />
+      </Principal>
+      <Dependent Role="tw_posts">
+        <PropertyRef Name="idperfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetFacebookCrescimentoFas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="zeeng">
+    <Parameter Name="idempresaface" Type="int" Mode="In" />
+    <Parameter Name="dataInicial" Type="datetime" Mode="In" />
+    <Parameter Name="dataFinal" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetFacebookInteracoesPorHora" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="zeeng">
+    <Parameter Name="idempresa" Type="int" Mode="In" />
+    <Parameter Name="dtInicial" Type="datetime" Mode="In" />
+    <Parameter Name="dtFinal" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetFacebookInteracoesSemana" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="zeeng">
+    <Parameter Name="idempresa" Type="int" Mode="In" />
+    <Parameter Name="dtInicial" Type="datetime" Mode="In" />
+    <Parameter Name="dtFinal" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="GetTotalMapaPorSemana" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="zeeng">
+    <Parameter Name="idEmpresa" Type="int" Mode="In" />
+    <Parameter Name="datainicial" Type="datetime" Mode="In" />
+    <Parameter Name="datafinal" Type="datetime" Mode="In" />
+  </Function>
+  <EntityContainer Name="zeengModelStoreContainer">
+    <EntitySet Name="cliente_empresas" EntityType="Self.cliente_empresas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="cliente_relatorio_empresas" EntityType="Self.cliente_relatorio_empresas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="cliente_relatorio_metricas" EntityType="Self.cliente_relatorio_metricas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="cliente_relatorios" EntityType="Self.cliente_relatorios" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="cliente_vertentes" EntityType="Self.cliente_vertentes" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="clientes" EntityType="Self.clientes" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="cnpjempresa" EntityType="Self.cnpjempresa" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="cnpjmarca" EntityType="Self.cnpjmarca" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="empresaredessociais" EntityType="Self.empresaredessociais" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="empresas" EntityType="Self.empresas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="estados" EntityType="Self.estados" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="fb_comentarios" EntityType="Self.fb_comentarios" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="fb_comentarios_termos" EntityType="Self.fb_comentarios_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="fb_perfis" EntityType="Self.fb_perfis" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="fb_perfis_stats" EntityType="Self.fb_perfis_stats" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="fb_post_termos" EntityType="Self.fb_post_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="fb_posts" EntityType="Self.fb_posts" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="fontes_noticias" EntityType="Self.fontes_noticias" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="insta_comentario_termos" EntityType="Self.insta_comentario_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="insta_comentarios" EntityType="Self.insta_comentarios" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="insta_perfis" EntityType="Self.insta_perfis" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="insta_perfis_stats" EntityType="Self.insta_perfis_stats" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="insta_post_termos" EntityType="Self.insta_post_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="insta_posts" EntityType="Self.insta_posts" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="logs" EntityType="Self.logs" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_areas" EntityType="Self.mapa_areas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_atributo" EntityType="Self.mapa_atributo" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_base" EntityType="Self.mapa_base" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_caracteristica" EntityType="Self.mapa_caracteristica" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_complemento" EntityType="Self.mapa_complemento" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_especies" EntityType="Self.mapa_especies" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_origens" EntityType="Self.mapa_origens" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_registro_empresa" EntityType="Self.mapa_registro_empresa" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_registros" EntityType="Self.mapa_registros" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="mapa_subespecie" EntityType="Self.mapa_subespecie" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="marcaredessociais" EntityType="Self.marcaredessociais" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="marcas" EntityType="Self.marcas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="municipios" EntityType="Self.municipios" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="noticia_imagens" EntityType="Self.noticia_imagens" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="noticia_termos" EntityType="Self.noticia_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="noticias" EntityType="Self.noticias" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="noticias_empresa" EntityType="Self.noticias_empresa" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="noticias_marca" EntityType="Self.noticias_marca" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="noticias_relacionadas" EntityType="Self.noticias_relacionadas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="presenca_online_capturas" EntityType="Self.presenca_online_capturas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="presenca_online_linkadopor" EntityType="Self.presenca_online_linkadopor" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="presenca_online_palavraspesquisa" EntityType="Self.presenca_online_palavraspesquisa" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="produtoredessociais" EntityType="Self.produtoredessociais" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="produtos" EntityType="Self.produtos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_arquivos" EntityType="Self.promo_arquivos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_estadosabrangencia" EntityType="Self.promo_estadosabrangencia" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_fb_posts" EntityType="Self.promo_fb_posts" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_insta_posts" EntityType="Self.promo_insta_posts" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_modalidades" EntityType="Self.promo_modalidades" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_municipiosabrangencia" EntityType="Self.promo_municipiosabrangencia" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_orgaosreguladores" EntityType="Self.promo_orgaosreguladores" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_promocoes" EntityType="Self.promo_promocoes" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_promoempresas" EntityType="Self.promo_promoempresas" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_promonoticias" EntityType="Self.promo_promonoticias" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_regulamentoarquivos" EntityType="Self.promo_regulamentoarquivos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_tw_posts" EntityType="Self.promo_tw_posts" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="promo_yt_videos" EntityType="Self.promo_yt_videos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="redessociais" EntityType="Self.redessociais" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_abrang_estado" EntityType="Self.seae_abrang_estado" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_abrang_municipio" EntityType="Self.seae_abrang_municipio" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_arquivos_proc" EntityType="Self.seae_arquivos_proc" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_empresa_processos" EntityType="Self.seae_empresa_processos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_mov_situacao" EntityType="Self.seae_mov_situacao" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_processo_setor" EntityType="Self.seae_processo_setor" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_processo_solicitantes" EntityType="Self.seae_processo_solicitantes" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_processos" EntityType="Self.seae_processos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_setores_proc" EntityType="Self.seae_setores_proc" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_situacoes" EntityType="Self.seae_situacoes" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="seae_subsetores_proc" EntityType="Self.seae_subsetores_proc" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="setoresempresa" EntityType="Self.setoresempresa" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="tw_mencao_termos" EntityType="Self.tw_mencao_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="tw_mencoes" EntityType="Self.tw_mencoes" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="tw_perfis" EntityType="Self.tw_perfis" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="tw_perfis_stats" EntityType="Self.tw_perfis_stats" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="tw_post_termos" EntityType="Self.tw_post_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="tw_posts" EntityType="Self.tw_posts" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="yt_canais" EntityType="Self.yt_canais" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="yt_canais_stats" EntityType="Self.yt_canais_stats" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="yt_comentario_termos" EntityType="Self.yt_comentario_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="yt_comentarios" EntityType="Self.yt_comentarios" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="yt_video_termos" EntityType="Self.yt_video_termos" Schema="zeeng" store:Type="Tables" />
+    <EntitySet Name="yt_videos" EntityType="Self.yt_videos" Schema="zeeng" store:Type="Tables" />
+    <AssociationSet Name="cliente_estado" Association="Self.cliente_estado">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="clientes" EntitySet="clientes" />
+    </AssociationSet>
+    <AssociationSet Name="clientes_usuario" Association="Self.clientes_usuario">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK___insta_perfis" Association="Self.FK___insta_perfis">
+      <End Role="insta_perfis" EntitySet="insta_perfis" />
+      <End Role="insta_perfis_stats" EntitySet="insta_perfis_stats" />
+    </AssociationSet>
+    <AssociationSet Name="FK__insta_perfis" Association="Self.FK__insta_perfis">
+      <End Role="insta_perfis" EntitySet="insta_perfis" />
+      <End Role="insta_posts" EntitySet="insta_posts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__insta_posts" Association="Self.FK__insta_posts">
+      <End Role="insta_posts" EntitySet="insta_posts" />
+      <End Role="insta_comentarios" EntitySet="insta_comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tw_perfis" Association="Self.FK__tw_perfis">
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+      <End Role="tw_perfis_stats" EntitySet="tw_perfis_stats" />
+    </AssociationSet>
+    <AssociationSet Name="FK__yt_canais" Association="Self.FK__yt_canais">
+      <End Role="yt_canais" EntitySet="yt_canais" />
+      <End Role="yt_canais_stats" EntitySet="yt_canais_stats" />
+    </AssociationSet>
+    <AssociationSet Name="FK__yt_perfis" Association="Self.FK__yt_perfis">
+      <End Role="yt_canais" EntitySet="yt_canais" />
+      <End Role="yt_videos" EntitySet="yt_videos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_abrang_estado_estado" Association="Self.fk_abrang_estado_estado">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="seae_abrang_estado" EntitySet="seae_abrang_estado" />
+    </AssociationSet>
+    <AssociationSet Name="fk_abrang_estado_processo" Association="Self.fk_abrang_estado_processo">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_abrang_estado" EntitySet="seae_abrang_estado" />
+    </AssociationSet>
+    <AssociationSet Name="fk_arqui_proc_proc" Association="Self.fk_arqui_proc_proc">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_arquivos_proc" EntitySet="seae_arquivos_proc" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cliente_relatorio" Association="Self.fk_cliente_relatorio">
+      <End Role="cliente_relatorios" EntitySet="cliente_relatorios" />
+      <End Role="cliente_relatorio_metricas" EntitySet="cliente_relatorio_metricas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cliente_relatorios" Association="Self.fk_cliente_relatorios">
+      <End Role="cliente_relatorios" EntitySet="cliente_relatorios" />
+      <End Role="cliente_relatorio_empresas" EntitySet="cliente_relatorio_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_clienteempresa_cliente" Association="Self.fk_clienteempresa_cliente">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="cliente_empresas" EntitySet="cliente_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_clienteempresa_empresa" Association="Self.fk_clienteempresa_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="cliente_empresas" EntitySet="cliente_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_clientes" Association="Self.fk_clientes">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="cliente_relatorios" EntitySet="cliente_relatorios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_clientes_vertentes_clientes" Association="Self.fk_clientes_vertentes_clientes">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="cliente_vertentes" EntitySet="cliente_vertentes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cnpj_empresa" Association="Self.fk_cnpj_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="cnpjempresa" EntitySet="cnpjempresa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cnpj_marca" Association="Self.fk_cnpj_marca">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="cnpjmarca" EntitySet="cnpjmarca" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresa_processo_promo" Association="Self.fk_empresa_processo_promo">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_empresa_processos" EntitySet="seae_empresa_processos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresa_promo_empresa" Association="Self.fk_empresa_promo_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="seae_empresa_processos" EntitySet="seae_empresa_processos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresa_redessociais" Association="Self.fk_empresa_redessociais">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="empresaredessociais" EntitySet="empresaredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresa_setor" Association="Self.fk_empresa_setor">
+      <End Role="setoresempresa" EntitySet="setoresempresa" />
+      <End Role="empresas" EntitySet="empresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresas" Association="Self.fk_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="cliente_relatorio_empresas" EntitySet="cliente_relatorio_empresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_empresasredes_redessociais" Association="Self.fk_empresasredes_redessociais">
+      <End Role="redessociais" EntitySet="redessociais" />
+      <End Role="empresaredessociais" EntitySet="empresaredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fb_comentarios_fb_posts" Association="Self.FK_fb_comentarios_fb_posts">
+      <End Role="fb_posts" EntitySet="fb_posts" />
+      <End Role="fb_comentarios" EntitySet="fb_comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fb_perfil_stats" Association="Self.fk_fb_perfil_stats">
+      <End Role="fb_perfis" EntitySet="fb_perfis" />
+      <End Role="fb_perfis_stats" EntitySet="fb_perfis_stats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fb_perfis_empresas" Association="Self.FK_fb_perfis_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="fb_perfis" EntitySet="fb_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fb_perfis_marcas" Association="Self.FK_fb_perfis_marcas">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="fb_perfis" EntitySet="fb_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_fb_posts_fb_perfis" Association="Self.FK_fb_posts_fb_perfis">
+      <End Role="fb_perfis" EntitySet="fb_perfis" />
+      <End Role="fb_posts" EntitySet="fb_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fbcomentarioss_fbtermos" Association="Self.fk_fbcomentarioss_fbtermos">
+      <End Role="fb_comentarios" EntitySet="fb_comentarios" />
+      <End Role="fb_comentarios_termos" EntitySet="fb_comentarios_termos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fbposts_fbtermos" Association="Self.fk_fbposts_fbtermos">
+      <End Role="fb_posts" EntitySet="fb_posts" />
+      <End Role="fb_post_termos" EntitySet="fb_post_termos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_insta_comentarios_termos" Association="Self.fk_insta_comentarios_termos">
+      <End Role="insta_comentarios" EntitySet="insta_comentarios" />
+      <End Role="insta_comentario_termos" EntitySet="insta_comentario_termos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_insta_perfis_empresas" Association="Self.FK_insta_perfis_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="insta_perfis" EntitySet="insta_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_insta_perfis_marcas" Association="Self.FK_insta_perfis_marcas">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="insta_perfis" EntitySet="insta_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="fk_insta_post_termos" Association="Self.fk_insta_post_termos">
+      <End Role="insta_posts" EntitySet="insta_posts" />
+      <End Role="insta_post_termos" EntitySet="insta_post_termos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_marca_produto" Association="Self.fk_marca_produto">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="produtos" EntitySet="produtos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_marca_redessociais" Association="Self.fk_marca_redessociais">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="marcaredessociais" EntitySet="marcaredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_marcaredes_redessociais" Association="Self.fk_marcaredes_redessociais">
+      <End Role="redessociais" EntitySet="redessociais" />
+      <End Role="marcaredessociais" EntitySet="marcaredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_mov_situacao" Association="Self.fk_mov_situacao">
+      <End Role="seae_situacoes" EntitySet="seae_situacoes" />
+      <End Role="seae_mov_situacao" EntitySet="seae_mov_situacao" />
+    </AssociationSet>
+    <AssociationSet Name="fk_mprodutoredes_redessociais" Association="Self.fk_mprodutoredes_redessociais">
+      <End Role="redessociais" EntitySet="redessociais" />
+      <End Role="produtoredessociais" EntitySet="produtoredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="FK_municipios_estados" Association="Self.FK_municipios_estados">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="municipios" EntitySet="municipios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_empresa" Association="Self.fk_noticia_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="noticias_empresa" EntitySet="noticias_empresa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_fonte" Association="Self.fk_noticia_fonte">
+      <End Role="fontes_noticias" EntitySet="fontes_noticias" />
+      <End Role="noticias" EntitySet="noticias" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_imagem" Association="Self.fk_noticia_imagem">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticia_imagens" EntitySet="noticia_imagens" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_marc_noticia" Association="Self.fk_noticia_marc_noticia">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticias_marca" EntitySet="noticias_marca" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_marca" Association="Self.fk_noticia_marca">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="noticias_marca" EntitySet="noticias_marca" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_noticia" Association="Self.fk_noticia_noticia">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticias_empresa" EntitySet="noticias_empresa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_princ" Association="Self.fk_noticia_princ">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticias_relacionadas" EntitySet="noticias_relacionadas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_rel" Association="Self.fk_noticia_rel">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticias_relacionadas" EntitySet="noticias_relacionadas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_noticia_termos" Association="Self.fk_noticia_termos">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="noticia_termos" EntitySet="noticia_termos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_post_termos" Association="Self.fk_post_termos">
+      <End Role="tw_posts" EntitySet="tw_posts" />
+      <End Role="tw_post_termos" EntitySet="tw_post_termos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_presenca_captura_palavras" Association="Self.fk_presenca_captura_palavras">
+      <End Role="presenca_online_capturas" EntitySet="presenca_online_capturas" />
+      <End Role="presenca_online_palavraspesquisa" EntitySet="presenca_online_palavraspesquisa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_presenca_linkadopor" Association="Self.fk_presenca_linkadopor">
+      <End Role="presenca_online_capturas" EntitySet="presenca_online_capturas" />
+      <End Role="presenca_online_linkadopor" EntitySet="presenca_online_linkadopor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_presenca_online_capturas_empresas" Association="Self.FK_presenca_online_capturas_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="presenca_online_capturas" EntitySet="presenca_online_capturas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_processos" Association="Self.fk_processos">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_processo_setor" EntitySet="seae_processo_setor" />
+    </AssociationSet>
+    <AssociationSet Name="fk_produto_redessociais" Association="Self.fk_produto_redessociais">
+      <End Role="produtos" EntitySet="produtos" />
+      <End Role="produtoredessociais" EntitySet="produtoredessociais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promo_municipio" Association="Self.fk_promo_municipio">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_abrang_municipio" EntitySet="seae_abrang_municipio" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promo_municipio_muni" Association="Self.fk_promo_municipio_muni">
+      <End Role="municipios" EntitySet="municipios" />
+      <End Role="seae_abrang_municipio" EntitySet="seae_abrang_municipio" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoarquivos_promocao" Association="Self.fk_promoarquivos_promocao">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_arquivos" EntitySet="promo_arquivos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promocao_modalidade" Association="Self.fk_promocao_modalidade">
+      <End Role="promo_modalidades" EntitySet="promo_modalidades" />
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promocao_orgaoreg" Association="Self.fk_promocao_orgaoreg">
+      <End Role="promo_orgaosreguladores" EntitySet="promo_orgaosreguladores" />
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoempresas_empresa" Association="Self.fk_promoempresas_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="promo_promoempresas" EntitySet="promo_promoempresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoempresas_promocao" Association="Self.fk_promoempresas_promocao">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_promoempresas" EntitySet="promo_promoempresas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoestados_estados" Association="Self.fk_promoestados_estados">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="promo_estadosabrangencia" EntitySet="promo_estadosabrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoestados_promo" Association="Self.fk_promoestados_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_estadosabrangencia" EntitySet="promo_estadosabrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoinsta_post" Association="Self.fk_promoinsta_post">
+      <End Role="insta_posts" EntitySet="insta_posts" />
+      <End Role="promo_insta_posts" EntitySet="promo_insta_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoinsta_promo" Association="Self.fk_promoinsta_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_insta_posts" EntitySet="promo_insta_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promomunicipios_municipios" Association="Self.fk_promomunicipios_municipios">
+      <End Role="municipios" EntitySet="municipios" />
+      <End Role="promo_municipiosabrangencia" EntitySet="promo_municipiosabrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promomunicipios_promocao" Association="Self.fk_promomunicipios_promocao">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_municipiosabrangencia" EntitySet="promo_municipiosabrangencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promonoticias_noticias" Association="Self.fk_promonoticias_noticias">
+      <End Role="noticias" EntitySet="noticias" />
+      <End Role="promo_promonoticias" EntitySet="promo_promonoticias" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promonoticias_promo" Association="Self.fk_promonoticias_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_promonoticias" EntitySet="promo_promonoticias" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoposts_post" Association="Self.fk_promoposts_post">
+      <End Role="fb_posts" EntitySet="fb_posts" />
+      <End Role="promo_fb_posts" EntitySet="promo_fb_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoposts_promo" Association="Self.fk_promoposts_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_fb_posts" EntitySet="promo_fb_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promotw_posts" Association="Self.fk_promotw_posts">
+      <End Role="tw_posts" EntitySet="tw_posts" />
+      <End Role="promo_tw_posts" EntitySet="promo_tw_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promotw_promo" Association="Self.fk_promotw_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_tw_posts" EntitySet="promo_tw_posts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoyt_promo" Association="Self.fk_promoyt_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_yt_videos" EntitySet="promo_yt_videos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_promoyt_videos" Association="Self.fk_promoyt_videos">
+      <End Role="yt_videos" EntitySet="yt_videos" />
+      <End Role="promo_yt_videos" EntitySet="promo_yt_videos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_registro_empresa_empresa" Association="Self.fk_registro_empresa_empresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="mapa_registro_empresa" EntitySet="mapa_registro_empresa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_registro_empresa_registro" Association="Self.fk_registro_empresa_registro">
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+      <End Role="mapa_registro_empresa" EntitySet="mapa_registro_empresa" />
+    </AssociationSet>
+    <AssociationSet Name="fk_regulamentoarquivos_promo" Association="Self.fk_regulamentoarquivos_promo">
+      <End Role="promo_promocoes" EntitySet="promo_promocoes" />
+      <End Role="promo_regulamentoarquivos" EntitySet="promo_regulamentoarquivos" />
+    </AssociationSet>
+    <AssociationSet Name="fk_seae_proc_solicitante" Association="Self.fk_seae_proc_solicitante">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_processo_solicitantes" EntitySet="seae_processo_solicitantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_seae_processo_setor_seae_subsetores_proc" Association="Self.FK_seae_processo_setor_seae_subsetores_proc">
+      <End Role="seae_subsetores_proc" EntitySet="seae_subsetores_proc" />
+      <End Role="seae_processo_setor" EntitySet="seae_processo_setor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_seae_subsetores_proc_seae_setores_proc" Association="Self.FK_seae_subsetores_proc_seae_setores_proc">
+      <End Role="seae_setores_proc" EntitySet="seae_setores_proc" />
+      <End Role="seae_subsetores_proc" EntitySet="seae_subsetores_proc" />
+    </AssociationSet>
+    <AssociationSet Name="fk_setores_proc" Association="Self.fk_setores_proc">
+      <End Role="seae_setores_proc" EntitySet="seae_setores_proc" />
+      <End Role="seae_processo_setor" EntitySet="seae_processo_setor" />
+    </AssociationSet>
+    <AssociationSet Name="fk_situacao_processo" Association="Self.fk_situacao_processo">
+      <End Role="seae_processos" EntitySet="seae_processos" />
+      <End Role="seae_mov_situacao" EntitySet="seae_mov_situacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tw_mencao_termos_tw_mencoes" Association="Self.FK_tw_mencao_termos_tw_mencoes">
+      <End Role="tw_mencoes" EntitySet="tw_mencoes" />
+      <End Role="tw_mencao_termos" EntitySet="tw_mencao_termos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tw_perfis_empresas" Association="Self.FK_tw_perfis_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tw_perfis_marcas" Association="Self.FK_tw_perfis_marcas">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuario" Association="Self.fk_usuario">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="cliente_relatorios" EntitySet="cliente_relatorios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuarios" Association="Self.fk_usuarios">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="logs" EntitySet="logs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_yt_canais_empresas" Association="Self.FK_yt_canais_empresas">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="yt_canais" EntitySet="yt_canais" />
+    </AssociationSet>
+    <AssociationSet Name="FK_yt_canais_marcas" Association="Self.FK_yt_canais_marcas">
+      <End Role="marcas" EntitySet="marcas" />
+      <End Role="yt_canais" EntitySet="yt_canais" />
+    </AssociationSet>
+    <AssociationSet Name="fk_yt_comentario_termos" Association="Self.fk_yt_comentario_termos">
+      <End Role="yt_comentarios" EntitySet="yt_comentarios" />
+      <End Role="yt_comentario_termos" EntitySet="yt_comentario_termos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_yt_comentarios_yt_comentarios" Association="Self.FK_yt_comentarios_yt_comentarios">
+      <End Role="yt_comentarios" EntitySet="yt_comentarios" />
+      <End Role="yt_comentarios1" EntitySet="yt_comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_yt_comentarios_yt_videos" Association="Self.FK_yt_comentarios_yt_videos">
+      <End Role="yt_videos" EntitySet="yt_videos" />
+      <End Role="yt_comentarios" EntitySet="yt_comentarios" />
+    </AssociationSet>
+    <AssociationSet Name="fk_yt_video_termos" Association="Self.fk_yt_video_termos">
+      <End Role="yt_videos" EntitySet="yt_videos" />
+      <End Role="yt_video_termos" EntitySet="yt_video_termos" />
+    </AssociationSet>
+    <AssociationSet Name="idEmpresa" Association="Self.idEmpresa">
+      <End Role="empresas" EntitySet="empresas" />
+      <End Role="marcas" EntitySet="marcas" />
+    </AssociationSet>
+    <AssociationSet Name="registros_area" Association="Self.registros_area">
+      <End Role="mapa_areas" EntitySet="mapa_areas" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_atributo" Association="Self.registros_atributo">
+      <End Role="mapa_atributo" EntitySet="mapa_atributo" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_base" Association="Self.registros_base">
+      <End Role="mapa_base" EntitySet="mapa_base" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_caracteristica" Association="Self.registros_caracteristica">
+      <End Role="mapa_caracteristica" EntitySet="mapa_caracteristica" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_complemento" Association="Self.registros_complemento">
+      <End Role="mapa_complemento" EntitySet="mapa_complemento" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_especie" Association="Self.registros_especie">
+      <End Role="mapa_especies" EntitySet="mapa_especies" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_estado" Association="Self.registros_estado">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_origem" Association="Self.registros_origem">
+      <End Role="mapa_origens" EntitySet="mapa_origens" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="registros_subespecie" Association="Self.registros_subespecie">
+      <End Role="mapa_subespecie" EntitySet="mapa_subespecie" />
+      <End Role="mapa_registros" EntitySet="mapa_registros" />
+    </AssociationSet>
+    <AssociationSet Name="tw_mecoes_perfil" Association="Self.tw_mecoes_perfil">
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+      <End Role="tw_mencoes" EntitySet="tw_mencoes" />
+    </AssociationSet>
+    <AssociationSet Name="tw_perfil_posts" Association="Self.tw_perfil_posts">
+      <End Role="tw_perfis" EntitySet="tw_perfis" />
+      <End Role="tw_posts" EntitySet="tw_posts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

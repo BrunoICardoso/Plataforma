@@ -1,0 +1,818 @@
+﻿
+@{
+    ViewBag.Title = "Editar";
+}
+
+<style>
+    .chosen-container {
+        width: 500px !important;
+    }
+
+    #selecaoDatas {
+        width: 100%;
+    }
+
+    .ibox-title {
+        border-width: 2px 0 0;
+    }
+
+    .listaChecks {
+        border-width: 0 0 0 2px;
+    }
+
+    .checkbox {
+        display: inline-block;
+        width: 24%;
+    }
+
+    hr {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .listaBotoes .btn-primary {
+        border-radius: 3px;
+    }
+
+    #icone-help {
+        float: right;
+        color: #BBB;
+        border: 1px solid #BBB;
+        border-radius: 13px;
+        width: 13px;
+        height: 13px;
+        font-size: 10px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 11px;
+        margin-right: -18px;
+        margin-top: -21px;
+    }
+
+    .checkTodasRedes {
+        float: right;
+    }
+
+    .iconRedeSocial {
+        vertical-align: middle;
+    }
+</style>
+
+<div class="row wrapper border-bottom m-b-sm white-bg page-heading">
+    <div class="col-md-8">
+        <h2>Edição de Relatório</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Relatorios">Relatórios</a>
+            </li>
+            <li class="active">
+                <strong>Editar</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-content m-b-sm border-bottom">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" for="product_name">Nome do relatório</label>
+                                <input type="text" id="txtNome" name="product_name" value="" placeholder="" class="form-control input-mini">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="status">Período de comparação</label>
+                                <div class="input-daterange input-group" id="selecaoDatas">
+                                    <input type="text" class="input-sm form-control" name="start" id="dtInicio" value="" />
+                                    <span class="input-group-addon" style="background-color: #fff; border-color: #fff;">até</span>
+                                    <input type="text" class="input-sm form-control" name="end" id="dtFim" value="" />
+                                </div>
+                                <i class="fa fa-question" id="icone-help" data-toggle="ajuda-tooltip" data-placement="top" data-original-title="" title=""></i>
+                            </div>
+                            <div class="avisoDatas"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="">
+                                <label class="control-label" for="product_name">Empresas</label>
+                                <div class="input-group">
+                                    <select data-placeholder="Selecione as empresas..." class="chosen-select" id="CampoEmpresas" multiple tabindex="4"></select>
+                                </div>
+                            </div>
+                            <div class="avisoEmpresas"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12">
+            <div class="ibox">
+
+                <div class="ibox-title">
+                    <h5>Redes Sociais</h5>
+                    <label class="checkTodasRedes" title="Selecionar todas">
+                        <input id="redessociais_seltodos" type="checkbox" class="check" value="redessociais_seltodos">
+                        Selecionar todas
+                    </label>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row m-b-lg col-md-12">
+                        <span>Selecione as métricas que você deseja obter no relatório</span>
+                        <div style="float:right" class="inline avisoMetricas"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1 text-center">
+                            <label class="checkTodasFace" title="Selecionar todas">
+                                <input id="facebook_seltodos" type="checkbox" class="check" value="facebook_seltodos">
+                            </label>
+                            <i class="fa fa-facebook-official fa-2x iconRedeSocial" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="col-md-11 checksface listaChecks border-left">
+                            <div class="checkbox i-checks"><label> <input id="facebook_total_fas" type="checkbox" value="facebook_total_fas"> <i></i>Total de fãs</label></div>
+                            <div class="checkbox i-checks"><label> <input id="facebook_crescimento_fas" type="checkbox" value="facebook_crescimento_fas"> <i></i>Crescimento de fãs</label></div>
+                            <div class="checkbox i-checks"><label> <input id="facebook_curtidas_posts" type="checkbox" value="facebook_curtidas_posts"> <i></i>Curtidas em Posts</label></div>
+                            <div class="checkbox i-checks"><label> <input id="facebook_total_interacoes" type="checkbox" value="facebook_total_interacoes"> <i></i>Total de Interações</label></div>
+                            <div class="checkbox i-checks"><label> <input id="facebook_comentarios" type="checkbox" value="facebook_comentarios"> <i></i>Comentários</label></div>
+                            <div class="checkbox i-checks"><label> <input id="facebook_qtd_postagens" type="checkbox" value="facebook_qtd_postagens"> <i></i>Quantidade de Posts</label></div>
+                            <div class="checkbox i-checks"><label> <input id="facebook_compartilhamentos" type="checkbox" value="facebook_compartilhamentos"> <i></i>Compartilhamentos</label></div>
+                            <div class="checkbox i-checks"><label> <input id="facebook_engajamento_medio" type="checkbox" value="facebook_engajamento_medio"> <i></i>Engajamento Médio</label></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-11 col-md-offset-1">
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1 text-center">
+                            <label class="checkTodasTw" title="Selecionar todas">
+                                <input id="twitter_seltodos" type="checkbox" class="check" value="twitter_seltodos">
+                            </label>
+                            <i class="fa fa-twitter-square fa-2x iconRedeSocial" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="col-md-11 checkstw listaChecks border-left">
+                            <div class="checkbox i-checks"><label> <input id="twitter_total_fas" type="checkbox" value="twitter_total_fas"> <i></i>Total de fãs</label></div>
+                            <div class="checkbox i-checks"><label> <input id="twitter_crescimento_fas" type="checkbox" value="twitter_crescimento_fas"> <i></i>Crescimento de fãs</label></div>
+                            <div class="checkbox i-checks"><label> <input id="twitter_curtidas" type="checkbox" value="twitter_curtidas"> <i></i>Curtidas em Tweets</label></div>
+                            <div class="checkbox i-checks"><label> <input id="twitter_interacoes" type="checkbox" value="twitter_interacoes"> <i></i>Total de Interações</label></div>
+                            <div class="checkbox i-checks"><label> <input id="twitter_posts" type="checkbox" value="twitter_posts"> <i></i>Quantidade de Tweets</label></div>
+                            <div class="checkbox i-checks"><label> <input id="twitter_retweets" type="checkbox" value="twitter_retweets"> <i></i>Total de Retweets</label></div>
+                            <div class="checkbox i-checks"><label> <input id="twitter_engajamento" type="checkbox" value="twitter_engajamento"> <i></i>Engajamento Médio</label></div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-11 col-md-offset-1">
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1 text-center">
+                            <label class="checkTodasInstagram" title="Selecionar todas">
+                                <input id="instagram_seltodos" type="checkbox" class="check" value="instagram_seltodos">
+                            </label>
+                            <i class="fa fa-instagram fa-2x iconRedeSocial" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="col-md-11 checksinsta listaChecks border-left">
+                            <div class="checkbox i-checks"><label> <input id="instagram_total_fas" type="checkbox" value="instagram_total_fas"> <i></i>Total de fãs</label></div>
+                            <div class="checkbox i-checks"><label> <input id="instagram_crescimento_fas" type="checkbox" value="instagram_crescimento_fas"> <i></i>Crescimento de fãs</label></div>
+                            <div class="checkbox i-checks"><label> <input id="instagram_curtidas_posts" type="checkbox" value="instagram_curtidas_posts"> <i></i>Curtidas em Posts</label></div>
+                            <div class="checkbox i-checks"><label> <input id="instagram_total_interacoes" type="checkbox" value="instagram_total_interacoes"> <i></i>Total de Interações</label></div>
+                            <div class="checkbox i-checks"><label> <input id="instagram_comentarios" type="checkbox" value="instagram_comentarios"> <i></i>Comentários</label></div>
+                            <div class="checkbox i-checks"><label> <input id="instagram_qtd_posts" type="checkbox" value="instagram_qtd_posts"> <i></i>Quantidade de Posts</label></div>
+                            <div class="checkbox i-checks"><label> <input id="instagram_engajamento_medio" type="checkbox" value="instagram_engajamento_medio"> <i></i>Engajamento Médio</label></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-11 col-md-offset-1">
+                            <hr>
+                        </div>
+                    </div>
+
+                    <div class="row m-b-sm">
+                        <div class="col-md-1 text-center">
+                            <label class="checkTodasYoutube" title="Selecionar todas">
+                                <input id="youtube_seltodos" type="checkbox" class="check" value="youtube_seltodos">
+                            </label>
+                            <i class="fa fa-youtube-square fa-2x iconRedeSocial" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="col-md-11 checksyt listaChecks border-left">
+                            <div class="checkbox i-checks"><label> <input id="youtube_total_inscritos" type="checkbox" value="youtube_total_inscritos"> <i></i>Total de Inscritos</label></div>
+                            <div class="checkbox i-checks"><label> <input id="youtube_crescimento_inscritos" type="checkbox" value="youtube_crescimento_inscritos"> <i></i>Crescimento Inscritos</label></div>
+                            <div class="checkbox i-checks"><label> <input id="youtube_qtd_videos" type="checkbox" value="youtube_qtd_videos"> <i></i>Quantidade de Vídeos</label></div>
+                            <div class="checkbox i-checks"><label> <input id="youtube_total_interacoes" type="checkbox" value="youtube_total_interacoes"> <i></i>Total de Interações</label></div>
+                            <div class="checkbox i-checks"><label> <input id="youtube_visualizacoes" type="checkbox" value="youtube_visualizacoes"> <i></i>Visualizações</label></div>
+                            <div class="checkbox i-checks"><label> <input id="youtube_curtidas" type="checkbox" value="youtube_curtidas"> <i></i>Curtidas em Vídeos</label></div>
+                            <div class="checkbox i-checks"><label> <input id="youtube_descurtidas" type="checkbox" value="youtube_descurtidas"> <i></i>Descurtidas em Vídeos</label></div>
+                            <div class="checkbox i-checks"><label> <input id="youtube_comentarios" type="checkbox" value="youtube_comentarios"> <i></i>Comentários</label></div>
+                            <div class="checkbox i-checks"><label> <input id="youtube_engajamento_medio" type="checkbox" value="youtube_engajamento_medio"> <i></i>Engajamento Médio</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="ibox">
+
+                <div class="ibox-title">
+                    <h5>Presença online</h5>
+                    <label class="checkTodasRedes" title="Selecionar todas">
+                        <input id="presenca_seltodos" type="checkbox" class="check" value="presenca_seltodos">
+                        Selecionar todas
+                    </label>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row m-b-lg">
+                        <div class="col-md-12">
+                            <span>Selecione as métricas que você deseja obter no relatório.</span>
+                            <div style="float:right" class="inline avisoMetricas"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1 text-center">
+                            <i class="fa fa-globe fa-2x iconRedeSocial" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="col-md-11 checkspresenca listaChecks border-left">
+                            <div class="checkbox i-checks"><label title="Exibe o Ranking Brasil mais atual"> <input id="presenca_rankbrasil" type="checkbox" value="presenca_rankbrasil"> <i></i>Rank Brasil</label></div>
+                            <div class="checkbox i-checks"><label title="Exibe a diferença Ranking Global entre o primeiro dia do filtro com do último dia do filtro"> <input id="presenca_cres_rankbrasil" type="checkbox" value="presenca_cres_rankbrasil"> <i></i>Crescimento Ranking Brasil</label></div>
+                            <div class="checkbox i-checks"><label title="Exibe o Ranking Global mais atual"> <input id="presenca_rankglobal" type="checkbox" value="presenca_rankglobal"> <i></i>Rank Global</label></div>
+                            <div class="checkbox i-checks"><label title="Exibe a diferença Ranking Brasil entre o primeiro dia do filtro com do último dia do filtro"> <input id="presenca_cres_rankglobal" type="checkbox" value="presenca_cres_rankglobal"> <i></i>Crescimento Ranking Global</label></div>
+                            <div class="checkbox i-checks"><label title="Exibe a média de visitas por pesquisa no período selecionado"> <input id="presenca_visitaspesquisa" type="checkbox" value="presenca_visitaspesquisa"> <i></i>Visitas por pesquisa</label></div>
+                            <div class="checkbox i-checks"><label title="Exibe a média da taxa de rejeição no período selecionado"> <input id="presenca_taxarejeicao" type="checkbox" value="presenca_taxarejeicao"> <i></i>Taxa de rejeição</label></div>
+                            <div class="checkbox i-checks"><label title="Exibe a média de páginas visitadas no período selecionado"> <input id="presenca_paginasvisitadas" type="checkbox" value="presenca_paginasvisitadas"> <i></i>Páginas visitadas</label></div>
+                            <div class="checkbox i-checks"><label title="Exibe o tempo médio do tempo de visita no período selecionado"> <input id="presenca_tempovisitas" type="checkbox" value="presenca_tempovisitas"> <i></i>Tempo de visita</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="ibox">
+
+                <div class="ibox-title">
+                    <h5>Outras métricas</h5>
+                    <label class="checkTodasRedes" title="Selecionar todas">
+                        <input id="outras_seltodos" type="checkbox" class="check" value="outras_seltodos">
+                        Selecionar todas
+                    </label>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row m-b-lg">
+                        <div class="col-md-12">
+                            <span>Selecione as métricas que você deseja obter no relatório.</span>
+                            <div style="float:right" class="inline avisoMetricas"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1 text-center">
+                            <i class="fa fa-newspaper-o fa-2x iconRedeSocial" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="col-md-11 checksoutras listaChecks border-left">
+                            <div class="checkbox i-checks"><label title="Exibe o total de notícias no período"> <input id="noticias_total" type="checkbox" value="noticias_total"> <i></i>Total de notícias</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="listaBotoes">
+
+            <div class="col-md-3 col-md-offset-5">
+                <button class="btn btn-primary" id="btnPesquisar" type="button" onclick="salvarRelatorio(true)">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Salvar e Visualizar
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" id="btnPesquisar" type="button" onclick="salvarRelatorio(false)">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Salvar
+                </button>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" id="btnPesquisar" type="button" onclick="Cancelar()">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    Cancelar
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+@section Styles {
+
+    <link href="~/Content/SweetAlert/sweetalert.css" rel="stylesheet" />
+    <link href="~/Content/plugins/chosen/chosen.css" rel="stylesheet" />
+    <link href="~/Content/plugins/chosen/bootstrap-chosen-bootstrap-chosen.css" rel="stylesheet" />
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/iCheck/custom.css" rel="stylesheet" />
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/jasnyBootstrap")
+    @Scripts.Render("~/plugins/sweetAlert")
+    @Scripts.Render("~/plugins/chosen")
+    @Scripts.Render("~/plugins/iCheck")
+    <script src="~/Scripts/plugins/chosen/chosen.jquery.js"></script>
+    <script src="~/Scripts/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+    <script src="~/Scripts/vis_files/CustomTooltip.js"></script>
+
+    <script>
+
+        $('#icone-help').tooltip({
+            html: true,
+            title: "Aqui é um tessstttee",
+            container: 'body'
+        });
+
+        var config = {
+            '.chosen-select': { width: "100%" },
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+            '.chosen-select-width': {}
+        }
+
+        var _Dados = {
+            idClienteRelatorio: @ViewBag.idRelatorio,
+            idCliente: @ViewBag.idCliente,
+            nomeRelatorio: "",
+            dataInicial: null,
+            dataFinal: null,
+            empresas: [],
+            metricas: []
+        }
+
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+
+        $(".chosen-select").width($("#choosenEmpresas").width());
+        $(window).resize(function () {
+            var opt = $(".chosen-select");
+            $(opt).width($("#choosenEmpresas").width());
+            $(opt).next().width($("#choosenEmpresas").width());
+        });
+
+        $(document).ready(function() {
+
+            CarregaComboEmpresas();
+            carregaRelatorio();
+
+            $('#txtNome').change(function () {
+                if (txtNome.value != "") {
+                    $('#txtNome').removeClass("campo-invalido");
+                    $(txtNome).attr('placeholder', '');
+                }
+            });
+
+            $('.chosen-results').on("click", function () {
+                if ($("#CampoEmpresas").val()) {
+                    $(".avisoEmpresas").empty();
+                }
+            });
+
+            $('#dtInicio').change(function () {
+                if (dtInicio.value != "") {
+                    $('#dtInicio').removeClass("campo-invalido");
+                    $(".avisoDatas").empty();
+                }
+                if (dtFim.value != "") {
+                    $('#dtFim').removeClass("campo-invalido");
+                    $(".avisoDatas").empty();
+                }
+            });
+
+            $('#dtFim').change(function () {
+                if (dtFim.value != "") {
+                    $('#dtFim').removeClass("campo-invalido");
+                    $(".avisoDatas").empty();
+                }
+                if (dtInicio.value != "") {
+                    $('#dtInicio').removeClass("campo-invalido");
+                    $(".avisoDatas").empty();
+                }
+            });
+
+            $('input').on("ifChecked", function () {
+                $(".avisoMetricas").empty();
+            });
+
+            $('#redessociais_seltodos').on('ifToggled', function (event) {
+
+                var selecionar = $(this).is(':checked');
+
+                if (selecionar) {
+                    $("#facebook_seltodos").iCheck('check');
+                    $("#twitter_seltodos").iCheck('check');
+                    $("#instagram_seltodos").iCheck('check');
+                    $("#youtube_seltodos").iCheck('check');
+                } else {
+                    $("#facebook_seltodos").iCheck('uncheck');
+                    $("#twitter_seltodos").iCheck('uncheck');
+                    $("#instagram_seltodos").iCheck('uncheck');
+                    $("#youtube_seltodos").iCheck('uncheck');
+                }
+
+                SelecionaTodosFace(selecionar);
+                SelecionaTodosTw(selecionar);
+                SelecionaTodosInsta(selecionar)
+                SelecionaTodosYt(selecionar)
+
+            });
+
+
+            $('#facebook_seltodos').on('ifToggled', function (event) {
+                var selecionar = $(this).is(':checked');
+                SelecionaTodosFace(selecionar);
+            });
+
+            $('#twitter_seltodos').on('ifToggled', function (event) {
+                var selecionar = $(this).is(':checked');
+                SelecionaTodosTw(selecionar);
+            });
+
+            $('#instagram_seltodos').on('ifToggled', function (event) {
+                var selecionar = $(this).is(':checked');
+                SelecionaTodosInsta(selecionar);
+            });
+
+            $('#youtube_seltodos').on('ifToggled', function (event) {
+                var selecionar = $(this).is(':checked');
+                SelecionaTodosYt(selecionar);
+            });
+
+
+            $('#presenca_seltodos').on('ifToggled', function (event) {
+
+                var selecionar = $(this).is(':checked');
+                SelecionaTodosPresenca(selecionar);
+
+            });
+
+            $('#outras_seltodos').on('ifToggled', function (event) {
+
+                var selecionar = $(this).is(':checked');
+                SelecionaTodosOutras(selecionar);
+            });
+
+        });
+
+
+        function CarregaComboEmpresas() {
+            var url = "/api/EmpresaAPI/GetEmpresasCliente?idCliente=" + @ViewBag.idCliente;
+
+            $.ajax({
+                type: "GET",
+                url: url,
+                async: false,
+                success: function (data) {
+
+                    $("#CampoEmpresas").empty();
+                    $.each(data, function (i, item) {
+                        $("#CampoEmpresas").append("<option value=" + item.id + ">" + item.nome + "</option>");
+                    });
+                    $("#CampoEmpresas").trigger('chosen:updated');
+                }
+            });
+        }
+
+        $('#selecaoDatas').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        }).on('changeDate', function () {});
+
+        var dataPadraoInicial = new Date();
+        var dataPadraoFinal = new Date();
+        dataPadraoInicial.setDate(dataPadraoFinal.getDate() - 30);
+
+        //$('#dtInicio').datepicker('setDate', dataPadraoInicial);
+        //$('#dtFim').datepicker('setDate', dataPadraoFinal);
+
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+
+
+        $('.check').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+        function Cancelar() {
+            window.location = "/Relatorios";
+        }
+
+        function carregaRelatorio(){
+
+            $.ajax({
+                type: "GET",
+                url: "/api/RelatoriosAPI/RetornaRelatorio?idRelatorio=" + @ViewBag.idRelatorio,
+                success: function (relatorio) {
+                    console.log(relatorio);
+
+                    $("#txtNome").val(relatorio.nomeRelatorio);
+                    $('#dtInicio').val(formataDataJson(relatorio.dataInicial));
+                    $('#dtFim').val(formataDataJson(relatorio.dataFinal));
+                    var empresas = relatorio.empresas.map(function (x) {
+                        return (x.toString());
+                    });
+                    $('#CampoEmpresas').val(empresas).trigger('chosen:updated');
+
+                    //$.each(relatorio.metricasFacebook,function(key,element){
+                    //    $(".listaChecks .checkbox input").each(
+                    //        function(i, chk) {
+                    //            if($(chk).val() == element){
+                    //                $(chk).parent().addClass("checked");
+                    //            }
+                    //        }
+                    //    );
+                    //});
+
+                    //$.each(relatorio.metricasInstagram,function(key,element){
+                    //    $(".listaChecks .checkbox input").each(
+                    //       function(i, chk) {
+                    //           if($(chk).val() == element){
+                    //               $(chk).parent().addClass("checked");
+                    //           }
+                    //       }
+                    //   );
+                    //});
+
+                    //$.each(relatorio.metricasTwitter,function(key,element){
+                    //    $(".listaChecks .checkbox input").each(
+                    //       function(i, chk) {
+                    //           if($(chk).val() == element){
+                    //               $(chk).parent().addClass("checked");
+                    //           }
+                    //       }
+                    //   );
+                    //});
+
+                    //$.each(relatorio.metricasYoutube,function(key,element){
+                    //    $(".listaChecks .checkbox input").each(
+                    //       function(i, chk) {
+                    //           if($(chk).val() == element){
+                    //               $(chk).parent().addClass("checked");
+                    //           }
+                    //       }
+                    //   );
+                    //});
+
+                    $.each(relatorio.metricas, function (key, element) {
+
+                        $(".listaChecks .checkbox input[value='" + element + "']").iCheck('check'); 
+
+                    });
+
+                }
+            });
+
+        }
+
+        function IntervaloValido() {
+            if ((ConverteDataStringParaData($('#dtFim').val()) - ConverteDataStringParaData($('#dtInicio').val()))/86400000 > 30 ) {
+                return false;
+            }
+            return true;
+        }
+
+        function VerificaForm() {
+            var nomevalidacao = true;
+            var validacaoEmpresas = true;
+            var validacaoDataIni = true;
+            var validacaoDataFim = true;
+            var validacaoIntervalo = true;
+            var validacaoMetricas = true;
+
+            //validar nome
+            if (txtNome.value == "") {
+                $(txtNome).addClass("campo-invalido");
+                nomevalidacao = false;
+                $(txtNome).attr('placeholder', 'Campo obrigatório!');
+            }
+
+            //validar qtd mínima de empresas
+            $(".avisoEmpresas").empty();
+            if (!$("#CampoEmpresas").val()) {
+                validacaoEmpresas = false;
+                ($(".avisoEmpresas").append("<div class='alert alert-danger'>Pelo menos uma empresa deve ser selecionada!</div>"));
+            }
+
+            //validar datas
+            if(dtInicio.value == "") {
+                $(dtInicio).addClass("campo-invalido");
+                validacaoDataIni = false;
+            }
+
+            if(dtFim.value == "") {
+                $(dtFim).addClass("campo-invalido");
+                validacaoDataFim = false;
+            }
+
+            $(".avisoDatas").empty();
+            if (!IntervaloValido()) {
+                validacaoIntervalo = false;
+                ($(".avisoDatas").append("<div class='alert alert-danger'>O intervalo entre as datas não deve ser maior que 30 dias.</div>"));
+            }
+
+            //validar metricas
+            $(".avisoMetricas").empty();
+            if ($(".listaChecks .checkbox div.checked input").length == 0) {
+                validacaoMetricas = false;
+                ($(".avisoMetricas").append("<div class='alert alert-danger'>Pelo menos uma métrica deve ser selecionada!</div>"));
+            }
+
+            return nomevalidacao && validacaoEmpresas && validacaoDataIni && validacaoDataFim && validacaoIntervalo && validacaoMetricas;
+        }
+
+        function salvarRelatorio(visualizar) {
+            if (VerificaForm()) {
+                _Dados.nomeRelatorio = $('#txtNome').val();
+                _Dados.dataInicial = ConverteDataStringParaData($('#dtInicio').val());
+                _Dados.dataFinal = ConverteDataStringParaData($('#dtFim').val());
+                _Dados.empresas = $('#CampoEmpresas').val();
+
+                //$(".listaChecks .checkbox div.checked input").each(
+                //    function(i, chk) {
+                //        if($(chk).val().includes("facebook")){
+                //            _Dados.metricasFacebook.push($(chk).val());
+                //        }
+                //    }
+                //);
+
+                //$(".listaChecks .checkbox div.checked input").each(
+                //      function(i, chk) {
+                //          if($(chk).val().includes("twitter")){
+                //              _Dados.metricasTwitter.push($(chk).val());
+                //          }
+                //      }
+                //  );
+
+                //$(".listaChecks .checkbox div.checked input").each(
+                //      function(i, chk) {
+                //          if($(chk).val().includes("instagram")){
+                //              _Dados.metricasInstagram.push($(chk).val());
+                //          }
+                //      }
+                //  );
+
+                //$(".listaChecks .checkbox div.checked input").each(
+                //      function(i, chk) {
+                //          if($(chk).val().includes("youtube")){
+                //              _Dados.metricasYoutube.push($(chk).val());
+                //          }
+                //      }
+                //  );
+
+                $(".listaChecks .checkbox div.checked input").each(
+                    function (i, chk) {
+                        _Dados.metricas.push($(chk).val());
+                    }
+                );
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/api/RelatoriosAPI/Editar",
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(_Dados),
+                    success: function (response) {
+
+                        if(response.Codigo != 0){
+                            if (visualizar == true)
+                            {
+                                window.location = "/Relatorios/Visualizar/?idRelatorio=" + @ViewBag.idRelatorio;
+                            }
+                            else
+                            {
+                                window.location = "/Relatorios/";
+                            }
+                        }else{
+                            ChamaSwalBack(response.Texto);
+                        }
+
+                    }
+                });
+            }else
+            {
+                ChamaSwal();
+            }
+        }
+
+        function ChamaSwal() {
+            swal({
+                title: "Não foi possível editar o relatório.",
+                text: "Campos obrigatórios não preenchidos adequadamente.",
+                showConfirmButton: true,
+                confirmButtonText: "Ok"
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+                }
+            });
+        }
+
+        function ChamaSwalBack(texto) {
+            swal({
+                title: "Não foi possível editar o relatório.",
+                text: texto,
+                showConfirmButton: true,
+                confirmButtonText: "Ok"
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    $('html, body').animate({ scrollTop: 0 }, 'slow');
+                }
+            });
+        }
+
+
+
+        function SelecionaTodosFace(status) {
+            if (status) {
+                $('.checksface input').iCheck('check')
+            }
+            else {
+                $('.checksface input').iCheck('uncheck')
+            }
+        }
+        function SelecionaTodosTw(status) {
+            if (status) {
+                $('.checkstw input').iCheck('check')
+            }
+            else {
+                $('.checkstw input').iCheck('uncheck')
+            }
+        }
+        function SelecionaTodosInsta(status) {
+            if (status) {
+                $('.checksinsta input').iCheck('check')
+            }
+            else {
+                $('.checksinsta input').iCheck('uncheck')
+            }
+        }
+        function SelecionaTodosYt(status) {
+            if (status) {
+                $('.checksyt input').iCheck('check')
+            }
+            else {
+                $('.checksyt input').iCheck('uncheck')
+            }
+        }
+
+        function SelecionaTodosPresenca(status) {
+            if (status) {
+                $('.checkspresenca input').iCheck('check')
+            }
+            else {
+                $('.checkspresenca input').iCheck('uncheck')
+            }
+        }
+
+        function SelecionaTodosOutras(status) {
+            if (status) {
+                $('.checksoutras input').iCheck('check')
+            }
+            else {
+                $('.checksoutras input').iCheck('uncheck')
+            }
+        }
+    </script>
+}

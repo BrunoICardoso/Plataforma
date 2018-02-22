@@ -1,0 +1,1686 @@
+﻿
+@{
+    ViewBag.Title = "Resumo das atividades da empresa";
+}
+<style>
+    .tab_social > li {
+        width: 25%;
+        text-align: center;
+    }
+
+    .social_subtitulo {
+        border-bottom: solid 1px #DDD;
+        padding-bottom: 10px;
+    }
+
+    .btn_cloud {
+        height: 40px;
+        padding: 5px 5px 5px 0;
+        background-color: #C9C9C9;
+        color: #fff;
+        font-size: 20px;
+        width: 200px;
+        float: right;
+        margin-left: 30px;
+    }
+
+    .btn_social {
+        height: 40px;
+        padding: 5px 5px 5px 0;
+        width: 100%;
+        background-color: #C9C9C9;
+        color: #fff;
+        font-size: 20px;
+    }
+
+        .btn_social.active, .btn_cloud.active {
+            background-color: #19AA8D;
+        }
+
+        .btn_social:hover, .btn_cloud:hover {
+            background-color: #0ed1aa;
+            cursor: pointer;
+        }
+
+
+    .btn_icone {
+        border-right: 1px solid white;
+        display: inline-block;
+        width: 40px;
+        text-align: center;
+        margin-right: 5px;
+    }
+
+    .linha-botoes {
+        border-bottom: 2px solid #C9C9C9;
+        padding-bottom: 20px;
+        margin: 0px 15px 20px 15px;
+    }
+
+    .linha-filtro {
+        margin-top: 20px;
+    }
+
+    .total_curtidas, .percentual_curtidas {
+        height: 50px;
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .total_curtidas {
+        display: inline-block;
+        text-align: center;
+        width: 49%;
+        border-right: solid 1px #666;
+        line-height: 18px;
+        padding-top: 6px;
+    }
+
+        .total_curtidas .indicador {
+            font-size: 20px;
+        }
+
+    .botoes-selecao {
+        width: 100%;
+    }
+
+    #btnAnalise, #btnLinhaTempo {
+        width: 50%;
+    }
+
+    .percentual_curtidas {
+        display: inline-block;
+        font-size: 20px;
+        width: 49%;
+        text-align: center;
+        line-height: 50px;
+    }
+
+        .percentual_curtidas .indicador {
+        }
+
+    .engajado_img, .engajado_texto {
+        display: inline-block;
+        vertical-align: top;
+    }   
+
+    .engajado_texto {
+        margin-left: 10px;
+        font-size: 11px;
+    }
+        
+    .engajado_data {
+        font-size: 12px;
+    }
+
+    .engajado_numero {
+        color: #19AA8D;
+    }
+
+    .engajado_texto > div {
+        margin-bottom: 10px;
+    }
+
+    .engajado_vermais {
+        text-align: right;
+        float: right;
+    }
+
+    .nuvem_termos {
+        width: 100%;
+        height: 400px;
+    }
+
+    .horarios_engajamento {
+    }
+
+        .horarios_engajamento td.diasemana {
+            background-color: #fff !important;
+        }
+
+        .horarios_engajamento td {
+            height: 30px;
+            width: 3.5%;
+        }
+
+        .horarios_engajamento .legenda_hora td {
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .horarios_engajamento .perc10 {
+            background-color: #AFE0D8;
+        }
+
+        .horarios_engajamento .perc20 {
+            background-color: #83CFC1;
+        }
+
+        .horarios_engajamento .perc30 {
+            background-color: #6AC6B6;
+        }
+
+        .horarios_engajamento .perc40 {
+            background-color: #57BFAD;
+        }
+
+        .horarios_engajamento .perc50 {
+            background-color: #358778;
+        }
+
+    .label_percent {
+        font-size: 20px;
+        color: #AAAAAA;
+        font-weight: bold;
+    }
+
+    .label_absolute {
+        font-size: 12px;
+        color: #AAAAAA;
+        font-weight: bold;
+    }
+
+    .item_legenda {
+        width: 49%;
+        display: inline-block;
+    }
+
+    .grafico_caption {
+        float: right;
+        border: solid 1px #DDD;
+        padding: 1px 5px 1px 5px;
+        color: #666;
+    }
+
+        .grafico_caption span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+    .cor_legenda {
+        display: inline-block;
+        margin-right: 5px;
+        width: 20px;
+        height: 10px;
+    }
+
+    .texto_legenda {
+    }
+
+    .cor1 {
+        background-color: #E37686;
+    }
+
+    .cor2 {
+        background-color: #D2D087;
+    }
+
+    .cor3 {
+        background-color: #6AC6B6;
+    }
+
+    .cor4 {
+        background-color: #1C97B0;
+    }
+
+    .container_timeline {
+        display:none;
+    }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Perfil Social</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Empresas</a>
+            </li>
+            <li class="active">
+                <strong>Perfil Social</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="row m-b-lg m-t-lg">
+    <div class="col-md-6">
+
+        <div class="profile-image">
+            <img src="~/Images/Empresas/logo01.png" class="img-circle circle-border m-b-md" alt="profile">
+        </div>
+        <div class="profile-info">
+            <div class="">
+                <div>
+                    <h2 class="no-margins">
+                        Coca Cola Company
+                    </h2>
+                    <h4>Corporação</h4>
+                    <small>
+                        The Coca-Cola Company, geralmente referida como Coca-Cola Company, Coke ou simplesmente Coca-Cola, dependendo da região, é uma corporação multinacional estadunidense, fabricante e comerciante de bebidas não-alcoólicas e concentrados de xaropes.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn_social active">
+            <div class="btn_icone"><i class="fa fa-facebook"></i></div>
+            Facebook
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="btn_social">
+            <div class="btn_icone">
+                <i class="fa fa-twitter"></i>
+            </div>
+            Twitter
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="btn_social">
+            <div class="btn_icone">
+                <i class="fa fa-instagram"></i>
+            </div>
+            Instagram
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="btn_social">
+            <div class="btn_icone">
+                <i class="fa fa-youtube"></i>
+            </div>
+            Youtube
+        </div>
+    </div>
+
+    <div class="col-md-12 linha-botoes"></div>
+
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="total_curtidas">
+                    <span class="indicador">32.000</span><br />
+                    <span>
+                        total de fãs
+                    </span>
+                </div>
+                <div class="percentual_curtidas">
+                    <i class="fa fa-arrow-down indicador text-danger"></i> 8%
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        Selecione o período <br />
+        <div class="input-daterange input-group" id="datepicker">
+            <input type="text" class="input-sm form-control" name="start" value="10/09/2016" />
+            <span class="input-group-addon">até</span>
+            <input type="text" class="input-sm form-control" name="end" value="10/10/2014" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="btn-group botoes-selecao">
+            <button class="btn btn-primary" id="btnAnalise" type="button">Análise</button>
+            <button class="btn btn-white" id="btnLinhaTempo" type="button">Linha do tempo</button>
+        </div>
+    </div>
+</div>
+
+<div class="row container_analise container_facebook">
+
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Crescimento de fãs</h5>
+                <h2>198 009</h2>
+                <div id="sparkline1"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Quantidade de posts</h5>
+                <h2>65 000</h2>
+                <div id="sparkline2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Quantidade de interações</h5>
+                <h2>680 900</h2>
+                <div id="sparkline3"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Curtidas</h5>
+                <h2>32 009</h2>
+                <div id="sparkline4"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Comentários</h5>
+                <h2>6 200</h2>
+                <div id="sparkline5"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Compartihamentos</h5>
+                <h2>80 900</h2>
+                <div id="sparkline6"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12"><h2 class="social_subtitulo">Posts com maior engajamento</h2></div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="engajado_img">
+                    <img src="~/Images/posts/coca1.png" />
+                </div>
+                <div class="engajado_texto">
+                    <div>
+                        <span class="engajado_data">10.10.2016 15:31h</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-thumbs-up"></i> <span class="engajado_numero">320</span> Curtidas<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-comments-o"></i> <span class="engajado_numero">88</span> Comentários<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-share"></i> <span class="engajado_numero">32</span> Compartilhamentos
+                    </div>
+
+                    <div class="engajado_vermais">
+                        <a href="#"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="engajado_img">
+                    <img src="~/Images/posts/coca2.png" />
+                </div>
+                <div class="engajado_texto">
+                    <div>
+                        <span class="engajado_data">09.10.2016 15:31h</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-thumbs-up"></i> <span class="engajado_numero">293</span> Curtidas<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-comments-o"></i> <span class="engajado_numero">92</span> Comentários<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-share"></i> <span class="engajado_numero">11</span> Compartilhamentos
+                    </div>
+
+                    <div class="engajado_vermais">
+                        <a href="#"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="engajado_img">
+                    <img src="~/Images/posts/coca3.png" />
+                </div>
+                <div class="engajado_texto">
+                    <div>
+                        <span class="engajado_data">04.10.2016 13:12h</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-thumbs-up"></i> <span class="engajado_numero">236</span> Curtidas<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-comments-o"></i> <span class="engajado_numero">98</span> Comentários<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-share"></i> <span class="engajado_numero">27</span> Compartilhamentos
+                    </div>
+
+                    <div class="engajado_vermais">
+                        <a href="#"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="engajado_img">
+                    <img src="~/Images/posts/coca4.png" />
+                </div>
+                <div class="engajado_texto">
+                    <div>
+                        <span class="engajado_data">29.09.2016 19:07h</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-thumbs-up"></i> <span class="engajado_numero">202</span> Curtidas<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-comments-o"></i> <span class="engajado_numero">73</span> Comentários<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-share"></i> <span class="engajado_numero">22</span> Compartilhamentos
+                    </div>
+
+                    <div class="engajado_vermais">
+                        <a href="#"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="engajado_img">
+                    <img src="~/Images/posts/coca5.png" />
+                </div>
+                <div class="engajado_texto">
+                    <div>
+                        <span class="engajado_data">14.09.2016 15:00h</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-thumbs-up"></i> <span class="engajado_numero">199</span> Curtidas<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-comments-o"></i> <span class="engajado_numero">55</span> Comentários<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-share"></i> <span class="engajado_numero">12</span> Compartilhamentos
+                    </div>
+                    <div class="engajado_vermais">
+                        <a href="#"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="engajado_img">
+                    <img src="~/Images/posts/coca6.png" />
+                </div>
+                <div class="engajado_texto">
+                    <div>
+                        <span class="engajado_data">14.09.2016 15:31h</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-thumbs-up"></i> <span class="engajado_numero">118</span> Curtidas<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-comments-o"></i> <span class="engajado_numero">23</span> Comentários<br />
+                    </div>
+                    <div>
+                        <i class="fa fa-share"></i> <span class="engajado_numero">11</span> Compartilhamentos
+                    </div>
+
+                    <div class="engajado_vermais">
+                        <a href="#"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12"><h2 class="social_subtitulo">Distribuição de fãs</h2></div>
+
+
+        </div>
+        <div class="row brazil-map" style="display:none">
+            <div class="col-lg-6">
+                <div class="btn-group">
+                    <button class="btn btn-white btn-xs" type="button" id="btn_verglobal">Global</button>
+                    <button class="btn btn-primary btn-xs" type="button">Brasil</button>
+                </div>
+                <div id="brazil-map" style="height: 355px;"></div>
+            </div>
+            <div class="col-lg-6">
+                <table class="table table-hover margin bottom">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%" class="text-center">#</th>
+                            <th>Estado</th>
+                            <th class="text-center">Total de fãs</th>
+                            <th class="text-center">Fãs na semana</th>
+                            <th class="text-center">Variação</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>Rio Grande do Sul</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">2</td>
+                            <td>Santa Catarina</td>
+                            <td class="text-center">7.600</td>
+                            <td class="text-center">1.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 10%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">3</td>
+                            <td>São Paulo</td>
+                            <td class="text-center">5.400</td>
+                            <td class="text-center">500</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">4</td>
+                            <td>Paraná</td>
+                            <td class="text-center">2.908</td>
+                            <td class="text-center">100</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 18%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">5</td>
+                            <td>Rio de Janeiro</td>
+                            <td class="text-center">1200</td>
+                            <td class="text-center">30</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">6</td>
+                            <td>Recife</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">7</td>
+                            <td>Espírito Santo</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">8</td>
+                            <td>Bahia</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">9</td>
+                            <td>Mato Grosso</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">10</td>
+                            <td>Mato Grosso do Sul</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="row world-map">
+            <div class="col-lg-6">
+                <div class="btn-group">
+                    <button class="btn btn-primary btn-xs" type="button">Global</button>
+                    <button class="btn btn-white btn-xs" type="button" id="btn_verbrasil">Brasil</button>
+                </div>
+                <div id="world-map" style="height: 355px;"></div>
+            </div>
+            <div class="col-lg-6">
+                <table class="table table-hover margin bottom">
+                    <thead>
+                        <tr>
+                            <th style="width: 1%" class="text-center">#</th>
+                            <th>País</th>
+                            <th class="text-center">Total de fãs</th>
+                            <th class="text-center">Fãs na semana</th>
+                            <th class="text-center">Variação</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>Brasil</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">2</td>
+                            <td>Austrália</td>
+                            <td class="text-center">7.600</td>
+                            <td class="text-center">1.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 10%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">3</td>
+                            <td>França</td>
+                            <td class="text-center">5.400</td>
+                            <td class="text-center">500</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">4</td>
+                            <td>Estados Unidos</td>
+                            <td class="text-center">2.908</td>
+                            <td class="text-center">100</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 18%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">5</td>
+                            <td>Canadá</td>
+                            <td class="text-center">1200</td>
+                            <td class="text-center">30</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">6</td>
+                            <td>Suécia</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">7</td>
+                            <td>Colômbia</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">8</td>
+                            <td>Argentina</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">9</td>
+                            <td>Reino Unido</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">10</td>
+                            <td>Alemanha</td>
+                            <td class="text-center">12.000</td>
+                            <td class="text-center">3.000</td>
+                            <td class="text-center text-navy"><i class="fa fa-level-up"></i> 30%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Posts pagos</h5>
+                <h2>16,67%</h2>
+                <div class="progress progress-mini">
+                    <div style="width: 17%;" class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Interações posts pagos</h5>
+                <h2>96,99%</h2>
+                <div class="progress progress-mini">
+                    <div style="width: 97%;" class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h5>Eficiência posts pagos</h5>
+                <h2>161,3x</h2>
+                <div class="progress progress-mini">
+                    <div style="width: 100%;" class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Posts por tipo</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="grafico_caption"><span>20</span> posts</div>
+                <div class="donut1">
+
+                </div>
+                <div class="legenda_donut">
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor1"></div>
+                        <span class="texto_legenda">Posts pagos</span>
+                    </div>
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor2"></div>
+                        <span class="texto_legenda">Posts orgânicos</span>
+                    </div>
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor3"></div>
+                        <span class="texto_legenda">Não detectados</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Tipo de interações</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="grafico_caption"><span>630 705</span> interações</div>
+                <div class="donut2">
+
+                </div>
+                <div class="legenda_donut">
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor1"></div>
+                        <span class="texto_legenda">Em posts pagos</span>
+                    </div>
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor2"></div>
+                        <span class="texto_legenda">Em posts orgânicos</span>
+                    </div>
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor3"></div>
+                        <span class="texto_legenda">Não detectadas</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Número de interações</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="grafico_caption"><span>630.705</span> interações</div>
+                <div class="donut3">
+
+                </div>
+                <div class="legenda_donut">
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor1"></div>
+                        <span class="texto_legenda">Curtidas</span>
+                    </div>
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor2"></div>
+                        <span class="texto_legenda">Comentários</span>
+                    </div>
+                    <div class="item_legenda">
+                        <div class="cor_legenda cor3"></div>
+                        <span class="texto_legenda">Compartilhamentos</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Engajamento por dia e hora</h5>
+            </div>
+            <div class="ibox-content">
+
+                <table class="horarios_engajamento">
+                    <tr>
+                        <td class="diasemana">Domingo</td>
+                        <td class="perc10" data-toggle="tooltip" data-placement="right" title="Tooltip on right"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc20"></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td></td>
+                        <td class="perc50"></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                        <td></td>
+                        <td class="perc10"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="diasemana">Segunda</td>
+                        <td class="perc50"></td>
+                        <td class="perc30"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc10"></td>
+                        <td></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                        <td></td>
+                        <td class="perc10"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+
+                        <td></td>
+                        <td class="perc50"></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc40"></td>
+                        <td class="perc40"></td>
+
+                    </tr>
+                    <tr>
+                        <td class="diasemana">Terça</td>
+                        <td class="perc30"></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+                        <td class="perc50"></td>
+                        <td class="perc30"></td>
+                        <td></td>
+                        <td class="perc40"></td>
+
+                        <td></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+
+                        <td class="perc20"></td>
+                        <td class="perc10"></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                    </tr>
+                    <tr>
+                        <td class="diasemana">Quarta</td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                        <td></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                        <td></td>
+                        <td class="perc10"></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                    </tr>
+                    <tr>
+                        <td class="diasemana">Quinta</td>
+                        <td class="perc50"></td>
+                        <td class="perc30"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc10"></td>
+                        <td></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                        <td></td>
+                        <td class="perc10"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+
+                        <td></td>
+                        <td class="perc50"></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc40"></td>
+                        <td class="perc40"></td>
+                    </tr>
+                    <tr>
+                        <td class="diasemana">Sexta</td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                        <td></td>
+                        <td class="perc10"></td>
+
+                        <td></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                    </tr>
+                    <tr>
+                        <td class="diasemana">Sábado</td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc20"></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td></td>
+                        <td class="perc50"></td>
+                        <td class="perc40"></td>
+                        <td class="perc50"></td>
+                        <td></td>
+                        <td class="perc10"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+                        <td class="perc20"></td>
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+                        <td></td>
+                        <td class="perc50"></td>
+                        <td class="perc10"></td>
+
+                        <td class="perc30"></td>
+                        <td class="perc40"></td>
+                    </tr>
+                    <tr class="legenda_hora">
+                        <td></td>
+                        <td>00</td>
+                        <td>01</td>
+                        <td>02</td>
+                        <td>03</td>
+                        <td>04</td>
+                        <td>05</td>
+                        <td>06</td>
+                        <td>07</td>
+                        <td>08</td>
+                        <td>09</td>
+                        <td>10</td>
+                        <td>11</td>
+                        <td>12</td>
+                        <td>13</td>
+                        <td>14</td>
+                        <td>15</td>
+                        <td>16</td>
+                        <td>17</td>
+                        <td>18</td>
+                        <td>19</td>
+                        <td>20</td>
+                        <td>21</td>
+                        <td>22</td>
+                        <td>23</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="ibox">
+            <div class="ibox-title">
+                <h5>Nuvem de palavras</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="btn_cloud active">
+                            <div class="btn_icone">
+                                <i class="fa fa-cloud"></i>
+                            </div>
+                            Postagens
+                        </div>
+                        <div class="btn_cloud">
+                            <div class="btn_icone">
+                                <i class="fa fa-cloud"></i>
+                            </div>
+                            Comentários
+                        </div>
+                    </div>
+                </div>
+                <div class="nuvem_termos"></div>
+                <div>
+                    <div id="range_tagcloud"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row container_timeline">
+    <div class="col-md-12">
+        <div class="social-feed-box">
+
+            <div class="pull-right social-action dropdown">
+                <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu m-t-xs">
+                    <li><a href="#">Config</a></li>
+                </ul>
+            </div>
+            <div class="social-avatar">
+                <a href="" class="pull-left">
+                    <img alt="image" src="~/Images/a1.jpg">
+                </a>
+                <div class="media-body">
+                    <a href="#">
+                        Andrew Williams
+                    </a>
+                    <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                </div>
+            </div>
+            <div class="social-body">
+                <p>
+                    Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                    default model text, and a search for 'lorem ipsum' will uncover many web sites still
+                    in their infancy. Packages and web page editors now use Lorem Ipsum as their
+                    default model text.
+                </p>
+
+                <div class="btn-group">
+                    <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                    <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                    <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                </div>
+            </div>
+            <div class="social-footer">
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a1.jpg">
+                    </a>
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
+                        <br />
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                        <small class="text-muted">12.06.2014</small>
+                    </div>
+                </div>
+
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a2.jpg">
+                    </a>
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Making this the first true generator on the Internet. It uses a dictionary of.
+                        <br />
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                        <small class="text-muted">10.07.2014</small>
+                    </div>
+                </div>
+
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a3.jpg">
+                    </a>
+                    <div class="media-body">
+                        <textarea class="form-control" placeholder="Write comment..."></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="social-feed-box">
+
+            <div class="pull-right social-action dropdown">
+                <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu m-t-xs">
+                    <li><a href="#">Config</a></li>
+                </ul>
+            </div>
+            <div class="social-avatar">
+                <a href="" class="pull-left">
+                    <img alt="image" src="~/Images/a6.jpg">
+                </a>
+                <div class="media-body">
+                    <a href="#">
+                        Andrew Williams
+                    </a>
+                    <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                </div>
+            </div>
+            <div class="social-body">
+                <p>
+                    Many desktop publishing packages and web page editors now use Lorem Ipsum as their
+                    default model text, and a search for 'lorem ipsum' will uncover many web sites still
+                    in their infancy. Packages and web page editors now use Lorem Ipsum as their
+                    default model text.
+                </p>
+                <p>
+                    Lorem Ipsum as their
+                    default model text, and a search for 'lorem ipsum' will uncover many web sites still
+                    in their infancy. Packages and web page editors now use Lorem Ipsum as their
+                    default model text.
+                </p>
+                <img src="~/Images/gallery/11.jpg" class="img-responsive">
+                <div class="btn-group">
+                    <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                    <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                    <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                </div>
+            </div>
+            <div class="social-footer">
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a1.jpg">
+                    </a>
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.
+                        <br />
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 26 Like this!</a> -
+                        <small class="text-muted">12.06.2014</small>
+                    </div>
+                </div>
+
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a2.jpg">
+                    </a>
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Making this the first true generator on the Internet. It uses a dictionary of.
+                        <br />
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                        <small class="text-muted">10.07.2014</small>
+                    </div>
+                </div>
+
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a8.jpg">
+                    </a>
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Making this the first true generator on the Internet. It uses a dictionary of.
+                        <br />
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                        <small class="text-muted">10.07.2014</small>
+                    </div>
+                </div>
+
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a3.jpg">
+                    </a>
+                    <div class="media-body">
+                        <textarea class="form-control" placeholder="Write comment..."></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="social-feed-box">
+
+            <div class="pull-right social-action dropdown">
+                <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu m-t-xs">
+                    <li><a href="#">Config</a></li>
+                </ul>
+            </div>
+            <div class="social-avatar">
+                <a href="" class="pull-left">
+                    <img alt="image" src="~/Images/a4.jpg">
+                </a>
+                <div class="media-body">
+                    <a href="#">
+                        Andrew Williams
+                    </a>
+                    <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+                </div>
+            </div>
+            <div class="social-body">
+                <p>
+                    Packages and web page editors now use Lorem Ipsum as their
+                    default model text. Page editors now use Lorem Ipsum as their
+                    default model text.
+                </p>
+                <div class="btn-group">
+                    <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
+                    <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
+                    <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
+                </div>
+            </div>
+            <div class="social-footer">
+
+
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a8.jpg">
+                    </a>
+                    <div class="media-body">
+                        <a href="#">
+                            Andrew Williams
+                        </a>
+                        Making this the first true generator on the Internet. It uses a dictionary of.
+                        <br />
+                        <a href="#" class="small"><i class="fa fa-thumbs-up"></i> 11 Like this!</a> -
+                        <small class="text-muted">10.07.2014</small>
+                    </div>
+                </div>
+
+                <div class="social-comment">
+                    <a href="" class="pull-left">
+                        <img alt="image" src="~/Images/a3.jpg">
+                    </a>
+                    <div class="media-body">
+                        <textarea class="form-control" placeholder="Write comment..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br />
+
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/ionRangeSlider/ionRangeStyles")
+    @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/plugins/dateRangeStyles")
+}
+
+@section Scripts{
+
+    @Scripts.Render("~/plugins/d3");
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/dateRange")
+
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/graficos/donut.js"></script>
+
+    @Scripts.Render("~/plugins/chartJs221");
+    @Scripts.Render("~/plugins/vectorMap")
+    @Scripts.Render("~/plugins/sparkline")
+    @Scripts.Render("~/plugins/ionRange")
+    <script src="~/Scripts/plugins/wordcloud/wordcloud2.js"></script>
+    <script type="text/javascript">
+
+        $("#sparkline1").sparkline([34, 43, 43, 35, 44, 32, 44, 52], {
+            type: 'line',
+            width: '100%',
+            height: '60',
+            lineColor: '#1ab394',
+            fillColor: "#ffffff"
+        });
+
+        $("#sparkline2").sparkline([24, 43, 43, 55, 44, 62, 44, 72], {
+            type: 'line',
+            width: '100%',
+            height: '60',
+            lineColor: '#1ab394',
+            fillColor: "#ffffff"
+        });
+
+        $("#sparkline3").sparkline([74, 43, 23, 55, 54, 32, 24, 12], {
+            type: 'line',
+            width: '100%',
+            height: '60',
+            lineColor: '#ed5565',
+            fillColor: "#ffffff"
+        });
+
+        $("#sparkline4").sparkline([24, 43, 43, 55, 44, 62, 44, 72], {
+            type: 'line',
+            width: '100%',
+            height: '60',
+            lineColor: '#1ab394',
+            fillColor: "#ffffff"
+        });
+
+        $("#sparkline5").sparkline([74, 43, 23, 55, 54, 32, 24, 12], {
+            type: 'line',
+            width: '100%',
+            height: '60',
+            lineColor: '#ed5565',
+            fillColor: "#ffffff"
+        });
+
+        $("#sparkline6").sparkline([24, 43, 33, 55, 64, 72, 44, 22], {
+            type: 'line',
+            width: '100%',
+            height: '60',
+            lineColor: '#ed5565',
+            fillColor: "#ffffff"
+        });
+
+        //Mapa de fãs-seguidores
+
+        //identifica o primeiro clique para poder carregar o mapa
+        var clique_um = true;
+
+        $("#btn_verglobal").click(function () {
+            $(".brazil-map").hide();
+            $(".world-map").show();
+        });
+
+        $("#btn_verbrasil").click(function () {
+
+
+            $(".brazil-map").show();
+            $(".world-map").hide();
+
+            if (clique_um) {
+                clique_um = false;
+                CarregaMapaBrasil();
+
+            }
+
+
+
+        });
+
+
+        function CarregaMapaBrasil() {
+            //Carregar mapa do Brasil
+            var mapData = {
+                "rs": 2908,
+                "sc": 2000,
+                "sp": 2200,
+                "pa": 5400,
+                "rr": 1200,
+                "ro": 7600,
+                "to": 12000,
+                "al": 2000,
+                "ba": 1200,
+            };
+
+            $('#brazil-map').vectorMap({
+                map: 'brazil',
+                backgroundColor: "transparent",
+                regionStyle: {
+                    initial: {
+                        fill: '#e4e4e4',
+                        "fill-opacity": 0.9,
+                        stroke: 'none',
+                        "stroke-width": 0,
+                        "stroke-opacity": 0
+                    }
+                },
+
+                series: {
+                    regions: [{
+                        values: mapData,
+                        scale: ["#1ab394", "#22d6b1"],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+            });
+
+        }
+
+
+
+        //Carregar mapa do Mundi
+
+        var mapData = {
+            "US": 298,
+            "SA": 200,
+            "DE": 220,
+            "FR": 540,
+            "CN": 120,
+            "AU": 760,
+            "BR": 550,
+            "IN": 200,
+            "GB": 120,
+        };
+
+        $('#world-map').vectorMap({
+            map: 'world_mill_en',
+            backgroundColor: "transparent",
+            regionStyle: {
+                initial: {
+                    fill: '#e4e4e4',
+                    "fill-opacity": 0.9,
+                    stroke: 'none',
+                    "stroke-width": 0,
+                    "stroke-opacity": 0
+                }
+            },
+
+            series: {
+                regions: [{
+                    values: mapData,
+                    scale: ["#1ab394", "#22d6b1"],
+                    normalizeFunction: 'polynomial'
+                }]
+            },
+        });
+
+
+        //Nuvem de termos
+
+        var listaPalavras = [['Coca-cola', 12], ['Pepsi', 6], ['Açaí', 6], ['Refrigerante', 8], ['Cerveja', 13], ['Sexta-feira', 5], ['Find', 3], ['Suco', 4], ['Laranja', 6], ['Fanta', 8], ['Limão', 4], ['Skol', 4], ['Sprite', 5]];
+
+        var options =
+        {
+            list: listaPalavras,
+            gridSize: Math.round(16 * $('.nuvem_termos').width() / 1024),
+            weightFactor: function (size) {
+                return Math.pow(size, 2) * $('.nuvem_termos').width() / 1024;
+            },
+            fontWeight: 'Bold',
+            minSize: '12px',
+            fontFamily: 'Arial',
+            color: '#555',
+            rotateRatio: 0.0,
+            backgroundColor: '#fff'
+        }
+
+        WordCloud($('.nuvem_termos')[0], options);
+
+
+        $("#range_tagcloud").ionRangeSlider({
+            min: 1,
+            max: 15,
+            type: 'double',
+            //prefix: "$",
+            //maxPostfix: "+",
+            prettify: false,
+            hasGrid: true,
+            step: 1,
+            color: '#666'
+        });
+
+
+
+
+        ////Gráficos  gerais
+
+        var dataset = {
+            valores: [5, 14, 1]
+        };
+
+        var width = 300,
+             height = 260,
+             radius = 90;
+
+        DesenharGraficoDonut(".donut1", dataset, width, height, radius);
+
+
+        var dataset2 = {
+            valores: [327429, 303276]
+        };
+
+        DesenharGraficoDonut(".donut2", dataset2, width, height, radius);
+
+
+        var dataset3 = {
+            valores: [6213, 2974, 2389]
+        };
+
+        DesenharGraficoDonut(".donut3", dataset3, width, height, radius);
+
+
+        $('.input-daterange').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true
+        });
+
+        $("#btnAnalise").click(function (b) {
+            $(".container_timeline").hide();
+            $(".container_analise").show();
+            $("#btnAnalise").addClass("btn-primary").removeClass("btn-white");
+            $("#btnLinhaTempo").removeClass("btn-primary").addClass("btn-white");
+        });
+
+        $("#btnLinhaTempo").click(function (b) {
+            $(".container_timeline").show();
+            $(".container_analise").hide();
+            $("#btnAnalise").removeClass("btn-primary").addClass("btn-white");
+            $("#btnLinhaTempo").addClass("btn-primary").removeClass("btn-white");
+
+        });
+
+      
+
+    </script>
+}

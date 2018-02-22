@@ -1,0 +1,48 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="~/Images/Eduardo.jpg" height="48" width="48" />
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">Eduardo Prange</strong>
+                            </span> <span class="text-muted text-xs block">CEO<b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="@Url.Action("Profile", "AppViews")">Profile</a></li>
+                        <li><a href="@Url.Action("Contacts", "AppViews")">Contacts</a></li>
+                        <li><a href="@Url.Action("Inbox", "Mailbox")">Mailbox</a></li>
+                        <li class="divider"></li>
+                        <li><a href="@Url.Action("Login", "Pages")">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    
+                </div>
+            </li>
+            <li class="@Html.IsSelected(controller: "Empresa")" title="Empresa">
+                <a href="@Url.Action("Index", "Empresa")"><i class="fa fa-building"></i> <span class="nav-label" data-i18n="nav.layouts">Empresa</span></a>
+            </li>
+            <li class="@Html.IsSelected(controller: "LancamentoProdutos")" title="Lançamento de produtos">
+                <a href="@Url.Action("Index", "LancamentoProdutos")"><i class="fa fa-binoculars"></i> <span class="nav-label" data-i18n="nav.layouts">Lançamento de produtos</span></a>
+            </li>
+
+            <li class="@Html.IsSelected(controller: "Noticias")" title="Notícias">
+                <a href="@Url.Action("Index", "Noticias")"><i class="fa fa-newspaper-o"></i> <span class="nav-label" data-i18n="nav.layouts">Notícias</span></a>
+            </li>
+
+            <li class="@Html.IsSelected(controller: "Layouts")" title="Presença digital">
+                <a href="@Url.Action("Index", "Layouts")"><i class="fa fa-globe"></i> <span class="nav-label" data-i18n="nav.layouts">Presença digital</span> <span class="label label-primary pull-right">NEW</span></a>
+            </li>
+
+            <li class="@Html.IsSelected(controller: "Layouts")" title="Redes sociais">
+                <a href="@Url.Action("Index", "Layouts")"><i class="fa fa-comments"></i> <span class="nav-label" data-i18n="nav.layouts">Redes sociais</span> <span class="label label-primary pull-right">NEW</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>

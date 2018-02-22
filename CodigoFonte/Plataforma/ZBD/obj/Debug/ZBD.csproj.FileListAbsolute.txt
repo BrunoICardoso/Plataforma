@@ -1,0 +1,8 @@
+C:\Bitbucket\ZeengPlatform\CodigoFonte\Plataforma\ZBD\bin\Debug\ZBD.dll.config
+C:\Bitbucket\ZeengPlatform\CodigoFonte\Plataforma\ZBD\bin\Debug\ZBD.dll
+C:\Bitbucket\ZeengPlatform\CodigoFonte\Plataforma\ZBD\bin\Debug\ZBD.pdb
+C:\Bitbucket\ZeengPlatform\CodigoFonte\Plataforma\ZBD\bin\Debug\EntityFramework.dll
+C:\Bitbucket\ZeengPlatform\CodigoFonte\Plataforma\ZBD\bin\Debug\EntityFramework.xml
+C:\Bitbucket\ZeengPlatform\CodigoFonte\Plataforma\ZBD\obj\Debug\ZBD.csprojResolveAssemblyReference.cache
+C:\Bitbucket\ZeengPlatform\CodigoFonte\Plataforma\ZBD\obj\Debug\ZBD.dll
+C:\Bitbucket\ZeengPlatform\CodigoFonte\Plataforma\ZBD\obj\Debug\ZBD.pdb

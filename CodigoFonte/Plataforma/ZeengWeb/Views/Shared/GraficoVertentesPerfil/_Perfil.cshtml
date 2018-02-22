@@ -1,0 +1,141 @@
+﻿@model ZeengWeb.ViewModel.Empresa.EmpresaPerfil
+
+
+@*-----------Redes Sociais---------*@   
+<div id="ClasseRedeSociais" class="" style="display:none;">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Redes Sociais</h5>
+        </div>
+        <div class="ibox-content redes-sociais">
+            <div class="graf-caption"><span>@Html.DisplayFor(model => model.Empresa.qtdInteracoes) </span> publicações</div>
+            <div id="graf-redesSociais" class="graf-redesSociais">
+                <div class="loadingRedesSocias" style="display:none; padding-top: 50px;">
+                    <div class="sk-spinner sk-spinner-three-bounce">
+                        <div class="sk-bounce1"></div>
+                        <div class="sk-bounce2"></div>
+                        <div class="sk-bounce3"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="infoRedesSocias">
+                <div class="row legenda_social" style="margin: -30px 0 10px 0;width: 100%;">
+                    
+                    <div class="col-md-3" style="margin-left:-14px;">
+                        <div class="cor_legenda cor1"></div>
+                        <span class="texto_legenda">Twitter</span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cor_legenda cor2"></div>
+                        <span class="texto_legenda">Instagram</span>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="cor_legenda cor3"></div>
+                        <span class="texto_legenda">Facebook</span>
+                    </div>
+                    <div class="col-md-3" style="margin-right:-14px;">
+                        <div class="cor_legenda cor4"></div>
+                        <span class="texto_legenda">Youtube</span>
+                    </div>
+                </div>
+                <span id="legendaRedesSociais" class="graf-legenda">* total de publicações nos últimos 12 meses</span>
+                <div id="vermaisRedesSocias" class="graf-vermais">
+                    <a href="/Empresa/RedesSociais/@Model.Empresa.idempresa">
+                        <i class="fa fa-eye"></i> Ver mais
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*-----------Noticias---------*@   
+<div id="ClasseNoticias" class="" style="display:none;">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Notícias</h5>
+        </div>
+        <div class="ibox-content noticias box-noticias">
+            <div class="graf-caption"><span id="totalNoticiasEmpresa">0</span> notícias</div>
+            <div class="graf-noticias"></div>
+            <div class="infoNoticias">
+                <span id="legendaNoticias" class="graf-legenda">* notícias das últimas 12 semanas</span>
+                <div id="vermaisnoticias" class="graf-vermais">
+                    <a href="/Empresa/Noticias/@Model.Empresa.idempresa"><i class="fa fa-eye"></i> Ver mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*-----------Presenca Online---------*@ 
+<div id="ClassePresenca" class="" style="display:none;">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Presença Online</h5>
+        </div>
+        <div class="ibox-content presenca-online-box">
+            <div class="graf-caption presencaonline"><span>0</span> rank Brasil</div>
+            <div class="graf-presencaonline"></div>
+            <div class="infoPresencaOnline">
+                <span id="graflegendaPresencaOnline" class="graf-legenda">* rank no Brasil nos últimos 12 meses</span>
+                <div id="vermaisPresencaOnline" class="graf-vermais">
+                    <a href="/Empresa/PresencaOnline/@Model.Empresa.idempresa"><i class="fa fa-eye"></i> Ver mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*-----------Promocoes---------*@ 
+<div id="ClassePromocoes" class="" style="display:none;">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Promoções</h5>
+        </div>
+        <div class="ibox-content noticias box-promocoes">
+            <div class="graf-caption" style="margin-right: 0;"><span id="totalPromocoesEmpresa">0</span> promoções</div>
+            <div class="graf-promocoes"></div>
+            <div class="infoPromocoes">
+                <div class="graf-promocoes-legenda">
+                </div>
+                <span class="graf-legenda-promocoes">* promoções cadastradas nos últimos 12 meses</span>
+                <div id="vermaisPromocoes" class="graf-vermais">
+                    <a href="/Empresa/Promo/@Model.Empresa.idempresa"><i class="fa fa-eye"></i> Ver mais</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*-----------Lancamento de Produto---------*@ 
+<div id="ClasseProduto" class="" style="display:none;">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Lançamento de produtos</h5>
+        </div>
+        <div class="ibox-content lancamento-produtos">
+            <div id="qtdProdutosEmpresa" class="graf-caption"><span>0</span> registrados</div>
+            <div id="graf-lancamento" class="graf-lancamento">
+            </div>
+            <div class="infoLancamento">
+
+                <span id="legendaLancamentoProdutos" class="graf-legenda">* total de produtos registrados nas últimas 12 semanas</span>
+                <div id="vermaisLancamentoProdutos" class="graf-vermais">
+                    <a href="/Empresa/LancamentoProduto/@Model.Empresa.idempresa">
+                        <i class="fa fa-eye"></i> Ver mais
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

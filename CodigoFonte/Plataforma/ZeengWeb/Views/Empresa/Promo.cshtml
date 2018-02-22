@@ -1,0 +1,935 @@
+﻿@model ZeengWeb.ViewModel.Empresa.EmpresaPromocoes
+@using ZeengWeb.Utils
+<style type="text/css">
+    .botoes-selecao {
+        margin-top: 25px;
+        margin-bottom: 25px;
+        float: right;
+        display: inline-flex;
+    }
+
+    .btnAnalise {
+        min-width: 130px;
+    }
+
+    .formData {
+        height: 33px;
+    }
+
+    .boxPromo {
+        margin-top: 30px;
+    }
+
+    .icone-rede-social {
+    }
+
+    .tituloBoxPromocoes {
+        text-align: center;
+        font-size: 14px;
+        margin-left: 15px;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    .tituloBoxNoticia {
+        height: 30.8px;
+        overflow: hidden;
+    }
+
+    .carousels {
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    .boxLinha {
+        border-top: 1px solid #c4c4c4;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .boxPromocao {
+        padding-bottom: 30px;
+        margin: 10px;
+    }
+
+    .tituloBoxPromocao {
+        font-size: 22px;
+        font-weight: 500;
+    }
+
+    .infoPostPromo {
+        font-weight: 700;
+    }
+
+    .boxPostagem {
+        height: 250px;
+        margin: 10px;
+    }
+
+    .boxPromoPost {
+        width: 330px;
+    }
+
+    .boxNoticia {
+        margin: 10px;
+    }
+
+    boxInnerNoticiaConteudo {
+        overflow: hidden;
+    }
+
+    .boxInnerNoticiaConteudo {
+        overflow: hidden;
+        height: 330px;
+        margin-bottom: 10px;
+        margin-top: 15px;
+    }
+
+    a {
+        color: #18a689;
+    }
+
+        a:hover {
+            color: #676a6c;
+        }
+
+    .boxNoticiaFonte {
+        margin-bottom: 10px;
+    }
+
+    .tagNoticiaFonte {
+        padding: 3px;
+    }
+
+    .boxPostagemFonteTags {
+        /*margin-top: 4px;*/
+        height: 70px;
+        overflow-y: auto;
+        width: 95%;
+        margin-left: 5px;
+        /*border: 1px solid;*/
+    }
+
+    .tagPostPromo {
+        padding: 3px;
+        margin-right: 5px;
+        margin-top: 5px;
+    }
+
+    .box-grafico-promocao-modalidade {
+        /*height: 390px;*/
+        fill: #333;
+    }
+
+    .box-grafico-abrangencia {
+        height: 435px;
+    }
+
+    .box-grafico-vigencia {
+        height: 435px;
+    }
+
+    .box-grafico-promocao-modalidade-legenda {
+        /*border-top: solid 1px #c2c2c2;*/
+        /*padding-top: 0px;*/
+        font-size: 13px;
+        margin-top: -24px;
+        float: left;
+
+    }
+
+    .box-grafico-promocao-modalidade-legenda span {
+        margin-right: 15px;
+        margin-left: 5px;
+        color: #676a6c;
+        font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    #barraDegrade {
+        float: left;
+        border: 1px solid;
+        height: 135px;
+        width: 12px;
+        margin-top: -150px;
+        background: linear-gradient(#94EBDA, #217E6B);
+    }
+    /* Gráfico Barras */
+    .barra {
+        fill: #8DD9CA;
+    }
+
+        .barra:hover {
+            fill: #abe8dc;
+        }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #666;
+        shape-rendering: crispEdges;
+    }
+
+    .ibox-content.boxPostagem {
+        padding: 7px 7px 20px 10px;
+    }
+
+    .text-center {
+        margin-top: 40px;
+    }
+
+     #grafico > svg > g {
+        transform: translate(165px, 190px);
+    }
+
+     #grafico > svg > g > text {
+         font-size: 15px;
+     }
+
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-8">
+        <h2>Promoções</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Empresa">Home</a>
+            </li>
+            <li>
+                <a href="/Empresa/">Empresas</a>
+            </li>
+            <li>
+                <a href="/Empresa/Perfil/@Html.DisplayFor(model => model.Empresa.idempresa)/">@Html.DisplayFor(model => model.Empresa.nome)</a>
+            </li>
+            <li class="active">
+                <strong>Promoções</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-8">
+            <div class="profile-image">
+                <img src="@Html.Raw(Configuracoes.DiretorioImagens)/empresas/@Model.Empresa.imagem" class="img-perfil m-b-md" alt="@Html.DisplayFor(model => model.Empresa.nome)">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            @Model.Empresa.nome
+                        </h2>
+                        <small>
+                            @Model.Empresa.descricao
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-md-8">
+                <label class="control-label" for="product_name">Palavras-chave</label>
+                <input type="text" id="txtPalavrasChave" name="product_name" value="" placeholder="" class="form-control input-mini">
+            </div>
+            <div class="col-md-4">
+                <label class="control-label" for="status">Período de cadastro</label>
+                <div class="input-daterange input-group" id="selecaoDatas">
+                    <input type="text" class="input-sm form-control formData" name="start" id="dataInicialCadastro" value="" />
+                    <span class="input-group-addon" style="background-color: #fff; border-color: #fff;">até</span>
+                    <input type="text" class="input-sm form-control formData" name="end" id="dataFinalCadastro" value="" />
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label class="font-bold" style="width: 100%; font-weight: 700;">Modalidade</label>
+                    <div class="input-group" style="width: 100%;">
+                        <select data-placeholder="Selecione uma modalidae..." class="chosen-select-width" id="cmbModalidades" multiple tabindex="4" style="width:100%;"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <label class="font-bold" style="width: 100%; font-weight: 700;">Abrangência</label>
+                <select data-placeholder="Selecione a abrangência" id="cmbAbrangencia" class="chosen-select-width" name="abrangencia" multiple tabindex="2" style="width:100%;"></select>
+            </div>
+
+            <div class="col-md-4">
+                <label class="control-label" for="status">Período de vigência</label>
+                <div class="input-daterange input-group" id="selecaoDatasVigencia">
+                    <input type="text" class="input-sm form-control formData" name="start" id="dataInicialVigencia" value="" />
+                    <span class="input-group-addon" style="background-color: #fff; border-color: #fff;">até</span>
+                    <input type="text" class="input-sm form-control formData" name="end" id="dataFinalVigencia" value="" />
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-lg-offset-10 col-lg-2">
+                <button class="btn btn-primary" id="btnPesquisar" type="button" onclick="pesquisa()">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Pesquisar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="btnsAnaliseLinhaTempo">
+            <div class="col-md-12">
+                <div class="btn-group botoes-selecao">
+                    <button class="btn btn-primary btnAnalise" id="btnAnalise" type="button">Análise</button>
+                    <button class="btn btn-white btnLinhaTempo" id="btnLinhaTempo" type="button">Linha do tempo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row container_linhadotempo">
+        <div class="ibox float-e-margins Carregartimeline">
+
+        </div>
+
+        <div class="col-lg-12">
+
+            <div class="paginacao_promocao"></div>
+
+        </div>
+    </div>
+
+    <div class="row container_analise">
+
+        <div class="boxPromoGraficos">
+            <div class="row2">
+                <div class="col-lg-4">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Promoções vigente</h5>
+                        </div>
+                        <div class="ibox-content vigencia">
+
+                            <div id="grafico-vigencia" style="height: 400px; z-index: -1;"></div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Promoções por abrangência</h5>
+                        </div>
+                        <div class="ibox-content agrangencia">
+
+                            <div id="brazil-map" style="height: 400px; z-index: -1;"></div>
+
+                            <div id="barraDegrade">
+                                <div style="margin-top: -3px; margin-left:15px">0</div>
+                                <div id="valorMaior" style="margin-top: 104px;margin-left:13px;">0</div>
+                            </div>
+
+                            @*<div id="valorMenor">0</div>
+                                <div id="valorMaior">0</div>*@
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Promoções por modalidade</h5>
+                        </div>
+
+                        <div class="ibox-content boxGraficoPromocoesModalidade">
+                            <div id="grafico" class="row box-grafico-promocao-modalidade"  style="height: 400px;">
+
+                            </div>
+                            <div class="box-grafico-promocao-modalidade-legenda">&nbsp;&nbsp;</div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row2 boxPromo">
+            <div class="col-lg-12 boxPromoRecentes text-center">
+                <label class="tituloBoxPromocoes">Promoções mais recentes</label>
+            </div>
+            <div class="col-lg-12 boxPromoRecentes">
+                <div id="carouselPromocoesRecentes" class="carouselPromosRecentes">
+
+                    @*<div>
+                            <div class="ibox-content boxPromocao">
+
+                                <h2 class="tituloBoxPromocao">Promoção Geloucos</h2>
+
+                                <p><i class="fa fa-money" aria-hidden="true"></i> Modalidade: </p>
+
+                                <p><i class="fa fa-calendar" aria-hidden="true"></i> Vigência: </p>
+
+                                <p><i class="fa fa-globe" aria-hidden="true"></i> Abrangência: </p>
+
+                                <a href="detalhepromo" style="float: right; margin-bottom: 5px;"><i class="fa fa-link" aria-hidden="true"></i>Veja mais</a>
+
+                            </div>
+                        </div>*@
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row2 boxPromo">
+            <div class="col-lg-12 boxPromoRecentes text-center">
+                <label class="tituloBoxPromocoes">Postagens sobre as promoções</label>
+            </div>
+            <div class="col-lg-12 boxPromoPostagens">
+
+                <div class="carouselPromosPostagens">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row2 boxPromo">
+            <div class="col-lg-12 boxPromoNoticias text-center">
+                <label class="tituloBoxPromocoes">Últimas notícias sobre as promoções</label>
+            </div>
+            <div class="col-lg-12 boxPromoNoticias">
+
+                <div class="carouselPromosNoticias">
+
+                    <div>
+                        <div class="ibox-content boxNoticia">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+@section Styles {
+    @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    @Styles.Render("~/plugins/slickStyles")
+    @Styles.Render("~/plugins/slickThemeStyles")
+}
+@section Scripts {
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/graficos/donut.js"></script>
+    <script src="~/Scripts/promocoes/PromocaoGraficoRegiao.js"></script>
+    <script src="~/Scripts/promocoes/PromocaoTimeLine.js"></script>
+
+    <script src="/Scripts/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="/Scripts/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="/Scripts/plugins/jvectormap/brazil-jvectormap.js"></script>
+    <script src="~/Scripts/graficos/barras.js"></script>
+    @Scripts.Render("~/plugins/slick")
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/chosen")
+    @Scripts.Render("~/plugins/d3")
+
+    <script type="text/javascript">
+
+        var _idEmpresa = @ViewBag.idEmpresa;
+        var dataPadraoInicial = new Date();
+        var dataPadraoFinal = new Date();
+        var _pagina = 0;
+        var quantidadePag=10;
+        var paginacaoPromoTimeline = new Paginacao();
+
+        dataPadraoInicial.setDate(dataPadraoFinal.getDate() - 90);
+
+        $(".container_linhadotempo").hide();
+
+        $(document).ready(function () {
+
+
+            var config = {
+                '.chosen-select': {},
+                '.chosen-select-deselect': { allow_single_deselect: true },
+                '.chosen-select-no-single': { disable_search_threshold: 10 },
+                '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+                '.chosen-select-width': { width: "100%" }
+            }
+
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+            $("#btnAnalise").click(function () {
+
+                $("#btnLinhaTempo").removeClass("btn-primary").addClass("btn-white");
+                $(this).addClass("btn-primary").removeClass("btn-white");
+
+                $(".container_analise").show();
+                $(".container_linhadotempo").hide();
+
+
+
+            });
+
+            $("#btnLinhaTempo").click(function () {
+
+                $("#btnAnalise").removeClass("btn-primary").addClass("btn-white");
+                $(this).addClass("btn-primary").removeClass("btn-white");
+
+                $(".container_analise").hide();
+                $(".container_linhadotempo").show();
+
+                Timeline.CarregarTimeline(0,quantidadePag);
+
+
+            });
+
+
+
+            $('.carouselPromosRecentes').slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: true,
+                autoplay: false,
+                autoplaySpeed: 2000,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+
+            $('.carouselPromosPostagens').slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: true,
+                autoplay: false,
+                autoplaySpeed: 2000,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+
+            $('.carouselPromosNoticias').slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: true,
+                autoplay: false,
+                autoplaySpeed: 2000,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+
+            $('#selecaoDatas').datepicker({
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true,
+                format: 'dd/mm/yyyy'
+            }).on('changeDate', function () {
+                //atualizaNoticias();
+            });
+
+            $('#selecaoDatasVigencia').datepicker({
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true,
+                format: 'dd/mm/yyyy'
+            }).on('changeDate', function () {
+                //atualizaNoticias();
+            });
+
+            retornaCombos();
+            retornaPromocoesRecentes();
+            retornaNoticiasRecentes();
+            retornaPostagensPromocao();
+            retornaGraficoModalidades();
+            GraficoRegiao.CarregaGraficoAbrangencia();
+            Timeline.CarregarTimeline(_pagina,quantidadePag);
+            retornaGraficoVigencia();
+        });
+
+        function retornaCombos() {
+
+            $.getJSON("/api/PromocoesAPI/RetornaCombos", function (data) {
+
+                $.each(data.modalidades, function (key, val) {
+                    $('#cmbModalidades').append("<option value=" + val.id + ">" + val.nome + "</option>");
+                    $('#cmbModalidades').trigger("chosen:updated");
+                });
+
+                $('#cmbAbrangencia').append("<option value=" +0+ ">Nacional</option>");
+                $.each(data.abrangencia, function (key, val) {
+                    $('#cmbAbrangencia').append("<option value=" + val.id + ">" + val.nome + "</option>");
+                    $('#cmbAbrangencia').trigger("chosen:updated");
+                });
+
+            });
+
+        }
+
+        function retornaFiltro() {
+
+            var filtro = new Object();
+
+            filtro.pesquisa = $("#txtPalavrasChave").val();
+            filtro.idEmpresa = @ViewBag.idEmpresa;
+            filtro.idModalidades = $("#cmbModalidades").val();
+            filtro.dataCadastroInicial = ConverteDataBRparaUNIX($("#dataInicialCadastro").val() + ' 00:00:00');
+            filtro.dataCadastroFinal = ConverteDataBRparaUNIX($("#dataFinalCadastro").val() + ' 00:00:00');
+            filtro.dataVigenciaInicial = ConverteDataBRparaUNIX($("#dataInicialVigencia").val() + ' 00:00:00');
+            filtro.dataVigenciaFinal = ConverteDataBRparaUNIX($("#dataFinalVigencia").val() + ' 00:00:00');
+            filtro.abrangencia = {
+                Nacional: jQuery.inArray("0",$("#cmbAbrangencia").val()) >= 0 ? true : null,
+                idEstados : $("#cmbAbrangencia").val()
+            };
+
+            filtro.pagina = 0;
+            filtro.qtdregistros = 10;
+
+            return filtro;
+        }
+
+        function pesquisa(){
+            retornaPromocoesRecentes();
+            retornaNoticiasRecentes();
+            retornaGraficoModalidades();
+            retornaPostagensPromocao();
+            retornaGraficoVigencia();
+            GraficoRegiao.CarregaGraficoAbrangencia();
+            Timeline.CarregarTimeline(_pagina,quantidadePag);
+        }
+
+        function retornaPromocoesRecentes(){
+
+            var data = retornaFiltro();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/PromocoesAPI/RetornaPromocoesRecentes",
+                data: data,
+
+                success: function(data){
+
+
+
+                    $('.carouselPromosRecentes').slick('removeSlide', null, null, true);
+
+                    $.each(data, function(key, element){
+
+                        $('.carouselPromosRecentes').slick('slickAdd',formataItemPromocaoRecente(element));
+
+                    });
+
+                }
+            });
+
+
+        }
+
+        function formataItemPromocaoRecente(item){
+
+            return "<div>"+
+                   "<div class='ibox-content boxPromocao'>"+
+                   "<h2 class='tituloBoxPromocao'>"+ (item.nomePromocao != null ? item.nomePromocao : "") +"</h2>"+
+                   "<p><i class='fa fa-money' aria-hidden='true'></i> Modalidade: "+ (item.modalidade != null ? item.modalidade : "Não informada.") + " </p>"+
+                   "<p><i class='fa fa-calendar' aria-hidden='true'></i> Vigência: "+ (item.dataVigenciaInicial != null ? formataDataJson(item.dataVigenciaInicial) : "") + " a " + (item.dataVigenciaFinal != null ? formataDataJson(item.dataVigenciaFinal) : "") +" </p>"+
+                   "<p><i class='fa fa-globe' aria-hidden='true'></i> Abrangência: "+ (item.abrangencia != null ? item.abrangencia : "Não informada.") +" </p>"+
+                   "<a href='/Empresa/PromoDetalhes/?idPromo="+item.idPromocao+"&&idEmpresa="+_idEmpresa+"' style='float: right; margin-bottom: 5px;'><i class='fa fa-plus-circle' aria-hidden='true'></i> Veja mais</a>"+
+                   "</div>"+
+                   "</div>";
+        }
+
+        function retornaNoticiasRecentes(){
+
+            var data = retornaFiltro();
+            $.ajax({
+                type: "POST",
+                url: "/api/PromocoesAPI/RetornaNoticiasPromocoes",
+                data: data,
+                success: function(data){
+
+                    //console.log('<<<<<<<<<<<<<<<<');
+                    //console.log(data);
+
+                    $('.carouselPromosNoticias').slick('removeSlide', null, null, true);
+
+                    $.each(data, function(key, element){
+
+                        $('.carouselPromosNoticias').slick('slickAdd',formataItemNoticiaPromocao(element));
+
+                    });
+                }
+            });
+        }
+
+
+        function formataItemNoticiaPromocao(item){
+
+            if(item.promocoes != null){
+                return "<div>"+
+                   "<div class='ibox-content boxNoticia'>"+
+                   "<div class='boxTopItemNoticia'>"+
+                   "<h4 class='tituloBoxNoticia'>"+ (item.titulo != null ? item.titulo : "") +"</h4>"+
+                   "<span class='boxNoticiaFonte small'>"+ (item.nomefonte != null ? item.nomefonte : "") +"</span>"+
+                   "<span class='small' style='float:right;'>" + ConverteDataUNIXparaBR(item.datapublicacao,false) + "</span>"+
+                   "</div>"+
+                   "<div class='boxInnerNoticiaConteudo'>"+
+                   "<p class='boxNoticiaConteudo'>"+
+                     (item.conteudo != null ? item.conteudo : "")
+                   +"</div>"+
+                   "<div class='boxBottomNoticia'>"+
+                   "<span class='boxNoticiaAutor small'>"+ (item.autor != null ? item.autor : "Não informado") +"</span>"+
+                   "<a href='/Empresa/NoticiaDetalhesPromo/?idNoticia="+item.idnoticia+"&idPromo="+item.promocoes[0].idpromocao+"&idEmpresa="+_idEmpresa+"' style='float: right;'><i class='fa fa-plus' aria-hidden='true'></i> Ver mais</a>"+
+                   "</div>"+
+                   "</div>"+
+                   "</div>";
+            } else {
+                return "";
+            }
+            
+        }
+
+        function retornaGraficoModalidades(){
+            $(".box-grafico-promocao-modalidade").empty();            
+
+            var data = retornaFiltro();
+
+            var dataGrafico = {
+                valores: []
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/api/PromocoesAPI/RetornaGraficoModalidade",
+                data: data,
+                success: function(data){
+
+                    if (data.length > 0){
+
+                        $(".box-grafico-promocao-modalidade-legenda").empty();
+
+                        $.each(data, function(i,item){
+
+                            dataGrafico.valores.push(parseInt(item.valor));
+
+                            $(".box-grafico-promocao-modalidade-legenda").append(legendaGraficoPromocaoModalidade(item,RetornaCorGraficoDonut(i)));
+
+                        });
+
+                        larguraGraf = $(".box-grafico-promocao-modalidade").width();
+                        alturaGraf = $(".box-grafico-promocao-modalidade").height() -20;
+                        var radius = 120;
+
+                        DesenharGraficoDonut(".box-grafico-promocao-modalidade", dataGrafico, larguraGraf, alturaGraf, radius);
+                    }
+                }
+            });
+        }
+
+        function legendaGraficoPromocaoModalidade(item,cor){
+
+            return "<i class='fa fa-square' aria-hidden='true' style='color:"+cor+"''><span>"+ item.categoria +"</span></i>";
+
+        }
+
+        // Gráfico vingência
+        // ==================================================
+        function retornaGraficoVigencia(){
+
+            var data = retornaFiltro();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/PromocoesAPI/GetGraficoVigentes",
+                data: data,
+                success: function(data){
+
+                    console.log(data);
+
+                    larguraGraf = $("#grafico-vigencia").width();
+                    alturaGraf = $("#grafico-vigencia").height();
+                    $('#grafico-vigencia').html('');
+                    DesenharGraficoBarras("#grafico-vigencia", data, larguraGraf, alturaGraf, "%b/%y");
+                }
+            });
+        }
+
+        function retornaPostagensPromocao(){
+            var data = retornaFiltro();
+            $.ajax({
+                type: "POST",
+                url: "/api/PromocoesAPI/RetornaPostagensRecentesPromocoes",
+                data: data,
+                success: function(data){
+
+                    //console.log('==========');
+                    //console.log(data);
+                    //console.log('==========');
+
+                    $('.carouselPromosPostagens').slick('removeSlide', null, null, true);
+
+                    $.each(data, function(key, element){
+
+                        $('.carouselPromosPostagens').slick('slickAdd',formataPostPromocao(element));
+
+                    });
+
+                }
+            });
+        }
+
+
+        function formataPostPromocao(post){
+
+            return "<div class='boxPostPromo'>"+
+                       "<div class='ibox-content boxPostagem'>"+
+                           "<span style='float:right; font-size: 13px;'>"+ (post.dataPostagem != null ? formataDataJson(post.dataPostagem) : "") +"</span>"+
+                           retornaIconePost(post.redeSocial)+
+                               "<div class='row' style='margin-left: -10px; height: 63%;'>"+
+                                   "<div class='col-md-5'>"+
+                                       "<a href='#' class='thumbnail'>"+
+                                            "<img src="+retornaImagemPost(post.redeSocial,post.imagem)+" alt='...'>"+
+                                       "</a>"+
+                                   "</div>"+
+                                   "<div class='col-md-7'>" +
+
+                                   (post.visualizacoes != null ? "<p><i class='fa fa-eye' aria-hidden='true'></i><span class='infoPostPromo'> "+post.visualizacoes+"</span> Visualizações </p>" : "" ) +
+
+                                   (post.curtidas != null ? "<p><i class='fa fa-thumbs-o-up' aria-hidden='true'></i><span class='infoPostPromo'> "+post.curtidas+"</span> Curtidas </p>" : "")+
+
+                                   (post.comentarios != null ? "<p><i class='fa fa-comment-o' aria-hidden='true'></i><span class='infoPostPromo'> "+post.comentarios+"</span> Comentários </p>" : "")+
+
+                                   (post.compartilhamentos != null ? "<p><i class='fa fa-share' aria-hidden='true'></i><span class='infoPostPromo'> "+post.compartilhamentos+"</span> Compartilhamentos </p>" : "")+
+
+                                   (post.retweets != null ? "<p><i class='fa fa-retweet' aria-hidden='true'></i> <span class='infoPostPromo'>"+post.retweets+"</span> Retweets </p>" : "")+
+                           "</div>"+
+                            //"<a href='detalhePostagem' style='float: right; margin-top: -10px;'><i class='fa fa-link' aria-hidden='true'></i>Veja mais</a>"+
+                            "</div>" +
+                            "<div class='row' style='margin-left: -10px;'>" +
+                                "<div class='col-md-12 boxPostagemFonteTags'>"+
+                                retornaTagsPostPromos(post.promocoes)+
+                            "</div>"+
+                    "</div>" +
+                "</div>";
+        }
+
+
+        function retornaIconePost(RedeSocial){
+
+            switch(RedeSocial){
+                case "facebook": return '<i class="fa fa-facebook-official fa-2x" style="padding-bottom: 5px"></i>';
+                case "instagram": return '<i class="fa fa-instagram fa-2x" style="padding-bottom: 5px"></i>';
+                case "twitter": return '<i class="fa fa-twitter fa-2x" style="padding-bottom: 5px"></i>';
+                case "youtube": return '<i class="fa fa-youtube-play fa-2x" style="padding-bottom: 5px"></i>';
+                default: return '<i class="fa fa-address-card fa-2x" aria-hidden="true"></i>';
+            }
+        }
+
+        function retornaImagemPost(RedeSocial,nomeImagem){
+
+            switch(RedeSocial){
+                case "facebook": return '@Configuracoes.DiretorioImagens/facebook/'+nomeImagem;
+                case "instagram": return '@Configuracoes.DiretorioImagens/instagram/'+nomeImagem;
+                case "youtube": return '@Configuracoes.DiretorioImagens/youtube/'+nomeImagem;
+                case "twitter": return '@Configuracoes.DiretorioImagens/twitter/'+nomeImagem;
+                default: return '@Configuracoes.DiretorioImagens/icon_chateado.png';
+            }
+        }
+
+        function retornaTagsPostPromos(promocoes){
+            var tags = "";
+            if(promocoes != null){
+                $.each(promocoes, function(key, element){
+                    tags += '<button class="btn btn-white tagPostPromo" type="submit">'+element.nome+'</button>';
+                });
+            }            
+            return tags;
+        }
+
+
+    </script>
+}

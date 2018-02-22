@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "Lançamento de produtos";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Lançamento de produtos</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li class="active">
+                <strong>Lançamento de produtos</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>Gráfico de registros no MAPA</h1>
+        <p>Veja aqui os produtos cadastrados no MAPA</p>
+    </div>
+    <div class="col-md-2 col-md-offset-1"><h3>Empresas</h3><input type="checkbox" id="chkempresas" value="Empresa" class="js-switch" checked /> </div>
+    <div class="col-md-2"><h3>Marcas</h3><input type="checkbox" id="chkmarcas" value="Marca" class="js-switch" checked /> </div>
+    <div class="col-md-2"><h3>Estados</h3><input type="checkbox" id="chkestado" value="Estado" class="js-switch" checked /> </div>
+    <div class="col-md-2"><h3>Períodos</h3><input type="checkbox" id="chkmesano" value="MesAno" class="js-switch" checked /> </div>
+    <div class="col-md-2"><h3>Origens</h3><input type="checkbox" id="chkorigem" value="Origem" class="js-switch" checked /> </div>
+
+</div>
+
+<div class="row">
+    
+    <div class="col-lg-12" id='vis'>
+    </div>
+
+
+</div>
+
+@section Styles{
+    @Styles.Render("~/plugins/switcheryStyles")
+    <style type="text/css">
+        .bubble_tooltip {
+            position: absolute;
+            top: 300px;
+            left: 130px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 2px solid #000;
+            /* background: #222222; */
+            background: #fff;
+            /* color: #eeeeee; */
+            color: black;
+            padding: 10px;
+            width: 300px;
+            font-size: 12px;
+            z-index: 10;
+        }
+    </style>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/plugins/chartJs221")
+    @Scripts.Render("~/plugins/slick")
+    @Scripts.Render("~/vis")
+    <script src="~/Scripts/vis_files/vis_lancgeral.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        var chkEmpresas = document.querySelector('#chkempresas');
+        var chkMarcas = document.querySelector('#chkmarcas');
+        var chkEstado = document.querySelector('#chkestado');
+        var chkMesAno = document.querySelector('#chkmesano');
+        var chkOrigem = document.querySelector('#chkorigem');
+
+        var switchery = new Switchery(chkEmpresas, { color: '#6AC6B5' });
+        var switchery2 = new Switchery(chkMarcas, { color: '#C7AEAC' });
+        var switchery3 = new Switchery(chkEstado, { color: '#87C4E0' });
+        var switchery4 = new Switchery(chkMesAno, { color: '#B6B345' });
+        var switchery5 = new Switchery(chkOrigem, { color: '#0796AF' });
+
+
+
+
+        function FiltrarBubbles() {
+            var filters = [];
+            var target = "Categoria";
+            var removeValues = {};
+
+            if (chkEmpresas.checked == false) {
+                removeValues["Empresa"] = true;
+            }
+
+            if (chkMarcas.checked == false) {
+                removeValues["Marca"] = true;
+            }
+
+            if (chkEstado.checked == false) {
+                removeValues["Estado"] = true;
+            }
+
+            if (chkMesAno.checked == false) {
+                removeValues["MesAno"] = true;
+            }
+
+            if (chkOrigem.checked == false) {
+                removeValues["Origem"] = true;
+            }
+
+            var toAdd = {
+                target: target,
+                removeValues: removeValues
+            };
+            filters.push(toAdd);
+
+            var filter = {
+                discrete: filters,
+                numeric: [] // numeric not done yet!
+            };
+
+            use_filters(filter);
+
+        };
+
+
+        $(document).ready(function () {
+
+            $('.switchery').click(function (a) {
+                FiltrarBubbles();
+            })
+
+
+        });
+
+        var initialise_form = function (selectionOptions) {
+
+
+        };
+
+        function get_distinct_values(csv, keyType, key) {
+            var allValues = {};
+            for (var i in csv) {
+                var value = csv[i][key];
+                allValues[value] = true;
+            }
+
+            var allValuesArray = [];
+            for (var i in allValues)
+                allValuesArray.push(i);
+
+            allValuesArray.sort();
+
+            return allValuesArray
+        }
+
+        function keyToLookup(key) {
+            var firstPartEnds = key.indexOf(':');
+            if (firstPartEnds <= 0)
+                return { key: key, type: key, title: key };
+
+            var firstPart = key.substring(0, firstPartEnds);
+            var secondPart = key.substring(firstPartEnds + 1);
+
+            return { key: key, type: firstPart, title: secondPart };
+        }
+        function render_filters_colors_and_groups(csv) {
+            var first = csv[0];
+            var lookups = [];
+            for (var key in first) {
+                var lookup = keyToLookup(key);
+                switch (lookup.type) {
+                    case "Filtro":
+                        lookups.push(lookup);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            var filterList = $('#filter-list');
+            for (var i in lookups) {
+                var lookup = lookups[i];
+                var values = get_distinct_values(csv, lookup.type, lookup.key);
+                var item = $('<div class="filter_block" data-target="' + lookup.key + '"><h3 class="filter_title">' + lookup.title + '</h3></div>');
+                for (var j in values) {
+                    var checkbox = $('<div class="sub-filter-block"><input type="checkbox" checked="checked" value="' + values[j] + '"/> ' + values[j] + '</div>');
+                    checkbox.appendTo(item);
+                }
+                item.appendTo(filterList);
+            }
+
+            initialise_form(lookups);
+        }
+
+        function hide_color_chart() {
+            var right = $('#right-sidebar');
+            var rightContainer = $('#right-sidebar-container');
+            right.fadeOut(500, function () {
+                rightContainer.empty();
+            });
+        }
+        function show_color_chart(what_to_color_by, color_mapper) {
+            var right = $('#right-sidebar');
+            rightContainer = $('#right-sidebar-container');
+            right.fadeOut(500, function () {
+                rightContainer.empty();
+
+                var lookup = keyToLookup(what_to_color_by);
+                $('<h3>' + lookup.title + '</h3>').appendTo(rightContainer);
+
+                var table = $('<table />');
+                for (var key in color_mapper) {
+                    var row = $('<tr/>');
+
+                    var cell = $('<td/>');
+                    var square = $('<div style="width: 15px; height: 15px; background: ' + color_mapper[key] + ';">&nbsp;</div>');
+                    square.appendTo(cell);
+                    cell.appendTo(row);
+
+                    cell = $('<td/>');
+                    cell.text(' ' + key + ' ');
+                    cell.appendTo(row);
+                    row.appendTo(table);
+                }
+
+                table.appendTo(rightContainer);
+                right.fadeIn(500);
+            });
+        }
+    </script>
+}

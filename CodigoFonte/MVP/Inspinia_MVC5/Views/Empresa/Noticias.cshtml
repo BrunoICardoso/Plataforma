@@ -1,0 +1,1246 @@
+﻿@{
+    ViewBag.Title = "Perfil da empresa";
+}
+
+
+<style type="text/css">
+    .texto_noticia {
+        margin: 0 0 10px;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .titulo_noticia {
+        height: 80px;
+        overflow: hidden;
+    }
+
+    .rodape_noticia {
+        height: 72px;
+        overflow: hidden;
+    }
+
+    .botoes-selecao {
+        width: 100%;
+    }
+
+    #btnAnalise, #btnLinhaTempo {
+        width: 50%;
+    }
+    .container_timeline {
+        display:none;
+    }
+
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Notícias</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Empresas</a>
+            </li>
+            <li>
+                <a>Coca Cola Company</a>
+            </li>
+            <li class="active">
+                <strong>Notícias</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-8">
+
+            <div class="profile-image">
+                <img src="~/Images/Empresas/logo01.png" class="img-circle circle-border m-b-md" alt="profile">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            Coca Cola Company
+                        </h2>
+                        <h4>Corporação</h4>
+                        <small>
+                            The Coca-Cola Company, geralmente referida como Coca-Cola Company, Coke ou simplesmente Coca-Cola, dependendo da região, é uma corporação multinacional estadunidense, fabricante e comerciante de bebidas não-alcoólicas e concentrados de xaropes.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label" for="product_name">Palavras-chave</label>
+                    <input type="text" id="product_name" name="product_name" value="" placeholder="" class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-4" id="optFontes">
+                <div class="form-group">
+                    <label class="control-label" for="status">Fontes</label>
+                    <div class="input-group">
+                        <select data-placeholder="Selecione as fontes..." class="chosen-select" multiple tabindex="4">
+                            <option value="1">Click RBS</option>
+                            <option value="2">Terra</option>
+                            <option value="3">Zero Hora</option>
+                            <option value="4">Veja</option>
+                            
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="btn-group botoes-selecao">
+                    <button class="btn btn-primary" id="btnAnalise" type="button">Análise</button>
+                    <button class="btn btn-white" id="btnLinhaTempo" type="button">Linha do tempo</button>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="row container_analise">
+        <div class="col-md-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Total de notícias por dia</h5>
+                </div>
+
+                <div class="ibox-content">
+                    <div id="histograma_noticias" class="row">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Total de notícias</h5>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-newspaper-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span>Últimos 30 dias </span>
+                            <h2 class="font-bold">1.260 notícias</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 container_analise">
+            <div class="ibox float-e-margins" style="height: 470px;"> @*545px*@
+                <div class="ibox-title">
+                    <h5>Quantidade de notícias por marca e produto</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-4"><strong>Empresa</strong> <input type="checkbox" id="chkempresas" value="Empresa" class="js-switch" checked /> </div>
+                        <div class="col-md-4"><strong>Marcas</strong> <input type="checkbox" id="chkmarcas" value="Marca" class="js-switch" checked /> </div>
+                        <div class="col-md-4"><strong>Produtos</strong> <input type="checkbox" id="chkproduto" value="Produto" class="js-switch" checked /> </div>
+                    </div>
+                    <div id='vis'>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 container_analise">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Fontes com mais publicações</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <table id="tableFontes" class="table" style="margin-bottom:0px">
+                            <thead>
+                                <tr><td></td><td>Fonte</td><td colspan="2">Quantidade</td><td></td></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="nowrap"><span id="sparkline1"></span></td><td class="truncate">Alimentos e bebidas teste 123</td><td class="nowrap">65</td><td class="text-navy nowrap"><i class="fa fa-level-up"></i>30%</td></tr>
+                                <tr><td><span id="sparkline2"></span></td><td>Uol Notícias</td><td>54</td><td class="text-warning"><i class="fa fa-level-down"></i>30%</td></tr>
+                                <tr><td><span id="sparkline3"></span></td><td>Terra</td><td>43</td><td class="text-navy"><i class="fa fa-level-up"></i>20%</td></tr>
+                                <tr><td><span id="sparkline4"></span></td><td>Clic RBS</td><td>32</td><td class="text-warning"><i class="fa fa-level-down"></i>12%</td></tr>
+                                <tr><td><span id="sparkline5"></span></td><td>Zero Hora</td><td>23</td><td class="text-navy"><i class="fa fa-level-up"></i>55%</td></tr>
+                                <tr><td><span id="sparkline6"></span></td><td>Alimentos e bebidas teste 123</td><td>12</td><td class="text-navy"><i class="fa fa-level-up"></i>130%</td></tr>
+                                <tr><td><span id="sparkline7"></span></td><td>Valor econômico</td><td>11</td><td class="text-warning"><i class="fa fa-level-down"></i>60%</td></tr>
+                                <tr><td><span id="sparkline8"></span></td><td>Exame</td><td>9</td><td class="text-warning"><i class="fa fa-level-down"></i>80%</td></tr>
+                                <tr><td><span id="sparkline9"></span></td><td>R7</td><td>9</td><td class="text-warning"><i class="fa fa-level-down"></i>80%</td></tr>
+                                <tr><td><span id="sparkline10"></span></td><td>Abras</td><td>9</td><td class="text-warning"><i class="fa fa-level-down"></i>80%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row top_palavras container_analise">
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1 class="no-margins">Termos em destaque</h1>
+            <p>Termos que mais aparecem nas notícias sobre essa empresa</p>
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#3D89A1">
+            <span class="palavra"></span>
+
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#BD6567">
+            <span class="palavra"></span>
+
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#31B59B">
+            <span class="palavra"></span>
+
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#C7AEAC">
+            <span class="palavra"></span>
+
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#DFA660">
+            <span class="palavra"></span>
+
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#D2D087">
+            <span class="palavra"></span>
+
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#BD6567">
+            <span class="palavra"></span>
+
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#31B59B">
+            <span class="palavra"></span>
+
+        </div>
+        <div class="col-md-4 container_palavra" style="background-color:#C7AEAC">
+            <span class="palavra"></span>
+
+        </div>
+    </div>
+
+    <div class="row container_timeline">
+
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Timeline de notícias</h1>
+            <p>Veja aqui as notícias relacionadas a Coca-Cola Company, as suas marcas e aos seus produtos produtos</p>
+        </div>
+        <div class="col-lg-6">
+            <span class="label_pagination">Página 1 de 125 - 1.350 notícias</span>
+        </div>
+        <div class="col-lg-6">
+
+            <ul class="pagination pull-right">
+
+                <li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li>
+                <li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li>
+                <li class="footable-page active"><a data-page="0" href="#">1</a></li>
+                <li class="footable-page"><a data-page="1" href="#">2</a></li>
+                <li class="footable-page"><a data-page="1" href="#">3</a></li>
+                <li class="footable-page"><a data-page="1" href="#">4</a></li>
+                <li class="footable-page"><a data-page="1" href="#">5</a></li>
+                <li class="footable-page"><a data-page="1" href="#">6</a></li>
+                <li class="footable-page"><a data-page="1" href="#">7</a></li>
+                <li class="footable-page"><a data-page="1" href="#">8</a></li>
+                <li class="footable-page"><a data-page="1" href="#">9</a></li>
+                <li class="footable-page"><a data-page="1" href="#">10</a></li>
+                <li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li>
+                <li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li>
+            </ul>
+
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia" title="Coca-Cola e Pepsi pagam milhões para esconder seu vínculo com a obesidade">
+                            Coca-Cola e Pepsi pagam milhões para esconder seu vínculo com a obesidade
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>EL PAÍS</strong>  <span class="text-muted"><i class="fa fa-clock-o"></i> 10 Out 2016 - 17:37</span>
+                    </div>
+                    <p class="texto_noticia">
+                        Estudo revela que associações científicas, universidades e órgãos públicos aceitam dinheiro dos fabricantes de refrigerantes nos EUA. <br />
+                        A indústria do açúcar e os maiores produtores de refrigerantes se encontram numa situação semelhante à das fábricas de cigarro algumas décadas atrás. O mundo sofre uma epidemia de obesidade, e o consumo de bebidas açucaradas é um dos culpados comprovados. Cada lata de refrigerante convencional contém 40 gramas de açúcar, bem mais do que os 25 gramas diários considerados como limite ideal pela Organização Mundial de Saúde. Frente ao crescente consumo desses produtos, alguns países ampliaram sua carga tributária, e outros cogitam incluir mensagens de alerta como as que já aparecem nas embalagens de cigarros.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Obesidade</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> NUÑO DOMÍNGUEZ</div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://brasil.elpais.com/brasil/2016/10/07/ciencia/1475858935_672186.html" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Coca-Cola Brasil entra no mercado de café
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>Revista Exame</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 28th Out 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        A Coca-Cola Brasil anunciou que lançará em agosto o Café Leão, produto com grãos 100% arábica, cultivados, torrados e embalados no país. A iniciativa marca a entrada da empresa no segmento de cafés, por meio da Leão, marca de origem brasileira com 115 anos de atuação no segmento de chás. O Café Leão será o primeiro da companhia no mundo para o consumo em casa.
+                        <br /><br />
+                        Segundo a Coca-Cola, a produção do Café Leão ...
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Novo produto</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> Redação </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://exame.abril.com.br/negocios/noticias/fusao-de-kraft-e-heinz-cria-empresa-maior-que-coca-cola" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Bando fortemente armado invade fabrica da Coca-Cola em Porto Velho
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>Rondoniagora</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 10 Out 2016 - 8:25</span>
+                    </div>
+                    <p class="texto_noticia">
+                        Quatro criminosos fortemente armados com fuzis invadiram a fábrica da Coca-Cola, em Porto Velho na madrugada desta segunda-feira, arrombaram um caixa eletrônico e levaram grande quantidade de dinheiro. O estabelecimento fica localizado na Estrada da Areia Branca, Zona Sul da capital.
+                        <br /><br />
+                        Segundo a Polícia, os bandidos chegaram em um automóvel e renderam os vigilantes. Os trabalhadores foram amarrados. Em seguida, utilizando um maçarico, o bando arrombou o caixa eletrônico, pegou o dinheiro e fugiu.
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Levaram dinheiro</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> Da redação </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://www.rondoniagora.com/noticias/bando+fortemente+armado+invade+fabrica+da+coca-cola+em+porto+velho+2016-10-10.htm" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Coca-Cola Brasil entra no mercado de café
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>Revista Exame</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 28th Out 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        A Coca-Cola Brasil anunciou que lançará em agosto o Café Leão, produto com grãos 100% arábica, cultivados, torrados e embalados no país. A iniciativa marca a entrada da empresa no segmento de cafés, por meio da Leão, marca de origem brasileira com 115 anos de atuação no segmento de chás. O Café Leão será o primeiro da companhia no mundo para o consumo em casa.
+                        <br /><br />
+                        Segundo a Coca-Cola, a produção do Café Leão ...
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Novo produto</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> Redação </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://exame.abril.com.br/negocios/noticias/fusao-de-kraft-e-heinz-cria-empresa-maior-que-coca-cola" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Apple, Google e Coca-Cola são as marcas mais valiosas do mundo
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>O Globo</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Out 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        RIO - Apple, Google e Coca-Cola continuam sendo as marcas mais valiosas do planeta, mas o setor automotivo é o mais representado no ranking da Interbrand, publicado nesta quarta-feira, e que conta com a estreia no top 100 de Dior e Tesla.
+                        <br /><br />
+                        “Por quatro anos consecutivos, Apple e Google se situam no topo da classificação. (...) Coca-Cola, Microsoft, Toyota, IBM, Samsung, Amazon, Mercedes-Benz e GE completam o top 10. Por último, Dior e Tesla entram no ranking Best Global Brands pela primeira vez, nas posições 89 e 100, respectivamente”, explica em comunicado a consultoria especializada em marcas.
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Negócios e Finanças</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> AFP </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://oglobo.globo.com/economia/negocios/apple-google-coca-cola-sao-as-marcas-mais-valiosas-do-mundo-20237632" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Que tal jogar em um PC refrigerado por Coca-Cola?
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>Canaltech</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 6 Out 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        No mercado de PC, os modders de hardware aparecem com as mais variadas ideias para criar sistemas cada vez mais inovadores - pra não dizer bizarros. Uma parceria da Coca-Cola com a Maingear, uma das principais fabricantes de mods para PC, criou um gabinete com um sistema refrigerado com o refrigerante - ou quase isso.
+                        <br /><br />
+
+                        Chamado de Maingear Rush 1ofONE Coke eSports, o gabinete foi feito para a Coke eSports, marca subsidiária da fabricante para o mercado de esportes eletrônicos.
+                        <br /><br />
+                        Todo o setup usa o refrigerante (na verdade é um líquido regular de refrigeração colorido como a Coca-Cola de verdade) para controlar o calor nas placas. Para completar, o reservatório onde fica o fluido de refrigeração tem o formato clássico de uma garrafa da bebida.
+
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Games</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> Redação </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://exame.abril.com.br/negocios/noticias/fusao-de-kraft-e-heinz-cria-empresa-maior-que-coca-cola" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Ícone da Coca-Cola, embalagens de vidro estão de volta às mesas
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>Revista Exame</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 2 Out 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        Para quem não é assíduo frequentador de botecos, ficou difícil encontrar nos últimos anos a famosa Coca-Cola na embalagem de vidro —a "Coca de garrafinha". Mas o reinado das latinhas de alumínio está prestes a ruir: de olho na exigência de porções menores (com menos açúcar) e no apelo "retrô" da embalagem, a empresa está colocando a "Coca KS" de novo nas ruas de São Paulo.
+                        <br /><br />
+                        Lançada em 1915, a garrafa foi a primeira embalagem criada para a bebida que, em seus primeiros anos de vida, no final do século 19, era servida apenas em máquinas parecidas com aquelas usadas hoje por fast-foods. Seus 237 mililitros eram, à época, o maior volume de Coca-Cola que poderia ser comprado de uma única vez —daí o apelido de KS, uma abreviação de "king size".
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Novo produto</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> GABRIEL JUSTO </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://www1.folha.uol.com.br/saopaulo/2016/10/1818449-icone-da-coca-cola-embalagens-de-vidro-estao-de-volta-as-mesas-saiba-onde-encontra-las.shtml" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            S&P corta perspectiva da Coca-Cola Femsa para negativa
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>Valor Econômico</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 28 Set 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        A S&P Global Ratings revisou nesta quarta-feira de estável para negativa a perspectiva da nota de crédito corporativa em escala global da companhia mexicana Coca-Cola Femsa. A perspectiva do rating em escala nacional permanece estável. As notas foram reafirmadas em “A-” e “mxAAA” nas escalas global e nacional, respectivamente.
+                        <br /><br />
+                        A revisão de perspectiva reflete as métricas de crédito mais fracas da Coca-Cola Femsa, com relação ao atual perfil de risco da companhia após a aquisição da engarrafadora Vonpar no Brasil.
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Novo produto</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> Thais Carrança </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://www.valor.com.br/empresas/4728879/sp-corta-perspectiva-da-coca-cola-femsa-para-negativa" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            15 RAZÕES PARA NÃO BEBER COCA-COLA (PRINCIPALMENTE CRIANÇAS)
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>GreenMe</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 20 Set 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+
+                        Todo mundo conhece a indubitável sensação de frescor da Coca-Cola, e muita gente simplesmente ama isso. Apesar disso, há uma alegação com que todos concordamos: a Coca-Cola não é saudável e é importante que ao menos as crianças evitem seu consumo a qualquer custo. Veremos aqui 15 razões para não beber Coca-Cola (principalmente crianças).
+                        <br /><br />
+                        1. Nenhum nutriente <br />
+                        A coca-cola não possui nenhum nutriente, é basicamente constituída de açúcar e possui alta concentração de calorias, sendo extremamente prejudicial à saúde.
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Novo produto</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> Felipe Chaves </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="https://www.greenme.com.br/viver/saude-e-bem-estar/4053-15-razoes-nao-beber-coca-cola" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Engarrafadora mexicana da Coca-Cola anuncia compra da Vonpar no RS
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>G1</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 23 Set 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        A companhia mexicana Coca-Cola Femsa formalizou, nesta sexta-feira (23), a compra da gaúcha Vonpar, uma das maiores envasadoras da bebida no Brasil. O acordo foi firmado por meio da subsidiária brasileira Spal Indústria Brasileira de Bebidas S/A, mas o valor da negociação ainda não foi divulgado. O acordo, no entanto, ainda deve ser aprovado pelo Conselho Administrativo de Defesa Econômica (Cade).
+                        <br /><br />
+                        Com a aquisição, a Coca-Cola Femsa busca aplicar a atuação no Sul do país, principalmente no Rio Grande do Sul e Santa Catarina, conforme comunicado divulgado pela assessoria de imprensa da empresa. A estimativa é de que, com a compra, a empresa mexicana passe a responder por 49% da produção de Coca Cola no país.
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Novo produto</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> Redação </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://exame.abril.com.br/negocios/noticias/fusao-de-kraft-e-heinz-cria-empresa-maior-que-coca-cola" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Coca-Cola faz mal para quem tem problema na tireoide?
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>Revista Exame</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 23 Set 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        A glândula tireoide é sempre o tema principal quando o assunto é obesidade. Isso porque a glândula, que fica localizada no pescoço, é responsável, entre outras coisas, pela regulação dos batimentos cardíacos e pela garantia do bom funcionamento do intestino.
+                        <br /><br />
+                        Quando a tireoide está desregulada, ocorre a liberação excessiva de hormônio, o que causa uma doença conhecida como hipertireoidismo - um dos sintomas é a perda de peso. Por outro lado, quando a glândula não produz hormônios suficientes, ocorre o hipotireoidismo, que pode causar, entre outros problemas, a obesidade.
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Tireoide</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i>  Marcelo Fraga </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://www.revistaencontro.com.br/app/noticia/gastro/2016/09/23/noticia_gastro,157693/coca-cola-faz-mal-para-quem-tem-problema-na-tireoide.shtml" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="@Url.Action("Noticia_Detalhe", "Empresa")" class="btn-link">
+                        <h2 class="titulo_noticia">
+                            Coca-Cola Brasil entra no mercado de café
+                        </h2>
+                    </a>
+
+                    <div class="small m-b-xs">
+                        <strong>Revista Exame</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 28th Out 2016</span>
+                    </div>
+                    <p class="texto_noticia">
+                        A Coca-Cola Brasil anunciou que lançará em agosto o Café Leão, produto com grãos 100% arábica, cultivados, torrados e embalados no país. A iniciativa marca a entrada da empresa no segmento de cafés, por meio da Leão, marca de origem brasileira com 115 anos de atuação no segmento de chás. O Café Leão será o primeiro da companhia no mundo para o consumo em casa.
+                        <br /><br />
+                        Segundo a Coca-Cola, a produção do Café Leão ...
+                    </p>
+                    <div class="row rodape_noticia">
+                        <div class="col-md-6">
+                            <h5>Tags:</h5>
+                            <button class="btn btn-primary btn-xs" type="button">Coca-Cola</button>
+                            <button class="btn btn-white btn-xs" type="button">Novo produto</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>Autor:</h5>
+                                <div> <i class="fa fa-user"> </i> Redação </div>
+                                <div>
+                                    <i class="fa fa-link"> </i> <a href="http://exame.abril.com.br/negocios/noticias/fusao-de-kraft-e-heinz-cria-empresa-maior-que-coca-cola" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <span class="label_pagination">Página 1 de 125 - 1.350 notícias</span>
+        </div>
+        <div class="col-lg-6">
+
+            <ul class="pagination pull-right">
+
+                <li class="footable-page-arrow disabled"><a data-page="first" href="#first">«</a></li>
+                <li class="footable-page-arrow disabled"><a data-page="prev" href="#prev">‹</a></li>
+                <li class="footable-page active"><a data-page="0" href="#">1</a></li>
+                <li class="footable-page"><a data-page="1" href="#">2</a></li>
+                <li class="footable-page"><a data-page="1" href="#">3</a></li>
+                <li class="footable-page"><a data-page="1" href="#">4</a></li>
+                <li class="footable-page"><a data-page="1" href="#">5</a></li>
+                <li class="footable-page"><a data-page="1" href="#">6</a></li>
+                <li class="footable-page"><a data-page="1" href="#">7</a></li>
+                <li class="footable-page"><a data-page="1" href="#">8</a></li>
+                <li class="footable-page"><a data-page="1" href="#">9</a></li>
+                <li class="footable-page"><a data-page="1" href="#">10</a></li>
+                <li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li>
+                <li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+
+<pre id="csvdata">
+Day,Quantity
+2016-10-01,676
+2016-10-02,369
+2016-10-03,751
+2016-10-04,748
+2016-10-05,757
+2016-10-06,033
+2016-10-07,696
+2016-10-08,576
+2016-10-09,846
+2016-10-10,489
+2016-10-11,532
+2016-10-12,773
+2016-10-13,639
+2016-10-14,161
+2016-10-15,73
+2016-10-16,537
+2016-10-17,939
+2016-10-18,504
+2016-10-19,607
+2016-10-20,109
+2016-10-21,956
+2016-10-22,825
+2016-10-23,327
+2016-10-24,854
+2016-10-25,408
+2016-10-26,497
+2016-10-27,577
+2016-10-28,559
+2016-10-29,75
+2016-10-30,883
+2016-10-31,88
+2016-11-01,546
+2016-11-02,632
+2016-11-03,889
+2016-11-04,644
+2016-11-05,919
+2016-11-06,917
+2016-11-07,974
+2016-11-08,749
+2016-11-09,179
+2016-11-10,783
+2016-11-11,937
+2016-11-12,104
+2016-11-13,831
+2016-11-14,424
+2016-11-15,462
+2016-11-16,604
+2016-11-17,713
+2016-11-18,815
+2016-11-19,105
+2016-11-20,227
+2016-11-21,936
+2016-11-22,576
+2016-11-23,841
+2016-11-24,79
+2016-11-25,507
+2016-11-26,621
+2016-11-27,881
+2016-11-28,854
+2016-11-29,92
+2016-11-30,798
+2016-12-01,758
+2016-12-02,907
+2016-12-03,121
+2016-12-04,712
+2016-12-05,107
+2016-12-06,395
+2016-12-07,162
+2016-12-08,763
+2016-12-09,931
+2016-12-10,365
+2016-12-11,865
+2016-12-12,195
+2016-12-13,196
+2016-12-14,867
+2016-12-15,858
+2016-12-16,89
+2016-12-17,85
+2016-12-18,491
+2016-12-19,802
+2016-12-20,845
+2016-12-21,876
+2016-12-22,501
+2016-12-23,225
+2016-12-24,788
+2016-12-25,924
+2016-12-26,826
+2016-12-27,996
+2016-12-28,99
+2016-12-29,332
+2016-12-30,752
+2016-12-31,712
+</pre>
+
+@section Styles{
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    @Styles.Render("~/plugins/switcheryStyles")
+    <style type="text/css">
+
+        .container_timeline {
+            display:none;
+        }
+        table {
+            width: 100%;
+        }
+
+        #tableFontes td:nth-child(2) {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            max-width: 100px;
+        }
+
+        table td {
+            white-space: nowrap;
+        }
+
+        .bubble_tooltip {
+            position: absolute;
+            top: 300px;
+            left: 130px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 2px solid #000;
+            /* background: #222222; */
+            background: #fff;
+            /* color: #eeeeee; */
+            color: black;
+            padding: 10px;
+            width: 300px;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        .label_pagination {
+            display: inline-block;
+            height: 28px;
+            line-height: 28px;
+            margin: 20px 0;
+        }
+
+
+        svg {
+            font: 10px sans-serif;
+        }
+
+        .focusBackground {
+            fill: white;
+        }
+
+        .snapshot {
+            opacity: 0.2;
+            fill-opacity: .2;
+        }
+
+        .daily {
+            fill: steelblue;
+        }
+
+        .max {
+            fill: none;
+            stroke: #f00;
+        }
+
+        .mean {
+            stroke: blue;
+            fill: steelblue;
+        }
+
+        .min {
+            fill: none;
+            stroke: #0f0;
+        }
+
+        .sd {
+            fill: none;
+            stroke: #ff0;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .brush .extent {
+            stroke: #fff;
+            fill-opacity: .125;
+            shape-rendering: crispEdges;
+        }
+
+        .brushSnapshot {
+            stroke: #999;
+            stroke-dasharray: 5, 5;
+            shape-rendering: crispEdges;
+        }
+
+        .barLabels {
+            fill: #fff;
+        }
+
+        .area {
+            fill: rgb(26, 179, 148);
+        }
+
+        .bar rect {
+            fill: steelblue;
+            shape-rendering: crispEdges;
+        }
+
+        .snapshotBar {
+            fill: red;
+            fill-opacity: .4;
+        }
+
+        .snapshotBarPeak rect {
+            shape-rendering: crispEdges;
+            stroke: #f00;
+            fill: red;
+            fill-opacity: .2;
+        }
+
+        .active rect {
+            fill: orange;
+        }
+
+        .bar black {
+            fill: #000;
+        }
+
+        #csvdata {
+            display: none;
+        }
+    </style>
+}
+
+@section Scripts {
+    <link href="~/Content/plugins/typed/typed.css" rel="stylesheet" />
+
+    @Scripts.Render("~/plugins/sparkline")
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/plugins/chosen")
+    @Scripts.Render("~/vis")
+    
+    <script src="~/Scripts/vis_files/vis_noticias_empresa.js" type="text/javascript"></script>
+    <script src="~/Scripts/plugins/histograma/histograma.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/plugins/typed/typed.js"></script>
+
+    <script>
+
+
+        $(function () {
+
+            $("#btnAnalise").click(function (b) {
+                $(".container_timeline").hide();
+                $(".container_analise").show();
+                $("#btnAnalise").addClass("btn-primary").removeClass("btn-white");
+                $("#btnLinhaTempo").removeClass("btn-primary").addClass("btn-white");
+            });
+
+            $("#btnLinhaTempo").click(function (b) {
+                $(".container_timeline").show();
+                $(".container_analise").hide();
+                $("#btnAnalise").removeClass("btn-primary").addClass("btn-white");
+                $("#btnLinhaTempo").addClass("btn-primary").removeClass("btn-white");
+
+            });
+
+            $(".palavra:even").typed({
+                strings: ["Alimentos e Bebidas.", "Cerveja de trigo.", "Refrigerantes Diet."],
+                typeSpeed: 30,
+                backDelay: 3900,
+                loop: true,
+            });
+
+            $(".palavra:odd").typed({
+                strings: ["Coca-Cola.", "Pepsco.", "Skol.", "Heinken."],
+                typeSpeed: 40,
+                backDelay: 2400,
+                loop: true,
+            });
+        });
+
+
+
+        $(document).ready(function () {
+
+            $(".chosen-select").width($("#optFontes").width());
+
+            $(window).resize(function () {
+                var opt = $(".chosen-select");
+
+                $(opt).width($("#optFontes").width());
+
+                $(opt).next().width($("#optFontes").width());
+            })
+
+            var config = {
+                '.chosen-select': {},
+                '.chosen-select-deselect': { allow_single_deselect: true },
+                '.chosen-select-no-single': { disable_search_threshold: 10 },
+                '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+                '.chosen-select-width': { width: "95%" }
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+
+
+        })
+
+
+
+
+        //Bubble Chart
+
+        var chkEmpresas = document.querySelector('#chkempresas');
+        var chkMarcas = document.querySelector('#chkmarcas');
+        var chkProduto = document.querySelector('#chkproduto');
+
+        var switchery = new Switchery(chkEmpresas, { color: '#E27686' });
+        var switchery2 = new Switchery(chkMarcas, { color: '#3D89A1' });
+        var switchery3 = new Switchery(chkProduto, { color: '#DFA660' });
+
+
+        function FiltrarBubbles() {
+            var filters = [];
+            var target = "Categoria";
+            var removeValues = {};
+
+            if (chkEmpresas.checked == false) {
+                removeValues["Empresa"] = true;
+            }
+
+            if (chkMarcas.checked == false) {
+                removeValues["Marca"] = true;
+            }
+
+            if (chkProduto.checked == false) {
+                removeValues["Produto"] = true;
+            }
+
+
+            var toAdd = {
+                target: target,
+                removeValues: removeValues
+            };
+            filters.push(toAdd);
+
+            var filter = {
+                discrete: filters,
+                numeric: [] // numeric not done yet!
+            };
+
+            use_filters(filter);
+
+        };
+
+
+        $(document).ready(function () {
+
+            $('.switchery').click(function (a) {
+                FiltrarBubbles();
+            })
+
+
+        });
+
+        var initialise_form = function (selectionOptions) {
+
+
+        };
+
+        function get_distinct_values(csv, keyType, key) {
+            var allValues = {};
+            for (var i in csv) {
+                var value = csv[i][key];
+                allValues[value] = true;
+            }
+
+            var allValuesArray = [];
+            for (var i in allValues)
+                allValuesArray.push(i);
+
+            allValuesArray.sort();
+
+            return allValuesArray
+        }
+
+        function keyToLookup(key) {
+            var firstPartEnds = key.indexOf(':');
+            if (firstPartEnds <= 0)
+                return { key: key, type: key, title: key };
+
+            var firstPart = key.substring(0, firstPartEnds);
+            var secondPart = key.substring(firstPartEnds + 1);
+
+            return { key: key, type: firstPart, title: secondPart };
+        }
+
+        function render_filters_colors_and_groups(csv) {
+            var first = csv[0];
+            var lookups = [];
+            for (var key in first) {
+                var lookup = keyToLookup(key);
+                switch (lookup.type) {
+                    case "Filtro":
+                        lookups.push(lookup);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            var filterList = $('#filter-list');
+            for (var i in lookups) {
+                var lookup = lookups[i];
+                var values = get_distinct_values(csv, lookup.type, lookup.key);
+                var item = $('<div class="filter_block" data-target="' + lookup.key + '"><h3 class="filter_title">' + lookup.title + '</h3></div>');
+                for (var j in values) {
+                    var checkbox = $('<div class="sub-filter-block"><input type="checkbox" checked="checked" value="' + values[j] + '"/> ' + values[j] + '</div>');
+                    checkbox.appendTo(item);
+                }
+                item.appendTo(filterList);
+            }
+
+            initialise_form(lookups);
+        }
+
+
+
+
+
+        //Gráficos das fontes
+
+        $("#sparkline1").sparkline([34, 43, 43, 35, 44, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        $("#sparkline2").sparkline([34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        $("#sparkline3").sparkline([34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        $("#sparkline4").sparkline([23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44, 34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        $("#sparkline5").sparkline([34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        $("#sparkline6").sparkline([34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        $("#sparkline7").sparkline([73, 53, 12, 53, 23, 65, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44, 34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        $("#sparkline8").sparkline([34, 43, 43, 35, 44, 32, 15, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65, 23], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+
+        $("#sparkline9").sparkline([34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        $("#sparkline10").sparkline([34, 43, 43, 35, 44, 32, 15, 22, 46, 33, 86, 54, 73, 53, 12, 53, 23, 65, 23, 63, 53, 42, 34, 56, 76, 15, 54, 23, 44], {
+            type: 'line',
+            lineColor: '#17997f',
+            fillColor: '#ffffff',
+            width: '50'
+        });
+
+        var graf1 = new Histograma();
+        graf1.pageWidth = $("#histograma_noticias").width();
+        graf1.init("#histograma_noticias");
+
+
+    </script>
+}

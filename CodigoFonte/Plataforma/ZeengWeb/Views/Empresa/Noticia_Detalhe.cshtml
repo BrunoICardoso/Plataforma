@@ -1,0 +1,264 @@
+﻿@model ZeengWeb.ViewModel.Empresa.EmpresaNoticiaDetalhe
+@{
+    ViewBag.Title = "Noticias - Detalhes";
+}
+
+@section Styles {
+    @*@Styles.Render("~/plugins/lightboxGallery")*@
+
+    <link href="~/Content/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+}
+
+<div id="blueimp-gallery" class="blueimp-gallery">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <p class="description"></p>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+  
+    @*<div class="col-lg-10">
+        <h2>Notícias</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Empresa">Home</a>
+            </li>
+            <li>
+                <a href="/Empresa">Empresas</a>
+            </li>
+            <li>
+                <a href="/Empresa/Perfil/@Model.noticia.empresas.FirstOrDefault().idempresa">@Model.noticia.empresas.FirstOrDefault().nomeempresa</a>
+            </li>
+            <li>
+                <a href="/Empresa/Noticias/@Model.noticia.empresas.FirstOrDefault().idempresa">Notícias</a>
+            </li>
+            <li class="active">
+                <strong>Notícia</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>*@
+
+    @{ 
+        if(ViewBag.LayoutTopo == "EmpresaNoticiaDetalhe")
+        {
+            @Html.Partial("Noticias/_Noticia_Detalhe_Topo")
+
+        } else if (ViewBag.LayoutTopo == "PromoNoticiaDetalhe")
+        {
+            @Html.Partial("Promocao/_Noticia_Detalhe_Topo")
+
+        } else {
+            @Html.Partial("Noticias/_Noticia_Detalhe_Topo")
+        }
+    }    
+    
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRight ">
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="ibox">
+
+                <div class="ibox-content">
+
+                    <div class="titulo_noticia">
+
+                        <strong>@Model.noticia.nomefonte </strong> <span class="text-muted"><i class="fa fa-clock-o"></i> @Model.noticia.datapublicacao</span>
+
+                        <h1>
+                            @Html.Raw(Model.noticia.titulo)
+                        </h1>
+                        <br />
+                        <h3 style="font-weight:500; line-height:23px;">
+                            @Model.noticia.subtitulo
+                        </h3>
+
+                    </div>
+                    <p>
+
+                        @Html.Raw(Model.noticia.conteudo.Replace("\n", "<br><br>"))
+                    </p>
+
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="small">
+                                <div><i class="fa fa-user"> </i> Autor:</div>
+                                <div style="margin-top:5px">
+                                    @Model.noticia.autor
+                                </div>
+                                <div style="margin-top:5px">
+                                    <i class="fa fa-link"> </i> <a href="@Model.noticia.url" target="_blank"> Ver original</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tags_noticia col-md-9">
+                            <h5>Tags:</h5>
+
+                            <div id="tags">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Imagens da notícia</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="lightBoxGallery" style="height: 270px; overflow-y: scroll;">
+
+                                <div id="links">
+
+
+                                    @{
+                                        if (Model.noticia.imagens != null)
+                                        {
+                                            foreach (var imagem in Model.noticia.imagens)
+                                            {
+                                                <a href="@imagem.url" title="@imagem.titulo" data-description="Fonte: @imagem.creditos" data-gallery=""><img src="@imagem.url" width="80" height="80"></a>
+                                            }
+                                        }
+                                    }                                    
+
+                                </div>
+
+                            </div>
+                            <div class="text-center">
+                                @*<i class="fa fa-angle-down"></i>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .botao-verde:hover {
+        background-color: #1ab394;
+        border-color: #1ab394;
+        color: #FFFFFF;
+    }
+
+    .noticia_relacionada {
+        margin: 0px 0px 20px 0px;
+    }
+
+    .tags_noticia button {
+        margin-bottom: 3px;
+    }
+
+    /* Local style for demo purpose */
+
+    .lightBoxGallery {
+        text-align: center;
+    }
+
+        .lightBoxGallery img {
+            margin: 5px;
+        }
+
+    .blueimp-gallery > .description {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+        color: #fff;
+        display: none;
+        font-style: italic;
+    }
+
+    .blueimp-gallery-controls > .description {
+        display: block;
+    }
+
+    /*.slides > p.description {
+        position: absolute;
+        top: 50px;
+        left: 15px;
+        color: #fff;
+        display: none;
+
+    }*/
+</style>
+
+
+@section Scripts {
+    @*@Scripts.Render("~/plugins/lightboxGallery")*@
+
+    <script src="~/Scripts/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+
+        });
+
+
+        $('#blueimp-gallery').on('slide', function (event, index, slide) {
+
+            $(this).children('.description')
+                .text($('#links a').eq(index).data('description'));
+        });
+
+        var idNoticia = @Model.noticia.idnoticia;
+
+        CarregarTags();
+
+        function CarregarTags() {
+            var url = "/api/EmpresaAPI/GetTagsNoticia?idNoticia=" + idNoticia;
+            $.getJSON(url, function (data) {
+
+                if(data){
+
+                    $('#tags').html('');
+
+                    $.each(data,function(index,obj){
+                        MontarTags(obj);
+                    });
+                }
+            });
+        }
+
+        function MontarTags(empresa) {
+
+            var conteudo = '';
+            conteudo = '<a href="/Empresa/Perfil/'+empresa.valor+'" class="btn btn-white btn-xs botao-verde"  type="button">'+empresa.termo+'</a>&nbsp;';
+            $('#tags').append(conteudo);
+        }
+
+        function mudarBotao(obj,_style){
+            $(obj).removeClass('btn btn-white btn-xs');
+            $(obj).addClass('btn '+_style+' btn-xs');
+        }
+
+    </script>
+
+}
+

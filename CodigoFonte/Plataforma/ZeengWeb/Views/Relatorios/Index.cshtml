@@ -1,0 +1,197 @@
+﻿
+@using ZeengWeb.Utils
+
+@{
+    ViewBag.Title = "Relatório - Redes Sociais";
+}
+
+<style>
+    .btn-sm:hover {
+        background-color: #1AB394;
+    }
+
+    a:hover .fa {
+        color: #FFFFFF;
+    }
+
+    .paginacaoRelatorio {
+        margin-right: 15px;
+    }
+</style>
+
+<script type="text/javascript">
+
+    var qtdeRegistros = 6;
+    var paginaAtual = 1;
+
+</script>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Relatório - Redes Sociais</h2>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="control-label" for="product_name">Relatório</label>
+                    <input type="text" id="txtNomeRelatorioUsuario" name="product_name" value="" style="height: 31px;" placeholder="Nome do relatório o nome do usuário que gerou" class="form-control input-mini">
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="control-label" for="status">Período de comparaçao</label>
+                    <div class="input-daterange input-group" id="selecaoDatas">
+                        <input type="text" class="input-sm form-control" name="start" id="dtinicial" value="" />
+                        <span class="input-group-addon" style="background-color: #fff; border-color: #fff;">até</span>
+                        <input type="text" class="input-sm form-control" name="end" id="dtfinal" value="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2" style="top:20px;">
+                <button class="ladda-button btn btn-primary" data-style="expand-left" id="BtnPesquisa">Pesquisa</button>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <a class="ladda-button btn btn-primary" data-style="expand-left" href="/Relatorios/Cadastrar/">Novo</a>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+            @*<div class="paginacaoRelatorio"></div>*@
+
+            <div class="col-md-12">
+                <table class="table table-bordered" id="listagemRelatorios">
+                    <thead>
+                        <tr>
+                            <th title="Data inicial de comparação">Inicial Comp.</th>
+                            <th title="Data final de comparação">Final Comp.</th>
+                            <th>Relatório</th>
+                            <th>Gerado Por</th>
+                            <th style="text-align:center;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+            </div>
+
+            <div class="paginacaoRelatorio"></div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+@section Styles {
+
+    @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/plugins/switcheryStyles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+
+    <link href="~/Content/SweetAlert/sweetalert.css" rel="stylesheet" />
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/sparkline")
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/plugins/chosen")
+
+    <script src="~/Scripts/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/Relatorios/relatorios.js"></script>
+
+
+    <script type="text/javascript">
+
+        $('#selecaoDatas').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        });
+
+        var dataPadraoInicial = new Date();
+        var dataPadraoFinal = new Date();
+        dataPadraoInicial.setDate(dataPadraoFinal.getDate() - 30);
+
+        $('#dtinicial').datepicker('setDate', dataPadraoInicial);
+        var dataPadraoFinal = new Date();
+        $('#dtfinal').datepicker('setDate', dataPadraoFinal);
+
+        var _dataInicial;
+        var _dataFinal;
+
+        if ($("#dtinicial").datepicker('getDate') == undefined){
+            _dataInicial = null;
+        }
+        else {
+            _dataInicial = ConverteDataParaDataJson($("#dtinicial").datepicker('getDate'));
+        }
+
+
+        if ($("#dtfinal").datepicker('getDate') == undefined) {
+            _dataFinal = null;
+        }
+        else {
+            _dataFinal = ConverteDataParaDataJson($("#dtfinal").datepicker('getDate'));
+        }
+
+        var filtros = {};
+        filtros.idCliente = '@Configuracoes.idClienteLogado';
+        filtros.dataInicial = _dataInicial;
+        filtros.dataFinal = _dataFinal;
+        filtros.pesquisa = $('#txtNomeRelatorioUsuario').val();
+        filtros.qtdeRegistros = qtdeRegistros;
+        filtros.pagina = paginaAtual;
+
+        var Paginacao = new Paginacao();
+        var objRelatorios = new Relatorios();
+
+        setTimeout(function () {
+            objRelatorios.Pesquisar();
+        }, 300);
+
+        $(document).ready(function () {
+
+            $('#BtnPesquisa').on('click', function () {
+                filtros.dataInicial = ConverteDataParaDataJson($("#dtinicial").datepicker('getDate'));
+                filtros.dataFinal = ConverteDataParaDataJson($("#dtfinal").datepicker('getDate'));
+                filtros.pesquisa = $('#txtNomeRelatorioUsuario').val();
+
+                objRelatorios.Pesquisar();
+            });
+
+        });
+
+    </script>
+
+}

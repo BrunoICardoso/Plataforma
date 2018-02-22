@@ -1,0 +1,343 @@
+﻿
+@{
+    ViewBag.Title = "Visualizar Relatório";
+}
+
+<style type="text/css">
+    @@media print {
+
+        .btn {
+            display: none;
+        }
+
+        #printHead {
+            display: none;
+        }
+
+        body.mini-navbar #page-wrapper {
+            margin: 0 0 0 0px;
+        }
+
+        .tabela-media-geral-facebook > tr > td {
+            color: #1ab394 !important;
+        }
+
+
+        .tabela-media-geral-twitter > tr > td {
+            color: #1ab394 !important;
+        }
+
+        .tabela-media-geral-instagram > tr > td {
+            color: #1ab394 !important;
+        }
+
+        .tabela-media-geral-youtube > tr > td {
+            color: #1ab394 !important;
+        }
+
+         .tabela-media-geral-presenca-noticia > tr > td {
+            color: #1ab394 !important;
+        }
+    }
+    
+   
+    
+    .tabela-rede-social {
+        margin-top: 20px;
+    }
+
+    .titulo-rede-social {
+        position: absolute;
+        margin-top: 18px;
+        margin-left: 10px;
+        font-weight: 600;
+        font-size: 11pt;
+    }
+
+    .tabela-media-geral-facebook {
+        /*color: #1ab394;*/
+        font-weight: 700;
+    }
+
+    .tabela-media-geral-twitter {
+        /*color: #1ab394;*/
+        font-weight: 700;
+    }
+
+    .tabela-media-geral-instagram {
+        /*color: #1ab394;*/
+        font-weight: 700;
+    }
+
+    .tabela-media-geral-youtube {
+        /*color: #1ab394;*/
+        font-weight: 700;
+    }
+
+    .tabela-media-geral-presenca-noticia {
+        /*color: #1ab394;*/
+        font-weight: 700;
+    }
+
+    .btn:hover {
+        background-color: #1AB394;
+        color: #ffffff;
+    }
+
+    .box-relatorio-rs {
+        overflow-x: auto;
+    }
+
+    .btn-rlt {
+        color: #fff;
+        background: #1AB394;
+        border: 1px solid #e7eaec;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .btn-rlt:hover {
+            background-color: #fff;
+            color: #676a6c;
+    }
+
+    .valorMenorMedia {
+        font-weight: bold;
+        color: #C00000;
+    }
+
+    .valorMaiorMedia {
+        font-weight: bold;
+        color: #005325;
+    }
+
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Visualização de Relatório</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Relatorios">Relatórios</a>
+            </li>
+            <li class="active">
+                <strong>Visualizar</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-lg-5"><b>Relatório:</b> <span id="nomeRelatorio"></span></div>
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4" style="text-align:right;" ><b>Período de comparação:</b> <span id="periodoCompara"></span></div>
+    </div>
+
+    <div class="ibox-facebook ibox-content m-b-sm border-bottom box-relatorio-rs" style="display:none">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="lblRedeSocial">
+                    <i class="fa fa-facebook-official fa-3x" aria-hidden="true"></i>
+                    <span class="titulo-rede-social">Tabela comparativa das marcas em relação ao Facebook</span>
+                    <div style="float:right;"><a class="btn btn-default" onclick="relatorios.GerarCSV(@ViewBag.idRelatorio ,this, 'facebook');">Exportar CSV</a></div>
+                </div>
+            </div>
+            <div class="col-lg-12 tabela-rede-social">
+
+                <table class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint">
+                    <thead>
+                        <tr class="titulos-metricas-facebook">
+                            <th class="footable-visible footable-sortable">Empresa<span class="footable-sort-indicator"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabela-metricas-facebook"></tbody>
+                    <tfoot class="tabela-media-geral-facebook">
+
+                    </tfoot>
+                </table>
+
+                @*<div class="paginacao">
+                    </div>*@
+
+            </div>
+
+        </div>
+    </div>
+    <div class="ibox-twitter ibox-content m-b-sm border-bottom box-relatorio-rs" style="display:none">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="lblRedeSocial">
+                    <i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i>
+                    <span class="titulo-rede-social">Tabela comparativa das marcas em relação ao Twitter</span>
+                    <div style="float:right;"><a class="btn btn-default" onclick="relatorios.GerarCSV(@ViewBag.idRelatorio ,this, 'twitter');">Exportar CSV</a></div>
+                </div>
+            </div>
+            <div class="col-lg-12 tabela-rede-social">
+
+                <table class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint">
+                    <thead>
+                        <tr class="titulos-metricas-twitter">
+                            <th class="footable-visible footable-sortable">Empresa<span class="footable-sort-indicator"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabela-metricas-twitter"></tbody>
+                    <tfoot class="tabela-media-geral-twitter">
+
+                    </tfoot>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="ibox-instagram ibox-content m-b-sm border-bottom box-relatorio-rs"  style="display:none">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="lblRedeSocial">
+                    <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
+                    <span class="titulo-rede-social">Tabela comparativa das marcas em relação ao Instagram</span>
+                    <div style="float:right;"><a class="btn btn-default" onclick="relatorios.GerarCSV(@ViewBag.idRelatorio ,this, 'instagram');">Exportar CSV</a></div>
+                </div>
+            </div>
+            <div class="col-lg-12 tabela-rede-social">
+
+                <table class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint">
+                    <thead>
+                        <tr class="titulos-metricas-instagram">
+                            <th class="footable-visible footable-sortable">Empresa<span class="footable-sort-indicator"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabela-metricas-instagram"></tbody>
+                    <tfoot class="tabela-media-geral-instagram">
+
+                    </tfoot>
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="ibox-youtube ibox-content m-b-sm border-bottom box-relatorio-rs" style="display:none">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="lblRedeSocial">
+                    <i class="fa fa-youtube-square fa-3x" aria-hidden="true"></i>
+                    <span class="titulo-rede-social">Tabela comparativa das marcas em relação ao Youtube</span>
+                    <div style="float:right;"><a class="btn btn-default" onclick="relatorios.GerarCSV(@ViewBag.idRelatorio ,this, 'youtube');">Exportar CSV</a></div>
+                </div>
+            </div>
+            <div class="col-lg-12 tabela-rede-social">
+
+                <table class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint">
+                    <thead>
+                        <tr class="titulos-metricas-youtube">
+                            <th class="footable-visible footable-sortable">Empresa<span class="footable-sort-indicator"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabela-metricas-youtube"></tbody>
+                    <tfoot class="tabela-media-geral-youtube">
+
+                    </tfoot>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="ibox-presenca-noticia ibox-content m-b-sm border-bottom box-relatorio-rs" style="display:none">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="lblRedeSocial">
+                    <i class="fa fa-book fa-3x" aria-hidden="true"></i>
+                    <span class="titulo-rede-social">Tabela comparativa das marcas em presença online e notícias</span>
+                    <div style="float:right;"><a class="btn btn-default" onclick="relatorios.GerarCSV(@ViewBag.idRelatorio ,this, 'presenca-noticia');">Exportar CSV</a></div>
+                </div>
+            </div>
+            <div class="col-lg-12 tabela-rede-social">
+
+                <table class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint">
+                    <thead>
+                        <tr class="titulos-metricas-presenca-noticia">
+                            <th class="footable-visible footable-sortable">Empresa<span class="footable-sort-indicator"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabela-metricas-presenca-noticia"></tbody>
+                    <tfoot class="tabela-media-geral-presenca-noticia">
+
+                    </tfoot>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:50px;">
+        <div class="col-lg-8"></div>
+        <div class="col-lg-4">
+            <button class="btn btn-rlt" onclick="sair()"><i class="fa fa-arrow-right" aria-hidden="true"></i> Sair</button>
+            <button class="btn btn-rlt" onclick="editar()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
+            <button class="btn btn-rlt" id="ImprimirRelatorio"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Imprimir</button>
+        </div>
+    </div>
+
+    <div id="dados-facebook" style="display:none;"></div>
+    <div id="dados-twitter" style="display:none;"></div>
+    <div id="dados-instagram" style="display:none;"></div>
+    <div id="dados-youtube" style="display:none;"></div>
+
+</div>
+
+@section Styles {
+
+}
+
+@section Scripts {
+
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/Relatorios/relatorios.js"></script>
+    
+    <script type="text/javascript">
+
+        var relatorios = new Relatorios();
+
+        relatorios.metricasFacebook(@ViewBag.idRelatorio);
+        relatorios.metricasTwitter(@ViewBag.idRelatorio);
+        relatorios.metricasInstagram(@ViewBag.idRelatorio);
+        relatorios.metricasYoutube(@ViewBag.idRelatorio);
+        relatorios.MetricasPresencaNoticia(@ViewBag.idRelatorio);
+
+        relatorios.CarregaPeriodoRelatorio(@ViewBag.idRelatorio);
+
+        $(document).ready(function () {
+
+            setTimeout(function () {
+                relatorios.GerarDadosCSV();
+            }, 1300);
+
+        });
+
+        $("#ImprimirRelatorio").click(function () {
+
+            window.print();
+
+        });
+
+        function sair() {
+            window.location = "/Relatorios";
+        }
+
+        function editar() {
+            window.location = "/Relatorios/Editar?idRelatorio="+@ViewBag.idRelatorio;
+        }
+
+    </script>
+
+}

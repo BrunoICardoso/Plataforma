@@ -1,0 +1,1265 @@
+﻿@model ZeengWeb.ViewModel.Empresa.EmpresaNoticias
+@using ZeengWeb.Utils
+@{
+    ViewBag.Title = "Presença Online";
+}
+
+<style type="text/css">
+
+    a.iconesPresenca {
+        font-weight: 600;
+        color: #676a6c;
+    }
+
+        a.iconesPresenca i.fa {
+            font-size: 16px;
+        }
+
+        a.iconesPresenca:hover {
+            color: #19AA8D;
+            text-decoration: underline;
+        }
+
+    .toolTaxaRejeicao {
+        text-align: left;
+        width: 320px;
+        padding: 10px;
+    }
+
+    .toolRankBrasil {
+        text-align: left;
+        width: 280px;
+        padding: 10px;
+    }
+
+    .toolTextoPequeno {
+        text-align: left;
+        width: 200px;
+        padding: 10px;
+    }
+
+
+    .indicador-container {
+        border: 1px solid #E5E5E5;
+        padding: 10px 20px 10px 20px;
+        margin-bottom: 20px;
+    }
+
+    .indicaodor1-tit {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .indicador1-icon-help, .indicaodor2-icon-help {
+        float: right;
+        color: #BBB;
+        border: 1px solid #BBB;
+        border-radius: 13px;
+        width: 13px;
+        height: 13px;
+        font-size: 10px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 11px;
+        margin-right: -10px;
+        margin-top: 2px;
+    }
+
+    .indicador1-valor {
+        display: inline-block;
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+        .indicador1-valor span {
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+    .indicador1-diferenca {
+        float: right;
+        line-height: 20px;
+        margin-top: 18px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+        .indicador1-diferenca i {
+            font-size: 18px;
+            margin-left: 5px;
+            vertical-align: top;
+        }
+
+        .indicador1-diferenca.cima {
+            color: #1AB394;
+        }
+
+            .indicador1-diferenca.cima i {
+                transform: rotate(7deg);
+                /* Safari */
+                -webkit-transform: rotate(-90deg);
+                /* Firefox */
+                -moz-transform: rotate(-90deg);
+                /* IE */
+                -ms-transform: rotate(-90deg);
+                /* Opera */
+                -o-transform: rotate(-90deg);
+            }
+
+        .indicador1-diferenca.baixo {
+            color: #1AB394;
+        }
+
+            .indicador1-diferenca.baixo i {
+                transform: rotate(7deg);
+                /* Safari */
+                -webkit-transform: rotate(90deg);
+                /* Firefox */
+                -moz-transform: rotate(90deg);
+                /* IE */
+                -ms-transform: rotate(90deg);
+                /* Opera */
+                -o-transform: rotate(90deg);
+                margin-top: 2px;
+            }
+
+    .indicaodor2-tit {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .indicador2-valor {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+        .indicador2-valor span {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+    .indicador2-diferenca {
+        float: right;
+        line-height: 12px;
+        margin-top: 14px;
+    }
+
+        .indicador2-diferenca i {
+            font-size: 12px;
+            margin-left: 5px;
+            vertical-align: top;
+        }
+
+        .indicador2-diferenca.cima {
+            color: #1AB394;
+        }
+
+            .indicador2-diferenca.cima i {
+                transform: rotate(7deg);
+                /* Safari */
+                -webkit-transform: rotate(-90deg);
+                /* Firefox */
+                -moz-transform: rotate(-90deg);
+                /* IE */
+                -ms-transform: rotate(-90deg);
+                /* Opera */
+                -o-transform: rotate(-90deg);
+            }
+
+        .indicador2-diferenca.baixo {
+            color: #E37686;
+        }
+
+            .indicador2-diferenca.baixo i {
+                transform: rotate(7deg);
+                /* Safari */
+                -webkit-transform: rotate(90deg);
+                /* Firefox */
+                -moz-transform: rotate(90deg);
+                /* IE */
+                -ms-transform: rotate(90deg);
+                /* Opera */
+                -o-transform: rotate(90deg);
+            }
+
+
+
+    .audiencia-box {
+        height: 180px;
+        padding-top: 0px;
+    }
+
+    .audiencia-icon-help {
+        float: right;
+        color: #BBB;
+        border: 1px solid #BBB;
+        border-radius: 13px;
+        width: 13px;
+        height: 13px;
+        font-size: 10px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 11px;
+        margin-right: 0px;
+        margin-top: 2px;
+    }
+
+
+    .audiencia-linhagrafico {
+        margin: 10px 0 10px 0;
+    }
+
+    .audiencia-containerlabel {
+        text-align: right;
+        padding-right: 0px;
+        line-height: 13px;
+    }
+
+    .audiencia-label {
+        text-align: right;
+    }
+
+    .audiencia-grafcontainer {
+        border: 1px solid #D9D9D9;
+        height: 13px;
+    }
+
+    .audiencia-grafvalor {
+        height: 11px;
+        width: 0%;
+    }
+
+    .audiencia-verde {
+        background-color: #1AB394;
+    }
+
+    .audiencia-laranja {
+        background-color: #F8AC59;
+    }
+
+    .audiencia-vermelho {
+        background-color: #E37686;
+    }
+
+    .audiencia-legenda {
+        font-size: 9px;
+        text-align: center;
+    }
+
+    .ajuda-tooltip {
+        margin: -20px 0 20px 0;
+    }
+
+    div.tooltip-inner {
+        max-width: 350px;
+    }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Presença Online</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Empresa">Home</a>
+            </li>
+            <li>
+                <a href="/Empresa">Empresas</a>
+            </li>
+            <li>
+                <a href="/Empresa/Perfil/@ViewBag.idEmpresa">@Model.empresa.nome</a>
+            </li>
+            <li class="active">
+                <strong>Presença Online</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row m-b-lg m-t-lg">
+
+        <div class="col-md-4">
+            <div class="profile-image">
+                <img src="@Html.Raw(Configuracoes.DiretorioImagens)/empresas/@Model.empresa.imagem" class="img-perfil m-b-md" alt="@Html.DisplayFor(model => model.empresa.nome)">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            @Model.empresa.nome
+                        </h2>
+                        <h5>@Html.DisplayFor(model => model.empresa.nomeSetor)</h5>
+                        @*<small>
+                                @Model.empresa.descricao
+                            </small>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-1" style="border-top: 1px solid #C9C9C9; border-left: 1px solid #C9C9C9; border-bottom: 1px solid #C9C9C9; height: 98px; width: 2px !important;">
+
+        </div>
+
+        <div class="col-sm-3">
+            <div  style="float:left; border: 0px solid red; margin: -3px 0 0 -20px;  padding-top: 10px; min-height: 67px; margin-top: 11%;">
+
+                @{
+
+                    if (Model.empresa != null && Model.empresa.urlsite != null)
+                    {
+                        <p><a class="iconesPresenca" href="http://@(Model.empresa.urlsite.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", ""))" target="_blank"><i class="fa fa-link"> </i>  @Model.empresa.urlsite.Replace("https://www.", "").Replace("http://www.", "").Replace("www.", "").Replace("https://", "").Split('/')[0]</a></p>
+                            
+                    }
+                    else
+                    {
+
+                        @Html.Raw("Nao há informação da url do site")
+
+                    }
+
+
+                }
+
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="form-group" id="periodo">
+                <label class="font-noraml">Período</label>
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" value="@DateTime.Now.Month / @DateTime.Now.Year" id="mesano">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="indicador-container rank-brasil">
+                <div class="indicaodor1-tit">
+                    Rank no Brasil
+                    <div class="ajuda-tooltip">
+                        <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="indicador1-valor">0</div><div id="indicador-diferenca-rankBrasil" class="indicador1-diferenca cima">0<i class="fa fa-play "></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="indicador-container rank-global">
+                <div class="indicaodor1-tit">
+                    Rank Global
+                    <div class="ajuda-tooltip">
+                        <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="indicador1-valor">0</div><div id="indicador-diferenca-rankGlobal" class="indicador1-diferenca cima">0<i class="fa fa-play "></i></div>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="col-md-3">
+                <div class="indicador-container autoridade-dominio">
+                    <div class="indicaodor1-tit">
+                        Autoridade do domínio
+                        <div class="ajuda-tooltip">
+                            <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="indicador1-valor">0<span>/100</span></div><div class="indicador1-diferenca baixo">0<i class="fa fa-play "></i></div>
+                    </div>
+                </div>
+            </div>*@
+        @*<div class="col-md-3">
+                <div class="indicador-container autoridade-pagina">
+                    <div class="indicaodor1-tit">
+                        Autoridade da página
+                        <div class="ajuda-tooltip">
+                            <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="indicador1-valor">0<span>/100</span></div><div class="indicador1-diferenca baixo">0<i class="fa fa-play "></i></div>
+                    </div>
+                </div>
+            </div>*@
+        <div class="col-md-4">
+            <div class="indicador-container visitas-pagina">
+                <div class="indicaodor1-tit">
+                    Visitas por pesquisa
+                    <div class="ajuda-tooltip">
+                        <i class="indicador1-icon-help fa fa-question" data-toggle="tooltip" data-placement="top" title=""></i>
+                    </div>
+                    <div>
+                        <div class="indicador1-valor">0%</div><div id="indicador-diferenca-visitasPesquisa" class="indicador1-diferenca cima">0%<i class="fa fa-play "></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="indicador-container taxa-rejeicao">
+                <div class="indicaodor1-tit">
+                    Taxa de rejeição
+                    <div class="ajuda-tooltip">
+                        <i class="indicador1-icon-help fa fa-question" data-toggle="tooltip" data-placement="top" title=""></i>
+                    </div>
+                </div>
+                <div><div class="indicador1-valor">0%</div><div id="indicador-diferenca-taxaRejeicao" class="indicador1-diferenca baixo">0%<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+        @*<div class="col-md-4">
+                <div class="indicador-container">
+                    <div class="indicaodor2-tit">Pont. de Spam<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                    <div><div class="indicador2-valor">4 <span>/17</span></div><div class="indicador2-diferenca cima">4%<i class="fa fa-play "></i></div></div>
+                </div>
+            </div>*@
+
+        @*<div class="col-md-4">
+                <div class="indicador-container">
+                    <div class="indicaodor2-tit">Links<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                    <div><div class="indicador2-valor">1.235</div><div class="indicador2-diferenca cima">48%<i class="fa fa-play "></i></div></div>
+                </div>
+            </div>*@
+
+        @*<div class="col-md-4">
+                <div class="indicador-container">
+                    <div class="indicaodor2-tit">Novos Links<i class="indicaodor2-icon-help fa fa-question"></i></div>
+                    <div><div class="indicador2-valor">596%</div><div class="indicador2-diferenca cima">3%<i class="fa fa-play "></i></div></div>
+                </div>
+            </div>*@
+
+
+        <div class="col-md-4">
+            <div class="indicador-container paginas-visitas">
+                <div class="indicaodor1-tit">Páginas visitadas</div>
+                <div class="ajuda-tooltip">
+                    <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                </div>
+                <div><div class="indicador1-valor">0</div><div id="indicador-diferenca-paginasVisitadas" class="indicador1-diferenca cima">0<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="indicador-container tempo-visita">
+                <div class="indicaodor1-tit">Tempo de visita</div>
+                <div class="ajuda-tooltip">
+                    <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                </div>
+                <div><div class="indicador1-valor">0</div><div id="indicador-diferenca-tempoVisita" class="indicador1-diferenca cima">0<i class="fa fa-play "></i></div></div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="ibox float-e-margins AudienciaGenero">
+
+                <div class="ibox-title">
+                    <h5>Audiência por gênero</h5>
+                    <div>
+                        <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                    </div>
+                </div>
+                <div class="ibox-content audiencia-box">
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">feminino</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-verde" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraFeminino">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">masculino</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-verde" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraMasculino">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+
+                        <div class="col-md-8 col-md-offset-4 audiencia-legenda">
+                            média da internet
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="ibox float-e-margins AudienciaEducacao">
+
+                <div class="ibox-title">
+                    <h5>Audiência por educação</h5>
+                    <div>
+                        <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                    </div>
+                </div>
+                <div class="ibox-content audiencia-box">
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">Eniso Médio Completo</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-laranja" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraSFaculdade">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">Superior Incompleto</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-laranja" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraAlFaculdade">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">Superior Completo</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-laranja" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraPosGrad">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">Pós Graduação</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-laranja" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraFaculdade">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row audiencia-linhagrafico">
+
+                        <div class="col-md-8 col-md-offset-4 audiencia-legenda">
+                            média da internet
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="ibox float-e-margins AudienciaLocalAcesso ">
+
+                <div class="ibox-title">
+                    <h5>Audiência por local de acesso</h5>
+                    <div>
+                        <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                    </div>
+                </div>
+                <div class="ibox-content audiencia-box">
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">casa</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-vermelho" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraCasa">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">escola</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-vermelho" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraEscola">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+                        <div class="col-md-4 audiencia-containerlabel">
+                            <span class="audiencia-label">trabalho</span>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="audiencia-grafcontainer">
+                                <div class="audiencia-grafvalor audiencia-vermelho" data-toggle="ajuda-tooltip" data-placement="top" title="" id="BarraTrabalho">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row audiencia-linhagrafico">
+
+                        <div class="col-md-8 col-md-offset-4 audiencia-legenda">
+                            média da internet
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins PrincipaisTermosPesquisa ">
+
+                <div class="ibox-title principaistermos">
+                    <h5>Principais termos utilizados em sites de pesquisa</h5>
+                    <div class="ajuda-tooltip">
+                        <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table principaistermos">
+                        <thead>
+                            <tr>
+                                @*<th></th>*@
+                                <th>Palavra</th>
+                                <th>Percentual do tráfego</th>
+
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="ibox float-e-margins SitesLinkam">
+
+                <div class="ibox-title links">
+                    <h5>Sites que linkam o site da empresa</h5>
+                    <div>
+                        <div class="ajuda-tooltip">
+                            <i class="indicador1-icon-help fa fa-question" data-toggle="ajuda-tooltip" data-placement="top" title=""></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="table links">
+                        <thead>
+                            <tr>
+                                <th>Site</th>
+                                <th class="link_audiencia">Url</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/Content/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="~/Content/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/Scripts/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+
+    <script type="text/javascript">
+
+        var idEmpresa = @ViewBag.idEmpresa;
+        var DataPadrao = ConverteDataParaDataJson(new Date());
+
+        $(document).ready(function () {
+
+            PesquisaGeral(idEmpresa, DataPadrao);
+            CarregaTooltipsHelp();
+
+
+            $('#periodo .input-group.date')
+                .datepicker({
+                    minViewMode: 1,
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: 'mm / yyyy',
+                    defaultDate: new Date()
+                })
+                .on('changeDate', function (data) {
+
+                    if(data.date != null)
+                    {
+                        PesquisaGeral(idEmpresa, ConverteDataParaDataJson(data.date));
+                    }
+
+                })
+
+
+        });
+
+        function CarregaTooltipsHelp(){
+
+            //Rank no Brasil
+            var textoRankBrasil ='<div class="toolRankBrasil">';
+            textoRankBrasil+='Rank no Brasil <br><br>';
+            textoRankBrasil+= 'Um ranking de popularidade do site desta empresa no Brasil. Esta classificação é calculada usando uma combinação de fatores, como: média de visitantes diário, tempo de visita a este site e exibições de página neste site durante os últimos 30 dias.'
+            textoRankBrasil+='</div>';
+            $('.rank-brasil i.indicador1-icon-help').tooltip({
+                html: true,
+                title: textoRankBrasil,
+                container: 'body'
+            });
+
+            //Rank Global
+            var textoRankGlobal ='<div class="toolTaxaRejeicao">';
+            textoRankGlobal+='Rank global <br><br>';
+            textoRankGlobal+='Uma estimativa aproximada da popularidade deste site. <br><br>';
+            textoRankGlobal+='A classificação é calculada usando uma combinação média de visitantes diários para este site e páginas visualizadas neste site ao longo dos últimos 3 meses. O site com a combinação mais alta de visitantes e visualizações de página é classificado como #1.';
+            textoRankGlobal+='</div>';
+
+            $('.rank-global i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoRankGlobal,
+                container: 'body'
+            });
+
+            //Visitas por Pesquisa
+            var textoVisitaPesquisa ='<div class="toolTextoPequeno">';
+            textoVisitaPesquisa+='Visitas por pesquisa <br><br>';
+            textoVisitaPesquisa+='É o percentual de visitas que o site recebe oriunda dos mecanismos de busca.';
+            textoVisitaPesquisa+='</div>';
+
+            $('.visitas-pagina i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoVisitaPesquisa,
+                container: 'body'
+            });
+
+            //Taxa de Rejeição
+            var textoToolTip = '<div class="toolTaxaRejeicao">';
+            textoToolTip += 'Taxa de Rejeição <br><br>';
+            textoToolTip += 'A taxa de rejeição, ou bounce rate, sinaliza “o percentual de sessões de uma única página (ou seja, sessões nas quais a pessoa saiu do seu site na página de entrada sem interagir com ela)”. Sendo assim, essa taxa é atribuída a visitantes que entraram no seu site por uma landing page e, por algum motivo, saíram por essa mesma página, sem realizar qualquer ação dentro do seu site.<br><br>';
+            textoToolTip += 'Essa saída pode acontecer de diversas maneiras: os usuários clicaram no botão “Voltar” no navegador, fecharam a página/aba, foram em um link para um outro site – dentro da sua própria página, digitaram um novo endereço ou simplesmente ficaram inativos tempo suficiente (30 minutos, no padrão do Google Analytics).';
+            textoToolTip += '</div>';
+
+            $('.taxa-rejeicao i.indicador1-icon-help').tooltip({
+                html: true,
+                title: textoToolTip,
+                container: 'body'
+            });
+
+            //Paginas Visitadas
+            var textoPaginasVisitas ='<div class="toolTextoPequeno">';
+            textoPaginasVisitas+='Páginas visitadas <br><br>';
+            textoPaginasVisitas+='É a quantidade média de páginas que os usuários navegam em seu site quando o visitam.';
+            textoPaginasVisitas+='</div>';
+
+            $('.paginas-visitas i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoPaginasVisitas,
+                container: 'body'
+            });
+
+            //Tempo de Visita
+            var textoTempoVisita ='<div class="toolTextoPequeno">';
+            textoTempoVisita+='Tempo de visita <br><br>';
+            textoTempoVisita+='É a quantidade média de tempo de permanência em seu site pelos usuários que o visitam.';
+            textoTempoVisita+='</div>';
+
+            $('.tempo-visita i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoPaginasVisitas,
+                container: 'body'
+            });
+            //--------------------------------------------------
+
+            //Audiência por gênero
+            var textoGenero ='<div class="toolTextoPequeno">';
+            textoGenero+='Audiência por gênero<br><br>';
+            textoGenero+='É o perfil do público que acessa o seu site caracterizado pelo seu gênero.';
+            textoGenero+='</div>';
+
+            $('.AudienciaGenero i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoGenero,
+                container: 'body'
+            });
+
+            //Audiencia por educação
+            var textoEducacao ='<div class="toolTextoPequeno">';
+            textoEducacao+='Audiência por educação <br><br>';
+            textoEducacao+='É o perfil do público que acessa o seu site caracterizado pelo seu grau de educação.';
+            textoEducacao+='</div>';
+
+            $('.AudienciaEducacao i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoEducacao,
+                container: 'body'
+            });
+
+            //Audiencia por local de acesso
+            var textoLocalAcesso ='<div class="toolTextoPequeno">';
+            textoLocalAcesso+='Audiência por local de acesso <br><br>';
+            textoLocalAcesso+='Define de onde (local) os usuários mais acessam o seu site.';
+            textoLocalAcesso+='</div>';
+
+            $('.AudienciaLocalAcesso i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoLocalAcesso,
+                container: 'body'
+            });
+            //------------------------------------------------
+
+            //Principais termos utltilizados em sites de pesquisa
+            var textoPrinciSitesPesquisa ='<div class="toolTaxaRejeicao">';
+            textoPrinciSitesPesquisa+='Principais termos utilizados em sites de pesquisa<br><br>';
+            textoPrinciSitesPesquisa+='Apresenta quais os termos de busca (palavras chave) que mais geram trafego para o seu site, sejam estes indexados por estratégias de SEO ou SEM.';
+            textoPrinciSitesPesquisa+='</div>';
+
+            $('.PrincipaisTermosPesquisa i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoPrinciSitesPesquisa,
+                container: 'body'
+            });
+
+            //Sites que linkam o site da empresa
+
+            var textoSiteLinkam ='<div class="toolTaxaRejeicao">';
+            textoSiteLinkam+='Sites que linkam o site da empresa <br><br>';
+            textoSiteLinkam+='Apresenta os principais sites geradores de tráfego para o seu site.';
+            textoSiteLinkam+='</div>';
+
+            $('.SitesLinkam i.indicador1-icon-help').tooltip({
+                html: true,
+                title:textoSiteLinkam,
+                container: 'body'
+            });
+
+            //------------------------------------------------
+
+        }
+
+        function PesquisaGeral(idEmpresa,Data) {
+
+            var url = "/api/EmpresaAPI/GetPesquisaPresencaOnline?idEmpresa=" + idEmpresa + "&Data=" + Data.replace("Z","");
+
+            $.getJSON(url, function (data) {
+
+                if(data != null){
+                    // Chamar as funções para montar cada um dos boxes
+                    BoxRankBrasil(data);
+                    BoxRankGlobal(data);
+                    BoxVisitasPesquisa(data);
+                    BoxTaxaRejeicao(data);
+                    BoxPaginasVisitadas(data);
+                    BoxTempoVisita(data);
+
+                    GraficoAudienciaGenero(data);
+                    GraficoAudienciaEducacao(data);
+                    GraficoAudienciaLocalAcesso(data);
+
+                    BoxTabelaTermos(data);
+                    BoxTabelaLinks(data);
+                }
+            })
+        }
+
+        function GraficoAudienciaGenero(obj){
+            if(obj.audiencia.audi_feminino>100){
+                $("#BarraFeminino").width('100%');
+
+            }else{$("#BarraFeminino").width(obj.audiencia.audi_feminino+'%');}
+
+            if(obj.audiencia.audi_masculino>100){
+                $("#BarraMasculino").width('100%');
+
+            }else{ $("#BarraMasculino").width(obj.audiencia.audi_masculino+'%');}
+
+        }
+
+        function GraficoAudienciaEducacao(obj){
+
+            if(obj.audiencia.audi_semfaculdade>100){
+                $("#BarraSFaculdade").width('100%');
+
+            }else{$("#BarraSFaculdade").width(obj.audiencia.audi_semfaculdade+'%');}
+
+            if(obj.audiencia.audi_algumafaculdade>100){
+                $("#BarraAlFaculdade").width('100%')
+
+            }else{$("#BarraAlFaculdade").width(obj.audiencia.audi_algumafaculdade+'%');}
+
+            if(obj.audiencia.audi_posgraduacao>100){
+                $("#BarraPosGrad").width('100%');
+
+            }else{$("#BarraPosGrad").width(obj.audiencia.audi_posgraduacao+'%');}
+
+            if(obj.audiencia.audi_faculdade>100){
+                $("#BarraFaculdade").width('100%');
+
+            }else{$("#BarraFaculdade").width(obj.audiencia.audi_faculdade+'%');}
+
+        }
+
+        function GraficoAudienciaLocalAcesso(obj){
+            if(obj.audiencia.audi_casa>100){
+                $("#BarraCasa").width('100%');
+
+            }else{$("#BarraCasa").width(obj.audiencia.audi_casa+'%');}
+
+            if(obj.audiencia.audi_escola>100){
+                $("#BarraEscola").width('100%');
+
+            }else{$("#BarraEscola").width(obj.audiencia.audi_escola+'%');}
+
+            if(obj.audiencia.audi_trabalho>100){
+                $("#BarraTrabalho").width('100%');
+
+            }else{$("#BarraTrabalho").width(obj.audiencia.audi_trabalho+'%');}
+
+        }
+
+        function BoxRankBrasil(obj){
+
+            var box = $('.indicador-container.rank-brasil');
+
+
+            if(obj.indicadorAtual != null && obj.indicadorAtual.rankBrasil != null){
+
+                box.find('.indicador1-valor').html(formataNumero(obj.indicadorAtual.rankBrasil));
+            }
+            else{
+                box.find('.indicador1-valor').html("0");
+            }
+
+            var addClassCimaBaixo = "";
+            var removeClassCimaBaixo = "";
+            var classPlaySquare = "";
+
+            var diffAtualAnterior = obj.diferencaRankBrasil;
+
+            // fa fa-square text-success
+
+            if(diffAtualAnterior < 0){
+                addClassCimaBaixo = 'baixo';
+                removeClassCimaBaixo = 'cima';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-rankBrasil").css("color","#E37686");
+
+            }else if(diffAtualAnterior == 0){
+                classPlaySquare = "fa-square text-success";
+                $("#indicador-diferenca-rankBrasil").css("color","#1c84c6");
+
+            } else {
+                addClassCimaBaixo = 'cima';
+                removeClassCimaBaixo = 'baixo';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-rankBrasil").css("color","#1AB394");
+            }
+
+            diffAtualAnterior = Math.abs(diffAtualAnterior);
+
+            box.find('.indicador1-diferenca').addClass(addClassCimaBaixo)
+                                               .removeClass(removeClassCimaBaixo)
+                                               .html(diffAtualAnterior + '<i class="fa '+classPlaySquare+' "></i>');
+        }
+
+        function BoxRankGlobal(obj){
+
+            var box = $('.indicador-container.rank-global');
+
+            if(obj.indicadorAtual != null && obj.indicadorAtual.rankGlobal != null)
+                box.find('.indicador1-valor').html(formataNumero(obj.indicadorAtual.rankGlobal));
+            else
+                box.find('.indicador1-valor').html("0");
+
+            var addClassCimaBaixo = "";
+            var removeClassCimaBaixo = "";
+            var classPlaySquare = "";
+
+            var diffAtualAnterior = obj.diferencaRankGlobal;
+
+            // fa fa-square text-success
+
+            if(diffAtualAnterior < 0){
+                addClassCimaBaixo = 'baixo';
+                removeClassCimaBaixo = 'cima';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-rankGlobal").css("color","#E37686");
+
+            }else if(diffAtualAnterior == 0){
+                classPlaySquare = "fa-square text-success";
+                $("#indicador-diferenca-rankGlobal").css("color","#1c84c6");
+
+            } else {
+                addClassCimaBaixo = 'cima';
+                removeClassCimaBaixo = 'baixo';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-rankGlobal").css("color","#1AB394");
+            }
+
+            diffAtualAnterior = Math.abs(diffAtualAnterior);
+
+            box.find('.indicador1-diferenca').addClass(addClassCimaBaixo)
+                                               .removeClass(removeClassCimaBaixo)
+                                               .html(diffAtualAnterior + '<i class="fa '+classPlaySquare+' "></i>');
+        }
+
+        function BoxVisitasPesquisa(obj){
+            var box = $('.indicador-container.visitas-pagina');
+
+
+            if(obj.indicadorAtual != null && obj.indicadorAtual.visitasPesquisa != null)
+                box.find('.indicador1-valor').html(formataNumero(obj.indicadorAtual.visitasPesquisa));
+            else
+                box.find('.indicador1-valor').html("0");
+
+            var addClassCimaBaixo = "";
+            var removeClassCimaBaixo = "";
+            var classPlaySquare = "";
+
+            var diffAtualAnterior = obj.diferencaVisitasPesquisa;
+
+            // fa fa-square text-success
+
+            if(diffAtualAnterior < 0){
+                addClassCimaBaixo = 'baixo';
+                removeClassCimaBaixo = 'cima';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-visitasPesquisa").css("color","#E37686");
+            }else if(diffAtualAnterior == 0){
+                classPlaySquare = "fa-square text-success";
+                $("#indicador-diferenca-visitasPesquisa").css("color","#1c84c6");
+
+            } else {
+                addClassCimaBaixo = 'cima';
+                removeClassCimaBaixo = 'baixo';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-visitasPesquisa").css("color","#1AB394");
+            }
+
+            diffAtualAnterior = Math.abs(diffAtualAnterior);
+
+            box.find('.indicador1-diferenca').addClass(addClassCimaBaixo)
+                                               .removeClass(removeClassCimaBaixo)
+                                               .html(diffAtualAnterior + '%<i class="fa '+classPlaySquare+' "></i>');
+        }
+
+        function BoxTaxaRejeicao(obj){
+            var box = $('.indicador-container.taxa-rejeicao');
+
+            if(obj.indicadorAtual != null && obj.indicadorAtual.taxaRejeicao != null)
+                box.find('.indicador1-valor').html(formataNumero(obj.indicadorAtual.taxaRejeicao));
+            else
+                box.find('.indicador1-valor').html("0");
+
+            var addClassCimaBaixo = "";
+            var removeClassCimaBaixo = "";
+            var classPlaySquare = "";
+
+            var diffAtualAnterior = obj.diferencaTaxaRejeicao;
+
+            // fa fa-square text-success
+
+            if(diffAtualAnterior < 0){
+                addClassCimaBaixo = 'baixo';
+                removeClassCimaBaixo = 'cima';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-taxaRejeicao").css("color","#E37686");
+            }else if(diffAtualAnterior == 0){
+                classPlaySquare = "fa-square text-success";
+                $("#indicador-diferenca-taxaRejeicao").css("color","#1c84c6");
+
+            } else {
+                addClassCimaBaixo = 'cima';
+                removeClassCimaBaixo = 'baixo';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-taxaRejeicao").css("color","#1AB394");
+            }
+
+            diffAtualAnterior = Math.abs(diffAtualAnterior);
+
+            box.find('.indicador1-diferenca').addClass(addClassCimaBaixo)
+                                               .removeClass(removeClassCimaBaixo)
+                                               .html(diffAtualAnterior + '%<i class="fa '+classPlaySquare+' "></i>');
+        }
+
+        function BoxPaginasVisitadas(obj){
+            var box = $('.indicador-container.paginas-visitas');
+
+
+            if(obj.indicadorAtual != null && obj.indicadorAtual.paginasVisitadas != null)
+                box.find('.indicador1-valor').html(formataNumero(obj.indicadorAtual.paginasVisitadas));
+            else
+                box.find('.indicador1-valor').html("0");
+
+            var addClassCimaBaixo = "";
+            var removeClassCimaBaixo = "";
+            var classPlaySquare = "";
+
+            var diffAtualAnterior = obj.diferencaPaginasVisitadas;
+
+            // fa fa-square text-success
+
+            if(diffAtualAnterior < 0){
+                addClassCimaBaixo = 'baixo';
+                removeClassCimaBaixo = 'cima';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-paginasVisitadas").css("color","#E37686");
+            }else if(diffAtualAnterior == 0){
+                classPlaySquare = "fa-square text-success";
+                $("#indicador-diferenca-paginasVisitadas").css("color","#1c84c6");
+
+            } else {
+                addClassCimaBaixo = 'cima';
+                removeClassCimaBaixo = 'baixo';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-paginasVisitadas").css("color","#1AB394");
+            }
+
+            diffAtualAnterior = Math.abs(diffAtualAnterior.replace(",","."));
+
+            diffAtualAnterior = diffAtualAnterior.toString().replace(".",",");
+            box.find('.indicador1-diferenca').addClass(addClassCimaBaixo)
+                                               .removeClass(removeClassCimaBaixo)
+                                               .html(diffAtualAnterior + '%<i class="fa '+classPlaySquare+' "></i>');
+        }
+
+        function BoxTempoVisita(obj){
+
+            var box = $('.indicador-container.tempo-visita');
+
+
+            if(obj.indicadorAtual != null && obj.indicadorAtual.tempoVisita != null)
+                box.find('.indicador1-valor').html(obj.indicadorAtual.tempoVisita);
+            else
+                box.find('.indicador1-valor').html("0h");
+
+            var addClassCimaBaixo = "";
+            var removeClassCimaBaixo = "";
+            var classPlaySquare = "";
+
+            var diffAtualAnterior = obj.diferencaTempoVisita;
+
+            // fa fa-square text-success
+
+            if(diffAtualAnterior < 0){
+                addClassCimaBaixo = 'baixo';
+                removeClassCimaBaixo = 'cima';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-tempoVisita").css("color","#E37686");
+
+            }else if(diffAtualAnterior == 0){
+                classPlaySquare = "fa-square text-success";
+                $("#indicador-diferenca-tempoVisita").css("color","#1c84c6");
+
+            } else {
+                addClassCimaBaixo = 'cima';
+                removeClassCimaBaixo = 'baixo';
+                classPlaySquare = "fa-play";
+                $("#indicador-diferenca-tempoVisita").css("color","#1AB394");
+            }
+
+            diffAtualAnterior = Math.abs(diffAtualAnterior.replace(",","."));
+
+            diffAtualAnterior = diffAtualAnterior.toString().replace(".",",");
+            box.find('.indicador1-diferenca').addClass(addClassCimaBaixo)
+                                               .removeClass(removeClassCimaBaixo)
+                                               .html(diffAtualAnterior + '%<i class="fa '+classPlaySquare+' "></i>');
+        }
+
+        function BoxTabelaTermos(obj){
+
+
+            var Tabela = $('.table.principaistermos').find('tbody');
+
+            $('.ibox-title.principaistermos').find('.audiencia-icon-help').attr('title','Tabela de termos...');
+            Tabela.empty();
+            if(obj.termos!= null){
+                $.each(obj.termos, function(index, termo){
+                    Tabela.append("<tr>" +
+                                    "<td>" + termo.palavra + "</td>" +
+                                    "<td>" + termo.percentual + "%</td>" +
+                                  "</tr>");
+                })
+            } else{
+
+                Tabela.append("<tr> <td colspan ='2'>Sem dados para esse período</td </tr>");
+
+            }
+
+        }
+
+        function BoxTabelaLinks(obj){
+            var Tabela = $('.table.links').find('tbody');
+
+            $('.ibox-title.links').find('.audiencia-icon-help').attr('title','Tabela dos links !!');
+            Tabela.empty();
+
+            if (obj.links!=null){
+                $.each(obj.links, function(index, li){
+
+
+                    var linkSite = "";
+                    if(li.link.length > 30)
+                        linkSite = li.link.toString().substring(0,30)+'...';
+                    else
+                        linkSite = li.link;
+
+
+                    Tabela.append("<tr>" +
+                                    "<td>" + li.site + "</td>" +
+                                    "<td class='link_audiencia' title='" + li.link + "'>" + linkSite + "</td>" +
+                                    "<td><a href='" + li.link + "' target='_blank' ><i class='fa fa-external-link'></i></a></td>" +
+                                  "</tr>");
+                });
+            }else {
+                Tabela.append("<tr> <td colspan ='2'>Sem dados para esse período</td </tr>");
+            }
+        }
+    </script>
+
+}
+

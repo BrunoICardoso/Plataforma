@@ -1,0 +1,67 @@
+ID,Categoria,Nome,Valor
+1,Empresa,Ambev,805
+2,Empresa,Brasil Kirin,637
+3,Empresa,Ebba,452
+4,Empresa,Do Bem e Fazenda Bela Bista,452
+5,Empresa,Frutaria (tecpolpa),357
+6,Empresa,IBS - Industria brasileira de sucos (Luminus),350
+7,Empresa,Wow!,345
+8,Empresa,Newage Indústria e Comércio de Bebidas e Alimentos (Monster e Flyhouse),295
+9,Empresa,LIV Drinks,293
+10,Empresa,GlobalBev,289
+11,Empresa,GB General Brands (Juxx),220
+12,Empresa,Unidrinks IND e COM (Greenday),214
+13,Empresa,Nestlé/Ultrapan,212
+14,Empresa,Grupo Petrópolis,201
+15,Empresa,Natural One,177
+16,Empresa,Sucos Palazzos (Luminus),141
+1,Estado,SP,3536
+2,Estado,RJ,1148
+3,Estado,MG,1022
+4,Estado,CE,531
+5,Estado,RS,402
+6,Estado,PE,335
+7,Estado,BA,324
+8,Estado,GO,177
+9,Estado,PA,128
+10,Estado,PB,118
+11,Estado,MA,73
+12,Estado,MT,61
+13,Estado,PR,61
+14,Estado,PI,36
+15,Estado,AM,35
+16,Estado,SE,31
+17,Estado,SC,21
+18,Estado,RO,6
+1,Marca,Maguary,122
+2,Marca,Sufresh,103
+3,Marca,Izzy,95
+4,Marca,Schin,87
+5,Marca,Greenday,82
+6,Marca,Dafruta,81
+7,Marca,Antarctica,69
+8,Marca,Viva Schin,68
+9,Marca,Frutaria,64
+10,Marca,Do Bem,62
+11,Marca,One,61
+12,Marca,Pepsi,59
+13,Marca,Dolly Frut,54
+14,Marca,Carrefour,53
+15,Marca,Pepsi Twist,52
+16,Marca,Natural One,52
+17,Marca,Dafruta Premium,52
+18,Marca,Schin Festa,51
+19,Marca,Nova Schin,48
+20,Marca,Fruthos,48
+21,Marca,Qualita,47
+22,Marca,Bonafruta,47
+1,MesAno,Setembro/2016,115
+2,MesAno,Agosto/2016,99
+3,MesAno,Julho/2016,22
+4,MesAno,Junho/2016,113
+5,MesAno,Maio/2016,12
+6,MesAno,Abril/2016,33
+7,MesAno,Março/2016,44
+8,MesAno,Fevereiro/2016,12
+1,Origem,Internacional,88
+2,Origem,Nacional,45

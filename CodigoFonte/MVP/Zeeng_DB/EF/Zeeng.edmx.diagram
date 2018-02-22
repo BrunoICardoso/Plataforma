@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e659cd7a956d4964be8eb9a6a6c72aa6" Name="Diagram1">
+        <EntityTypeShape EntityType="zeeng_Model.cnpjempresa" Width="1.5" PointX="5.625" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeeng_Model.empresaredessociais" Width="1.5" PointX="3.25" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeeng_Model.empresas" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeeng_Model.redessociais" Width="1.5" PointX="6.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="zeeng_Model.setoresempresa" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="zeeng_Model.fk_cnpj_empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="zeeng_Model.fk_empresa_redessociais" ManuallyRouted="false" />
+        <AssociationConnector Association="zeeng_Model.fk_empresasredes_redessociais" ManuallyRouted="false" />
+        <AssociationConnector Association="zeeng_Model.fk_empresa_setor" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

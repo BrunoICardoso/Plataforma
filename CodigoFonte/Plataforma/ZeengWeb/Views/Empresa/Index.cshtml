@@ -1,0 +1,497 @@
+﻿
+@using ZeengWeb.Utils
+
+@{
+    ViewBag.Title = "Empresas";
+}
+
+<style type="text/css">
+    .empresa-box {
+        border: 1px solid #e7eaec;
+        padding: 20px;
+        background-color: #ffffff;
+        height: 210px;
+        margin-bottom: 30px;
+    }
+
+    .btn_social {
+        width: 100px;
+        margin-bottom: 10px;
+    }
+
+    div.contact-box.center-version {
+        padding-bottom: 15px;
+    }
+
+    .box-imagem {
+        box-shadow: 0px 0px 5px #999;
+        xxborder: 1px solid #EAEAEA;
+        padding: 2px;
+        width: 100px;
+        height: 100px;
+    }
+
+        .box-imagem img {
+            width: 96px;
+            height: 96px;
+        }
+
+    .img_left_box {
+        float: left;
+        height: 180px;
+        padding: 4px 20px 15px 10px;
+    }
+
+    .link-vermais, .link-vermais a {
+        color: #666;
+        text-align: center;
+        line-height: 15px;
+        vertical-align: middle;
+        margin-top: 10px;
+    }
+
+        .link-vermais i {
+            line-height: 15px;
+            vertical-align: middle;
+            margin-right: 2px;
+        }
+
+        .link-vermais:hover {
+            color: #666;
+            text-decoration: underline;
+        }
+
+        .link-vermais span {
+            font-size: 10px;
+            line-height: 15px;
+            vertical-align: middle;
+        }
+
+    .img_right_box {
+    }
+
+    .titulo_lista_empresas_box {
+        font-size: 15px;
+        font-weight: 800;
+        line-height: 21px;
+        xxheight: 42px;
+    }
+
+        .titulo_lista_empresas_box a {
+            color: #666;
+        }
+
+    .conj_link_lista_empresa_box {
+        xxfloat: left;
+        margin-bottom: 4px;
+    }
+
+        .conj_link_lista_empresa_box i {
+            height: 16px;
+            width: 16px;
+            margin-right: 3px;
+        }
+
+    .titulo_lista_empresas_box {
+        margin-top: 0px;
+    }
+
+    .links_lista_empresa_box {
+        font-size: 12px;
+        color: #666666;
+    }
+
+    .links_bold_lista_empresa_box {
+        font-size: 14px;
+        font-weight: 700;
+        color: #666666;
+    }
+
+        .links_bold_lista_empresa_box span {
+            font-size: 12px;
+            color: #666666;
+            font-weight: normal;
+        }
+
+        .links_bold_lista_empresa_box:hover {
+            text-decoration: underline;
+            color: #666666;
+        }
+
+    .boxFiltroEmpresas {
+        margin-top: 15px;
+    }
+
+    .labelPesquisar {
+        border: none;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .sk-spinner-fading-circle .sk-circle:before {
+        background-color: #fff;
+    }
+
+    .sk-spinner-fading-circle.sk-spinner {
+        width: 20px;
+        height: 20px;
+    }
+
+    .loadingPesquisar {
+        display: none;
+    }
+
+    .box-nenhumResultado {
+        display: none;
+    }
+
+    .nenhumResultado {
+        height: 95%;
+        width: 100%;
+        text-align: center;
+        color: #999999;
+        margin: auto;
+        -webkit-user-select: none; /* Chrome all / Safari all */
+        -moz-user-select: none; /* Firefox all */
+        -ms-user-select: none; /* IE 10+ */
+        user-select: none;
+        display: table;
+    }
+
+        .nenhumResultado div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+    .imgNenhumResultado {
+        display: block;
+        margin: auto;
+    }
+
+    .paginacaoBottom {
+        margin-bottom: 50px;
+    }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>Lista de empresas</h2>
+        <ol class="breadcrumb">
+            <li>
+                <p>Home</p>
+            </li>
+            <li class="active">
+                <strong>Empresas</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+
+            <div class="form-group">
+                <div class=" col-sm-8 col-center boxFiltroEmpresas">
+                    <div class="input-group m-b">
+                        <input type="text" class="form-control" id="txtPesquisa"> <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" id="btnPesquisar">
+
+                                <span class="fa fa-search fa-1x lupaPesquisar"></span>
+
+                                <div class="sk-spinner sk-spinner-fading-circle loadingPesquisar">
+                                    <div class="sk-circle1 sk-circle"></div>
+                                    <div class="sk-circle2 sk-circle"></div>
+                                    <div class="sk-circle3 sk-circle"></div>
+                                    <div class="sk-circle4 sk-circle"></div>
+                                    <div class="sk-circle5 sk-circle"></div>
+                                    <div class="sk-circle6 sk-circle"></div>
+                                    <div class="sk-circle7 sk-circle"></div>
+                                    <div class="sk-circle8 sk-circle"></div>
+                                    <div class="sk-circle9 sk-circle"></div>
+                                    <div class="sk-circle10 sk-circle"></div>
+                                    <div class="sk-circle11 sk-circle"></div>
+                                    <div class="sk-circle12 sk-circle"></div>
+                                </div>
+
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="row listaempresas">
+
+</div>
+
+<div class="col-lg-12 box-nenhumResultado">
+
+    <div class="nenhumResultado">
+        <div>
+            <img class="imgNenhumResultado" src="/Images/icon_chateado.png" /> <br>
+            <span>Nenhum Resultado Encontrado.</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 paginacao paginacaoBottom">
+
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+
+    <script type="text/javascript">
+
+        var paginacao = new Paginacao();
+        var paginaAtual = 1;
+        var totalRegistros;
+        var _valorRankBrasil = 0;
+        var idcliente = $("#iduser").val();
+
+        var filtro = new Object();
+
+        $(document).ready(function () {
+
+            // verificaHistorico();
+            carregaPaginaEmpresas(retornaFiltroPesquisa());
+           
+            $("#txtPesquisa").val((filtro.pesquisa != null || filtro.pesquisa != "" ? filtro.pesquisa : ""));
+        });
+
+        function verificaHistorico() {
+
+            var previous = document.referrer;
+            if (previous.includes("Login") || !!!document.referrer) {
+                  carregaPaginaEmpresas(retornaFiltroPesquisa());
+            } else {
+                filtro = JSON.parse(localStorage.getItem("empresasAtual"));
+                paginaAtual = filtro.pesquisa != null && filtro.pesquisa != "" ? filtro.pagina : 1;
+                carregaPaginaEmpresas(filtro);
+            }
+            
+        }
+
+        function mudouPagina(_paginaAtual) {
+            paginaAtual = _paginaAtual;
+            carregaPaginaEmpresas(retornaFiltroPesquisa());
+        }
+
+        function carregaPaginaEmpresas(filtroAtual) {
+
+            $(".box-nenhumResultado").hide();
+            $(".lupaPesquisar").hide();
+            $(".loadingPesquisar").fadeIn();
+
+            $.ajax({
+                type: "POST",
+                url: "/api/EmpresaAPI/RetornaEmpresas",
+                data: filtroAtual,
+
+                complete: function () {
+                    $(".loadingPesquisar").hide();
+                    $(".lupaPesquisar").show();
+                },
+                success: function (data) {
+
+                    $(".listaempresas").empty();
+
+                    totalRegistros = data.TotalEmpresas;
+                    paginacao.CriaPaginacao(".paginacao", parseInt(((totalRegistros / 9) + 0.9)), totalRegistros, paginaAtual);
+                    paginacao.setMudouPagina(mudouPagina);
+
+                    if (data.TotalEmpresas > 0) {
+                        $.each(data.Empresas, function (key, val) {
+                            montaModeloEmpresa(val);
+                        });
+                    }
+                    else {
+                        $(".box-nenhumResultado").show();
+                    }
+
+                }
+            });
+
+
+
+        }
+
+        function GetTotalRankBrasil(idEmpresa) {
+            _valorRankBrasil = 0;
+
+            //var url = "/api/EmpresaAPI/GetRankBrasil?idEmpresa=" + idEmpresa;
+            //$.getJSON(url, function (data) {
+
+            //    if (data.length > 0) {
+            //        _valorRankBrasil = data[0].valor;
+            //    }
+            //});
+
+            if (idEmpresa == 1)
+                _valorRankBrasil = 90999;
+        }
+
+        function GetTotalNoticias(idEmpresa) {
+            var dtInicial = ConverteDataBRparaUNIX(SubtrairData(365));
+            var dtFinal = ConverteDataBRparaUNIX(new Date().toLocaleString());
+            var total = 0;
+
+            var filtro = new Object();
+            filtro.idEmpresa = idEmpresa;
+            filtro.dataInicial = dtInicial;
+            filtro.dataFinal = dtFinal;
+            filtro.titulo = null;
+            filtro.conteudo = null;
+            filtro.subtitulo = null;
+            filtro.fontes = [];
+            filtro.inicial = 0;
+
+            //var url = "/api/EmpresaAPI/RetornaQuantidadeNoticias?idEmpresa=" + idEmpresa + "&dtInicial=" + dtInicial + "&dtFinal=" + dtFinal;
+            var url = "/api/EmpresaAPI/PesquisaNoticiasEmpresa/";
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: filtro,
+                async: false,
+                //contentType: "",
+                success: function (data) {
+                    total = data.TotalNoticias;
+                }
+            });
+
+            return total;
+        }
+
+        function montaModeloEmpresa(empresa) {
+
+            var modeloArr = [];
+            modeloArr.push('<div class="col-lg-4">');
+            modeloArr.push('<div class="empresa-box center-version">');
+            modeloArr.push('<div class="img_left_box">');
+            modeloArr.push('<div class="box-imagem">');
+            modeloArr.push('<a href="/Empresa/Perfil/' + empresa.idempresa + '">');
+            modeloArr.push('<img alt="image" src="@Html.Raw(Configuracoes.DiretorioImagens)/empresas/' + empresa.imagem + '">');
+            modeloArr.push('</a>');
+            modeloArr.push('</div>');
+            modeloArr.push('<div class="link-vermais">');
+            modeloArr.push('<a href="/Empresa/Perfil/' + empresa.idempresa + '">');
+            modeloArr.push('<i class="fa fa-plus-circle"></i><span> ver mais</span>');
+            modeloArr.push('</a>');
+            modeloArr.push('</div>');
+            modeloArr.push('</div>');
+            modeloArr.push('<div class="">');
+            modeloArr.push('<h3 class="titulo_lista_empresas_box">');
+            modeloArr.push('<a href="/Empresa/Perfil/' + empresa.idempresa + '">');
+            modeloArr.push(empresa.nome);
+            modeloArr.push('</a>');
+            modeloArr.push('</h3>');
+
+            if (empresa.VertenteClientes.produtos == true) {
+                // Produtos registrados
+                modeloArr.push('<div class="conj_link_lista_empresa_box">');
+                modeloArr.push('<i class="fa fa-binoculars"></i>');
+                modeloArr.push('<a class="links_bold_lista_empresa_box" href="/Empresa/Lancamentoproduto/' + empresa.idempresa + '" data-toggle="tooltip" title="Últimos 12 Meses.">');
+                modeloArr.push(empresa.qtdLancamentos + ' <span>produtos registrados</span>');
+                modeloArr.push('</a>');
+                modeloArr.push('</div>');
+            }
+
+            if (empresa.VertenteClientes.presencaonline == true) {
+                // Rank Brasil
+                modeloArr.push('<div class="conj_link_lista_empresa_box">');
+                modeloArr.push('<i class="fa fa-globe"></i>');
+                modeloArr.push('<a class="links_bold_lista_empresa_box" href="/Empresa/PresencaOnline/' + empresa.idempresa + '" data-toggle="tooltip" title="Últimos 12 Meses. ">');
+                modeloArr.push((empresa.rankBrasil !== null ? empresa.rankBrasil : 0) + ' <span>rank Brasil</span>');
+                modeloArr.push('</a>');
+                modeloArr.push('</div>');
+            }
+
+            if (empresa.VertenteClientes.noticias == true) {
+                // Notícias
+                modeloArr.push('<div class="conj_link_lista_empresa_box">');
+                modeloArr.push('<i class="fa fa-newspaper-o"></i>');
+                modeloArr.push('<a class="links_bold_lista_empresa_box" href="/Empresa/Noticias/' + empresa.idempresa + '" data-toggle="tooltip" title="Últimos 12 Meses.">');
+                modeloArr.push(empresa.qtdNoticias + ' <span>notícias</span>');
+                modeloArr.push('</a>');
+                modeloArr.push('</div>');
+            }
+
+            if (empresa.VertenteClientes.promocoes == true) {
+                // Promoções
+                modeloArr.push('<div class="conj_link_lista_empresa_box">');
+                modeloArr.push('<i class="fa fa-comments"></i>');
+                modeloArr.push('<a class="links_bold_lista_empresa_box" href="/Empresa/Promo/' + empresa.idempresa + '">');
+                modeloArr.push(empresa.qtdPromocoes + ' <span>promoções</span>');
+                modeloArr.push('</a>');
+                modeloArr.push('</div>');
+            }
+
+            if (empresa.VertenteClientes.redessociais == true) {
+                // Interações
+                modeloArr.push('<div class="conj_link_lista_empresa_box">');
+                modeloArr.push('<i class="fa fa-bullhorn"></i>');
+                modeloArr.push('<a class="links_bold_lista_empresa_box" href="/Empresa/RedesSociais/' + empresa.idempresa + '" data-toggle="tooltip" title="Últimos 12 Meses.">');
+                modeloArr.push(empresa.qtdPublicacoes + ' <span>publicações</span>');
+                modeloArr.push('</a>');
+                modeloArr.push('</div>');
+            }
+
+
+            modeloArr.push('</div>');
+            modeloArr.push('</div>');
+            modeloArr.push('</div>');
+
+            var modelo = modeloArr.join('');
+
+            $(".listaempresas").append(modelo);
+        }
+
+        function retornaFiltroPesquisa() {
+       
+            filtro.pesquisa = $("#txtPesquisa").val();
+            filtro.pagina = paginaAtual;
+            filtro.qtdregistros = 9;
+            filtro.idcliente = idcliente;
+
+            localStorage.removeItem("empresasAtual");
+            localStorage.setItem("empresasAtual", JSON.stringify(filtro));
+
+            return filtro;
+        }
+
+        function Pesquisar(filtro) {
+
+            carregaPaginaEmpresas(filtro);
+        }
+
+        $("#txtPesquisa").keyup(function (btn) {
+            if (event.which == 13) {
+                paginaAtual = 1;
+                Pesquisar(retornaFiltroPesquisa());
+            }
+        });
+
+        $("#btnPesquisar").click(function () {
+            paginaAtual = 1;
+            Pesquisar(retornaFiltroPesquisa());
+        });
+
+
+
+    </script>
+
+}
+

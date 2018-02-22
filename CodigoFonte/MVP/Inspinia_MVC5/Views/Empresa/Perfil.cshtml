@@ -1,0 +1,607 @@
+﻿
+@{
+    ViewBag.Title = "Perfil da empresa";
+}
+
+<style>
+    .slick_demo_2 .ibox-content {
+        margin: 0 5px;
+        padding: 5px;
+    }
+
+    .celltext {
+        display: inline-block;
+        text-overflow: ellipsis;
+        width: 86%;
+        /* word-wrap: break-word; */
+        white-space: nowrap;
+        overflow: hidden;
+        padding-left: 4px;
+    }
+
+    .scroll {
+        display: block;
+        height: 107px;
+        overflow-y: scroll;
+    }
+
+    #legendabubble {
+        margin-bottom: 30px;
+    }
+
+    .bubble_tooltip {
+        position: absolute;
+        top: 300px;
+        left: 130px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 2px solid #000;
+        /* background: #222222; */
+        background: #fff;
+        /* color: #eeeeee; */
+        color: black;
+        padding: 10px;
+        width: 300px;
+        font-size: 12px;
+        z-index: 10;
+    }
+
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #666;
+        shape-rendering: crispEdges;
+    }
+
+    .area {
+        fill: #FFDB80;
+    }
+
+    .graf-caption {
+        padding: 1px 5px;
+        color: #999;
+        border: 1px solid #AAA;
+        float: right;
+    }
+
+        .graf-caption span {
+            font-size: 20px;
+        }
+
+    .graf-legenda {
+        display: inline-block;
+    }
+
+    .graf-vermais {
+        float: right;
+    }
+
+    .graf-presencaonline {
+        height: 292px;
+    }
+
+
+    .graf-lancamento {
+        margin-top: 50px;
+    }
+
+    .graf-noticias {
+        height: 298px;
+        margin-bottom: 30px;
+    }
+
+    .graf-promocoes {
+        height: 250px;
+    }
+
+    .label_percent {
+        font-size: 16px;
+        color: #AAAAAA;
+    }
+
+    .label_absolute {
+        font-size: 12px;
+        color: #AAAAAA;
+    }
+
+    .barra {
+        fill: #8DD9CA;
+    }
+
+        .barra:hover {
+            fill: #abe8dc;
+        }
+
+    .axis--x path {
+        display: none;
+    }
+
+    .legenda_donut {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .item_legenda {
+        width: 30%;
+        display: inline-block;
+    }
+
+    .cor_legenda {
+        display: inline-block;
+        margin-right: 5px;
+        width: 20px;
+        height: 10px;
+    }
+
+    .texto_legenda {
+    }
+
+    .cor1 {
+        background-color: #E37686;
+    }
+
+    .cor2 {
+        background-color: #D2D087;
+    }
+
+    .cor3 {
+        background-color: #6AC6B6;
+    }
+
+    .cor4 {
+        background-color: #1C97B0;
+    }
+
+    .graf-redessociais {
+        height: 200px;
+    }
+
+        .graf-redessociais path {
+            xxstroke: steelblue;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .graf-redessociais .axis path,
+        .graf-redessociais .axis line {
+            fill: none;
+            stroke: grey;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+        }
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Perfil da empresa</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Empresas</a>
+            </li>
+            <li class="active">
+                <strong>Perfil</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-6">
+
+            <div class="profile-image">
+                <img src="~/Images/Empresas/logo01.png" class="img-circle circle-border m-b-md" alt="profile">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            Coca Cola Company
+                        </h2>
+                        <h4>Corporação</h4>
+                        <small>
+                            The Coca-Cola Company, geralmente referida como Coca-Cola Company, Coke ou simplesmente Coca-Cola, dependendo da região, é uma corporação multinacional estadunidense, fabricante e comerciante de bebidas não-alcoólicas e concentrados de xaropes.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2 class="no-margins">Marcas</h2>
+            <div class="slick_demo_2">
+
+                <div>
+                    <div class="ibox-content">
+                        <img src="~/Images/marcas/marca01.png" alt="Coca Cola" />
+                        <p class="text-center">Coca cola</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="ibox-content">
+                        <img src="~/Images/marcas/marca02.png" alt="Sprite" />
+                        <p class="text-center">Sprite</p>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="ibox-content">
+                        <img src="~/Images/marcas/marca03.png" alt="Fanta" />
+                        <p class="text-center">Fanta</p>
+
+                    </div>
+                </div>
+                <div>
+                    <div class="ibox-content">
+                        <img src="~/Images/marcas/marca04.png" alt="Diet Coke" />
+                        <p class="text-center">Diet Coke</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Lançamento de produtos</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="graf-caption"><span>93</span> produtos cadastrados</div>
+                    <div class="graf-lancamento">
+                        <canvas id="lineChart" height="200" width="400"></canvas>
+                    </div>
+
+                    <span class="graf-legenda">* total de produtos registrados nas últimas 12 semanas</span>
+                    <div class="graf-vermais">
+                        <a href="/Empresa/LancamentoProduto">
+                            <i class="fa fa-eye"></i> Ver mais
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Presença Online</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="graf-caption"><span>28 893</span> Rank Brasil</div>
+                    <div class="graf-presencaonline">
+
+                    </div>
+                    <span class="graf-legenda">* rank no Brasil nas últimas 12 semanas</span>
+                    <div class="graf-vermais">
+                        <a href="/Empresa/PresencaOnline"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Notícias</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="graf-caption"><span>2 090</span> notícias</div>
+                    <div class="graf-noticias">
+
+
+                    </div>
+                    <span class="graf-legenda">* notícias das últimas 12 semanas</span>
+                    <div class="graf-vermais">
+                        <a href="/Empresa/Noticias"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Promoções</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="graf-caption"><span>19</span> Promoções</div>
+                    <div class="graf-promocoes">
+
+
+                    </div>
+                    <div class="legenda_donut">
+                        <div class="item_legenda">
+                            <div class="cor_legenda cor1"></div>
+                            <span class="texto_legenda">Registrados</span>
+                        </div>
+                        <div class="item_legenda">
+                            <div class="cor_legenda cor2"></div>
+                            <span class="texto_legenda">Autorizados</span>
+                        </div>
+
+                    </div>
+                    <span class="graf-legenda">* promoções capturadas nas últimas 12 semanas</span>
+                    <div class="graf-vermais">
+                        <a href="/Empresa/Promocoes"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Redes sociais</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="graf-caption"><span>28 893</span> interações</div>
+                    <div class="graf-redessociais">
+
+
+                    </div>
+                    <div class="row legenda_social">
+                        <div class="col-md-3">
+                            <div class="cor_legenda cor1"></div>
+                            <span class="texto_legenda">Twitter</span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="cor_legenda cor2"></div>
+                            <span class="texto_legenda">Instagram</span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="cor_legenda cor3"></div>
+                            <span class="texto_legenda">Facebook</span>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="cor_legenda cor4"></div>
+                            <span class="texto_legenda">Youtube</span>
+                        </div>
+
+                    </div>
+                    <br />
+                    <span class="graf-legenda">* interações nas redes sociais nas últimas 12 semanas</span>
+                    <div class="graf-vermais">
+                        <a href="/Empresa/Social"><i class="fa fa-eye"></i> Ver mais</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Styles {
+    @Styles.Render("~/plugins/slickStyles")
+    @Styles.Render("~/plugins/slickThemeStyles")
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/d3")
+    @Scripts.Render("~/plugins/chartJs221")
+    @Scripts.Render("~/plugins/slick")
+
+    <script src="~/Scripts/utils.js"></script>
+    <script src="~/Scripts/graficos/area.js"></script>
+    <script src="~/Scripts/graficos/barras.js"></script>
+    <script src="~/Scripts/graficos/donut.js"></script>
+    <script src="~/Scripts/graficos/linhas.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            //Gráfico de lançamento de produtos
+            var lineData = {
+                labels: ["Setembro", "Outubro", "Novembro", "Dezembro", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto"],
+                datasets: [
+                    {
+                        label: "MAPA",
+                        backgroundColor: "rgba(255, 183, 0,0.5)",
+                        borderColor: "rgba(255, 135, 0,1)",
+                        pointColor: "rgba(255, 135, 0,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56]
+                    },
+                    {
+                        label: "INPI",
+                        backgroundColor: "rgba(26,179,148,0.5)",
+                        borderColor: "rgba(26,179,148,0.7)",
+                        pointColor: "rgba(26,179,148,1)",
+                        pointStrokeColor: "#fff",   
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(26,179,148,1)",
+                        data: [28, 48, 40, 19, 86, 27, 90, 28, 48, 40, 19, 86, 27]
+                    }
+                ]
+            };
+
+            var ctx = document.getElementById("lineChart").getContext("2d");
+            var chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: lineData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    },
+                    tooltips: { mode: 'x-axis' }
+                }
+
+            });
+
+            $('.slick_demo_2').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 450,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+
+
+            //Gráfico de presença on line
+
+            var dados = [
+                { "date": "2016-10-13", "valor": 28893 },
+                { "date": "2016-10-6", "valor": 29893 },
+                { "date": "2016-9-29", "valor": 28793 },
+                { "date": "2016-9-22", "valor": 27893 },
+                { "date": "2016-9-15", "valor": 26893 },
+                { "date": "2016-9-8", "valor": 27293 },
+                { "date": "2016-9-1", "valor": 25893 },
+                { "date": "2016-8-25", "valor": 25393 },
+                { "date": "2016-8-18", "valor": 25893 },
+                { "date": "2016-8-11", "valor": 24493 },
+                { "date": "2016-7-25", "valor": 23893 },
+                { "date": "2016-7-18", "valor": 24593 }
+            ]
+
+            var larguraGraf = $(".graf-presencaonline").width();
+            var alturaGraf = $(".graf-presencaonline").height() - 32;
+
+            DesenharGraficoArea(".graf-presencaonline", dados, larguraGraf, alturaGraf);
+
+
+            var dadosNoticias = [
+               { "date": "2016-10-13", "valor": 2889 },
+               { "date": "2016-10-6", "valor": 2989 },
+               { "date": "2016-9-29", "valor": 2879 },
+               { "date": "2016-9-22", "valor": 2789 },
+               { "date": "2016-9-15", "valor": 2689 },
+               { "date": "2016-9-8", "valor": 2729 },
+               { "date": "2016-9-1", "valor": 2589 },
+               { "date": "2016-8-25", "valor": 2539 },
+               { "date": "2016-8-18", "valor": 2589 },
+               { "date": "2016-8-11", "valor": 2449 },
+               { "date": "2016-7-25", "valor": 2389 },
+               { "date": "2016-7-18", "valor": 2459 }
+            ]
+
+            larguraGraf = $(".graf-noticias").width();
+            alturaGraf = $(".graf-noticias").height();
+
+            DesenharGraficoBarras(".graf-noticias", dadosNoticias, larguraGraf, alturaGraf);
+
+
+            var dataset = {
+                valores: [5, 14, 87, 2]
+            };
+
+            larguraGraf = $(".graf-promocoes").width();
+            alturaGraf = $(".graf-promocoes").height();
+            var radius = 110;
+
+            DesenharGraficoDonut(".graf-promocoes", dataset, larguraGraf, alturaGraf, radius);
+
+
+            var dadosSocial = [
+                { "categoria": "twitter", "date": "2016-10-13", "valor": 28 },
+                { "categoria": "twitter", "date": "2016-10-6", "valor": 29 },
+                { "categoria": "twitter", "date": "2016-9-29", "valor": 28 },
+                { "categoria": "twitter", "date": "2016-9-22", "valor": 27 },
+                { "categoria": "twitter", "date": "2016-9-15", "valor": 26 },
+                { "categoria": "twitter", "date": "2016-9-8", "valor": 27 },
+                { "categoria": "twitter", "date": "2016-9-1", "valor": 25 },
+                { "categoria": "twitter", "date": "2016-8-25", "valor": 25 },
+                { "categoria": "twitter", "date": "2016-8-18", "valor": 25 },
+                { "categoria": "twitter", "date": "2016-8-11", "valor": 24 },
+                { "categoria": "twitter", "date": "2016-7-25", "valor": 23 },
+                { "categoria": "twitter", "date": "2016-7-18", "valor": 24 },
+
+                { "categoria": "instagram", "date": "2016-10-13", "valor": 12 },
+                { "categoria": "instagram", "date": "2016-10-6", "valor": 14 },
+                { "categoria": "instagram", "date": "2016-9-29", "valor": 17 },
+                { "categoria": "instagram", "date": "2016-9-22", "valor": 12 },
+                { "categoria": "instagram", "date": "2016-9-15", "valor": 22 },
+                { "categoria": "instagram", "date": "2016-9-8", "valor": 12 },
+                { "categoria": "instagram", "date": "2016-9-1", "valor": 12 },
+                { "categoria": "instagram", "date": "2016-8-25", "valor": 12 },
+                { "categoria": "instagram", "date": "2016-8-18", "valor": 11 },
+                { "categoria": "instagram", "date": "2016-8-11", "valor": 13 },
+                { "categoria": "instagram", "date": "2016-7-25", "valor": 23 },
+                { "categoria": "instagram", "date": "2016-7-18", "valor": 12 },
+
+                { "categoria": "facebook", "date": "2016-10-13", "valor": 38 },
+                { "categoria": "facebook", "date": "2016-10-6", "valor": 39 },
+                { "categoria": "facebook", "date": "2016-9-29", "valor": 38 },
+                { "categoria": "facebook", "date": "2016-9-22", "valor": 37 },
+                { "categoria": "facebook", "date": "2016-9-15", "valor": 36 },
+                { "categoria": "facebook", "date": "2016-9-8", "valor": 37 },
+                { "categoria": "facebook", "date": "2016-9-1", "valor": 35 },
+                { "categoria": "facebook", "date": "2016-8-25", "valor": 35 },
+                { "categoria": "facebook", "date": "2016-8-18", "valor": 35 },
+                { "categoria": "facebook", "date": "2016-8-11", "valor": 34 },
+                { "categoria": "facebook", "date": "2016-7-25", "valor": 33 },
+                { "categoria": "facebook", "date": "2016-7-18", "valor": 34 },
+
+                { "categoria": "youtube", "date": "2016-10-13", "valor": 2 },
+                { "categoria": "youtube", "date": "2016-10-6", "valor": 1 },
+                { "categoria": "youtube", "date": "2016-9-29", "valor": 3 },
+                { "categoria": "youtube", "date": "2016-9-22", "valor": 4 },
+                { "categoria": "youtube", "date": "2016-9-15", "valor": 6 },
+                { "categoria": "youtube", "date": "2016-9-8", "valor": 2 },
+                { "categoria": "youtube", "date": "2016-9-1", "valor": 3 },
+                { "categoria": "youtube", "date": "2016-8-25", "valor": 4 },
+                { "categoria": "youtube", "date": "2016-8-18", "valor": 4},
+                { "categoria": "youtube", "date": "2016-8-11", "valor": 9 },
+                { "categoria": "youtube", "date": "2016-7-25", "valor": 3 },
+                { "categoria": "youtube", "date": "2016-7-18", "valor": 3 }
+            ]
+
+            var coresCategoria = [];
+            coresCategoria["twitter"] = "#E37686";
+            coresCategoria["instagram"] = "#D2D087";
+            coresCategoria["facebook"] = "#6AC6B6";
+            coresCategoria["youtube"] = "#1C97B0";
+
+            larguraGraf = $(".graf-redessociais").width();
+            alturaGraf = $(".graf-redessociais").height() - 40;
+            DesenharGraficoLinhas(".graf-redessociais", dadosSocial, larguraGraf, alturaGraf, coresCategoria);
+
+
+
+        });
+    </script>
+}

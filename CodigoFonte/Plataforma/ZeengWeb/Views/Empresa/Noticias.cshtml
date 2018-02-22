@@ -1,0 +1,1140 @@
+﻿@model ZeengWeb.ViewModel.Empresa.EmpresaNoticias
+@using ZeengWeb.Utils
+
+@{
+    ViewBag.Title = "Notícias";
+
+    var DataHora = DateTime.Now.ToString("ddMMyyyyHHmmss");
+}
+
+<style type="text/css">
+   
+    .botao-verde-Noticia:hover{
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #FFFFFF;
+    }
+    
+    .texto_noticia {
+        margin: 0 0 10px;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .titulo_noticia {
+        height: 80px;
+        overflow: hidden;
+    }
+
+    .rodape_noticia {
+        height: 72px;
+        overflow: hidden;
+    }
+
+    .botoes-selecao {
+        width: 100%;
+    }
+
+    #btnAnalise, #btnLinhaTempo {
+        width: 50%;
+    }
+
+    .container_timeline {
+        display: none;
+    }
+
+    #product_name {
+        height: 30px;
+    }
+
+    #totalNoticias {
+        font-size: 18pt;
+    }
+
+    .graf-caption {
+        padding: 1px 5px;
+        color: #999;
+        border: 1px solid #AAA;
+        float: right;
+        margin: -10px 0 5px 0;
+    }
+
+    #txtPalavrasChave {
+        height: 30px;
+    }
+
+    ul.chosen-choices {
+        max-height: 30px;
+    }
+
+    .highlight {
+        background-color: yellow;
+    }
+
+
+    .bubble_tooltip {
+        position: absolute;
+        top: 300px;
+        left: 130px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 2px solid #000;
+        /* background: #222222; */
+        background: #fff;
+        /* color: #eeeeee; */
+        color: black;
+        padding: 10px;
+        width: 300px;
+        font-size: 12px;
+        z-index: 10;
+    }
+
+    .datahoranoticia {
+        float: right;
+    }
+
+    #bubble_termos {
+        width: 650px;
+        height: 470px;
+        padding: 0;
+    }
+
+    a.NomeFonte {
+        color: #666;
+    }
+
+        a.NomeFonte:hover {
+            text-decoration: underline;
+        }
+
+
+    .container_palavra_pequena {
+        padding: 40px 20px;
+        color: white;
+        white-space: nowrap;
+        font-size: 20px;
+    }
+
+    .text-square {
+        color: #1c84c6;
+    }
+
+    .text-warning {
+        color: #ed5565;
+    }
+
+    #icone-help-top-fontes {
+        float: right;
+        color: #BBB;
+        border: 1px solid #BBB;
+        border-radius: 13px;
+        width: 13px;
+        height: 13px;
+        font-size: 10px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 11px;
+        margin-right: -14px;
+        margin-top: -13px;
+    }
+
+    .icone-help-top-fontes-infinito {
+        float: right;
+        color: #BBB;
+        border: 1px solid #BBB;
+        border-radius: 13px;
+        width: 13px;
+        height: 13px;
+        font-size: 10px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 11px;
+        margin-right: -32px;
+        margin-top: 5px;
+    }
+
+    .boxGraficoDia{
+        height: 96px;
+    }
+
+    .loadingGraficoDia{
+        display: none;
+        margin-top: 20px;
+    }
+
+    .boxBubbleTermos{
+        /*height: 436px;*/
+        height: 480px;
+
+    }
+
+    .loadingBubbleDia{
+        display: none;
+        margin-top: 200px;
+    }
+
+    .loadingTopFontes{
+        display: none;
+        margin-top: 90px;
+        margin-bottom: 80px;
+    }
+
+    .loadingTopPalavras{
+        margin-top: 260px;
+        display: none;
+    }
+
+    .loadingListaNoticias{
+        display:none;
+        margin-top: 360px;
+        margin-bottom: 420px;
+    }
+
+
+    .top_palavras{
+        height:495px;
+    }
+
+
+    .btnsAnaliseLinhaTempo{
+        margin-top: 30px;
+        margin-bottom: 100px;
+    }
+
+
+</style>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Notícias</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/Empresa">Home</a>
+            </li>
+            <li>
+                <a href="/Empresa">Empresas</a>
+            </li>
+            <li>
+                <a href="/Empresa/Perfil/@ViewBag.idEmpresa">@Model.empresa.nome</a>
+            </li>
+            <li class="active">
+                <strong>Notícias</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-8">
+
+            <div class="profile-image">
+                <img src="@Html.Raw(Configuracoes.DiretorioImagens)/empresas/@Model.empresa.imagem" class="img-perfil m-b-md" alt="@Html.DisplayFor(model => model.empresa.nome)">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h2 class="no-margins">
+                            @Model.empresa.nome
+                        </h2>
+                        <small>
+                            @Model.empresa.descricao
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="control-label" for="product_name">Palavras-chave</label>
+                    <input type="text" id="txtPalavrasChave" name="product_name" value="" placeholder="" class="form-control input-mini">
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" for="status">Selecione o período</label>
+                    <div class="input-daterange input-group" id="selecaoDatas">
+                        <input type="text" class="input-sm form-control" name="start" id="dtinicial" value="10/09/2016" />
+                        <span class="input-group-addon" style="background-color: #fff; border-color: #fff;">até</span>
+                        <input type="text" class="input-sm form-control" name="end" id="dtfinal" value="10/10/2014" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-8" id="optFontes">
+                <div class="form-group">
+                    <label class="control-label" for="status">Fontes</label>
+                    <div class="input-group">
+                        <select data-placeholder="Selecione as fontes..." class="chosen-select" id="CampoFontes" multiple tabindex="4">
+
+                            @foreach (var List in Model.noticiafonteempresa)
+                            {
+                                <option value="@List.idfonte"> @List.nome </option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="top:20px;">
+                @*<button class="btn btn-white" id="Button1" type="button" value="button" onclick="CarregarPaginacaoNoticias(@ViewBag.idEmpresa)">Pesquisar</button>*@
+                @*<button class="ladda-button btn btn-primary" id="BtnPesquisaNoticias" type="button" value="button" data-style="expand-left" >Pesquisar</button>*@
+
+                <button class="ladda-button btn btn-primary" data-style="expand-left" id="BtnPesquisaNoticias">
+                    <span class="ladda-label">Pesquisar</span>
+                    <span class="ladda-spinner"></span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+ 
+        <div class="row">
+            <div class="col-lg-12">
+                <hr style="height: 10px; border: 0; box-shadow: 0 6px 9px -3px #e4e4e4 inset;">
+            </div>
+            <div class="btnsAnaliseLinhaTempo">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <div class="btn-group botoes-selecao">
+                        <button class="btn btn-primary" id="btnAnalise" type="button">Análise</button>
+                        <button class="btn btn-white" id="btnLinhaTempo" type="button">Linha do tempo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+
+
+    <div class="row container_analise">
+        <div class="col-md-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Total de notícias por dia</h5>
+                </div>
+
+                <div class="ibox-content boxGraficoDia">
+                    <div id="grafico_noticias_dia" class="row">
+                        @*<div class="graf-caption">
+                                <span id="totalNoticias"></span>
+                            </div>*@
+                        <div id="sparklineNoticiasDia"></div>
+                    </div>
+
+
+                    <div class="loadingGraficoDia">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Total de notícias</h5>
+                </div>
+
+                <div class="ibox-content" style="height:96px">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <i class="fa fa-newspaper-o fa-5x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            @*<span>Últimos 30 dias </span>*@
+                            <span id="intervaloDeDiasQtdNoticias"></span><br />
+                            <h2 class="font-bold" id="quantidadeNoticias"></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 container_analise">
+            <div class="ibox float-e-margins" style="height: 470px;">
+                @*545px*@
+                <div class="ibox-title" style="min-height: 58px;">
+                    <h5>Frequência dos termos</h5>
+                </div>
+
+                <div class="ibox-content boxBubbleTermos">
+
+
+                    <div class="loadingBubbleDia">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+                    <div id="bubble_termos"></div>
+
+                </div>
+
+               
+
+            </div>
+        </div>
+
+        <div class="col-lg-4 container_analise">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title" style="min-height: 58px;">
+                    <h5>
+
+                        Fontes com mais publicações <br /><i class="fa fa-question" id="icone-help-top-fontes" data-toggle="ajuda-tooltip" data-placement="top"></i>
+
+                        @*<div style="font-weight: normal; margin-top: 5px;">Últimos 7 dias</div>*@
+                    </h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="loadingTopFontes">
+                        <div class="sk-spinner sk-spinner-three-bounce">
+                            <div class="sk-bounce1"></div>
+                            <div class="sk-bounce2"></div>
+                            <div class="sk-bounce3"></div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <table id="tableFontes" class="table" style="margin-bottom:0px" border="0">
+                            <thead id="tableHead"></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+   
+
+    <div class="row top_palavras container_analise">
+     
+        <div class="col-lg-12 text-center" style="margin-top: 55px;">
+            <div class="navy-line"></div>
+            <h1 class="no-margins">Termos em destaque</h1>
+            <p>Termos que mais aparecem nas notícias sobre essa empresa</p>
+        </div>
+
+
+        <div class="loadingTopPalavras">
+            <div class="sk-spinner sk-spinner-three-bounce">
+                <div class="sk-bounce1"></div>
+                <div class="sk-bounce2"></div>
+                <div class="sk-bounce3"></div>
+            </div>
+        </div>
+
+        <div class="boxTopPalavras">
+
+            <div class="col-md-4 container_palavra" style="background-color:#3D89A1">
+                <span class="palavra"></span>
+
+            </div>
+            <div class="col-md-4 container_palavra" style="background-color:#BD6567">
+                <span class="palavra"></span>
+
+            </div>
+            <div class="col-md-4 container_palavra" style="background-color:#31B59B">
+                <span class="palavra"></span>
+
+            </div>
+            <div class="col-md-4 container_palavra" style="background-color:#C7AEAC">
+                <span class="palavra"></span>
+
+            </div>
+            <div class="col-md-4 container_palavra" style="background-color:#DFA660">
+                <span class="palavra"></span>
+
+            </div>
+            <div class="col-md-4 container_palavra" style="background-color:#D2D087">
+                <span class="palavra"></span>
+
+            </div>
+            <div class="col-md-4 container_palavra" style="background-color:#BD6567">
+                <span class="palavra"></span>
+
+            </div>
+            <div class="col-md-4 container_palavra" style="background-color:#31B59B">
+                <span class="palavra"></span>
+
+            </div>
+            <div class="col-md-4 container_palavra" style="background-color:#C7AEAC">
+                <span class="palavra"></span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row container_timeline">
+
+        <div class="col-lg-12 text-center">
+            <div class="navy-line"></div>
+            <h1>Timeline de notícias</h1>
+            <p>Veja aqui as notícias relacionadas a @Model.empresa.nome, as suas marcas e aos seus produtos</p>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="paginacao_noticias"></div>
+        </div>
+
+
+        <div class="loadingListaNoticias">
+            <div class="sk-spinner sk-spinner-three-bounce">
+                <div class="sk-bounce1"></div>
+                <div class="sk-bounce2"></div>
+                <div class="sk-bounce3"></div>
+            </div>
+        </div>
+
+
+        <div class="row" id="listaNoticias"></div>
+
+        <div class="col-lg-12">
+            <div class="paginacao_noticias"></div>
+        </div>
+
+    </div>
+
+</div>
+
+@section Styles {
+
+    @Styles.Render("~/plugins/dataPickerStyles")
+    @Styles.Render("~/plugins/switcheryStyles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+}
+
+@section Scripts {
+
+
+
+    @Scripts.Render("~/plugins/sparkline")
+    <link href="~/Content/plugins/typed/typed.css" rel="stylesheet" />
+    <script src="~/Scripts/plugins/typed/typed.js"></script>
+    <script src="~/Scripts/plugins/paginacao/paginacao.js"></script>
+    <script src="~/Scripts/utils.js"></script>
+
+    <link href="~/Content/plugins/ladda/ladda-themeless.min.css" rel="stylesheet" />
+    <script src="~/Scripts/plugins/ladda/spin.min.js"></script>
+    <script src="~/Scripts/plugins/ladda/ladda.min.js"></script>
+    <script src="~/Scripts/plugins/ladda/ladda.jquery.min.js"></script>
+
+    @Scripts.Render("~/plugins/dataPicker")
+    @Scripts.Render("~/plugins/sparkline")
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/plugins/switchery")
+    @Scripts.Render("~/plugins/chosen")
+    
+
+@Scripts.Render("~/vis")
+
+<script src="~/Scripts/vis_files/CustomTooltip.js"></script>
+<script src="~/Scripts/vis_files/vis_noticias_empresa.js"></script>
+
+
+    <script type="text/javascript">
+
+        var diretorioImagens = "@Html.Raw(Configuracoes.DiretorioImagens)";
+        var idEmpresa = @ViewBag.idEmpresa;
+        var divListaNoticias = $('#listaNoticias');
+        var dataPadraoInicial = new Date();
+        var dataPadraoFinal = new Date();
+        dataPadraoInicial.setDate(dataPadraoFinal.getDate() - 90);
+        var paginaAtual = 1;
+        var QtdRegistros = 12;
+        var CampoPalavraChave = $('#txtPalavrasChave').val();
+        var TotalNoticias = 0;
+        var _filtros = new Object();
+
+        $('#selecaoDatas').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        }).on('changeDate', function () {
+            //atualizaNoticias();
+        });
+
+        $('#dtinicial').datepicker('setDate', dataPadraoInicial);
+        $('#dtfinal').datepicker('setDate', dataPadraoFinal);
+
+        var btnPesquisaNoticias = $('#BtnPesquisaNoticias').ladda();
+
+        var Tbody = $('#tableFontes').find('tbody');
+
+        $(document).ready(function () {
+
+            $(".chosen-select").width($("#optFontes").width());
+
+            $(window).resize(function () {
+                var opt = $(".chosen-select");
+
+                $(opt).width($("#optFontes").width());
+
+                $(opt).next().width($("#optFontes").width());
+            })
+
+            var config = {
+                '.chosen-select': {},
+                '.chosen-select-deselect': { allow_single_deselect: true },
+                '.chosen-select-no-single': { disable_search_threshold: 10 },
+                '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+                '.chosen-select-width': { width: "95%" }
+            }
+
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+
+
+            $("#btnAnalise").click(function (b) {
+                $(".container_timeline").hide();
+                $(".container_analise").show();
+                $("#btnAnalise").addClass("btn-primary").removeClass("btn-white");
+                $("#btnLinhaTempo").removeClass("btn-primary").addClass("btn-white");
+            });
+
+            $("#btnLinhaTempo").click(function (b) {
+                $(".container_timeline").show();
+                $(".container_analise").hide();
+                $("#btnAnalise").removeClass("btn-primary").addClass("btn-white");
+                $("#btnLinhaTempo").addClass("btn-primary").removeClass("btn-white");
+
+            });
+
+            var dataInicial = $("#dtinicial").datepicker('getDate');
+            var dataFinal = $("#dtfinal").datepicker('getDate');
+
+            $('#intervaloDatasTotal30Dias').html($("#dtinicial").val() + ' a ' + $("#dtfinal").val());
+
+            //RetornaQuantidadeNoticias(@ViewBag.idEmpresa,dataInicial,dataFinal);
+            topPalavras(@ViewBag.idEmpresa,dataInicial,dataFinal);
+
+            CarregarPaginacaoNoticias(idEmpresa,RetornaFiltro(@ViewBag.idEmpresa));
+            CarregaGraficoNoticiaPorDia(RetornaFiltro(@ViewBag.idEmpresa));
+            CarregaTopFontes(RetornaFiltro(@ViewBag.idEmpresa));
+
+            // ==============================================================================
+            $( '.ladda-button' ).ladda( 'bind', { timeout: 2000 } );
+
+            // Bind progress buttons and simulate loading progress
+            Ladda.bind( '.progress-demo .ladda-button',{
+                callback: function( instance ){
+                    var progress = 0;
+                    var interval = setInterval( function(){
+                        progress = Math.min( progress + Math.random() * 0.1, 1 );
+                        instance.setProgress( progress );
+
+                        if( progress === 1 ){
+                            instance.stop();
+                            clearInterval( interval );
+                        }
+                    }, 200 );
+                }
+            });
+
+            btnPesquisaNoticias.click(function(){
+
+                btnPesquisaNoticias.ladda( 'start' );
+                pesquisar(RetornaFiltro(@ViewBag.idEmpresa))
+
+            });
+            // ==============================================================================
+
+            CarregaTooltipsHelp(_filtros);
+
+        });
+
+        function atualizaNoticias(){
+            var dataInicial = $("#dtinicial").datepicker('getDate');
+            var dataFinal = $("#dtfinal").datepicker('getDate');
+            RetornaQuantidadeNoticias(@ViewBag.idEmpresa,dataInicial,dataFinal);
+        }
+
+        function RetornaQuantidadeNoticias(idEmpresa, dataInicial, dataFinal) {
+
+            var novaDataInicial = ConverteDataParaDataJson(dataInicial);
+            var novaDataFinal = ConverteDataParaDataJson(dataFinal);
+
+            var url = "/api/EmpresaAPI/RetornaQuantidadeNoticias?idEmpresa=" + idEmpresa + "&dtInicial=" + novaDataInicial + "&dtFinal=" + novaDataFinal + "";
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: null,
+                async: false,
+                contentType: "",
+                success: function (data) {
+                    $("#intervaloDeDiasQtdNoticias").text($("#dtinicial").val() + " até " +$("#dtfinal").val());
+                    $("#quantidadeNoticias").text(data + " notícias");
+
+                }
+            });
+
+        }
+
+        function topPalavras(idEmpresa,dtInicial,dtFinal){
+           
+
+            $("#bubble_termos").empty();
+            $(".loadingBubbleDia").show();
+            $("#my_tooltip").remove();
+
+
+            $(".boxTopPalavras").hide();
+            $(".loadingTopPalavras").show();
+
+
+            var novadtInicial = ConverteDataParaDataJson(dtInicial);
+            var novadtFinal = ConverteDataParaDataJson(dtFinal);
+
+            var listaTermos = [];
+
+            var filtro = {
+                "idEmpresa":idEmpresa,
+                "dataInicial":novadtInicial,
+                "dataFinal":novadtFinal,
+                "expressao": $("#txtPalavrasChave").val(),
+                "qtdRegistros":50
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/api/EmpresaAPI/RetornaPrincipaisTermosNoticias",
+                data: filtro,
+                async: true,
+                success:function(data) {
+
+                    $.each(data, function(key, item) {
+
+                        listaTermos.push('<a style="color:#FFF;" onclick="PesquisaPorClickTermoDestaque(\''+item.termo.replace('&','&amp;')+'\')">'+item.termo.replace('&','&amp;')+'</a>');
+
+                    });
+
+                    if(listaTermos.length > 0){
+                        while(listaTermos.length < 27){
+                            $.each(data, function(key, item) {
+                                listaTermos.push(item.termo);
+                            });
+                        }
+                    }
+
+                    $(".loadingTopPalavras").hide();
+                    $(".boxTopPalavras").show();
+                    
+                    $(".palavra").each(function(i, e){
+
+                        var s = listaTermos.slice(i * 3, (i * 3) + 3);
+
+                        $(e).typed({
+                            strings:s,
+                            typeSpeed: 30,
+                            backDelay: 3900,
+                            loop: true,
+
+                        });
+
+                    });
+
+                    CarregaBubbleTermos(data);
+
+                }
+            });
+
+
+
+            //$(".palavra:odd").typed({
+            //    strings: listaTermos.sort(),
+            //    typeSpeed: 40,
+            //    backDelay: 2400,
+            //    loop: true,
+            //});
+        }
+
+        var Paginacao  = new Paginacao();
+        var TotalNoticias = 0;
+
+        function CarregarPaginacaoNoticias(idEmpresa,filtro){
+
+            if(filtro == undefined)
+                filtro = RetornaFiltro(@ViewBag.idEmpresa);
+
+            CarregarNoticias(idEmpresa,paginaAtual,filtro);
+            btnPesquisaNoticias.ladda('stop');
+        }
+
+        function MudouPaginaNoticia(pagina){
+            paginaAtual = pagina;
+            CarregarPaginacaoNoticias(idEmpresa,RetornaFiltro(@ViewBag.idEmpresa));
+        }
+
+        function CarregarNoticias(idEmpresa,pagina,filtro){
+
+
+            $(".loadingListaNoticias").show();
+            divListaNoticias.html('');
+
+            pagina = ((pagina -1) * QtdRegistros);
+
+            _filtros.inicial = pagina;
+            _filtros.qtdRegistros = QtdRegistros;
+
+            $.ajax({
+                type: "POST",
+                url: "/api/EmpresaAPI/PesquisaNoticiasEmpresa/",
+                data: filtro,
+                success: function(dados){
+
+                    TotalNoticias = dados.TotalNoticias;
+
+                    $("#intervaloDeDiasQtdNoticias").text($("#dtinicial").val() + " até " +$("#dtfinal").val());
+                    $("#quantidadeNoticias").text(TotalNoticias + " notícias");
+
+                    Paginacao.CriaPaginacao(".paginacao_noticias", parseInt((TotalNoticias / QtdRegistros) + 0.9), TotalNoticias, paginaAtual);
+                    Paginacao.setMudouPagina(MudouPaginaNoticia);
+
+                    $(".loadingListaNoticias").hide();
+
+                    $.each(dados.noticias,function(index,noticia){
+                        MontaNoticias(noticia);
+                    })
+                }
+            });
+        }
+
+        function MontaNoticias(noticia){
+
+            var box = '';
+            box = '<div class="col-lg-4">';
+            box += '<div class="ibox">';
+            box += '<div class="ibox-content" style="height:439px;">';
+            box += '    <a href="/Empresa/Noticia_Detalhe/?id='+noticia.idnoticiaempresa+'&textoPesquisado='+$(document).find('#txtPalavrasChave').val()+'" class="btn-link"> ';
+            box += '<h2 class="titulo_noticia" title="'+noticia.titulo+'">'+noticia.titulo+'</h2>';
+            box += '</a>';
+            box += '<div class="small m-b-xs">';
+            box += '<strong>'+noticia.nomefonte+'</strong>  <span class="text-muted datahoranoticia"><i class="fa fa-clock-o"></i> '+noticia.datapublicacao+'</span>'+
+                        '</div>';
+            box += '    <p class="texto_noticia">'+noticia.conteudo+'...</p>';
+
+            box +=      '<div class="row">';
+            box +=          '<div class="col-md-6">'+
+                                '<div class="small text-left">'+
+                                    '<span style="font-weight: 600" ><i class="fa fa-user" > </i> <b>Autor:</b></span>'+
+                                    //'<div title="'+( noticia.autor != null ? noticia.autor : 'Não informado'  )+'"> <i class="fa fa-user"> </i> '+ ( noticia.autor != null ? noticia.autor.substr(0,20) : 'Não informado'  ) +'</div>'+
+                                    ' <span title="'+( noticia.autor != null ? noticia.autor : 'Não informado'  )+'" > '+ ( noticia.autor != null ? noticia.autor.substr(0,20) : 'Não informado'  )+'</span>'+
+                                '</div>'+
+                            '</div>';
+
+            box +=          '<div class="col-md-6 text-right">' +
+                                '<i class="fa fa-link"> </i> <a href="'+noticia.url+'" target="_blank"> Ver original</a>'+
+                            '</div>';
+            box +=      '</div>';
+
+            box += '<div class="row">'+
+                            '<div class="col-md-12">'+
+                                '<h5>Tags:</h5>';
+
+            box += '<div style="overflow-y:auto; height:45px;">';
+
+            $.each(noticia.tags,function(index,tag){
+                box += '<button class="btn btn-white btn-xs" style="margin: 0 5px 5px 0" type="button">'+ tag.termo +'</button>';
+            });
+
+            box += '</div>';
+
+            box += '</div>';
+            box += '</div>';
+            box += '</div>';
+
+            divListaNoticias.append(box);
+        }
+
+        function RetornaFiltro(idEmpresa){
+
+            _filtros.idEmpresa = idEmpresa;
+            _filtros.dataInicial = ConverteDataBRparaUNIX($('#dtinicial').val() + ' 00:00:00');
+            _filtros.dataFinal = ConverteDataBRparaUNIX($('#dtfinal').val() + ' 00:00:00');
+            _filtros.titulo = $("#txtPalavrasChave").val();
+            _filtros.conteudo = $("#txtPalavrasChave").val();
+            _filtros.subtitulo = $("#txtPalavrasChave").val();
+
+            if(_filtros.fontes != undefined){
+                if(_filtros.fontes.length == 0){
+                    _filtros.fontes = $('#CampoFontes').val() == null  ? [] : $('#CampoFontes').val();
+                }
+            } else
+                _filtros.fontes = [];
+
+            _filtros.inicial = 0;
+
+            return _filtros;
+        }
+
+        function CarregaGraficoNoticiaPorDia(filtro){
+
+            $("#sparklineNoticiasDia").empty();
+            $(".loadingGraficoDia").show();
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/EmpresaAPI/PesquisaNoticiasPorDia",
+                data: filtro,
+                success: function(data){
+
+                    $(".loadingGraficoDia").hide();
+                    var totalNoticias = 0;
+                    if(data != null ){
+
+                        var valores = data.map(function (x) {
+                            totalNoticias += x.valor;
+                            return x.valor;
+                        });
+
+                        var datas = data.map(function (x) {
+                            return x.data;
+                        });
+
+                        $("#totalNoticias").text(formataNumero(totalNoticias));
+                        $("#sparklineNoticiasDia").sparkline(valores, {
+                            type: 'line',
+                            width: '100%',
+                            height: '60',
+                            lineColor: '#1ab394',
+                            fillColor: "#ffffff",
+                            tooltipFormat: "{{offset:data}}: {{y:val}}",
+                            tooltipValueLookups: {
+                                data: datas
+                            }
+                        });
+
+                    }
+                }
+            });
+        }
+
+        function CarregaTopFontes(filtro){
+            Tbody.html('');
+            $("#tableHead").html('');
+
+            $(".loadingTopFontes").show();
+
+
+            $.ajax({
+                type: "POST",
+                url: "/api/EmpresaAPI/PesquisaTopFontesNoticias",
+                data: filtro,
+                success: function(data){
+
+
+                    $(".loadingTopFontes").hide();
+                    Tbody.html('');
+
+                    if(data){
+                        $("#tableHead").append('<tr><td>Fonte</td><td colspan="3">Quantidade</td><tr>');
+                    }
+                    
+                    if(data != null){
+
+                        $.each(data, function(index,obj){
+
+                            percentual = CalculaPercentualDiferencaTotais(obj.total,obj.totalPeriodoAnterior);
+
+                            if(percentual != 'Infinity'){
+                                if(percentual < 0){
+                                    classeI = 'fa-level-down';
+                                    classeTD = 'text-warning';
+                                    iconeAjuda = '';
+                                }else{
+                                    classeI = 'fa-level-up';
+                                    classeTD = 'text-navy';
+                                    iconeAjuda = '';
+                                }
+
+                            }else{
+                                classeI = 'fa-level-up';
+                                classeTD = 'text-navy';
+
+                                percentual = '<span style="font-size: 24px !important; float: right; margin: -6px 0 -12px 0;">&#8734;</span>';
+                                iconeAjuda = '<i class="fa fa-question icone-help-top-fontes-infinito" data-toggle="ajuda-tooltip" data-placement="top"></i>'
+
+                            }
+
+                            if(obj.nomeFonte != null){
+                            
+                                Tbody.append('<tr>'+
+                                                   //'<td>'+
+                                                   //'<span id="sparkline'+index+'"></span>'+
+                                                   //'</td>'+
+                                                   '<td class="tabelaFonteNoticias" onclick="PesquisaPorClickFonte('+obj.idFonte+')" style="word-wrap: break-word; overflow-wrap: break-word;" ><a class="NomeFonte">'+obj.nomeFonte+'</a></td>'+
+                                                   '<td>'+obj.total+'</td>'+
+                                                   '<td class="'+classeTD+'" style="text-align:right;">' + percentual + '%</td>'+
+                                                   '<td class="'+classeTD+'" width="22px"><i class="fa '+classeI+'"></i></td>'+
+                                            '</tr>'
+                                       );
+                            }
+
+
+                            var valores = obj.totalNoticias.map(function (x) {
+                                return x.valor;
+                            });
+
+
+
+                            //$("#sparkline"+index).sparkline(valores, {
+                            //    type: 'line',
+                            //    lineColor: '#17997f',
+                            //    fillColor: '#ffffff',
+                            //    width: '50'
+                            //});
+                        });
+
+                        CarregaTooltipsHelp(filtro);
+                    }
+                }
+            });
+        }
+
+        function pesquisar(filtro){
+            $('#icone-help-top-fontes').tooltip('destroy');
+            var dataInicial = $("#dtinicial").datepicker('getDate');
+            var dataFinal = $("#dtfinal").datepicker('getDate');
+
+            //RetornaQuantidadeNoticias(@ViewBag.idEmpresa,dataInicial,dataFinal);
+            CarregaGraficoNoticiaPorDia(RetornaFiltro(@ViewBag.idEmpresa));
+            CarregaTopFontes(RetornaFiltro(@ViewBag.idEmpresa));
+            topPalavras(@ViewBag.idEmpresa,dataInicial,dataFinal);
+            CarregarPaginacaoNoticias(idEmpresa,RetornaFiltro(@ViewBag.idEmpresa));
+
+        }
+
+        function CarregaBubbleTermos(termos){
+
+            $("#bubble_termos").empty();
+            $("#my_tooltip").remove();
+            
+            var chart, render_chart, render_vis;
+            chart = null;
+            render_vis = function (csv) {
+                render_filters_colors_and_groups(csv);
+                return render_chart(csv);
+            };
+            render_chart = function (csv) {
+
+                chart = new BubbleChart(csv, $("#bubble_termos").width(), 600);
+
+                chart.start();
+                return root.display_all();
+            };
+            root.display_all = (function (_this) {
+                return function () {
+                    return chart.display_group_all();
+                };
+            })(this);
+            root.group_by = (function (_this) {
+                return function (groupBy) {
+                    if (groupBy === '') {
+                        return chart.display_group_all();
+                    } else {
+                        return chart.group_by(groupBy);
+                    }
+                };
+            })(this);
+            root.color_by = (function (_this) {
+                return function (colorBy) {
+                    if (colorBy === '') {
+                        return chart.remove_colors();
+                    } else {
+                        return chart.color_by(colorBy);
+                    }
+                };
+            })(this);
+            root.use_filters = (function (_this) {
+                return function (filters) {
+                    return chart.use_filters(filters);
+                };
+            })(this);
+
+            $(".loadingBubbleDia").hide();
+
+            render_chart(termos);
+
+        }
+
+        function PesquisaPorClickFonte(idFonte){
+
+            _filtros.fontes.push(idFonte);
+
+            $("#btnLinhaTempo").trigger("click");
+            $('#CampoFontes').val(idFonte).trigger("chosen:updated");
+
+            pesquisar(RetornaFiltro(@ViewBag.idEmpresa))
+            CarregaGraficoNoticiaPorDia(_filtros);
+        }
+
+        function PesquisaPorClickTermoDestaque(palavra){
+            _filtros.conteudo = palavra;
+            _filtros.titulo = palavra;
+            _filtros.subtitulo = palavra;
+
+            $("#btnLinhaTempo").trigger("click");
+            $('#txtPalavrasChave').val(palavra);
+
+            pesquisar(RetornaFiltro(@ViewBag.idEmpresa))
+            CarregaGraficoNoticiaPorDia(_filtros);
+        }
+
+        function CarregaTooltipsHelp(filtros){
+
+            var textoTopFontes = '';
+            textoTopFontes ='<div id="toolTipTopFontes">';
+            textoTopFontes+='Top Fontes <br><br>';
+            textoTopFontes+= 'Perído pesquisado entre '+ ConverteDataUNIXparaBR(filtros.dataInicial).replace(' 00:00:00','') + ' a ' + ConverteDataUNIXparaBR(filtros.dataFinal).replace(' 00:00:00','');
+            textoTopFontes+='</div>';
+            $('#icone-help-top-fontes').tooltip({
+                html: true,
+                title: textoTopFontes,
+                container: 'body'
+            });
+
+            var textoTopFontesInfinito ='<div id="toolTipTopFontesInfinito">';
+            textoTopFontesInfinito+='Valor Infinito <br><br>';
+            textoTopFontesInfinito+= 'Evolução dos valores'
+            textoTopFontesInfinito+='</div>';
+            $('i.icone-help-top-fontes-infinito').tooltip({
+                html: true,
+                title: textoTopFontesInfinito,
+                container: 'body'
+            });
+        }
+
+    </script>
+}
